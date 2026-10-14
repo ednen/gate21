@@ -1,0 +1,58 @@
+{
+  "slug": "airport",
+  "mission": "Check in for your flight",
+  "missionTr": "Uçuşun için check-in yap — ve rötarla başa çık",
+  "stamp": "AIRPORT CLEARED",
+  "words": [
+    { "en": "passport", "tr": "pasaport" },
+    { "en": "boarding pass", "tr": "biniş kartı" },
+    { "en": "gate", "tr": "biniş kapısı" },
+    { "en": "luggage", "tr": "bagaj" },
+    { "en": "carry-on", "tr": "kabin bagajı" },
+    { "en": "delayed", "tr": "rötarlı" },
+    { "en": "aisle seat", "tr": "koridor koltuğu" },
+    { "en": "window seat", "tr": "cam kenarı koltuk" },
+    { "en": "check-in counter", "tr": "check-in bankosu" },
+    { "en": "departures", "tr": "giden yolcular" }
+  ],
+  "pronounce": [
+    { "word": "passport", "ipa": "/ˈpæs.pɔːrt/", "stress": "PASS-port", "tipTr": "Vurgu ilk hecede: PASS-port." },
+    { "word": "luggage", "ipa": "/ˈlʌɡ.ɪdʒ/", "stress": "LUG-ij", "tipTr": "Sondaki -age \"ij\" gibi okunur, \"eyc\" değil." },
+    { "word": "boarding pass", "ipa": "/ˈbɔːr.dɪŋ pæs/", "stress": "BOAR-ding pass", "tipTr": "\"Boarding\" kelimesindeki r'yi yumuşak söyle." }
+  ],
+  "recognize": [
+    {
+      "prompt": "Where do you show your passport first?",
+      "options": ["Security", "Check-in counter", "Restaurant"],
+      "answer": 1,
+      "explainTr": "Check-in bankosunda pasaportuna bakılır ve biniş kartın (boarding pass) verilir."
+    },
+    {
+      "prompt": "The screen says DELAYED. What happens?",
+      "options": ["The flight leaves later", "The flight is cancelled", "The gate is closed"],
+      "answer": 0,
+      "explainTr": "Delayed = rötarlı. Uçuş yapılacak, sadece geç kalkacak. İptal \"cancelled\" olurdu."
+    },
+    {
+      "prompt": "You want to sit next to the window. You say:",
+      "options": ["A window seat, please.", "An aisle seat, please.", "A middle seat, please."],
+      "answer": 0,
+      "explainTr": "Window seat = cam kenarı. Aisle seat = koridor tarafı."
+    }
+  ],
+  "speak": {
+    "scene": "checkin-desk",
+    "prompt": "What do you see?",
+    "answer": "check-in counter",
+    "accept": ["check-in counter", "check in counter", "check-in desk", "checkin counter", "check-in"]
+  },
+  "use": {
+    "word": "check-in counter",
+    "phrase": "Where is the check-in counter?",
+    "phraseTr": "Check-in bankosu nerede?",
+    "situation": "You just walked into the terminal. Ask where to drop your bag.",
+    "situationTr": "Terminale yeni girdin. Bagajını nereye bırakacağını sor.",
+    "tiles": ["Where", "is", "the", "check-in counter", "?"]
+  },
+  "survive": { "scenario": "airport-checkin" }
+}

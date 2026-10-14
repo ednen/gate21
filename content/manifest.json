@@ -1,0 +1,22 @@
+{
+  "version": "2026.10.1",
+  "weeks": [
+    { "week": 1, "level": "Travel Ready", "levelTr": "Temel ihtiyaçlarını söyleyebilirsin", "startDay": 1 },
+    { "week": 2, "level": "Travel Confident", "levelTr": "Soru sorup sorun çözebilirsin", "startDay": 8 },
+    { "week": 3, "level": "Travel Pro", "levelTr": "Doğal konuşur, beklenmedik durumla başa çıkarsın", "startDay": 15 }
+  ],
+  "chapters": [
+    { "slug": "airport", "week": 1, "order": 1, "title": "Airport", "titleTr": "Havalimanı", "icon": "plane", "available": true },
+    { "slug": "hotel", "week": 1, "order": 2, "title": "Hotel", "titleTr": "Otel", "icon": "bed", "available": true },
+    { "slug": "restaurant", "week": 1, "order": 3, "title": "Restaurant", "titleTr": "Restoran", "icon": "utensils", "available": true },
+    { "slug": "shopping", "week": 1, "order": 4, "title": "Shopping", "titleTr": "Alışveriş", "icon": "bag", "available": true },
+    { "slug": "transportation", "week": 2, "order": 5, "title": "Transportation", "titleTr": "Ulaşım", "icon": "train", "available": false },
+    { "slug": "directions", "week": 2, "order": 6, "title": "Directions & City", "titleTr": "Yol tarifi ve şehir", "icon": "map", "available": false },
+    { "slug": "emergencies", "week": 2, "order": 7, "title": "Problems & Emergencies", "titleTr": "Sorunlar ve acil durumlar", "icon": "alert", "available": false },
+    { "slug": "social", "week": 2, "order": 8, "title": "Social Situations", "titleTr": "Sosyal ortamlar", "icon": "chat", "available": false },
+    { "slug": "complaints", "week": 3, "order": 9, "title": "Complaints & Changes", "titleTr": "Şikâyet ve değişiklik", "icon": "edit", "available": false },
+    { "slug": "experiences", "week": 3, "order": 10, "title": "Experiences & Activities", "titleTr": "Deneyimler ve aktiviteler", "icon": "ticket", "available": false },
+    { "slug": "small-talk", "week": 3, "order": 11, "title": "Small Talk", "titleTr": "Sohbet", "icon": "chat", "available": false },
+    { "slug": "full-trip", "week": 3, "order": 12, "title": "Full Trip Simulation", "titleTr": "Tam seyahat simülasyonu", "icon": "globe", "available": false }
+  ]
+}

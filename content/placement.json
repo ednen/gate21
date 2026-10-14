@@ -1,0 +1,48 @@
+{
+  "questions": [
+    {
+      "tag": "AIRPORT",
+      "prompt": "The gate agent says: “Your flight is delayed.” What does it mean?",
+      "options": ["Your flight is cancelled", "Your flight will leave later", "Your gate has changed"],
+      "answer": 1,
+      "explainTr": "Delayed = rötarlı. Uçuş yapılacak, sadece geç kalkacak."
+    },
+    {
+      "tag": "AIRPORT",
+      "prompt": "You want the seat next to the corridor. What do you ask for?",
+      "options": ["An aisle seat, please.", "A window seat, please.", "A middle seat, please."],
+      "answer": 0,
+      "explainTr": "Aisle = koridor tarafı. Window = cam kenarı."
+    },
+    {
+      "tag": "HOTEL",
+      "prompt": "Receptionist: “Could I see your passport, please?” Best reply?",
+      "options": ["Yes, I see.", "Sure, here you are.", "No problem, thanks."],
+      "answer": 1,
+      "explainTr": "Bir şeyi uzatırken \"Here you are\" denir."
+    },
+    {
+      "tag": "RESTAURANT",
+      "prompt": "You paid and need proof of payment. Ask for a…",
+      "options": ["recipe", "reception", "receipt"],
+      "answer": 2,
+      "explainTr": "Receipt = fiş. \"Can I get a receipt?\""
+    },
+    {
+      "tag": "TAXI",
+      "prompt": "The driver speaks too fast. What do you say?",
+      "options": ["Speak English!", "Could you speak more slowly?", "What?"],
+      "answer": 1,
+      "explainTr": "Kibar ve net — konuşmayı da sürdürür."
+    }
+  ],
+  "speaking": [
+    { "situationTr": "Havalimanına vardın, bagajını nereye bırakacağını bulamıyorsun.", "phrase": "Where is the check-in counter?" },
+    { "situationTr": "Bir kafedesin. İçecek siparişi ver.", "phrase": "I'd like a coffee, please." }
+  ],
+  "bands": [
+    { "min": 0, "level": "Travel Ready", "startDay": 1, "messageTr": "Temel İngilizceyi anlıyorsun ama baskı altında konuşmak zor gelebilir." },
+    { "min": 50, "level": "Travel Confident", "startDay": 8, "messageTr": "Temelleri hallediyorsun. Sıradaki adım: soru sormak ve anında sorun çözmek." },
+    { "min": 75, "level": "Travel Pro", "startDay": 15, "messageTr": "Çok yakınsın. Şimdi daha doğal konuşmaya ve beklenmedik durumlara hazırlanalım." }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "airport-checkin",
+  "chapter": "airport",
+  "title": "Check-in desk",
+  "titleTr": "Check-in bankosu",
+  "role": "Airline staff",
+  "setting": "Istanbul Airport · Check-in",
+  "persona": "You are a polite airline check-in agent at Istanbul Airport. The passenger is checking in for an international flight.",
+  "opening": "Good morning. May I see your passport, please?",
+  "goals": [
+    {
+      "id": "passport",
+      "instruction": "The passenger hands over their passport, for example by saying 'Here you are'.",
+      "hint": "Sure, here you are.",
+      "keywords": ["here", "passport", "sure", "of course"],
+      "successReply": "Thank you. Are you checking any bags today?",
+      "retryReply": "I'll need your passport to check you in."
+    },
+    {
+      "id": "bags",
+      "instruction": "The passenger says whether they are checking a bag, for example 'Yes, one suitcase' or 'No, just carry-on'.",
+      "hint": "Yes, just one suitcase.",
+      "keywords": ["yes", "no", "one", "suitcase", "bag", "just", "carry-on", "only"],
+      "successReply": "Thanks. I'm afraid your flight is delayed by two hours.",
+      "retryReply": "Do you have a suitcase to check in, or just carry-on?"
+    },
+    {
+      "id": "delay",
+      "twist": true,
+      "instruction": "The flight is delayed. The passenger reacts usefully: asks about a connecting flight, a lounge, or a meal voucher.",
+      "retryReply": "I'm sorry for the delay. Is there anything I can help you with?",
+      "options": [
+        { "text": "Will I miss my connection?", "keywords": ["connection", "connecting", "miss", "transfer"], "reply": "Your connection is protected — we'll rebook you automatically if needed. Here's your boarding pass." },
+        { "text": "Is there a lounge I can use?", "keywords": ["lounge", "wait", "sit", "rest"], "reply": "Yes, the lounge is on the second floor. Show your boarding pass at the desk." },
+        { "text": "Can I get a meal voucher?", "keywords": ["meal", "food", "voucher", "eat"], "reply": "Of course. Here's a meal voucher — you can use it at any café after security." }
+      ]
+    }
+  ]
+}

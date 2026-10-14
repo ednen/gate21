@@ -1,0 +1,39 @@
+{
+  "slug": "shopping-size",
+  "chapter": "shopping",
+  "title": "Clothing store",
+  "titleTr": "Giyim mağazası",
+  "role": "Shop assistant",
+  "setting": "City Center Mall · Clothing store",
+  "persona": "You are a helpful shop assistant in a clothing store. The customer is looking at a blue jacket.",
+  "opening": "Hi there! Can I help you find anything?",
+  "goals": [
+    {
+      "id": "try-on",
+      "instruction": "The customer asks to try something on, or asks where the fitting room is.",
+      "hint": "Yes, can I try this jacket on?",
+      "keywords": ["try", "fitting", "room", "on"],
+      "successReply": "Of course. The fitting room is just over there.",
+      "retryReply": "Would you like to try something on?"
+    },
+    {
+      "id": "size",
+      "instruction": "The customer says the size is wrong and asks for another size.",
+      "hint": "It's too small. Do you have a bigger size?",
+      "keywords": ["small", "big", "bigger", "larger", "size", "medium", "large", "tight"],
+      "successReply": "Let me check… I'm sorry, we don't have a bigger size in blue.",
+      "retryReply": "How does it fit?"
+    },
+    {
+      "id": "no-size",
+      "twist": true,
+      "instruction": "The size is not available. The customer asks for another colour, asks the shop to order one, or asks for a similar item.",
+      "retryReply": "I'm sorry about that. Can I help you with anything else?",
+      "options": [
+        { "text": "Do you have it in another color?", "keywords": ["color", "colour", "black", "another", "different"], "reply": "Yes! We have it in black in a large. Shall I get it for you?" },
+        { "text": "Can you order one for me?", "keywords": ["order", "online", "arrive", "deliver"], "reply": "Sure — it'll arrive in three days. I just need your phone number." },
+        { "text": "Is there a similar jacket?", "keywords": ["similar", "like this", "other jacket", "else"], "reply": "This one is very similar, and it's 20% off today." }
+      ]
+    }
+  ]
+}

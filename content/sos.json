@@ -1,0 +1,14 @@
+{
+  "phrases": [
+    { "en": "I need help.", "tr": "Yardıma ihtiyacım var." },
+    { "en": "I lost my passport.", "tr": "Pasaportumu kaybettim." },
+    { "en": "I need a doctor.", "tr": "Doktora ihtiyacım var." },
+    { "en": "My luggage is missing.", "tr": "Bagajım kayıp." },
+    { "en": "I don't understand.", "tr": "Anlamıyorum." },
+    { "en": "Could you speak more slowly?", "tr": "Daha yavaş konuşabilir misiniz?" },
+    { "en": "Where is the nearest police station?", "tr": "En yakın karakol nerede?" },
+    { "en": "My card isn't working.", "tr": "Kartım çalışmıyor." },
+    { "en": "Please call an ambulance.", "tr": "Lütfen ambulans çağırın." },
+    { "en": "Can you write it down, please?", "tr": "Yazabilir misiniz, lütfen?" }
+  ]
+}

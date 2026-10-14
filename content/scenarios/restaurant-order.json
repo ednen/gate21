@@ -1,0 +1,39 @@
+{
+  "slug": "restaurant-order",
+  "chapter": "restaurant",
+  "title": "Dinner service",
+  "titleTr": "Akşam yemeği",
+  "role": "Waiter",
+  "setting": "Café Lisboa · Dinner",
+  "persona": "You are a cheerful waiter at a busy restaurant called Café Lisboa. The guest has just walked in for dinner.",
+  "opening": "Good evening! Do you have a reservation?",
+  "goals": [
+    {
+      "id": "table",
+      "instruction": "The guest asks for a table and says how many people.",
+      "hint": "No, a table for two, please.",
+      "keywords": ["table", "two", "three", "for", "people", "one"],
+      "successReply": "Right this way. Are you ready to order?",
+      "retryReply": "How many people is the table for?"
+    },
+    {
+      "id": "order",
+      "instruction": "The guest orders food or a drink politely, for example 'I'd like…' or 'Can I have…'.",
+      "hint": "I'd like the chicken salad, please.",
+      "keywords": ["like", "have", "please", "order", "get", "take"],
+      "successReply": "Good choice. Oh — I'm sorry, the kitchen just ran out of chicken.",
+      "retryReply": "What would you like to have?"
+    },
+    {
+      "id": "sold-out",
+      "twist": true,
+      "instruction": "The dish is sold out. The guest asks for a recommendation, orders something else, or asks for a vegetarian option.",
+      "retryReply": "I'm so sorry. What else can I get you?",
+      "options": [
+        { "text": "What do you recommend?", "keywords": ["recommend", "suggest", "good", "popular", "best"], "reply": "The grilled fish is very popular tonight. Would you like that?" },
+        { "text": "Then I'll have the pasta, please.", "keywords": ["then", "instead", "pasta", "other", "else"], "reply": "Perfect, one pasta. It'll be about fifteen minutes." },
+        { "text": "Is there a vegetarian option?", "keywords": ["vegetarian", "vegan", "without meat", "veggie"], "reply": "Yes — the mushroom risotto is vegetarian and very good." }
+      ]
+    }
+  ]
+}

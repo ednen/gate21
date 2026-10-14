@@ -1,0 +1,39 @@
+{
+  "slug": "hotel-checkin",
+  "chapter": "hotel",
+  "title": "AI Receptionist",
+  "titleTr": "Yapay zekâ resepsiyonist",
+  "role": "Receptionist",
+  "setting": "Grand Hotel · Front desk",
+  "persona": "You are a friendly, professional front desk receptionist at the Grand Hotel. The guest is arriving to check in.",
+  "opening": "Hello, welcome to the Grand Hotel. How can I help you?",
+  "goals": [
+    {
+      "id": "reservation",
+      "instruction": "The guest says they have a reservation (a booking) and gives a name.",
+      "hint": "Hi, I have a reservation under {name}.",
+      "keywords": ["reservation", "booking", "booked", "reserved"],
+      "successReply": "Certainly. Could I see your passport, please?",
+      "retryReply": "Sorry — do you have a booking with us? Under what name?"
+    },
+    {
+      "id": "passport",
+      "instruction": "The guest hands over their passport, for example by saying 'Here you are'.",
+      "hint": "Sure, here you are.",
+      "keywords": ["here", "passport", "sure", "of course"],
+      "successReply": "Thank you. I'm sorry — your room isn't ready yet.",
+      "retryReply": "I just need your passport to check you in."
+    },
+    {
+      "id": "room-not-ready",
+      "twist": true,
+      "instruction": "The room is not ready. The guest deals with it: asks to leave their luggage, asks when the room will be ready, or asks for another room.",
+      "retryReply": "I'm really sorry about that. Is there anything I can do for you while you wait?",
+      "options": [
+        { "text": "Could I leave my luggage here?", "keywords": ["luggage", "bag", "bags", "leave", "keep", "suitcase"], "reply": "Of course. We'll keep it safe and text you when your room is ready." },
+        { "text": "When will the room be ready?", "keywords": ["when", "what time", "how long", "ready"], "reply": "Around 2 p.m. You're welcome to wait in the lounge — coffee is on us." },
+        { "text": "Is there another room available?", "keywords": ["another", "other", "different", "available"], "reply": "Let me check… Yes — a room on the 5th floor is ready now. Here's your key card." }
+      ]
+    }
+  ]
+}
