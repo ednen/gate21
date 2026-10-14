@@ -9,7 +9,8 @@ COPY backend/src backend/src
 RUN mvn -B -q -f backend/pom.xml -DskipTests package
 
 FROM eclipse-temurin:21-jre-alpine
-RUN addgroup -S app && adduser -S app -G app
+# ffmpeg converts Android's AAC recordings to WAV for Azure (in memory, via pipes).
+RUN apk add --no-cache ffmpeg && addgroup -S app && adduser -S app -G app
 USER app
 WORKDIR /app
 COPY --from=build /src/backend/target/gate21-backend-*.jar app.jar

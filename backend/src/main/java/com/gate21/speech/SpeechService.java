@@ -32,15 +32,17 @@ public class SpeechService {
     }
 
     private final SpeechAssessor assessor;
+    private final AudioNormalizer normalizer;
     private final QuotaService quota;
     private final UserRepository users;
     private final JdbcClient jdbc;
     private final AppProperties props;
     private final Clock clock;
 
-    public SpeechService(SpeechAssessor assessor, QuotaService quota, UserRepository users, JdbcClient jdbc,
-                         AppProperties props, Clock clock) {
+    public SpeechService(SpeechAssessor assessor, AudioNormalizer normalizer, QuotaService quota,
+                         UserRepository users, JdbcClient jdbc, AppProperties props, Clock clock) {
         this.assessor = assessor;
+        this.normalizer = normalizer;
         this.quota = quota;
         this.users = users;
         this.jdbc = jdbc;
@@ -48,14 +50,15 @@ public class SpeechService {
         this.clock = clock;
     }
 
-    public AssessResponse assess(UUID userId, byte[] audio, String referenceText) {
+    public AssessResponse assess(UUID userId, byte[] upload, String referenceText) {
         requireConsent(userId);
-        validateAudio(audio);
+        validateSize(upload);
         String reference = referenceText == null ? "" : referenceText.strip();
         if (reference.isEmpty() || reference.length() > 200) {
             throw ApiException.badRequest("INVALID_REFERENCE_TEXT", "referenceText must be 1–200 characters");
         }
 
+        byte[] audio = normalizer.toWav(upload);
         quota.consume(userId, QuotaService.SPEECH, props.quota().speechPerDay(), "SPEECH_QUOTA_EXCEEDED");
         Assessment result;
         try {
@@ -92,9 +95,10 @@ public class SpeechService {
     }
 
     /** Transcribes free speech for role-play. Returns null when the provider cannot transcribe. */
-    public String transcribe(UUID userId, byte[] audio) {
+    public String transcribe(UUID userId, byte[] upload) {
         requireConsent(userId);
-        validateAudio(audio);
+        validateSize(upload);
+        byte[] audio = normalizer.toWav(upload);
         quota.consume(userId, QuotaService.SPEECH, props.quota().speechPerDay(), "SPEECH_QUOTA_EXCEEDED");
         try {
             String text = assessor.transcribe(audio);
@@ -116,17 +120,12 @@ public class SpeechService {
         }
     }
 
-    static void validateAudio(byte[] audio) {
+    static void validateSize(byte[] audio) {
         if (audio == null || audio.length < 44) {
             throw ApiException.badRequest("AUDIO_MISSING", "Audio is missing or empty.");
         }
         if (audio.length > MAX_AUDIO_BYTES) {
             throw new ApiException(HttpStatus.PAYLOAD_TOO_LARGE, "AUDIO_TOO_LARGE", "Audio must be at most 15 seconds.");
-        }
-        boolean riff = audio[0] == 'R' && audio[1] == 'I' && audio[2] == 'F' && audio[3] == 'F';
-        boolean wave = audio[8] == 'W' && audio[9] == 'A' && audio[10] == 'V' && audio[11] == 'E';
-        if (!riff || !wave) {
-            throw new ApiException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "UNSUPPORTED_AUDIO", "Audio must be WAV (16 kHz mono PCM).");
         }
     }
 
