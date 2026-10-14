@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
@@ -80,7 +82,27 @@ public class AudioNormalizer {
         if (process.exitValue() != 0 || !isWav(wav)) {
             throw new IOException("ffmpeg exit code " + process.exitValue());
         }
-        return wav;
+        return fixSizes(wav);
+    }
+
+    /**
+     * ffmpeg cannot seek back on a pipe, so it leaves the RIFF and data chunk sizes as 0xFFFFFFFF.
+     * Writes the real sizes so strict WAV readers accept the file.
+     */
+    static byte[] fixSizes(byte[] wav) throws IOException {
+        ByteBuffer b = ByteBuffer.wrap(wav).order(ByteOrder.LITTLE_ENDIAN);
+        b.putInt(4, wav.length - 8);
+        int pos = 12;
+        while (pos + 8 <= wav.length) {
+            boolean data = wav[pos] == 'd' && wav[pos + 1] == 'a' && wav[pos + 2] == 't' && wav[pos + 3] == 'a';
+            if (data) {
+                b.putInt(pos + 4, wav.length - (pos + 8));
+                return wav;
+            }
+            long size = Integer.toUnsignedLong(b.getInt(pos + 4));
+            pos += 8 + (int) Math.min(size + (size & 1), wav.length);
+        }
+        throw new IOException("WAV without a data chunk");
     }
 
     private static boolean detectFfmpeg() {

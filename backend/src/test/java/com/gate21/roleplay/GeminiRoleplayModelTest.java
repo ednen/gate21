@@ -41,7 +41,9 @@ class GeminiRoleplayModelTest {
         assertThat(body.path("generationConfig").path("responseMimeType").asText()).isEqualTo("application/json");
         assertThat(body.path("generationConfig").path("thinkingConfig").path("thinkingBudget").asInt()).isZero();
         assertThat(body.path("systemInstruction").path("parts").path(0).path("text").asText())
-            .contains("Could I see your passport").contains("Ozan");
+            .contains("The guest's name is Ozan")
+            .contains(hotel.goals().get(1).successReply())
+            .contains(hotel.goals().get(1).retryReply());
     }
 
     @Test
