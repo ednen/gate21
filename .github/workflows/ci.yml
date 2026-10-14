@@ -25,3 +25,20 @@ jobs:
       - name: Report failures as annotations
         if: failure()
         run: python3 .github/scripts/report_failures.py mvn.log backend/target/surefire-reports
+
+  mobile:
+    name: Mobile (typecheck + tests)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test

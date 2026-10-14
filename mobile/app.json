@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Gate 21",
+    "slug": "gate21",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.gate21.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#14171C",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.gate21.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Gate 21 telaffuzunu de\u011ferlendirmek i\u00e7in mikrofonu kullan\u0131r.",
+          "recordAudioAndroid": true,
+          "enableBackgroundRecording": false
+        }
+      ],
+      "expo-secure-store",
+      "expo-font",
+      [
+        "expo-notifications",
+        {}
+      ]
+    ],
+    "scheme": "gate21",
+    "extra": {
+      "apiUrl": "http://localhost:8080"
+    }
+  }
+}
