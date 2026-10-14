@@ -32,7 +32,13 @@ async function request<T>(path: string, init: RequestInit, opts: Options = {}): 
     return undefined as T;
   }
   const text = await response.text();
-  const body = text ? JSON.parse(text) : undefined;
+  let body: { code?: string; detail?: string } | undefined;
+  try {
+    body = text ? JSON.parse(text) : undefined;
+  } catch {
+    // Not JSON (for example a proxy's HTML error page).
+    body = undefined;
+  }
   if (!response.ok) {
     if (response.status === 401 && auth) {
       tokens.signedOutByServer();

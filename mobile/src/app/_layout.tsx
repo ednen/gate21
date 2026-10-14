@@ -9,9 +9,9 @@ import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono/500Me
 import { JetBrainsMono_700Bold } from '@expo-google-fonts/jetbrains-mono/700Bold';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -39,6 +39,15 @@ export default function RootLayout() {
     void bootstrap();
     void syncContent();
   }, [bootstrap]);
+
+  // Signed out while using the app (logout elsewhere, revoked session): back to the welcome screen.
+  const previous = useRef(status);
+  useEffect(() => {
+    if (previous.current === 'signedIn' && status === 'signedOut') {
+      router.replace('/welcome');
+    }
+    previous.current = status;
+  }, [status]);
 
   // Whenever the app comes back to the foreground, send anything recorded offline.
   useEffect(() => {
