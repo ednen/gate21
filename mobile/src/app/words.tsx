@@ -69,7 +69,17 @@ export default function Words() {
             </View>
             <View style={styles.grid}>
               {section.words.map((w) => (
-                <Tile key={w.en} word={w} onPress={() => (w.learned ? (setOpen(w), say(w.en)) : setOpen(w))} />
+                <Tile
+                  key={w.en}
+                  word={w}
+                  onPress={() => {
+                    // A learned word is spoken the moment its picture is tapped.
+                    if (w.learned) {
+                      say(w.en, { slow: true });
+                    }
+                    setOpen(w);
+                  }}
+                />
               ))}
             </View>
           </View>
@@ -82,7 +92,9 @@ export default function Words() {
             <Pressable style={styles.sheet} onPress={() => undefined}>
               {open.learned ? (
                 <>
-                  {hasPicture(open.picture) ? <Picture name={open.picture} size={140} label={open.en} /> : <Text style={styles.bigText}>{open.en}</Text>}
+                  <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true })}>
+                    {hasPicture(open.picture) ? <Picture name={open.picture} size={140} /> : <Text style={styles.bigText}>{open.en}</Text>}
+                  </Pressable>
                   <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true })} style={styles.wordRow}>
                     <Text style={styles.sheetWord}>{open.en}</Text>
                     <Icon name="speaker" size={22} />
@@ -123,6 +135,7 @@ function Tile({ word, onPress }: { word: CollectionWord; onPress: () => void }) 
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={word.learned ? `${word.en}, ${word.tr}` : 'Henüz öğrenilmedi'}
+      accessibilityHint={word.learned ? 'Dinle' : undefined}
       onPress={onPress}
       style={[styles.tile, !word.learned && styles.tileLocked]}
     >

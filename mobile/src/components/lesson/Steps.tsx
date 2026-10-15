@@ -71,9 +71,14 @@ export function DiscoverStep({ chapter, onDone }: StepProps) {
       <Label>{`KELİME ${index + 1} / ${words.length}`}</Label>
       <Card style={styles.flashcard}>
         {hasPicture(w.picture) ? (
-          <View style={styles.pictureBox}>
-            <Picture name={w.picture} size={120} label={w.en} />
-          </View>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`${w.en}. Dinle`}
+            onPress={() => say(w.en, { slow: true })}
+            style={({ pressed }) => [styles.pictureBox, pressed && { transform: [{ scale: 0.96 }] }]}
+          >
+            <Picture name={w.picture} size={120} />
+          </Pressable>
         ) : null}
         <Pressable
           accessibilityRole="button"
