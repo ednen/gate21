@@ -24,7 +24,7 @@ class GeminiRoleplayModelTest {
 
     private final JsonMapper mapper = JsonMapper.builder()
         .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
-    private final Scenario hotel = new ContentService(mapper).scenario("hotel-checkin").orElseThrow();
+    private final Scenario hotel = new ContentService(mapper).scenario("hotel-bronze").orElseThrow();
     private final List<SceneStep> steps = ScenePlanner.resolve(hotel,
         List.of("g:reservation", "g:passport", "g:nights", "g:breakfast", "t:room-not-ready", "g:wifi"),
         Map.of("room", "512", "breakfast", "7 to 10", "wifi", "garden2026"), "Ozan");

@@ -36,15 +36,18 @@ type Phase = 'scene' | 'report' | 'memory' | 'finished';
 
 const ROLE_ICON: Record<string, IconName> = {
   'Airline staff': 'plane',
-  'Taxi driver': 'map',
+  'Taxi driver': 'car',
+  'Border officer': 'passport',
+  Barista: 'coffee',
+  'Station assistant': 'train',
   Receptionist: 'bed',
   Waiter: 'utensils',
   'Shop assistant': 'bag',
 };
 
-/** Speech rate grows with the level; READY also keeps one clear accent. */
-const RATE: Record<Difficulty, number> = { READY: 0.85, CONFIDENT: 0.95, PRO: 1.05 };
-const LEVEL_LABEL: Record<Difficulty, string> = { READY: 'READY', CONFIDENT: 'CONFIDENT', PRO: 'PRO' };
+/** Speech rate grows with the level. */
+const RATE: Record<Difficulty, number> = { BRONZE: 0.85, SILVER: 0.95, GOLD: 1.05 };
+const LEVEL_LABEL: Record<Difficulty, string> = { BRONZE: 'BRONZE', SILVER: 'SILVER', GOLD: 'GOLD' };
 
 /** The "Can you actually survive this?" scene, then its coaching report and memory check. */
 export default function Scene() {
@@ -70,8 +73,8 @@ export default function Scene() {
   const scroll = useRef<ScrollView>(null);
   const nextId = useRef(0);
 
-  const difficulty: Difficulty = view?.difficulty ?? 'READY';
-  const hideText = difficulty !== 'READY';
+  const difficulty: Difficulty = view?.difficulty ?? 'BRONZE';
+  const hideText = difficulty !== 'BRONZE';
 
   const show = (messages: SceneMessage[], level: Difficulty) => {
     const added: Item[] = messages.map((m) =>
@@ -83,7 +86,7 @@ export default function Scene() {
     sayAll(
       messages
         .filter((m) => m.kind !== 'transition')
-        .map((m) => ({ text: m.text, voice: level === 'READY' ? 'en-US' : m.voice })),
+        .map((m) => ({ text: m.text, voice: m.voice })),
       RATE[level],
     );
   };
@@ -119,7 +122,7 @@ export default function Scene() {
     setHintShown(false);
   }, [view?.stepIndex]);
 
-  const hintVisible = !!view?.hintsAllowed && (difficulty === 'READY' || hintShown);
+  const hintVisible = !!view?.hintsAllowed && (difficulty === 'BRONZE' || hintShown);
   const intended = option ?? (hintVisible ? view?.hint ?? null : null);
 
   const send = async (text: string, withAudio: boolean) => {
@@ -130,7 +133,7 @@ export default function Scene() {
     setError(null);
     try {
       const recording = withAudio ? await voice.stop() : null;
-      const next = await sendTurn(view.sessionId, text, recording, difficulty === 'CONFIDENT' && hintShown);
+      const next = await sendTurn(view.sessionId, text, recording, difficulty === 'SILVER' && hintShown);
       setItems((list) => [
         ...list,
         { id: nextId.current++, who: 'you', text: next.userText ?? text, note: next.feedbackTr ?? undefined, ok: next.goalMet ?? undefined },
@@ -302,7 +305,7 @@ export default function Scene() {
                 accessibilityRole="button"
                 accessibilityLabel={hidden ? 'Tekrar dinle. Metni göstermek için uzun bas' : m.text}
                 accessibilityHint={hidden ? undefined : 'Tekrar dinle'}
-                onPress={() => sayAll([{ text: m.text, voice: difficulty === 'READY' ? 'en-US' : m.voice }], RATE[difficulty])}
+                onPress={() => sayAll([{ text: m.text, voice: m.voice }], RATE[difficulty])}
                 onLongPress={() => setRevealed((r) => new Set(r).add(m.id))}
                 style={[styles.bubble, styles.aiBubble, twist && { borderColor: colors.red }]}
               >
@@ -396,8 +399,8 @@ export default function Scene() {
 }
 
 /**
- * READY: the suggestion (or the ways out of a surprise) is always shown and free.
- * CONFIDENT: hidden behind "Show hint", which costs points. PRO: no hints at all.
+ * BRONZE: the suggestion (or the ways out of a surprise) is always shown and free.
+ * SILVER: hidden behind "Show hint", which costs points. GOLD: no hints at all.
  */
 function HintArea({ view, difficulty, hintVisible, option, onOption, onReveal }: {
   view: SceneView;
@@ -443,7 +446,7 @@ function HintArea({ view, difficulty, hintVisible, option, onOption, onReveal }:
       </View>
     );
   }
-  return view.hintTr && difficulty !== 'PRO' ? <Text style={styles.hintTr}>{view.hintTr}</Text> : null;
+  return view.hintTr && difficulty !== 'GOLD' ? <Text style={styles.hintTr}>{view.hintTr}</Text> : null;
 }
 
 const styles = StyleSheet.create({

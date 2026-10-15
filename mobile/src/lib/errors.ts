@@ -15,6 +15,8 @@ const MESSAGES: Record<string, string> = {
   AUDIO_TOO_LARGE: 'Kayıt çok uzun. En fazla 15 saniye konuş.',
   SESSION_FINISHED: 'Bu sahne bitti.',
   TURN_CONFLICT: 'Bu cevap zaten gönderildi.',
+  MEMBERSHIP_REQUIRED: 'Bu bölüm tam yolculuğun parçası. Devam etmek için bir plan seç.',
+  STORE_NOT_CONNECTED: 'Mağaza ödemesi çok yakında açılacak.',
   NETWORK: 'İnternet bağlantısı yok gibi görünüyor.',
 };
 

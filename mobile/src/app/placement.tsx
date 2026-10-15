@@ -78,7 +78,7 @@ export default function Placement() {
     if (!isFinal && me.data) {
       await scheduleDailyReminder(me.data.reminderHour).catch(() => false);
     }
-    router.replace(isFinal ? '/progress' : '/home');
+    router.replace(isFinal ? '/progress' : result?.starter ? '/lesson/starter-alphabet' : '/home');
   };
 
   if (phase === 'intro') {
@@ -121,14 +121,19 @@ export default function Placement() {
               </Card>
             ) : null
           ) : (
-            <Card style={{ borderWidth: 2, borderColor: colors.yellow }}>
+            <Card style={{ borderWidth: 2, borderColor: colors.yellow, gap: 4 }}>
               <Label>ÖNERİLEN BAŞLANGIÇ</Label>
-              <Title size={20}>{`${result.level} — ${result.startDayApplied ? result.startDay : 1}. gün`}</Title>
+              <Title size={20}>
+                {result.starter ? 'Başlangıç paketi: 5 kısa ders' : `${result.level} — ${result.startDayApplied ? result.startDay : 1}. gün`}
+              </Title>
+              {result.starter ? (
+                <Body size={14} color={colors.muted}>Alfabe, sayılar, kodlama, zamirler ve ilk kelimeler. 21 günün bundan sonra başlar.</Body>
+              ) : null}
             </Card>
           )}
           {!isFinal ? <Body color={colors.muted} size={14}>21. günde tekrar test olacaksın, farkı kendin göreceksin.</Body> : null}
           <View style={{ flex: 1 }} />
-          <Button label={isFinal ? 'Sonuçlarıma git' : '21 günümü başlat'} onPress={start} />
+          <Button label={isFinal ? 'Sonuçlarıma git' : result.starter ? 'Başlangıç paketiyle başla' : '21 günümü başlat'} onPress={start} />
         </ScrollView>
       </SafeAreaView>
     );

@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { acknowledge, type Attempt, enqueue, MAX_BATCH, nextBatch } from './queue';
 import { average, joinTiles, shuffledOrder, surviveScore } from './sentence';
+import { canPlay, matchPairs } from './rules';
 import { compareVersions } from './version';
+import hotel from '../../../content/chapters/hotel-bronze.json';
+import alphabet from '../../../content/chapters/starter-alphabet.json';
 
 const attempt = (id: string): Attempt => ({
   clientId: id,
@@ -65,5 +68,28 @@ describe('content versions', () => {
     expect(compareVersions('2026.10.10', '2026.10.9')).toBe(1);
     expect(compareVersions('2026.9.1', '2026.10.1')).toBe(-1);
     expect(compareVersions('2026.10.1', '2026.10.1')).toBe(0);
+  });
+});
+
+describe('matching game', () => {
+  it('uses the words the chapter chose, in order', () => {
+    expect(matchPairs(hotel).map((w) => w.en)).toEqual(hotel.match);
+    expect(matchPairs(hotel).every((w) => !!w.picture)).toBe(true);
+  });
+
+  it('falls back to the first six words and never shows more than six', () => {
+    const words = alphabet.words.slice(0, 9);
+    expect(matchPairs({ words }).map((w) => w.en)).toEqual(['A', 'B', 'C', 'D', 'E', 'F']);
+    expect(matchPairs({ words, match: ['Z', 'A'] }).map((w) => w.en)).toEqual(['A']);
+  });
+});
+
+describe('plan access', () => {
+  it('keeps the Starter pack and the first free days open to everyone', () => {
+    expect(canPlay({ kind: 'starter', day: 0 }, false, 2)).toBe(true);
+    expect(canPlay({ kind: 'lesson', day: 2 }, false, 2)).toBe(true);
+    expect(canPlay({ kind: 'lesson', day: 3 }, false, 2)).toBe(false);
+    expect(canPlay({ kind: 'simulation', day: 21 }, false, 2)).toBe(false);
+    expect(canPlay({ kind: 'lesson', day: 17 }, true, 2)).toBe(true);
   });
 });

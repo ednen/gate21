@@ -1,19 +1,31 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import bundledManifest from '../../../content/manifest.json';
-import airport from '../../../content/chapters/airport.json';
-import hotel from '../../../content/chapters/hotel.json';
-import restaurant from '../../../content/chapters/restaurant.json';
-import shopping from '../../../content/chapters/shopping.json';
+import starterAlphabet from '../../../content/chapters/starter-alphabet.json';
+import starterNumbers from '../../../content/chapters/starter-numbers.json';
+import starterSpelling from '../../../content/chapters/starter-spelling.json';
+import starterPeople from '../../../content/chapters/starter-people.json';
+import starterBasics from '../../../content/chapters/starter-basics.json';
+import arrivalBronze from '../../../content/chapters/arrival-bronze.json';
+import transferBronze from '../../../content/chapters/transfer-bronze.json';
+import hotelBronze from '../../../content/chapters/hotel-bronze.json';
+import restaurantBronze from '../../../content/chapters/restaurant-bronze.json';
+import cafeBronze from '../../../content/chapters/cafe-bronze.json';
+import shoppingBronze from '../../../content/chapters/shopping-bronze.json';
+import transportBronze from '../../../content/chapters/transport-bronze.json';
 import fullTrip from '../../../content/chapters/full-trip.json';
 import placementJson from '../../../content/placement.json';
 import sosJson from '../../../content/sos.json';
 import { apiGet } from './api';
+import type { ChapterKind, LevelId, Step } from './types';
 import { compareVersions } from './version';
 
 export type ChapterInfo = {
   slug: string;
+  kind: ChapterKind;
+  stop: string | null;
   week: number;
+  day: number;
   order: number;
   title: string;
   titleTr: string;
@@ -21,28 +33,51 @@ export type ChapterInfo = {
   available: boolean;
 };
 
+export type LevelInfo = {
+  week: number;
+  id: LevelId;
+  title: string;
+  titleTr: string;
+  tagline: string;
+  message: string;
+  messageTr: string;
+  trip: string;
+  startDay: number;
+};
+
+export type Stop = { slug: string; order: number; title: string; titleTr: string; icon: string };
+
 export type Manifest = {
   version: string;
-  weeks: { week: number; level: string; levelTr: string; startDay: number }[];
+  freeDays: number;
+  levels: LevelInfo[];
+  graduation: { title: string; titleTr: string; lines: string[]; linesTr: string[] };
+  stops: Stop[];
   chapters: ChapterInfo[];
 };
 
-export type Word = { en: string; tr: string };
+/** A word card: the word, its picture (if it can be drawn) and the word used in a sentence. */
+export type Word = { en: string; tr: string; picture?: string; example?: string; exampleTr?: string };
 export type PronounceItem = { word: string; ipa: string; stress: string; tipTr: string };
-export type Question = { prompt: string; options: string[]; answer: number; explainTr: string; tag?: string };
+/** With `audio`, the prompt is heard (spoken by the device) instead of read. */
+export type Question = { prompt: string; options: string[]; answer: number; explainTr: string; tag?: string; audio?: string };
+export type DialogLine = { who: string; text: string; gap?: string; options?: string[] };
+export type FormField = { label: string; labelTr: string; options: string[]; answer: number; explainTr: string };
 
-/** A regular chapter: the six-step lesson loop. */
-export type LessonChapter = {
-  type?: 'lesson';
+export type Chapter = {
   slug: string;
   mission: string;
   missionTr: string;
   stamp: string;
-  words: Word[];
-  pronounce: PronounceItem[];
-  recognize: Question[];
-  speak: { scene: string; prompt: string; answer: string; accept: string[] };
-  use: {
+  steps: Step[];
+  words?: Word[];
+  pronounce?: PronounceItem[];
+  match?: string[];
+  recognize?: Question[];
+  dialog?: { titleTr: string; lines: DialogLine[] };
+  form?: { title: string; titleTr: string; situationTr: string; fields: FormField[] };
+  speak?: { picture: string; prompt: string; answer: string; accept: string[] };
+  use?: {
     word: string;
     phrase: string;
     phraseTr: string;
@@ -50,29 +85,13 @@ export type LessonChapter = {
     situationTr: string;
     tiles: string[];
   };
-  survive: { scenario: string };
+  survive?: { scenario: string };
 };
-
-/** Full Trip: only the Survive step, one long scene across several characters. */
-export type SimulationChapter = {
-  type: 'simulation';
-  slug: string;
-  mission: string;
-  missionTr: string;
-  stamp: string;
-  survive: { scenario: string };
-};
-
-export type Chapter = LessonChapter | SimulationChapter;
-
-export function isSimulation(chapter: Chapter): chapter is SimulationChapter {
-  return chapter.type === 'simulation';
-}
 
 export type Placement = {
   questions: Question[];
   speaking: { situationTr: string; phrase: string }[];
-  bands: { min: number; level: string; startDay: number; messageTr: string }[];
+  bands: { min: number; level: string; startDay: number; starter: boolean; messageTr: string }[];
 };
 
 export type SosPhrase = { en: string; tr: string };
@@ -84,7 +103,10 @@ const STORAGE_KEY = 'gate21.content-pack';
 const bundled: Pack = {
   version: bundledManifest.version,
   manifest: bundledManifest as Manifest,
-  chapters: { airport, hotel, restaurant, shopping, 'full-trip': fullTrip } as Record<string, Chapter>,
+  chapters: Object.fromEntries(
+    [starterAlphabet, starterNumbers, starterSpelling, starterPeople, starterBasics, arrivalBronze, transferBronze,
+      hotelBronze, restaurantBronze, cafeBronze, shoppingBronze, transportBronze, fullTrip].map((c) => [c.slug, c as Chapter]),
+  ),
 };
 
 let current: Pack = bundled;
@@ -104,6 +126,20 @@ export function chapter(slug: string): Chapter | undefined {
 export function chapterInfo(slug: string): ChapterInfo | undefined {
   return current.manifest.chapters.find((c) => c.slug === slug);
 }
+
+export function stop(slug: string | null | undefined): Stop | undefined {
+  return current.manifest.stops.find((s) => s.slug === slug);
+}
+
+export function level(week: number): LevelInfo | undefined {
+  return current.manifest.levels.find((l) => l.week === week);
+}
+
+export function levelById(id: string): LevelInfo | undefined {
+  return current.manifest.levels.find((l) => l.id === id);
+}
+
+export { canPlay, matchPairs } from './rules';
 
 /**
  * Loads a newer content pack cached on the device, then checks the API for a newer one.

@@ -3,7 +3,8 @@ import Svg, { Circle, Path, Rect } from 'react-native-svg';
 export type IconName =
   | 'plane' | 'bed' | 'utensils' | 'bag' | 'train' | 'map' | 'alert' | 'chat' | 'edit' | 'ticket' | 'globe'
   | 'mic' | 'speaker' | 'flame' | 'star' | 'target' | 'home' | 'passport' | 'chart' | 'check' | 'close'
-  | 'arrowLeft' | 'arrowRight' | 'lock' | 'wifiOff';
+  | 'arrowLeft' | 'arrowRight' | 'lock' | 'wifiOff' | 'car' | 'coffee' | 'abc' | 'hash' | 'people' | 'medal'
+  | 'repeat';
 
 type Props = { name: IconName; size?: number; color?: string; fill?: string; strokeWidth?: number };
 
@@ -103,6 +104,36 @@ function paths(name: IconName, c: Common) {
           <Path {...line} d="M8 11V7a4 4 0 0 1 8 0v4" />
         </>
       );
+    case 'car':
+      return (
+        <>
+          <Path {...line} d="M5 17H3v-5l2-5h14l2 5v5h-2M5 12h14" />
+          <Circle {...line} cx="7.5" cy="17" r="2" />
+          <Circle {...line} cx="16.5" cy="17" r="2" />
+        </>
+      );
+    case 'coffee':
+      return <Path {...line} d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1a3 3 0 0 1 0 6h-1M8 2v3M12 2v3" />;
+    case 'abc':
+      return <Path {...line} d="M3 17l3.5-10L10 17M4.2 13.5h4.6M13 7v10h3a2.5 2.5 0 0 0 0-5h-3 2.5a2.5 2.5 0 0 0 0-5zM22 8.5A3.5 3.5 0 0 0 19.5 7" />;
+    case 'hash':
+      return <Path {...line} d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18" />;
+    case 'people':
+      return (
+        <>
+          <Circle {...line} cx="9" cy="8" r="3.5" />
+          <Path {...line} d="M2 21c0-4 3-7 7-7s7 3 7 7M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.5.7 4 3.4 4 7" />
+        </>
+      );
+    case 'medal':
+      return (
+        <>
+          <Path {...line} d="M7 2l3 7M17 2l-3 7" />
+          <Circle {...c} cx="12" cy="15" r="6" />
+        </>
+      );
+    case 'repeat':
+      return <Path {...line} d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3" />;
     case 'wifiOff':
       return <Path {...line} d="m2 2 20 20M8.5 16.5a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.6M10.7 5c4-.4 8.1.9 11.3 3.8M16.9 11.3a10 10 0 0 1 2.2 1.6M5 13a10 10 0 0 1 5.2-2.8M12 20h.01" />;
   }

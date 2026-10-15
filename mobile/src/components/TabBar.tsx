@@ -6,11 +6,12 @@ import { colors, fonts } from '@/theme';
 
 import { Icon, type IconName } from './Icon';
 
-type Tab = 'home' | 'passport' | 'sos' | 'progress';
+type Tab = 'home' | 'passport' | 'practice' | 'sos' | 'progress';
 
-const TABS: { key: Tab; label: string; icon: IconName; href: '/home' | '/passport' | '/sos' | '/progress' }[] = [
+const TABS: { key: Tab; label: string; icon: IconName; href: '/home' | '/passport' | '/practice' | '/sos' | '/progress' }[] = [
   { key: 'home', label: 'Bugün', icon: 'home', href: '/home' },
   { key: 'passport', label: 'Pasaport', icon: 'passport', href: '/passport' },
+  { key: 'practice', label: 'Pratik', icon: 'repeat', href: '/practice' },
   { key: 'sos', label: 'SOS', icon: 'alert', href: '/sos' },
   { key: 'progress', label: 'İlerleme', icon: 'chart', href: '/progress' },
 ];

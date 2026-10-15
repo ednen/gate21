@@ -1,7 +1,17 @@
 /** Response shapes of the Gate 21 API (see backend controllers). */
 
-export type Step = 'DISCOVER' | 'PRONOUNCE' | 'RECOGNIZE' | 'SPEAK' | 'USE' | 'SURVIVE';
-export const STEPS: Step[] = ['DISCOVER', 'PRONOUNCE', 'RECOGNIZE', 'SPEAK', 'USE', 'SURVIVE'];
+/** Step kinds; every chapter lists the steps it uses, in order. */
+export type Step = 'DISCOVER' | 'PRONOUNCE' | 'RECOGNIZE' | 'SPEAK' | 'USE' | 'SURVIVE' | 'MATCH' | 'DIALOG' | 'FORM';
+
+export type LevelId = 'BRONZE' | 'SILVER' | 'GOLD';
+export type ChapterKind = 'lesson' | 'starter' | 'simulation';
+
+export type Membership = {
+  plan: 'FREE' | 'JOURNEY' | 'KEEP_READY';
+  active: boolean;
+  expiresAt: string | null;
+  freeDays: number;
+};
 
 export type Me = {
   id: string;
@@ -13,8 +23,10 @@ export type Me = {
   memberSince: string;
   journeyDay: number;
   week: number;
+  levelId: LevelId;
   level: string;
   levelTr: string;
+  trip: string;
   todayDone: boolean;
   todayXp: number;
   dailyGoalXp: number;
@@ -24,21 +36,33 @@ export type Me = {
   speakingAccuracy: number | null;
   placementScore: number | null;
   finalScore: number | null;
+  starterRecommended: boolean;
+  starterDone: boolean;
+  graduatedAt: string | null;
+  practice: { thisWeek: number; weeklyGoal: number };
+  membership: Membership;
   nextChapter: {
     slug: string;
+    kind: ChapterKind;
+    stop: string | null;
+    week: number;
+    day: number;
     title: string;
     titleTr: string;
     mission: string;
     missionTr: string;
-    scenario: string;
+    scenario: string | null;
   } | null;
 };
 
 export type PassportChapter = {
   slug: string;
+  kind: ChapterKind;
+  stop: string | null;
   title: string;
   titleTr: string;
   week: number;
+  day: number;
   order: number;
   icon: string;
   available: boolean;
@@ -57,7 +81,35 @@ export type Passport = {
   journeyDay: number;
   level: string;
   stamps: number;
+  levels: LevelBadge[];
   chapters: PassportChapter[];
+};
+
+/** Bronze / Silver / Gold Traveller: earned when all seven lessons of the week are done. */
+export type LevelBadge = {
+  id: LevelId;
+  week: number;
+  title: string;
+  titleTr: string;
+  tagline: string;
+  message: string;
+  messageTr: string;
+  trip: string;
+  lessonsDone: number;
+  lessons: number;
+  earned: boolean;
+  earnedAt: string | null;
+};
+
+export type Offer = { id: 'JOURNEY' | 'KEEP_READY'; title: string; titleTr: string; price: string; periodTr: string; featuresTr: string[] };
+export type Offers = { current: Membership; storeConnected: boolean; plans: Offer[] };
+
+export type PracticeOverview = {
+  weeklyGoal: number;
+  practiceDays: string[];
+  thisWeek: number;
+  phrases: { en: string; tr: string }[];
+  scenes: { chapter: string; scenario: string; title: string; titleTr: string; icon: string; week: number }[];
 };
 
 export type Assessment = {
@@ -70,7 +122,7 @@ export type Assessment = {
   tipTr: string;
 };
 
-export type Difficulty = 'READY' | 'CONFIDENT' | 'PRO';
+export type Difficulty = LevelId;
 
 /** A character line. kind: say | twist (the surprise) | transition (scene change) | closing. */
 export type SceneMessage = {
@@ -128,6 +180,7 @@ export type PlacementResult = {
   level: string;
   startDay: number;
   messageTr: string;
+  starter: boolean;
   startDayApplied: boolean;
 };
 
@@ -136,6 +189,8 @@ export type SyncResult = {
   duplicates: number;
   xpGained: number;
   stampedChapters: string[];
+  levelsEarned: LevelId[];
+  graduated: boolean;
   xpTotal: number;
   streak: number;
 };
