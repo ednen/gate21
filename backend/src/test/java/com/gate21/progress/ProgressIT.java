@@ -83,6 +83,20 @@ class ProgressIT extends IntegrationTest {
     }
 
     @Test
+    void fullTripIsOneStepAndStaysOutOfTheMissionUntilWeekThree() throws Exception {
+        String token = token("Ozan");
+        Response passport = getJson("/api/v1/progress/passport", token);
+        var trip = findChapter(passport, "full-trip");
+        assertThat(trip.path("totalSteps").asInt()).isEqualTo(1);
+        assertThat(trip.path("unlocked").asBoolean()).isFalse();
+        assertThat(findChapter(passport, "hotel").path("totalSteps").asInt()).isEqualTo(6);
+
+        Response r = sync(token, List.of(attempt(UUID.randomUUID(), "full-trip", "SURVIVE", 90, Instant.now())));
+        assertThat(r.body().path("stampedChapters").get(0).asText()).isEqualTo("full-trip");
+        assertThat(getJson("/api/v1/me", token).body().path("nextChapter").path("slug").asText()).isEqualTo("airport");
+    }
+
+    @Test
     void consecutiveDaysBuildAStreakAndAdvanceTheJourney() throws Exception {
         String token = token("Ozan");
         Instant now = Instant.now();

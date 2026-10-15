@@ -49,7 +49,6 @@ gate21:
   quota:
     speech-per-day: ${QUOTA_SPEECH_PER_DAY:40}
     roleplay-sessions-per-day: ${QUOTA_ROLEPLAY_PER_DAY:3}
-    roleplay-max-turns: 10
   speech:
     # fake = deterministic local scorer (dev/tests), azure = Azure AI Speech
     provider: ${SPEECH_PROVIDER:fake}

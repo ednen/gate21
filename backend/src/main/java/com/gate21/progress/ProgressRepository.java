@@ -29,8 +29,8 @@ public class ProgressRepository {
             return scoreCount == 0 ? null : Math.round((float) scoreSum / scoreCount);
         }
 
-        public boolean complete() {
-            return (stepsDone & Step.ALL_BITS) == Step.ALL_BITS;
+        public boolean complete(int requiredBits) {
+            return (stepsDone & requiredBits) == requiredBits;
         }
     }
 

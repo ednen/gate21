@@ -38,8 +38,8 @@ public class ProgressService {
     }
 
     public record PassportChapter(String slug, String title, String titleTr, int week, int order, String icon,
-                                  boolean available, boolean unlocked, int stepsDone, boolean complete, int stars,
-                                  String stamp, Instant stampedAt) {
+                                  boolean available, boolean unlocked, int stepsDone, int totalSteps, boolean complete,
+                                  int stars, String stamp, Instant stampedAt) {
     }
 
     private final ProgressRepository repo;
@@ -99,7 +99,7 @@ public class ProgressService {
                 .collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
             for (String slug : touchedChapters) {
                 ChapterRow row = rows.get(slug);
-                if (row != null && row.complete()) {
+                if (row != null && row.complete(requiredBits(slug))) {
                     if (row.stampedAt() == null) {
                         stamped.add(slug);
                     }
@@ -125,15 +125,15 @@ public class ProgressService {
         List<PassportChapter> result = new ArrayList<>();
         for (ChapterInfo c : content.manifest().chapters()) {
             ChapterRow row = rows.get(c.slug());
-            int weekStart = content.manifest().weeks().stream()
-                .filter(w -> w.week() == c.week()).findFirst().map(w -> w.startDay()).orElse(1);
+            int required = requiredBits(c.slug());
             String stamp = content.chapterMeta(c.slug()).map(m -> m.stamp()).orElse(null);
             result.add(new PassportChapter(
                 c.slug(), c.title(), c.titleTr(), c.week(), c.order(), c.icon(),
                 c.available(),
-                c.available() && journeyDay >= weekStart,
-                row == null ? 0 : Integer.bitCount(row.stepsDone() & Step.ALL_BITS),
-                row != null && row.complete(),
+                c.available() && journeyDay >= weekStart(c),
+                row == null ? 0 : Integer.bitCount(row.stepsDone() & required),
+                Integer.bitCount(required),
+                row != null && row.complete(required),
                 row == null ? 0 : row.stars(),
                 stamp,
                 row == null ? null : row.stampedAt()));
@@ -141,17 +141,31 @@ public class ProgressService {
         return result;
     }
 
-    /** The first available chapter that is not finished yet, or null when everything available is done. */
-    public ChapterInfo nextChapter(UUID userId) {
+    /**
+     * The first unlocked chapter that is not finished yet, or null when everything unlocked is
+     * done. Chapters of a later week stay out of the mission until that week starts.
+     */
+    public ChapterInfo nextChapter(UUID userId, int journeyDay) {
         Map<String, ChapterRow> rows = repo.chapters(userId).stream()
             .collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
         for (ChapterInfo c : content.availableChapters()) {
             ChapterRow row = rows.get(c.slug());
-            if (row == null || !row.complete()) {
+            if (journeyDay >= weekStart(c) && (row == null || !row.complete(requiredBits(c.slug())))) {
                 return c;
             }
         }
         return null;
+    }
+
+    /** A simulation chapter (Full Trip) is only the Survive step; a lesson chapter has all six. */
+    int requiredBits(String slug) {
+        boolean simulation = content.chapterMeta(slug).map(m -> m.simulation()).orElse(false);
+        return simulation ? Step.SURVIVE.bit() : Step.ALL_BITS;
+    }
+
+    private int weekStart(ChapterInfo c) {
+        return content.manifest().weeks().stream()
+            .filter(w -> w.week() == c.week()).findFirst().map(w -> w.startDay()).orElse(1);
     }
 
     static Instant clamp(Instant occurredAt, Instant now) {

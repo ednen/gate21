@@ -5,35 +5,109 @@
   "titleTr": "Yapay zekâ resepsiyonist",
   "role": "Receptionist",
   "setting": "Grand Hotel · Front desk",
+  "voice": "en-GB",
   "persona": "You are a friendly, professional front desk receptionist at the Grand Hotel. The guest is arriving to check in.",
+  "briefTr": "Grand Hotel'e vardın. Rezervasyon {name} adına, 3 gece.",
   "opening": "Hello, welcome to the Grand Hotel. How can I help you?",
+  "facts": [
+    { "id": "room", "values": ["512", "318", "207", "624"], "question": "What was your room number?", "questionTr": "Oda numaran kaçtı?" },
+    { "id": "breakfast", "values": ["7 to 10", "6:30 to 9:30", "8 to 11"], "question": "When is breakfast?", "questionTr": "Kahvaltı saat kaçta?" },
+    { "id": "wifi", "values": ["garden2026", "sunset55", "bluedoor7"], "question": "What was the Wi-Fi password?", "questionTr": "Wi-Fi şifresi neydi?" }
+  ],
   "goals": [
     {
       "id": "reservation",
+      "titleTr": "Rezervasyonunu söylemek",
       "instruction": "The guest says they have a reservation (a booking) and gives a name.",
       "hint": "Hi, I have a reservation under {name}.",
+      "hintTr": "Merhaba, {name} adına rezervasyonum var.",
       "keywords": ["reservation", "booking", "booked", "reserved"],
-      "successReply": "Certainly. Could I see your passport, please?",
+      "successReply": "Certainly, let me find it.",
       "retryReply": "Sorry — do you have a booking with us? Under what name?"
     },
     {
       "id": "passport",
+      "titleTr": "Pasaportu vermek",
+      "ask": "Could I see your passport, please?",
       "instruction": "The guest hands over their passport, for example by saying 'Here you are'.",
       "hint": "Sure, here you are.",
+      "hintTr": "Tabii, buyurun.",
       "keywords": ["here", "passport", "sure", "of course"],
-      "successReply": "Thank you. I'm sorry — your room isn't ready yet.",
+      "successReply": "Thank you.",
       "retryReply": "I just need your passport to check you in."
     },
     {
+      "id": "nights",
+      "titleTr": "Kaç gece kalacağını söylemek",
+      "ask": "And how many nights are you staying with us?",
+      "instruction": "The guest says how many nights they are staying.",
+      "hint": "Three nights, please.",
+      "hintTr": "Üç gece, lütfen.",
+      "keywords": ["night", "nights", "one", "two", "three", "four", "five", "week"],
+      "successReply": "Lovely.",
+      "retryReply": "Sorry, how many nights will you stay?"
+    },
+    {
+      "id": "breakfast",
+      "titleTr": "Kahvaltıyı sormak",
+      "ask": "Would you like breakfast included?",
+      "instruction": "The guest says whether they want breakfast, or asks about it.",
+      "hint": "Yes, please. What time is breakfast?",
+      "hintTr": "Evet, lütfen. Kahvaltı saat kaçta?",
+      "keywords": ["yes", "no", "please", "breakfast", "thanks"],
+      "successReply": "Breakfast is from {breakfast}, in the garden restaurant.",
+      "retryReply": "Would you like breakfast with your room? It's served every morning."
+    },
+    {
+      "id": "wifi",
+      "titleTr": "Wi-Fi şifresini sormak",
+      "ask": "Is there anything else I can help you with?",
+      "instruction": "The guest asks for the Wi-Fi password.",
+      "hint": "What's the Wi-Fi password?",
+      "hintTr": "Wi-Fi şifresi ne?",
+      "keywords": ["wifi", "wi-fi", "password", "internet"],
+      "successReply": "The Wi-Fi password is {wifi}.",
+      "retryReply": "Sorry? Many guests ask about the internet — would you like the Wi-Fi password?"
+    }
+  ],
+  "twists": [
+    {
       "id": "room-not-ready",
-      "twist": true,
-      "instruction": "The room is not ready. The guest deals with it: asks to leave their luggage, asks when the room will be ready, or asks for another room.",
+      "titleTr": "Oda hazır değil",
+      "intro": "Oh — I'm sorry, your room isn't ready yet.",
+      "instruction": "The room is not ready. The guest deals with it: asks to leave luggage, asks when it will be ready, or asks for another room.",
       "retryReply": "I'm really sorry about that. Is there anything I can do for you while you wait?",
       "options": [
         { "text": "Could I leave my luggage here?", "keywords": ["luggage", "bag", "bags", "leave", "keep", "suitcase"], "reply": "Of course. We'll keep it safe and text you when your room is ready." },
-        { "text": "When will the room be ready?", "keywords": ["when", "what time", "how long", "ready"], "reply": "Around 2 p.m. You're welcome to wait in the lounge — coffee is on us." },
-        { "text": "Is there another room available?", "keywords": ["another", "other", "different", "available"], "reply": "Let me check… Yes — a room on the 5th floor is ready now. Here's your key card." }
+        { "text": "When will the room be ready?", "keywords": ["when", "what time", "how long"], "reply": "Around 2 p.m. You're welcome to wait in the lounge — coffee is on us." },
+        { "text": "Is there another room available?", "keywords": ["another", "other", "different", "available"], "reply": "Let me check… Yes, another room is ready now." }
+      ]
+    },
+    {
+      "id": "overbooked",
+      "titleTr": "Otel dolu",
+      "intro": "Oh no… I'm afraid we're overbooked tonight. I'm very sorry.",
+      "instruction": "The hotel is overbooked. The guest asks for a solution: any room at all, an upgrade, or a discount.",
+      "retryReply": "I completely understand. How would you like us to help?",
+      "options": [
+        { "text": "Is there any room at all, even a small one?", "keywords": ["any room", "small", "even", "any"], "reply": "Let me look again… We have one small room left. It's yours." },
+        { "text": "Could you give me an upgrade?", "keywords": ["upgrade", "suite", "better"], "reply": "Good idea — I can upgrade you to a suite at no extra cost." },
+        { "text": "Can I get a discount for this?", "keywords": ["discount", "cheaper", "refund", "price"], "reply": "Of course — 20% off, and a room has just become free." }
+      ]
+    },
+    {
+      "id": "card-declined",
+      "titleTr": "Kart geçmedi",
+      "intro": "Hmm, your card was declined. Do you have another way to pay?",
+      "instruction": "The guest's card was declined. The guest asks to try again, offers cash, or offers another card.",
+      "retryReply": "No problem, these things happen. How would you like to pay?",
+      "options": [
+        { "text": "Could you try it again, please?", "keywords": ["again", "try", "retry", "one more"], "reply": "Sure… yes, it worked this time." },
+        { "text": "Can I pay in cash?", "keywords": ["cash", "money"], "reply": "Of course, cash is fine." },
+        { "text": "Can I use another card?", "keywords": ["another card", "other card", "different card", "visa", "mastercard"], "reply": "Yes, that one went through. Thank you." }
       ]
     }
-  ]
+  ],
+  "twistSlots": [{ "after": "breakfast", "pool": ["room-not-ready", "overbooked", "card-declined"] }],
+  "closing": "Here's your key card — room {room}. Check-out is at 11. Enjoy your stay!"
 }

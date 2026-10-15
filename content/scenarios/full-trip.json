@@ -1,0 +1,199 @@
+{
+  "slug": "full-trip",
+  "chapter": "full-trip",
+  "title": "Full Trip Simulation",
+  "titleTr": "Tam seyahat simülasyonu",
+  "role": "Airline staff",
+  "setting": "Istanbul Airport · Check-in",
+  "voice": "en-US",
+  "persona": "You are a polite airline check-in agent at Istanbul Airport. The passenger is flying to Lisbon.",
+  "briefTr": "Lizbon'a gidiyorsun. Otelin: {hotel}. Rezervasyon {name} adına. Havalimanından restorana kadar her şeyi İngilizce hallet.",
+  "opening": "Good morning! Where are you flying today?",
+  "facts": [
+    { "id": "gate", "values": ["B12", "C7", "A3"], "question": "Which gate did you fly from?", "questionTr": "Hangi kapıdan uçtun?" },
+    { "id": "hotel", "values": ["Harbor View Hotel", "Park Lane Hotel", "Riverside Hotel"], "question": "Which hotel did you stay at?", "questionTr": "Hangi otelde kaldın?" },
+    { "id": "room", "values": ["512", "318", "207"], "question": "What was your room number?", "questionTr": "Oda numaran kaçtı?" },
+    { "id": "fare", "values": ["25 euros", "32 euros", "18 euros"], "question": "How much was the taxi?", "questionTr": "Taksi ne kadar tuttu?" }
+  ],
+  "goals": [
+    {
+      "id": "airport-destination",
+      "titleTr": "Havalimanı: nereye uçtuğunu söylemek",
+      "instruction": "The passenger says where they are flying.",
+      "hint": "I'm flying to Lisbon.",
+      "hintTr": "Lizbon'a uçuyorum.",
+      "keywords": ["flying", "fly", "going", "lisbon", "to"],
+      "successReply": "Lovely.",
+      "retryReply": "Sorry, where are you flying to today?"
+    },
+    {
+      "id": "airport-passport",
+      "titleTr": "Havalimanı: pasaportu vermek",
+      "ask": "May I see your passport, please?",
+      "instruction": "The passenger hands over their passport.",
+      "hint": "Sure, here you are.",
+      "hintTr": "Tabii, buyurun.",
+      "keywords": ["here", "passport", "sure", "of course"],
+      "successReply": "Thank you. Your gate is {gate}.",
+      "retryReply": "I'll need your passport to check you in."
+    },
+    {
+      "id": "taxi-destination",
+      "titleTr": "Taksi: adresi söylemek",
+      "role": "Taxi driver",
+      "setting": "Lisbon · Airport taxi rank",
+      "voice": "en-GB",
+      "persona": "You are a chatty, friendly taxi driver at Lisbon airport. The passenger has just landed.",
+      "ask": "Hi there! Where to?",
+      "instruction": "The passenger tells the driver which hotel to go to.",
+      "hint": "To the {hotel}, please.",
+      "hintTr": "{hotel}'e, lütfen.",
+      "keywords": ["hotel", "to the", "please"],
+      "successReply": "No problem — it's about thirty minutes.",
+      "retryReply": "Sorry, which hotel are you going to?"
+    },
+    {
+      "id": "taxi-pay",
+      "titleTr": "Taksi: ödemek",
+      "ask": "Here we are! That's {fare}.",
+      "instruction": "The passenger asks to pay or pays, by card or cash.",
+      "hint": "Can I pay by card?",
+      "hintTr": "Kartla ödeyebilir miyim?",
+      "keywords": ["card", "cash", "pay", "here you are"],
+      "successReply": "Of course. Enjoy Lisbon!",
+      "retryReply": "That's the fare. How would you like to pay?"
+    },
+    {
+      "id": "hotel-checkin",
+      "titleTr": "Otel: check-in yapmak",
+      "role": "Receptionist",
+      "setting": "{hotel} · Front desk",
+      "voice": "en-AU",
+      "persona": "You are a warm receptionist at the {hotel} in Lisbon.",
+      "ask": "Welcome to the {hotel}! Are you checking in?",
+      "instruction": "The guest says they have a reservation and gives a name.",
+      "hint": "Yes, I have a reservation under {name}.",
+      "hintTr": "Evet, {name} adına rezervasyonum var.",
+      "keywords": ["reservation", "booking", "booked", "reserved", "checking in"],
+      "successReply": "Perfect — here's your key, room {room}.",
+      "retryReply": "Do you have a booking with us? Under what name?"
+    },
+    {
+      "id": "hotel-breakfast",
+      "titleTr": "Otel: kahvaltıyı sormak",
+      "ask": "Is there anything else I can help you with?",
+      "instruction": "The guest asks what time breakfast is.",
+      "hint": "What time is breakfast?",
+      "hintTr": "Kahvaltı saat kaçta?",
+      "keywords": ["breakfast", "what time", "when"],
+      "successReply": "Breakfast is from 7 to 10, on the terrace.",
+      "retryReply": "Many guests ask about breakfast — would you like to know the time?"
+    },
+    {
+      "id": "dinner-table",
+      "titleTr": "Restoran: masa istemek",
+      "role": "Waiter",
+      "setting": "Café Lisboa · Dinner",
+      "voice": "en-US",
+      "persona": "You are a cheerful waiter at Café Lisboa. The guest is eating alone tonight.",
+      "ask": "Good evening! Table for one?",
+      "instruction": "The guest asks for a table.",
+      "hint": "Yes, a table for one, please.",
+      "hintTr": "Evet, tek kişilik bir masa lütfen.",
+      "keywords": ["table", "yes", "one", "please"],
+      "successReply": "Right this way.",
+      "retryReply": "Are you dining alone tonight?"
+    },
+    {
+      "id": "dinner-order",
+      "titleTr": "Restoran: sipariş vermek",
+      "ask": "What would you like?",
+      "instruction": "The guest orders food politely.",
+      "hint": "I'd like the fish, please.",
+      "hintTr": "Balık istiyorum, lütfen.",
+      "keywords": ["like", "have", "order", "please", "fish"],
+      "successReply": "Great choice.",
+      "retryReply": "What can I get you?"
+    },
+    {
+      "id": "dinner-bill",
+      "titleTr": "Restoran: hesabı istemek",
+      "ask": "Anything else for you tonight?",
+      "instruction": "The guest declines and asks for the bill.",
+      "hint": "No, thanks. Could I get the bill, please?",
+      "hintTr": "Hayır, teşekkürler. Hesabı alabilir miyim?",
+      "keywords": ["bill", "check", "pay", "no"],
+      "successReply": "Of course.",
+      "retryReply": "Would you like anything else, or shall I bring the bill?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "flight-delayed",
+      "titleTr": "Uçuş rötarlı",
+      "intro": "Oh — I'm afraid your flight is delayed by two hours.",
+      "instruction": "The flight is delayed. The passenger asks about a connection, a lounge or a meal voucher.",
+      "retryReply": "I'm sorry for the delay. Is there anything I can help you with?",
+      "options": [
+        { "text": "Will I miss my connection?", "keywords": ["connection", "connecting", "miss", "transfer"], "reply": "No connection on this ticket, so you're fine — you'll land in Lisbon this evening." },
+        { "text": "Is there a lounge I can use?", "keywords": ["lounge", "wait", "sit", "rest"], "reply": "Yes, the lounge is on the second floor." },
+        { "text": "Can I get a meal voucher?", "keywords": ["meal", "food", "voucher", "eat"], "reply": "Of course. Here's a meal voucher for any café after security." }
+      ]
+    },
+    {
+      "id": "overweight",
+      "titleTr": "Bavul fazla kilolu",
+      "intro": "Oh — your suitcase is four kilos over the limit.",
+      "instruction": "The suitcase is too heavy. The passenger moves things to their carry-on, asks about the fee, or asks for a second bag.",
+      "retryReply": "I'm afraid it's over the limit. What would you like to do?",
+      "options": [
+        { "text": "Can I move some things to my carry-on?", "keywords": ["move", "carry-on", "take out", "hand luggage"], "reply": "Sure. … That's perfect now." },
+        { "text": "How much is the extra fee?", "keywords": ["how much", "fee", "cost"], "reply": "It's 40 euros. I'll add it to your booking." },
+        { "text": "Can I check it as a second bag?", "keywords": ["second bag", "second", "two bags"], "reply": "Yes, you can split it into two bags." }
+      ]
+    },
+    {
+      "id": "traffic",
+      "titleTr": "Trafik var",
+      "intro": "Oh, there's a lot of traffic today. It might take an hour.",
+      "instruction": "There is heavy traffic. The passenger asks about a faster way, says it's okay, or asks about the price.",
+      "retryReply": "Sorry about the traffic. Is that okay?",
+      "options": [
+        { "text": "Is there a faster way?", "keywords": ["faster", "quicker", "another way", "shortcut"], "reply": "I know a shortcut along the river. Let's try it!" },
+        { "text": "That's okay, I'm not in a hurry.", "keywords": ["okay", "hurry", "fine", "no problem"], "reply": "Great, sit back and enjoy the view." },
+        { "text": "Will it cost more?", "keywords": ["cost", "price", "how much", "more"], "reply": "No, it's a fixed price from the airport." }
+      ]
+    },
+    {
+      "id": "lost-luggage",
+      "titleTr": "Bavul gelmemiş",
+      "intro": "Oh, one more thing — the airline just called. Your suitcase didn't arrive with your flight.",
+      "instruction": "The guest's suitcase is lost. The guest asks when it will arrive, asks for it to be delivered to the hotel, or asks what to do.",
+      "retryReply": "I'm so sorry. What would you like to know?",
+      "options": [
+        { "text": "When will it arrive?", "keywords": ["when", "arrive", "how long"], "reply": "Tomorrow morning — they'll bring it straight here." },
+        { "text": "Can they deliver it to the hotel?", "keywords": ["deliver", "bring", "send", "hotel"], "reply": "Yes, they'll deliver it here tomorrow morning." },
+        { "text": "What should I do now?", "keywords": ["what should", "do now", "help"], "reply": "Just fill in this short form — they'll deliver it tomorrow." }
+      ]
+    },
+    {
+      "id": "kitchen-closing",
+      "titleTr": "Mutfak kapanıyor",
+      "intro": "Just so you know, the kitchen closes in ten minutes.",
+      "instruction": "The kitchen is closing soon. The guest orders dessert now, asks for something quick, or says the main dish is enough.",
+      "retryReply": "Would you like to add anything before the kitchen closes?",
+      "options": [
+        { "text": "Then I'll order dessert now too.", "keywords": ["dessert", "now", "too"], "reply": "Good thinking — one chocolate cake, coming up." },
+        { "text": "Is there anything quick?", "keywords": ["quick", "fast", "faster"], "reply": "The soup is quick. I'll bring that first." },
+        { "text": "No problem, just the fish then.", "keywords": ["just", "problem", "fine"], "reply": "Perfect, the fish is on its way." }
+      ]
+    }
+  ],
+  "twistSlots": [
+    { "after": "airport-passport", "pool": ["flight-delayed", "overweight"] },
+    { "after": "taxi-destination", "pool": ["traffic"] },
+    { "after": "hotel-breakfast", "pool": ["lost-luggage"] },
+    { "after": "dinner-order", "pool": ["kitchen-closing"] }
+  ],
+  "closing": "Here's your bill. Enjoy the rest of your trip!"
+}

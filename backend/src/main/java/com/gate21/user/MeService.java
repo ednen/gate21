@@ -57,7 +57,7 @@ public class MeService {
         WeekInfo week = content.weekForDay(journeyDay);
         int todayXp = progressRepo.xpOn(userId, today);
 
-        ChapterInfo next = progress.nextChapter(userId);
+        ChapterInfo next = progress.nextChapter(userId, journeyDay);
         NextChapter nextChapter = next == null ? null : content.chapterMeta(next.slug())
             .map(m -> new NextChapter(next.slug(), next.title(), next.titleTr(), m.mission(), m.missionTr(), m.scenario()))
             .orElse(null);
@@ -68,6 +68,16 @@ public class MeService {
             ProgressRules.effectiveStreak(stats.streakCurrent(), stats.lastActiveDate(), today),
             stats.streakBest(), stats.xpTotal(), stats.speakingAverage(), stats.placementScore(),
             stats.finalScore(), nextChapter);
+    }
+
+    /** The learner's week on the 21-day journey (1–3), which sets how hard scenes are. */
+    public int journeyWeek(UUID userId) {
+        UserRow user = users.findById(userId)
+            .orElseThrow(() -> ApiException.unauthorized("USER_NOT_FOUND", "Please sign in again."));
+        StatsRow stats = progressRepo.stats(userId).orElseThrow();
+        LocalDate today = LocalDate.now(clock.withZone(ZoneId.of(user.timezone())));
+        int journeyDay = ProgressRules.journeyDay(stats.startDay(), progressRepo.activeDaysBefore(userId, today));
+        return content.weekForDay(journeyDay).week();
     }
 
     @Transactional

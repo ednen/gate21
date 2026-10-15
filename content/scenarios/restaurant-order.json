@@ -5,35 +5,107 @@
   "titleTr": "Akşam yemeği",
   "role": "Waiter",
   "setting": "Café Lisboa · Dinner",
+  "voice": "en-US",
   "persona": "You are a cheerful waiter at a busy restaurant called Café Lisboa. The guest has just walked in for dinner.",
+  "briefTr": "Bir arkadaşınla akşam yemeğine çıktın. Rezervasyonunuz yok.",
   "opening": "Good evening! Do you have a reservation?",
+  "facts": [
+    { "id": "total", "values": ["€34.50", "€28.00", "€41.20"], "question": "How much was the bill?", "questionTr": "Hesap ne kadardı?" }
+  ],
   "goals": [
     {
       "id": "table",
+      "titleTr": "Masa istemek",
       "instruction": "The guest asks for a table and says how many people.",
       "hint": "No, a table for two, please.",
+      "hintTr": "Hayır, iki kişilik bir masa lütfen.",
       "keywords": ["table", "two", "three", "for", "people", "one"],
-      "successReply": "Right this way. Are you ready to order?",
+      "successReply": "Right this way.",
       "retryReply": "How many people is the table for?"
     },
     {
+      "id": "drink",
+      "titleTr": "İçecek söylemek",
+      "ask": "Can I get you something to drink?",
+      "instruction": "The guest orders a drink.",
+      "hint": "Just water, please.",
+      "hintTr": "Sadece su, lütfen.",
+      "keywords": ["water", "cola", "coke", "juice", "wine", "beer", "tea", "coffee", "lemonade", "drink"],
+      "successReply": "Coming right up.",
+      "retryReply": "What would you like to drink? We have water, juice, soft drinks and wine."
+    },
+    {
       "id": "order",
-      "instruction": "The guest orders food or a drink politely, for example 'I'd like…' or 'Can I have…'.",
+      "titleTr": "Yemek siparişi vermek",
+      "ask": "Are you ready to order?",
+      "instruction": "The guest orders food politely, for example 'I'd like…' or 'Can I have…'.",
       "hint": "I'd like the chicken salad, please.",
+      "hintTr": "Tavuk salatası istiyorum, lütfen.",
       "keywords": ["like", "have", "please", "order", "get", "take"],
-      "successReply": "Good choice. Oh — I'm sorry, the kitchen just ran out of chicken.",
+      "successReply": "Good choice.",
       "retryReply": "What would you like to have?"
     },
     {
+      "id": "dessert",
+      "titleTr": "Tatlıyı geri çevirip hesabı istemek",
+      "ask": "Would you like anything else? Dessert, maybe?",
+      "instruction": "The guest says yes or no to dessert, or asks for the bill.",
+      "hint": "No, thank you. Just the bill, please.",
+      "hintTr": "Hayır, teşekkürler. Sadece hesap lütfen.",
+      "keywords": ["no", "yes", "bill", "check", "dessert", "thank"],
+      "successReply": "Of course.",
+      "retryReply": "Anything else for you? Or shall I bring the bill?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödeme şeklini söylemek",
+      "ask": "Will you pay by card or cash?",
+      "instruction": "The guest says how they will pay.",
+      "hint": "By card, please.",
+      "hintTr": "Kartla, lütfen.",
+      "keywords": ["card", "cash"],
+      "successReply": "Perfect, thank you.",
+      "retryReply": "Sorry — card or cash?"
+    }
+  ],
+  "twists": [
+    {
       "id": "sold-out",
-      "twist": true,
+      "titleTr": "Yemek kalmamış",
+      "intro": "Oh — I'm sorry, the kitchen just ran out of chicken.",
       "instruction": "The dish is sold out. The guest asks for a recommendation, orders something else, or asks for a vegetarian option.",
       "retryReply": "I'm so sorry. What else can I get you?",
       "options": [
-        { "text": "What do you recommend?", "keywords": ["recommend", "suggest", "good", "popular", "best"], "reply": "The grilled fish is very popular tonight. Would you like that?" },
+        { "text": "What do you recommend?", "keywords": ["recommend", "suggest", "good", "popular", "best"], "reply": "The grilled fish is very popular tonight. I'll bring that." },
         { "text": "Then I'll have the pasta, please.", "keywords": ["then", "instead", "pasta", "other", "else"], "reply": "Perfect, one pasta. It'll be about fifteen minutes." },
         { "text": "Is there a vegetarian option?", "keywords": ["vegetarian", "vegan", "without meat", "veggie"], "reply": "Yes — the mushroom risotto is vegetarian and very good." }
       ]
+    },
+    {
+      "id": "allergy",
+      "titleTr": "Yemekte alerjen var",
+      "intro": "Just so you know, the chicken salad comes with nuts.",
+      "instruction": "The dish contains nuts. The guest says they are allergic and asks for it without nuts, asks for another suggestion, or asks for something different.",
+      "retryReply": "Is that okay for you, or would you like something else?",
+      "options": [
+        { "text": "I'm allergic to nuts. Can you make it without them?", "keywords": ["allergic", "allergy", "without"], "reply": "Absolutely, I'll tell the chef — no nuts at all." },
+        { "text": "What else do you recommend?", "keywords": ["recommend", "else", "suggest"], "reply": "The grilled fish is lovely, and there are no nuts in it." },
+        { "text": "Can I have something different?", "keywords": ["different", "change", "instead"], "reply": "Of course. How about the pasta? I'll bring you that." }
+      ]
+    },
+    {
+      "id": "long-wait",
+      "titleTr": "Mutfak çok yoğun",
+      "intro": "I should tell you — the kitchen is very busy. It'll take about forty minutes.",
+      "instruction": "The food will take a long time. The guest asks for something faster, agrees to wait, or asks for bread while waiting.",
+      "retryReply": "Sorry about the wait. Is that okay for you?",
+      "options": [
+        { "text": "Is there anything faster?", "keywords": ["faster", "quick", "quicker", "fast"], "reply": "The soup is ready in five minutes. Shall I bring that first?" },
+        { "text": "That's fine, we'll wait.", "keywords": ["wait", "fine", "okay", "ok"], "reply": "Thank you for your patience. I'll bring some olives on the house." },
+        { "text": "Could we have some bread while we wait?", "keywords": ["bread", "snack", "while"], "reply": "Of course, fresh bread is coming right away." }
+      ]
     }
-  ]
+  ],
+  "twistSlots": [{ "after": "order", "pool": ["sold-out", "allergy", "long-wait"] }],
+  "closing": "Here's your bill — {total} in total. Have a lovely evening!"
 }

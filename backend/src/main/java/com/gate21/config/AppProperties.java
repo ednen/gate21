@@ -9,7 +9,7 @@ public record AppProperties(JwtProps jwt, QuotaProps quota, SpeechProps speech, 
     public record JwtProps(String secret, String issuer, Duration accessTokenTtl, Duration refreshTokenTtl) {
     }
 
-    public record QuotaProps(int speechPerDay, int roleplaySessionsPerDay, int roleplayMaxTurns) {
+    public record QuotaProps(int speechPerDay, int roleplaySessionsPerDay) {
     }
 
     public record SpeechProps(String provider, AzureProps azure) {

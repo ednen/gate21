@@ -1,0 +1,8 @@
+{
+  "slug": "full-trip",
+  "type": "simulation",
+  "mission": "Survive a whole trip in English",
+  "missionTr": "Havalimanından restorana bütün bir yolculuğu İngilizce hallet",
+  "stamp": "TRIP COMPLETE",
+  "survive": { "scenario": "full-trip" }
+}
