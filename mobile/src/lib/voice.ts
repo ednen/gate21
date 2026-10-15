@@ -11,6 +11,7 @@ import { useCallback, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 
 import { apiUpload } from './api';
+import { DEMO } from './demo/flag';
 import type { Assessment, SceneView } from './types';
 
 /**
@@ -41,7 +42,8 @@ const OPTIONS: RecordingOptions = {
 
 const MAX_SECONDS = 15;
 
-export type Recording = { uri: string; name: string; type: string };
+/** {@code transcript}: in the browser demo, what the browser's own recognizer heard instead of audio. */
+export type Recording = { uri: string; name: string; type: string; transcript?: string };
 
 function fileFor(uri: string): Recording {
   if (Platform.OS === 'android') {
@@ -54,7 +56,7 @@ function fileFor(uri: string): Recording {
 }
 
 /** Tap once to start, tap again to stop. Stops by itself after 15 seconds. */
-export function useVoiceRecorder() {
+function useDeviceRecorder() {
   const recorder = useAudioRecorder(OPTIONS);
   const [recording, setRecording] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -88,8 +90,103 @@ export function useVoiceRecorder() {
   return { recording, start, stop };
 }
 
+// ---- browser demo: the browser's speech recognizer stands in for server-side transcription ----
+
+type RecognitionResultList = ArrayLike<ArrayLike<{ transcript: string }>>;
+type Recognition = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  start(): void;
+  stop(): void;
+  onresult: ((e: { results: RecognitionResultList }) => void) | null;
+  onerror: ((e: { error: string }) => void) | null;
+  onend: (() => void) | null;
+};
+
+function recognitionCtor(): (new () => Recognition) | null {
+  if (Platform.OS !== 'web') {
+    return null;
+  }
+  const w = globalThis as unknown as { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition };
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
+
+async function microphoneAllowed(): Promise<boolean> {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach((t) => t.stop());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function useBrowserRecognizer() {
+  const [recording, setRecording] = useState(false);
+  const recognizer = useRef<Recognition | null>(null);
+  const heard = useRef('');
+  const ended = useRef<Promise<void>>(Promise.resolve());
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const start = useCallback(async (): Promise<boolean> => {
+    const Ctor = recognitionCtor();
+    if (!Ctor || !(await microphoneAllowed())) {
+      return false;
+    }
+    await Speech.stop();
+    const r = new Ctor();
+    r.lang = 'en-US';
+    r.continuous = true;
+    r.interimResults = true;
+    r.maxAlternatives = 1;
+    heard.current = '';
+    r.onresult = (e) => {
+      heard.current = Array.from(e.results, (res) => res[0]?.transcript ?? '').join(' ').replace(/\s+/g, ' ').trim();
+    };
+    r.onerror = () => undefined;
+    ended.current = new Promise((resolve) => {
+      r.onend = () => resolve();
+    });
+    try {
+      r.start();
+    } catch {
+      return false;
+    }
+    recognizer.current = r;
+    setRecording(true);
+    timer.current = setTimeout(() => r.stop(), MAX_SECONDS * 1000);
+    return true;
+  }, []);
+
+  const stop = useCallback(async (): Promise<Recording | null> => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = null;
+    }
+    recognizer.current?.stop();
+    // The last words arrive just before the recognizer ends; don't wait forever for it.
+    await Promise.race([ended.current, new Promise((r) => setTimeout(r, 2500))]);
+    recognizer.current = null;
+    setRecording(false);
+    return { uri: 'browser-speech', name: 'speech.txt', type: 'text/plain', transcript: heard.current };
+  }, []);
+
+  return { recording, start, stop };
+}
+
+/** On a phone: record audio for the API. In the browser demo: let the browser listen. */
+export const useVoiceRecorder = DEMO && recognitionCtor() ? useBrowserRecognizer : useDeviceRecorder;
+
 function audioForm(recording: Recording): FormData {
   const form = new FormData();
+  if (DEMO) {
+    if (recording.transcript !== undefined) {
+      form.append('transcript', recording.transcript);
+    }
+    return form;
+  }
   // React Native's FormData takes a {uri, name, type} object for files.
   form.append('audio', recording as unknown as Blob);
   return form;

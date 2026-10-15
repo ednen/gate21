@@ -1,5 +1,6 @@
 
 import { API_URL } from './config';
+import { DEMO } from './demo/flag';
 import { secureStorage } from './secureStorage';
 
 /**
@@ -57,6 +58,10 @@ async function doRefresh(): Promise<boolean> {
   const refreshToken = await secureStorage.getItem(REFRESH_KEY);
   if (!refreshToken) {
     return false;
+  }
+  if (DEMO) {
+    accessToken = 'demo-access';
+    return true;
   }
   try {
     const response = await fetch(`${API_URL}/api/v1/auth/refresh`, {

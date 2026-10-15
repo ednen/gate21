@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { DemoPanel } from '@/components/DemoPanel';
 import { TabBar } from '@/components/TabBar';
 import { Body, Button, Card, ErrorNote, Label, ProgressBar, Title } from '@/components/ui';
 import { apiSend } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
+import { DEMO } from '@/lib/demo/flag';
 import { messageFor } from '@/lib/errors';
 import { keys, queryClient, useMe, usePassport } from '@/lib/queries';
 import { scheduleDailyReminder } from '@/lib/reminders';
@@ -62,6 +64,8 @@ export default function Progress() {
         <SafeAreaView edges={['top']} style={styles.body}>
           <Label>{`${data?.journeyDay ?? 1}. GÜN · İLERLEME`}</Label>
           <Title size={34}>{after !== null ? 'Artık donup kalmıyorsun.' : 'Yolculuğun nasıl gidiyor?'}</Title>
+
+          {DEMO ? <DemoPanel /> : null}
 
           <View style={styles.pair}>
             <ScoreBox title="ÖNCE · 1. GÜN" value={before} dark={false} />

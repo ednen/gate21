@@ -24,7 +24,7 @@ export default function Welcome() {
       </View>
 
       <View style={styles.middle}>
-        <Text style={styles.kicker}>21 GÜN · 12 GERÇEK DURUM</Text>
+        <Text style={styles.kicker}>21 GÜN · 7 DURAK · 3 ŞEHİR</Text>
         <Text accessibilityRole="header" style={styles.headline}>
           Don't learn English.{'\n'}Learn how to travel in English.
         </Text>

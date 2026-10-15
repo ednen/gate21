@@ -1,0 +1,40 @@
+name: Demo
+
+# Builds the browser demo (no server needed, every week open) and publishes it on GitHub Pages:
+# https://ednen.github.io/gate21/
+on:
+  push:
+    branches: [main]
+    paths: ["mobile/**", "content/**", ".github/workflows/demo.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: demo
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Build and publish the demo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - run: npm ci
+      - run: npm run build:demo
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: mobile/dist-demo
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "Demo for ${{ github.sha }}"

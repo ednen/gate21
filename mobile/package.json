@@ -39,7 +39,8 @@
     "ios": "expo start --ios",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:demo": "EXPO_PUBLIC_DEMO=1 EXPO_BASE_URL=/gate21 expo export -p web --output-dir dist-demo && node scripts/demo-postbuild.mjs dist-demo"
   },
   "private": true
 }

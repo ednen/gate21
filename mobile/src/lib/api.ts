@@ -1,4 +1,6 @@
 import { API_URL } from './config';
+import { DEMO } from './demo/flag';
+import { demoRequest } from './demo/server';
 import { ApiError } from './errors';
 import { tokens } from './tokens';
 
@@ -9,6 +11,10 @@ type Options = { auth?: boolean };
  * requests that fail at the same moment) and retries.
  */
 async function request<T>(path: string, init: RequestInit, opts: Options = {}): Promise<T> {
+  if (DEMO) {
+    const body = typeof init.body === 'string' ? JSON.parse(init.body) : (init.body as FormData | undefined);
+    return demoRequest<T>(init.method ?? 'GET', path, body);
+  }
   const auth = opts.auth ?? true;
   const send = async () => {
     const headers = new Headers(init.headers);
