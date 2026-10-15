@@ -10,8 +10,27 @@
   "briefTr": "Londra Heathrow'a indin. Adın {name}. Tatil için geldin, Grand Hotel'de bir hafta kalacaksın. Dönüş biletin telefonunda.",
   "opening": "Good morning. Passport, please.",
   "facts": [
-    { "id": "belt", "values": ["5", "7", "9", "3"], "question": "Which baggage belt was your suitcase on?", "questionTr": "Bavulun hangi bantta geliyordu?" },
-    { "id": "desk", "values": ["12", "4", "21"], "question": "What was the number of your passport desk?", "questionTr": "Pasaport masanın numarası kaçtı?" }
+    {
+      "id": "belt",
+      "values": [
+        "5",
+        "7",
+        "9",
+        "3"
+      ],
+      "question": "Which baggage belt was your suitcase on?",
+      "questionTr": "Bavulun hangi bantta geliyordu?"
+    },
+    {
+      "id": "desk",
+      "values": [
+        "12",
+        "4",
+        "21"
+      ],
+      "question": "What was the number of your passport desk?",
+      "questionTr": "Pasaport masanın numarası kaçtı?"
+    }
   ],
   "goals": [
     {
@@ -20,7 +39,13 @@
       "instruction": "The traveller hands over their passport, for example by saying 'Here you are'.",
       "hint": "Here you are.",
       "hintTr": "Buyurun.",
-      "keywords": ["here", "passport", "sure", "of course", "yes"],
+      "keywords": [
+        "here",
+        "passport",
+        "sure",
+        "of course",
+        "yes"
+      ],
       "successReply": "Thank you. Please look at the camera above desk {desk}.",
       "retryReply": "Can I see your passport, please?"
     },
@@ -31,7 +56,22 @@
       "instruction": "The traveller says why they are visiting: holiday, business, visiting family or friends, or study.",
       "hint": "I'm here on holiday.",
       "hintTr": "Tatil için buradayım.",
-      "keywords": ["holiday", "vacation", "tourism", "tourist", "business", "work", "visit", "visiting", "friends", "family", "study", "conference", "sightseeing"],
+      "keywords": [
+        "business",
+        "conference",
+        "family",
+        "friends",
+        "holiday",
+        "purpose",
+        "sightseeing",
+        "study",
+        "tourism",
+        "tourist",
+        "vacation",
+        "visit",
+        "visiting",
+        "work"
+      ],
       "successReply": "Lovely.",
       "retryReply": "Why are you visiting the UK? Holiday, business…?"
     },
@@ -42,7 +82,23 @@
       "instruction": "The traveller says how long they will stay, for example 'For one week' or 'Five days'.",
       "hint": "For one week.",
       "hintTr": "Bir hafta.",
-      "keywords": ["week", "weeks", "day", "days", "night", "nights", "month", "one", "two", "three", "four", "five", "six", "seven", "ten"],
+      "keywords": [
+        "week",
+        "weeks",
+        "day",
+        "days",
+        "night",
+        "nights",
+        "month",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "ten"
+      ],
       "successReply": "Okay.",
       "retryReply": "How many days will you be in the UK?"
     },
@@ -53,7 +109,18 @@
       "instruction": "The traveller says where they will stay: a hotel, a friend's home, an apartment.",
       "hint": "At the Grand Hotel in London.",
       "hintTr": "Londra'daki Grand Hotel'de.",
-      "keywords": ["hotel", "friend", "friends", "apartment", "flat", "hostel", "airbnb", "house", "staying", "family"],
+      "keywords": [
+        "hotel",
+        "friend",
+        "friends",
+        "apartment",
+        "flat",
+        "hostel",
+        "airbnb",
+        "house",
+        "staying",
+        "family"
+      ],
       "successReply": "Thank you.",
       "retryReply": "Where will you stay? A hotel?"
     },
@@ -64,7 +131,15 @@
       "instruction": "The traveller says yes and shows or mentions the return ticket.",
       "hint": "Yes, it's on my phone.",
       "hintTr": "Evet, telefonumda.",
-      "keywords": ["yes", "ticket", "return", "phone", "here", "flight", "back"],
+      "keywords": [
+        "yes",
+        "ticket",
+        "return",
+        "phone",
+        "here",
+        "flight",
+        "back"
+      ],
       "successReply": "That's fine.",
       "retryReply": "When are you flying home? Do you have a ticket?"
     }
@@ -77,9 +152,33 @@
       "instruction": "The officer spoke too fast. The traveller politely asks them to repeat or to speak more slowly.",
       "retryReply": "Sorry — I asked for the address of your hotel.",
       "options": [
-        { "text": "Sorry, could you repeat that, please?", "keywords": ["repeat", "again", "pardon"], "reply": "Of course. Can you tell me the address of your hotel, please? It's King Street, yes? Fine." },
-        { "text": "Could you speak more slowly, please?", "keywords": ["slowly", "slow", "slower"], "reply": "Sorry. The… address… of… your… hotel? King Street? Good, that's fine." },
-        { "text": "Sorry, I don't understand.", "keywords": ["understand", "don't", "do not"], "reply": "No problem. Your hotel address — is it in London? Good, that's fine." }
+        {
+          "text": "Sorry, could you repeat that, please?",
+          "keywords": [
+            "repeat",
+            "again",
+            "pardon"
+          ],
+          "reply": "Of course. Can you tell me the address of your hotel, please? It's King Street, yes? Fine."
+        },
+        {
+          "text": "Could you speak more slowly, please?",
+          "keywords": [
+            "slowly",
+            "slow",
+            "slower"
+          ],
+          "reply": "Sorry. The… address… of… your… hotel? King Street? Good, that's fine."
+        },
+        {
+          "text": "Sorry, I don't understand.",
+          "keywords": [
+            "understand",
+            "don't",
+            "do not"
+          ],
+          "reply": "No problem. Your hotel address — is it in London? Good, that's fine."
+        }
       ]
     },
     {
@@ -89,9 +188,34 @@
       "instruction": "The officer wants to see the hotel booking. The traveller shows it, says it is on the phone, or offers the confirmation email.",
       "retryReply": "Do you have the booking with you? On paper or on your phone?",
       "options": [
-        { "text": "Sure, here is my booking.", "keywords": ["here", "booking", "sure"], "reply": "Thank you. That's all fine." },
-        { "text": "It's on my phone. One moment, please.", "keywords": ["phone", "moment", "minute", "second"], "reply": "Take your time… Yes, I can see it. Thank you." },
-        { "text": "I have the confirmation email.", "keywords": ["email", "confirmation", "e-mail"], "reply": "That's perfect, thank you." }
+        {
+          "text": "Sure, here is my booking.",
+          "keywords": [
+            "here",
+            "booking",
+            "sure"
+          ],
+          "reply": "Thank you. That's all fine."
+        },
+        {
+          "text": "It's on my phone. One moment, please.",
+          "keywords": [
+            "phone",
+            "moment",
+            "minute",
+            "second"
+          ],
+          "reply": "Take your time… Yes, I can see it. Thank you."
+        },
+        {
+          "text": "I have the confirmation email.",
+          "keywords": [
+            "email",
+            "confirmation",
+            "e-mail"
+          ],
+          "reply": "That's perfect, thank you."
+        }
       ]
     },
     {
@@ -101,12 +225,83 @@
       "instruction": "The arrival card is missing. The traveller apologises and asks to fill it in, asks where to get one, or asks for help with it.",
       "retryReply": "You need to fill in the arrival card first.",
       "options": [
-        { "text": "Sorry! Can I fill it in now?", "keywords": ["fill", "now", "sorry"], "reply": "Yes, here's a pen. Just your name and address in the UK… Thank you, that's fine." },
-        { "text": "Where can I get one?", "keywords": ["where", "get", "find"], "reply": "There's a pile right here. Fill it in now — that's it, perfect." },
-        { "text": "Could you help me with it, please?", "keywords": ["help", "with it", "show"], "reply": "Of course. Your name here, your hotel there… Done. Thank you." }
+        {
+          "text": "Sorry! Can I fill it in now?",
+          "keywords": [
+            "fill",
+            "now",
+            "sorry"
+          ],
+          "reply": "Yes, here's a pen. Just your name and address in the UK… Thank you, that's fine."
+        },
+        {
+          "text": "Where can I get one?",
+          "keywords": [
+            "where",
+            "get",
+            "find"
+          ],
+          "reply": "There's a pile right here. Fill it in now — that's it, perfect."
+        },
+        {
+          "text": "Could you help me with it, please?",
+          "keywords": [
+            "help",
+            "with it",
+            "show"
+          ],
+          "reply": "Of course. Your name here, your hotel there… Done. Thank you."
+        }
+      ]
+    },
+    {
+      "id": "boarding-pass",
+      "titleTr": "Biniş kartını istiyor",
+      "intro": "Can I also see your boarding pass, please?",
+      "instruction": "The officer asks for the boarding pass. The traveller shows it, says it is on the phone, or says they only have the e-ticket.",
+      "retryReply": "I need to see your boarding pass too, please.",
+      "options": [
+        {
+          "text": "Sure, here is my boarding pass.",
+          "keywords": [
+            "here",
+            "boarding",
+            "sure"
+          ],
+          "reply": "Thank you. Seat 14A — you came from gate 12 in Istanbul. Fine."
+        },
+        {
+          "text": "It's on my phone. One moment.",
+          "keywords": [
+            "phone",
+            "moment",
+            "minute"
+          ],
+          "reply": "Take your time… Yes, that's fine."
+        },
+        {
+          "text": "I only have the e-ticket. Is that okay?",
+          "keywords": [
+            "e-ticket",
+            "ticket",
+            "only",
+            "okay"
+          ],
+          "reply": "That's fine, I can check it here."
+        }
       ]
     }
   ],
-  "twistSlots": [{ "after": "stay", "pool": ["too-fast", "show-booking", "no-card"] }],
+  "twistSlots": [
+    {
+      "after": "stay",
+      "pool": [
+        "too-fast",
+        "show-booking",
+        "no-card",
+        "boarding-pass"
+      ]
+    }
+  ],
   "closing": "Welcome to the UK. Your bags are on belt {belt}. Enjoy your stay!"
 }

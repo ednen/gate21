@@ -21,8 +21,9 @@ export type StepProps = { chapter: Chapter; consent: boolean; onDone: (score: nu
  */
 export function DiscoverStep({ chapter, onDone }: StepProps) {
   const words = chapter.words ?? [];
-  // Long sets without pictures (the alphabet, numbers) are quicker to hear as a grid.
-  const cards = words.length <= 12 && words.some((w) => w.example || hasPicture(w.picture));
+  // Words with pictures get flashcards; long sets without pictures (the alphabet, numbers)
+  // are quicker to hear as a grid.
+  const cards = words.some((w) => hasPicture(w.picture)) || (words.length <= 12 && words.some((w) => w.example));
   const [index, setIndex] = useState(0);
   const [heard, setHeard] = useState<Set<number>>(new Set());
 

@@ -148,6 +148,69 @@ const DRAWINGS: Record<string, ReactNode> = {
       <T x={32} y={47} size={18}>7</T>
     </>
   ),
+  gate: (
+    <>
+      <Rc x={6} y={8} w={52} h={22} r={3} fill={Y} />
+      <T x={32} y={23.5} size={10}>GATE 12</T>
+      <P d="M14 30v26M50 30v26M14 42h36" />
+      <P d="M24 56v-8h16v8" fill={W} />
+    </>
+  ),
+  seat: (
+    <>
+      <P d="M12 10h16a4 4 0 0 1 4 4v26H16a4 4 0 0 1-4-4z" fill={B} />
+      <P d="M16 40h24a4 4 0 0 1 4 4v4H16z" fill={B} />
+      <P d="M18 48v8M38 48v8" />
+      <Rc x={16} y={12} w={12} h={7} r={2} fill={W} />
+      <Rc x={42} y={10} w={18} h={12} r={2} fill={W} />
+      <T x={51} y={19.5} size={8}>14A</T>
+    </>
+  ),
+  camera: (
+    <>
+      <Rc x={8} y={18} w={48} h={34} r={5} fill={colors.inkLine} />
+      <P d="M22 18l4-6h12l4 6" fill={colors.inkLine} />
+      <Ci x={32} y={35} r={10} fill={W} />
+      <Ci x={32} y={35} r={5} fill={B} />
+      <Ci x={48} y={25} r={2} fill={Y} />
+    </>
+  ),
+  target: (
+    <>
+      <Ci x={30} y={34} r={22} fill={W} />
+      <Ci x={30} y={34} r={14} fill={R} />
+      <Ci x={30} y={34} r={6} fill={W} />
+      <P d="M30 34L54 10M46 10h8v8" />
+    </>
+  ),
+  'single-bed': (
+    <>
+      <P d="M18 52V20M18 38h28v14M46 52V38" />
+      <Rc x={20} y={28} w={10} h={8} r={3} fill={W} />
+      <P d="M32 38v-6h10a4 4 0 0 1 4 4v2" fill={Y} />
+      <Ci x={50} y={14} r={7} fill={Y} />
+      <T x={50} y={17.5} size={9}>1</T>
+    </>
+  ),
+  'double-bed': (
+    <>
+      <P d="M4 52V20M4 38h56v14M60 52V38" />
+      <Rc x={6} y={28} w={12} h={8} r={3} fill={W} />
+      <Rc x={20} y={28} w={12} h={8} r={3} fill={W} />
+      <P d="M34 38v-6h22a4 4 0 0 1 4 4v2" fill={Y} />
+      <Ci x={50} y={14} r={7} fill={Y} />
+      <T x={50} y={17.5} size={9}>2</T>
+    </>
+  ),
+  'room-service': (
+    <>
+      <P d="M10 44a22 22 0 0 1 44 0z" fill={colors.line} />
+      <Ci x={32} y={19} r={3} fill={INK} />
+      <Ln x1={6} y1={48} x2={58} y2={48} w={4} />
+      <P d="M20 56h24" />
+      <P d="M40 30c2 2 4 5 4 8" w={2} />
+    </>
+  ),
   // ---- transfer -------------------------------------------------------------------------
   taxi: (
     <>

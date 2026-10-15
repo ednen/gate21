@@ -73,7 +73,7 @@ class RoleplayIT extends IntegrationTest {
     }
 
     @Test
-    void hotelCheckInIsALongerConversationWithOneSurprise() throws Exception {
+    void hotelCheckInIsASixGoalConversationWithOneSurprise() throws Exception {
         String token = withJourney(token("Ozan"));
         List<JsonNode> views = playThrough(token, "hotel-bronze");
         JsonNode start = views.getFirst();
@@ -83,9 +83,9 @@ class RoleplayIT extends IntegrationTest {
         assertThat(start.path("messages").get(0).path("text").asText()).startsWith("Good afternoon, welcome to the Grand Hotel");
         assertThat(start.path("hint").asText()).isEqualTo("Hi, I have a reservation under Ozan.");
         assertThat(start.path("briefTr").asText()).contains("Ozan");
-        assertThat(start.path("totalSteps").asInt()).isEqualTo(6);
+        assertThat(start.path("totalSteps").asInt()).isEqualTo(7);
 
-        assertThat(views).hasSize(7);
+        assertThat(views).hasSize(8);
         assertThat(kinds(views)).containsOnlyOnce("twist").contains("closing");
         assertThat(last.path("completed").asBoolean()).isTrue();
         assertThat(last.path("messages").get(last.path("messages").size() - 1).path("text").asText())
@@ -103,7 +103,7 @@ class RoleplayIT extends IntegrationTest {
         JsonNode body = r.body();
         assertThat(body.path("completed").asBoolean()).isTrue();
         assertThat(body.path("score").asInt()).isEqualTo(100);
-        assertThat(body.path("lines")).hasSize(6);
+        assertThat(body.path("lines")).hasSize(7);
         assertThat(body.path("lines").get(0).path("better").asText()).isNotBlank();
         assertThat(body.path("hardestTr").asText()).isNotBlank();
         assertThat(body.path("phrases")).isNotEmpty();

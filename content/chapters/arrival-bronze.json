@@ -1,54 +1,334 @@
 {
   "slug": "arrival-bronze",
   "mission": "Get through passport control",
-  "missionTr": "Pasaport kontrolünden geç: neden geldiğini, ne kadar kalacağını ve nerede kalacağını söyle",
+  "missionTr": "Havalimanından geç: biniş kartını göster, ziyaret amacını, ne kadar kalacağını ve nerede kalacağını söyle",
   "stamp": "ARRIVED",
-  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "FORM", "DIALOG", "SURVIVE"],
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "FORM",
+    "DIALOG",
+    "SURVIVE"
+  ],
   "words": [
-    { "en": "passport", "tr": "pasaport", "picture": "passport", "example": "Here is my passport.", "exampleTr": "Pasaportum burada." },
-    { "en": "passport control", "tr": "pasaport kontrolü", "picture": "officer", "example": "Where is passport control?", "exampleTr": "Pasaport kontrolü nerede?" },
-    { "en": "holiday", "tr": "tatil", "picture": "sun", "example": "I'm here on holiday.", "exampleTr": "Tatil için buradayım." },
-    { "en": "business", "tr": "iş", "picture": "briefcase", "example": "I'm here on business.", "exampleTr": "İş için buradayım." },
-    { "en": "one week", "tr": "bir hafta", "picture": "calendar", "example": "I'm staying for one week.", "exampleTr": "Bir hafta kalacağım." },
-    { "en": "hotel", "tr": "otel", "picture": "hotel", "example": "I'm staying at a hotel.", "exampleTr": "Bir otelde kalıyorum." },
-    { "en": "return ticket", "tr": "dönüş bileti", "picture": "boarding-pass", "example": "Do you have a return ticket?", "exampleTr": "Dönüş biletiniz var mı?" },
-    { "en": "arrival card", "tr": "giriş kartı (form)", "picture": "form", "example": "Please fill in this arrival card.", "exampleTr": "Lütfen bu giriş kartını doldurun." },
-    { "en": "baggage reclaim", "tr": "bagaj teslim alanı", "picture": "suitcase", "example": "Where is baggage reclaim?", "exampleTr": "Bagaj teslim alanı nerede?" },
-    { "en": "exit", "tr": "çıkış", "picture": "exit", "example": "The exit is on the left.", "exampleTr": "Çıkış solda." }
+    {
+      "en": "passport",
+      "tr": "pasaport",
+      "picture": "passport",
+      "example": "Here is my passport.",
+      "exampleTr": "Pasaportum burada."
+    },
+    {
+      "en": "passport control",
+      "tr": "pasaport kontrolü",
+      "picture": "officer",
+      "example": "Where is passport control?",
+      "exampleTr": "Pasaport kontrolü nerede?"
+    },
+    {
+      "en": "holiday",
+      "tr": "tatil",
+      "picture": "sun",
+      "example": "I'm here on holiday.",
+      "exampleTr": "Tatil için buradayım."
+    },
+    {
+      "en": "business",
+      "tr": "iş",
+      "picture": "briefcase",
+      "example": "I'm here on business.",
+      "exampleTr": "İş için buradayım."
+    },
+    {
+      "en": "one week",
+      "tr": "bir hafta",
+      "picture": "calendar",
+      "example": "I'm staying for one week.",
+      "exampleTr": "Bir hafta kalacağım."
+    },
+    {
+      "en": "hotel",
+      "tr": "otel",
+      "picture": "hotel",
+      "example": "I'm staying at a hotel.",
+      "exampleTr": "Bir otelde kalıyorum."
+    },
+    {
+      "en": "return ticket",
+      "tr": "dönüş bileti",
+      "picture": "boarding-pass",
+      "example": "Do you have a return ticket?",
+      "exampleTr": "Dönüş biletiniz var mı?"
+    },
+    {
+      "en": "arrival card",
+      "tr": "giriş kartı (form)",
+      "picture": "form",
+      "example": "Please fill in this arrival card.",
+      "exampleTr": "Lütfen bu giriş kartını doldurun."
+    },
+    {
+      "en": "baggage reclaim",
+      "tr": "bagaj teslim alanı",
+      "picture": "suitcase",
+      "example": "Where is baggage reclaim?",
+      "exampleTr": "Bagaj teslim alanı nerede?"
+    },
+    {
+      "en": "exit",
+      "tr": "çıkış",
+      "picture": "exit",
+      "example": "The exit is on the left.",
+      "exampleTr": "Çıkış solda."
+    },
+    {
+      "en": "boarding pass",
+      "tr": "biniş kartı",
+      "picture": "boarding-pass",
+      "example": "Can I see your boarding pass, please?",
+      "exampleTr": "Biniş kartınızı görebilir miyim, lütfen?"
+    },
+    {
+      "en": "gate",
+      "tr": "kapı (uçağa biniş kapısı)",
+      "picture": "gate",
+      "example": "Our flight leaves from gate 12.",
+      "exampleTr": "Uçağımız 12 numaralı kapıdan kalkıyor."
+    },
+    {
+      "en": "gate number",
+      "tr": "kapı numarası",
+      "picture": "gate",
+      "example": "What's the gate number?",
+      "exampleTr": "Kapı numarası kaç?"
+    },
+    {
+      "en": "seat",
+      "tr": "koltuk",
+      "picture": "seat",
+      "example": "My seat is 14A, by the window.",
+      "exampleTr": "Koltuğum 14A, cam kenarı."
+    },
+    {
+      "en": "visit",
+      "tr": "ziyaret",
+      "picture": "camera",
+      "example": "This is my first visit to London.",
+      "exampleTr": "Bu Londra'ya ilk ziyaretim."
+    },
+    {
+      "en": "purpose",
+      "tr": "amaç",
+      "picture": "target",
+      "example": "What's the purpose of your visit?",
+      "exampleTr": "Ziyaretinizin amacı nedir?"
+    }
   ],
   "pronounce": [
-    { "word": "passport", "ipa": "/ˈpɑːs.pɔːt/", "stress": "PAHSS-port", "tipTr": "Vurgu ilk hecede. \"Pas-sport\" diye ikiye bölme, tek akışta söyle." },
-    { "word": "holiday", "ipa": "/ˈhɒl.ə.deɪ/", "stress": "HOL-uh-day", "tipTr": "Ortadaki i neredeyse duyulmaz: HOL-ı-dey." },
-    { "word": "business", "ipa": "/ˈbɪz.nəs/", "stress": "BIZ-nis", "tipTr": "Yazıldığı gibi \"bu-si-ness\" değil, iki hece: BIZ-nis." }
+    {
+      "word": "passport",
+      "ipa": "/ˈpɑːs.pɔːt/",
+      "stress": "PAHSS-port",
+      "tipTr": "Vurgu ilk hecede. \"Pas-sport\" diye ikiye bölme, tek akışta söyle."
+    },
+    {
+      "word": "holiday",
+      "ipa": "/ˈhɒl.ə.deɪ/",
+      "stress": "HOL-uh-day",
+      "tipTr": "Ortadaki i neredeyse duyulmaz: HOL-ı-dey."
+    },
+    {
+      "word": "business",
+      "ipa": "/ˈbɪz.nəs/",
+      "stress": "BIZ-nis",
+      "tipTr": "Yazıldığı gibi \"bu-si-ness\" değil, iki hece: BIZ-nis."
+    },
+    {
+      "word": "purpose",
+      "ipa": "/ˈpɜː.pəs/",
+      "stress": "PUR-puss",
+      "tipTr": "Yazıldığı gibi \"pur-poz\" değil: PÖR-pıs. Sondaki e okunmaz."
+    }
   ],
-  "match": ["passport", "holiday", "hotel", "return ticket", "arrival card", "baggage reclaim"],
+  "match": [
+    "passport",
+    "boarding pass",
+    "gate",
+    "seat",
+    "holiday",
+    "baggage reclaim"
+  ],
   "form": {
     "title": "ARRIVAL CARD",
     "titleTr": "Giriş kartı",
     "situationTr": "Adın Ozan Yılmaz. Türk vatandaşısın. Londra'ya TK1985 seferiyle geldin. Grand Hotel'de 7 gece kalacaksın, tatil için geldin.",
     "fields": [
-      { "label": "Family name", "labelTr": "Soyadı", "options": ["Ozan", "Yılmaz", "Turkish"], "answer": 1, "explainTr": "Family name = surname = soyadı. Adın değil!" },
-      { "label": "First name", "labelTr": "Adı", "options": ["Ozan", "Yılmaz", "Mr"], "answer": 0, "explainTr": "First name = given name = adın." },
-      { "label": "Nationality", "labelTr": "Uyruk", "options": ["Turkey", "Istanbul", "Turkish"], "answer": 2, "explainTr": "Uyruk sıfatla yazılır: Turkish. Turkey ülkenin adıdır." },
-      { "label": "Flight number", "labelTr": "Uçuş numarası", "options": ["TK1985", "7 nights", "Gate B12"], "answer": 0, "explainTr": "Flight number biletindeki sefer kodudur: TK1985." },
-      { "label": "Address in the UK", "labelTr": "İngiltere'deki adresin", "options": ["Istanbul, Turkey", "Grand Hotel, London", "Heathrow Airport"], "answer": 1, "explainTr": "Ülkede kalacağın yer: Grand Hotel, London." },
-      { "label": "Purpose of visit", "labelTr": "Ziyaret amacı", "options": ["Business", "Holiday", "Study"], "answer": 1, "explainTr": "Tatil için geldin: Holiday (Amerikan İngilizcesinde vacation)." },
-      { "label": "Length of stay", "labelTr": "Kalış süresi", "options": ["7 nights", "TK1985", "1985"], "answer": 0, "explainTr": "Length of stay = ne kadar kalacağın: 7 nights." }
+      {
+        "label": "Family name",
+        "labelTr": "Soyadı",
+        "options": [
+          "Ozan",
+          "Yılmaz",
+          "Turkish"
+        ],
+        "answer": 1,
+        "explainTr": "Family name = surname = soyadı. Adın değil!"
+      },
+      {
+        "label": "First name",
+        "labelTr": "Adı",
+        "options": [
+          "Ozan",
+          "Yılmaz",
+          "Mr"
+        ],
+        "answer": 0,
+        "explainTr": "First name = given name = adın."
+      },
+      {
+        "label": "Nationality",
+        "labelTr": "Uyruk",
+        "options": [
+          "Turkey",
+          "Istanbul",
+          "Turkish"
+        ],
+        "answer": 2,
+        "explainTr": "Uyruk sıfatla yazılır: Turkish. Turkey ülkenin adıdır."
+      },
+      {
+        "label": "Flight number",
+        "labelTr": "Uçuş numarası",
+        "options": [
+          "TK1985",
+          "7 nights",
+          "Gate B12"
+        ],
+        "answer": 0,
+        "explainTr": "Flight number biletindeki sefer kodudur: TK1985."
+      },
+      {
+        "label": "Address in the UK",
+        "labelTr": "İngiltere'deki adresin",
+        "options": [
+          "Istanbul, Turkey",
+          "Grand Hotel, London",
+          "Heathrow Airport"
+        ],
+        "answer": 1,
+        "explainTr": "Ülkede kalacağın yer: Grand Hotel, London."
+      },
+      {
+        "label": "Purpose of visit",
+        "labelTr": "Ziyaret amacı",
+        "options": [
+          "Business",
+          "Holiday",
+          "Study"
+        ],
+        "answer": 1,
+        "explainTr": "Tatil için geldin: Holiday (Amerikan İngilizcesinde vacation)."
+      },
+      {
+        "label": "Length of stay",
+        "labelTr": "Kalış süresi",
+        "options": [
+          "7 nights",
+          "TK1985",
+          "1985"
+        ],
+        "answer": 0,
+        "explainTr": "Length of stay = ne kadar kalacağın: 7 nights."
+      }
     ]
   },
   "dialog": {
     "titleTr": "Pasaport kontrolünde",
     "lines": [
-      { "who": "Officer", "text": "Good morning. ___, please.", "gap": "Passport", "options": ["Passport", "Breakfast", "Ticket"] },
-      { "who": "You", "text": "Here you are." },
-      { "who": "Officer", "text": "What's the purpose of your visit?" },
-      { "who": "You", "text": "I'm here on ___.", "gap": "holiday", "options": ["holiday", "hotel", "exit"] },
-      { "who": "Officer", "text": "How ___ are you staying?", "gap": "long", "options": ["long", "much", "many"] },
-      { "who": "You", "text": "For one week." },
-      { "who": "Officer", "text": "Where are you staying?" },
-      { "who": "You", "text": "At the Grand ___.", "gap": "Hotel", "options": ["Hotel", "Passport", "Card"] },
-      { "who": "Officer", "text": "Thank you. Enjoy your stay." }
+      {
+        "who": "Officer",
+        "text": "Good morning. ___, please.",
+        "gap": "Passport",
+        "options": [
+          "Passport",
+          "Breakfast",
+          "Ticket"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Here you are."
+      },
+      {
+        "who": "Officer",
+        "text": "And your boarding ___?",
+        "gap": "pass",
+        "options": [
+          "pass",
+          "gate",
+          "seat"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "It's on my phone. Seat 14A, gate 12."
+      },
+      {
+        "who": "Officer",
+        "text": "What's the ___ of your visit?",
+        "gap": "purpose",
+        "options": [
+          "purpose",
+          "gate",
+          "seat"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "I'm here on ___.",
+        "gap": "holiday",
+        "options": [
+          "holiday",
+          "hotel",
+          "exit"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "Is this your first ___?",
+        "gap": "visit",
+        "options": [
+          "visit",
+          "seat",
+          "gate"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Yes, it is."
+      },
+      {
+        "who": "Officer",
+        "text": "How ___ are you staying?",
+        "gap": "long",
+        "options": [
+          "long",
+          "much",
+          "many"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "For one week, at the Grand Hotel."
+      },
+      {
+        "who": "Officer",
+        "text": "Thank you. Enjoy your stay."
+      }
     ]
   },
-  "survive": { "scenario": "arrival-bronze" }
+  "survive": {
+    "scenario": "arrival-bronze"
+  }
 }

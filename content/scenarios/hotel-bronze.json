@@ -95,6 +95,22 @@
       "retryReply": "Sorry, how many nights will you stay?"
     },
     {
+      "id": "room-type",
+      "titleTr": "Oda tipini söylemek",
+      "ask": "And is that a single or a double room?",
+      "instruction": "The guest says which room they booked: a single, a double or a twin room.",
+      "hint": "A double room, please.",
+      "hintTr": "Çift kişilik oda, lütfen.",
+      "keywords": [
+        "single",
+        "double",
+        "twin",
+        "room"
+      ],
+      "successReply": "Perfect.",
+      "retryReply": "Sorry — a room for one person, or for two?"
+    },
+    {
       "id": "breakfast",
       "titleTr": "Kahvaltıyı sormak",
       "ask": "Would you like breakfast included?",
@@ -124,7 +140,7 @@
         "password",
         "internet"
       ],
-      "successReply": "The Wi-Fi password is {wifi}.",
+      "successReply": "The Wi-Fi password is {wifi}. And room service is open 24 hours.",
       "retryReply": "Sorry? Many guests ask about the internet — would you like the Wi-Fi password?"
     }
   ],
