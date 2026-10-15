@@ -91,6 +91,8 @@ function load(): State {
   try {
     const raw = globalThis.localStorage?.getItem(KEY);
     memory = raw ? { ...fresh(), ...(JSON.parse(raw) as State) } : fresh();
+    // The demo always starts at Day 1 so every week can be tried (older demo data may say otherwise).
+    memory.startDay = 1;
   } catch {
     memory = fresh();
   }
@@ -435,12 +437,8 @@ function placementSubmit(s: State, body: { kind: 'INITIAL' | 'FINAL'; answers: (
   const band = placementContent.bands.reduce((match, b) => (score >= b.min ? b : match), placementContent.bands[0]);
   let applied = false;
   if (body.kind === 'INITIAL') {
-    applied = s.attempts.length === 0;
+    // In the demo the result is shown but the journey stays at Day 1, so every week can be tried.
     s.placementScore = score;
-    if (applied) {
-      s.startDay = band.startDay;
-    }
-    s.starterRecommended = band.starter;
   } else {
     s.finalScore = score;
   }
@@ -744,6 +742,17 @@ export function finishWeekButOne(week: number): void {
 /** Forgets all progress but keeps the account, the placement result and the panel settings. */
 export function resetProgress(): void {
   const s = load();
-  Object.assign(s, { chapters: {}, attempts: [], dailyXp: {}, xpTotal: 0, streakBest: 0, graduatedAt: null, sessions: {}, finalScore: null });
+  Object.assign(s, {
+    chapters: {},
+    attempts: [],
+    dailyXp: {},
+    xpTotal: 0,
+    streakBest: 0,
+    graduatedAt: null,
+    sessions: {},
+    finalScore: null,
+    startDay: 1,
+    starterRecommended: false,
+  });
   save();
 }

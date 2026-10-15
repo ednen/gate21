@@ -1,5 +1,5 @@
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -32,7 +32,10 @@ export default function Home() {
   const freeDays = manifest().freeDays;
   const chapters = passport.data?.chapters ?? [];
   // Show the week the learner is working on: the next lesson's week, else the calendar week.
-  const shownWeek = next?.kind === 'lesson' ? next.week : week;
+  const currentWeek = next?.kind === 'lesson' ? next.week : week;
+  // Any week can be looked at (and, once it is open, replayed); the current one is shown first.
+  const [pickedWeek, setPickedWeek] = useState<number | null>(null);
+  const shownWeek = pickedWeek ?? currentWeek;
   const weekLessons = chapters.filter((c) => c.kind === 'lesson' && c.week === shownWeek).sort((a, b) => a.day - b.day);
   const starter = chapters.filter((c) => c.kind === 'starter').sort((a, b) => a.order - b.order);
   const starterLeft = starter.filter((c) => !c.complete);
@@ -120,7 +123,24 @@ export default function Home() {
         </View>
 
         <View style={styles.section}>
-          <Label>{`${shownWeek}. HAFTA · YOLCULUĞUN 7 DURAĞI`}</Label>
+          <View style={styles.weekTabs} accessibilityRole="tablist">
+            {manifest().levels.map((l) => {
+              const active = l.week === shownWeek;
+              return (
+                <Pressable
+                  key={l.id}
+                  accessibilityRole="tab"
+                  accessibilityState={{ selected: active }}
+                  onPress={() => setPickedWeek(l.week)}
+                  style={[styles.weekTab, active && { backgroundColor: colors.ink, borderColor: colors.ink }]}
+                >
+                  <View style={[styles.weekDot, { backgroundColor: LEVEL_COLORS[l.id].metal }]} />
+                  <Text style={[styles.weekTabText, active && { color: colors.surface }]}>{`${l.week}. hafta`}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+          <Label>{`${shownWeek}. HAFTA · ${(level(shownWeek)?.trip ?? '').toUpperCase()} · 7 DURAK`}</Label>
           <View style={styles.stops}>
             {weekLessons.map((c) => (
               <StopRow key={c.slug} chapter={c} isNext={c.slug === next?.slug} locked={!canPlay(c, member, freeDays)} />
@@ -271,6 +291,21 @@ const styles = StyleSheet.create({
   statLabel: { fontFamily: fonts.body, fontSize: 12, color: colors.muted },
   section: { marginHorizontal: 16, marginTop: 18, gap: 10 },
   stops: { gap: 8 },
+  weekTabs: { flexDirection: 'row', gap: 8 },
+  weekTab: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    minHeight: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.line,
+    backgroundColor: colors.surface,
+  },
+  weekDot: { width: 10, height: 10, borderRadius: 5 },
+  weekTabText: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.ink },
   stopRow: { minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.surface, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 2, borderColor: colors.surface },
   stopIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: colors.yellowTint, alignItems: 'center', justifyContent: 'center' },
   stopDay: { fontFamily: fonts.monoMedium, fontSize: 10, letterSpacing: 0.8, color: colors.muted },
