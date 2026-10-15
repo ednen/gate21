@@ -51,7 +51,7 @@
     ]
   },
   "stops": [
-    { "slug": "arrival", "order": 1, "title": "Arrival & Passport Control", "titleTr": "Varış ve pasaport kontrolü", "icon": "passport" },
+    { "slug": "arrival", "order": 1, "title": "Arrival", "titleTr": "Varış ve pasaport kontrolü", "icon": "passport" },
     { "slug": "transfer", "order": 2, "title": "Transfer", "titleTr": "Otele transfer", "icon": "car" },
     { "slug": "hotel", "order": 3, "title": "Hotel", "titleTr": "Otel", "icon": "bed" },
     { "slug": "restaurant", "order": 4, "title": "Lunch", "titleTr": "Restoranda öğle yemeği", "icon": "utensils" },
