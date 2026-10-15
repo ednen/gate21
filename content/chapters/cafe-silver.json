@@ -1,72 +1,205 @@
 {
   "slug": "cafe-silver",
-  "draft": true,
   "mission": "Get your coffee exactly how you like it",
-  "missionTr": "Kahveni tam istediğin gibi sipariş et: süt tipi, şeker, sıcaklık; Wi-Fi ve priz sor",
+  "missionTr": "Kahveni tam istediğin gibi sipariş et: süt tipi, boy, şurup; yanına bir şey al, tuvaleti ve Wi-Fi'ı sor",
   "stamp": "JUST RIGHT",
-  "trip": "New York",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
-    "RECOGNIZE",
     "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "oat milk",
-      "tr": "yulaf sütü"
+      "tr": "yulaf sütü",
+      "picture": "milk",
+      "example": "Can I get it with oat milk?",
+      "exampleTr": "Yulaf sütüyle alabilir miyim?"
     },
     {
       "en": "decaf",
-      "tr": "kafeinsiz"
+      "tr": "kafeinsiz",
+      "picture": "decaf",
+      "example": "A decaf latte, please.",
+      "exampleTr": "Kafeinsiz bir latte, lütfen."
     },
     {
       "en": "extra shot",
-      "tr": "ekstra shot (sert)"
+      "tr": "ekstra shot (daha sert)",
+      "picture": "espresso",
+      "example": "Can I add an extra shot?",
+      "exampleTr": "Ekstra shot ekleyebilir miyim?"
     },
     {
       "en": "iced",
-      "tr": "buzlu"
+      "tr": "buzlu",
+      "picture": "iced",
+      "example": "An iced coffee, please.",
+      "exampleTr": "Bir buzlu kahve, lütfen."
     },
     {
       "en": "refill",
-      "tr": "tekrar doldurma"
+      "tr": "tekrar doldurma",
+      "picture": "refill",
+      "example": "Are refills free?",
+      "exampleTr": "Tekrar doldurma ücretsiz mi?"
     },
     {
       "en": "to go",
-      "tr": "götürmek için (ABD)"
+      "tr": "götürmek için (ABD)",
+      "picture": "takeaway",
+      "example": "It's to go, thanks.",
+      "exampleTr": "Götürmek için, teşekkürler."
     },
     {
       "en": "bagel",
-      "tr": "simit benzeri ekmek"
+      "tr": "bagel (simit benzeri ekmek)",
+      "picture": "bagel",
+      "example": "A bagel with cream cheese, please.",
+      "exampleTr": "Krem peynirli bir bagel, lütfen."
+    },
+    {
+      "en": "toasted",
+      "tr": "kızartılmış",
+      "picture": "toaster",
+      "example": "Could you toast it, please?",
+      "exampleTr": "Kızartabilir misiniz, lütfen?"
     },
     {
       "en": "outlet",
-      "tr": "priz (ABD)"
+      "tr": "priz (ABD)",
+      "picture": "outlet",
+      "example": "Is there an outlet near here?",
+      "exampleTr": "Yakında priz var mı?"
     },
     {
       "en": "restroom",
-      "tr": "tuvalet (ABD)"
+      "tr": "tuvalet (ABD)",
+      "picture": "toilet",
+      "example": "Where is the restroom?",
+      "exampleTr": "Tuvalet nerede?"
     }
   ],
-  "scene": {
-    "role": "Barista",
-    "setting": "Brew Brothers, SoHo · Counter",
-    "goalsTr": [
-      "İçeceğini ayrıntılı sipariş et (süt tipi, boy)",
-      "Şeker ya da şurup isteyip istemediğini söyle",
-      "Götürmek için olduğunu söyle (to go)",
-      "Yanına bir bagel iste ve ısıtılmasını rica et",
-      "Tuvaletin nerede olduğunu sor",
-      "Wi-Fi şifresini ve priz sor"
-    ],
-    "twistsTr": [
-      "Yulaf sütü bitmiş",
-      "Tuvalet sadece müşteriler için, kodu fişte",
-      "Adını bardağa yanlış yazıyorlar"
+  "pronounce": [
+    {
+      "word": "bagel",
+      "ipa": "/ˈbeɪ.ɡəl/",
+      "stress": "BAY-gul",
+      "tipTr": "\"Bagel\" değil: BEY-gıl."
+    },
+    {
+      "word": "decaf",
+      "ipa": "/ˈdiː.kæf/",
+      "stress": "DEE-kaf",
+      "tipTr": "Vurgu başta: Dİİ-kef."
+    },
+    {
+      "word": "latte",
+      "ipa": "/ˈlɑː.teɪ/",
+      "stress": "LAH-tay",
+      "tipTr": "Amerikan İngilizcesinde: LAA-tey."
+    }
+  ],
+  "match": [
+    "oat milk",
+    "extra shot",
+    "iced",
+    "bagel",
+    "outlet",
+    "restroom"
+  ],
+  "dialog": {
+    "titleTr": "Kahvecide",
+    "lines": [
+      {
+        "who": "Barista",
+        "text": "Hey! What can I get started for you?"
+      },
+      {
+        "who": "You",
+        "text": "Can I get an ___ latte with oat milk?",
+        "gap": "iced",
+        "options": [
+          "iced",
+          "ice",
+          "nice"
+        ]
+      },
+      {
+        "who": "Barista",
+        "text": "Sure. Any syrup?"
+      },
+      {
+        "who": "You",
+        "text": "No, thanks. But can I add an extra ___?",
+        "gap": "shot",
+        "options": [
+          "shot",
+          "shop",
+          "short"
+        ]
+      },
+      {
+        "who": "Barista",
+        "text": "Of course. Anything to eat?"
+      },
+      {
+        "who": "You",
+        "text": "A bagel, ___, please.",
+        "gap": "toasted",
+        "options": [
+          "toasted",
+          "tasted",
+          "to go"
+        ]
+      },
+      {
+        "who": "Barista",
+        "text": "For here or to go?"
+      },
+      {
+        "who": "You",
+        "text": "To ___, please.",
+        "gap": "go",
+        "options": [
+          "go",
+          "here",
+          "take"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Oh, and where is the ___?",
+        "gap": "restroom",
+        "options": [
+          "restroom",
+          "rest",
+          "room"
+        ]
+      },
+      {
+        "who": "Barista",
+        "text": "In the back, on the left."
+      }
     ]
   },
-  "notesTr": ""
+  "use": {
+    "word": "outlet",
+    "phrase": "Is there an outlet I can use?",
+    "phraseTr": "Kullanabileceğim bir priz var mı?",
+    "situation": "Your phone battery is low. Ask if there's an outlet you can use.",
+    "situationTr": "Telefonunun şarjı az. Kullanabileceğin bir priz olup olmadığını sor.",
+    "tiles": [
+      "Is there",
+      "an outlet",
+      "I can use",
+      "?"
+    ]
+  },
+  "survive": {
+    "scenario": "cafe-silver"
+  }
 }

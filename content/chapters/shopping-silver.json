@@ -1,72 +1,261 @@
 {
   "slug": "shopping-silver",
-  "draft": true,
-  "mission": "Buy gifts and get tax back",
-  "missionTr": "Hediyelik eşya al, hediye paketi iste, vergi iadesini (tax refund) sor",
+  "mission": "Buy gifts and ship them home",
+  "missionTr": "Annen için hediye al: fiyatı ve vergiyi sor, hediye paketi iste, kırılan bir şeyse dikkatli paketlet; kargo formunu doldur",
   "stamp": "GIFTS BOUGHT",
-  "trip": "New York",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
-    "RECOGNIZE",
+    "FORM",
     "DIALOG",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "souvenir",
-      "tr": "hediyelik eşya"
+      "tr": "hediyelik eşya",
+      "picture": "souvenir",
+      "example": "I'm looking for a souvenir.",
+      "exampleTr": "Hediyelik bir şey arıyorum."
+    },
+    {
+      "en": "gift",
+      "tr": "hediye",
+      "picture": "gift",
+      "example": "It's a gift for my mother.",
+      "exampleTr": "Annem için bir hediye."
     },
     {
       "en": "gift wrap",
-      "tr": "hediye paketi"
+      "tr": "hediye paketi",
+      "picture": "gift",
+      "example": "Could you gift wrap it?",
+      "exampleTr": "Hediye paketi yapabilir misiniz?"
+    },
+    {
+      "en": "mug",
+      "tr": "kupa",
+      "picture": "mug",
+      "example": "How much is this mug?",
+      "exampleTr": "Bu kupa ne kadar?"
+    },
+    {
+      "en": "postcard",
+      "tr": "kartpostal",
+      "picture": "postcard",
+      "example": "I'd like five postcards.",
+      "exampleTr": "Beş kartpostal istiyorum."
     },
     {
       "en": "on sale",
-      "tr": "indirimde"
-    },
-    {
-      "en": "receipt",
-      "tr": "fiş"
+      "tr": "indirimde",
+      "picture": "sale",
+      "example": "Is this on sale?",
+      "exampleTr": "Bu indirimde mi?"
     },
     {
       "en": "tax",
-      "tr": "vergi"
-    },
-    {
-      "en": "exchange",
-      "tr": "değiştirmek"
+      "tr": "vergi",
+      "picture": "tax",
+      "example": "Is tax included?",
+      "exampleTr": "Vergi dahil mi?"
     },
     {
       "en": "fragile",
-      "tr": "kırılgan"
+      "tr": "kırılgan",
+      "picture": "fragile",
+      "example": "It's fragile. Please wrap it carefully.",
+      "exampleTr": "Kırılgan. Lütfen dikkatli sarın."
     },
     {
-      "en": "for my mother",
-      "tr": "annem için"
+      "en": "ship",
+      "tr": "kargoyla göndermek",
+      "picture": "parcel",
+      "example": "Do you ship to Turkey?",
+      "exampleTr": "Türkiye'ye gönderiyor musunuz?"
     },
     {
-      "en": "Do you ship to Turkey?",
-      "tr": "Türkiye'ye gönderiyor musunuz?"
+      "en": "receipt",
+      "tr": "fiş",
+      "picture": "receipt",
+      "example": "Can I have the receipt, please?",
+      "exampleTr": "Fişi alabilir miyim, lütfen?"
     }
   ],
-  "scene": {
-    "role": "Sales assistant",
-    "setting": "Gift shop, Fifth Avenue",
-    "goalsTr": [
-      "Annen için hediye önerisi iste",
-      "Fiyatı ve vergi dahil olup olmadığını sor",
-      "Hediye paketi iste",
-      "Kırılgan olduğu için iyi sarılmasını rica et",
-      "Değişim/iade süresini sor",
-      "Kartla öde ve fişi iste"
-    ],
-    "twistsTr": [
-      "Fiyata vergi eklenince tutar yükseliyor (ABD'de etiket fiyatı vergisiz)",
-      "Hediye paketi ücretli",
-      "İstediğin renk sadece online"
+  "pronounce": [
+    {
+      "word": "souvenir",
+      "ipa": "/ˌsuː.vəˈnɪr/",
+      "stress": "soo-vuh-NEER",
+      "tipTr": "Vurgu sonda: suu-vı-NİR."
+    },
+    {
+      "word": "fragile",
+      "ipa": "/ˈfrædʒ.əl/",
+      "stress": "FRAJ-ul",
+      "tipTr": "Amerikan İngilizcesinde iki hece: FREC-ıl."
+    },
+    {
+      "word": "receipt",
+      "ipa": "/rɪˈsiːt/",
+      "stress": "ri-SEET",
+      "tipTr": "Ortadaki p okunmaz: ri-SİİT."
+    }
+  ],
+  "match": [
+    "souvenir",
+    "gift",
+    "mug",
+    "postcard",
+    "on sale",
+    "fragile"
+  ],
+  "form": {
+    "title": "SHIPPING FORM",
+    "titleTr": "Kargo formu",
+    "situationTr": "Annene bir kupa ve kartpostallar gönderiyorsun. Adresi: Ayşe Yılmaz, Alsancak, İzmir, Türkiye. İçindekiler kırılabilir, değeri 40 dolar.",
+    "fields": [
+      {
+        "label": "Recipient",
+        "labelTr": "Alıcı",
+        "options": [
+          "Ayşe Yılmaz",
+          "Ozan Yılmaz",
+          "New York"
+        ],
+        "answer": 0,
+        "explainTr": "Recipient = alıcı, paketi alacak kişi: annen."
+      },
+      {
+        "label": "Country",
+        "labelTr": "Ülke",
+        "options": [
+          "Turkish",
+          "Turkey",
+          "Izmir"
+        ],
+        "answer": 1,
+        "explainTr": "Ülke adı: Turkey (Türkiye). Turkish uyruk ya da dil için kullanılır."
+      },
+      {
+        "label": "City",
+        "labelTr": "Şehir",
+        "options": [
+          "Alsancak",
+          "Izmir",
+          "Turkey"
+        ],
+        "answer": 1,
+        "explainTr": "City = şehir: Izmir. Alsancak semt (district)."
+      },
+      {
+        "label": "Contents",
+        "labelTr": "İçindekiler",
+        "options": [
+          "Mug and postcards",
+          "Clothes",
+          "Food"
+        ],
+        "answer": 0,
+        "explainTr": "Contents = paketin içinde ne olduğu."
+      },
+      {
+        "label": "Value (USD)",
+        "labelTr": "Değer (dolar)",
+        "options": [
+          "$40",
+          "$400",
+          "$4"
+        ],
+        "answer": 0,
+        "explainTr": "Value = gümrük için ürünlerin değeri: 40 dolar."
+      },
+      {
+        "label": "Handle with care?",
+        "labelTr": "Dikkatli taşınsın mı?",
+        "options": [
+          "Yes — fragile",
+          "No",
+          "Express"
+        ],
+        "answer": 0,
+        "explainTr": "Fragile = kırılgan. Kupa kırılabilir, o yüzden evet."
+      }
     ]
   },
-  "notesTr": "Notlardaki \"different countries and different concepts\": ABD'de etiket fiyatına vergi kasada eklenir."
+  "dialog": {
+    "titleTr": "Hediyelik eşya dükkânında",
+    "lines": [
+      {
+        "who": "Assistant",
+        "text": "Hi! Looking for anything special?"
+      },
+      {
+        "who": "You",
+        "text": "Yes, a ___ for my mother.",
+        "gap": "gift",
+        "options": [
+          "gift",
+          "tip",
+          "tax"
+        ]
+      },
+      {
+        "who": "Assistant",
+        "text": "These mugs are very popular."
+      },
+      {
+        "who": "You",
+        "text": "How much is this ___?",
+        "gap": "mug",
+        "options": [
+          "mug",
+          "map",
+          "mud"
+        ]
+      },
+      {
+        "who": "Assistant",
+        "text": "It's eighteen dollars, plus tax."
+      },
+      {
+        "who": "You",
+        "text": "Okay, I'll take it. It's ___, so please wrap it carefully.",
+        "gap": "fragile",
+        "options": [
+          "fragile",
+          "on sale",
+          "free"
+        ]
+      },
+      {
+        "who": "Assistant",
+        "text": "Sure. Would you like it gift ___?",
+        "gap": "wrapped",
+        "options": [
+          "wrapped",
+          "wrote",
+          "shipped"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Yes, please. And do you ___ to Turkey?",
+        "gap": "ship",
+        "options": [
+          "ship",
+          "shop",
+          "sheep"
+        ]
+      },
+      {
+        "who": "Assistant",
+        "text": "We do! Just fill in this form."
+      }
+    ]
+  },
+  "survive": {
+    "scenario": "shopping-silver"
+  }
 }

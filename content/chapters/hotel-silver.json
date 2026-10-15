@@ -1,72 +1,164 @@
 {
   "slug": "hotel-silver",
-  "draft": true,
   "mission": "Ask for what you need at the hotel",
-  "missionTr": "Otelde isteklerini söyle: erken giriş, manzaralı oda, ekstra havlu, oda servisi",
+  "missionTr": "Otelde isteklerini söyle: erken giriş, manzaralı oda, uyandırma servisi, ekstra havlu, geç çıkış",
   "stamp": "ROOM WITH A VIEW",
-  "trip": "New York",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
     "RECOGNIZE",
-    "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "early check-in",
-      "tr": "erken giriş"
+      "tr": "erken giriş",
+      "picture": "sun",
+      "example": "Can I check in early?",
+      "exampleTr": "Erken giriş yapabilir miyim?"
     },
     {
       "en": "late check-out",
-      "tr": "geç çıkış"
+      "tr": "geç çıkış",
+      "picture": "clock",
+      "example": "Could I have a late check-out?",
+      "exampleTr": "Geç çıkış yapabilir miyim?"
     },
     {
       "en": "view",
-      "tr": "manzara"
+      "tr": "manzara",
+      "picture": "view",
+      "example": "Could I have a room with a view?",
+      "exampleTr": "Manzaralı bir oda alabilir miyim?"
     },
     {
       "en": "quiet room",
-      "tr": "sessiz oda"
+      "tr": "sessiz oda",
+      "picture": "quiet",
+      "example": "I'd like a quiet room, please.",
+      "exampleTr": "Sessiz bir oda istiyorum, lütfen."
     },
     {
       "en": "extra towels",
-      "tr": "ekstra havlu"
+      "tr": "ekstra havlu",
+      "picture": "towels",
+      "example": "Could I have extra towels, please?",
+      "exampleTr": "Ekstra havlu alabilir miyim, lütfen?"
     },
     {
       "en": "room service",
-      "tr": "oda servisi"
+      "tr": "oda servisi",
+      "picture": "room-service",
+      "example": "Is room service available at night?",
+      "exampleTr": "Oda servisi gece de var mı?"
     },
     {
       "en": "wake-up call",
-      "tr": "uyandırma servisi"
+      "tr": "uyandırma servisi",
+      "picture": "alarm",
+      "example": "I'd like a wake-up call at seven.",
+      "exampleTr": "Saat yedide uyandırma servisi istiyorum."
     },
     {
       "en": "safe",
-      "tr": "kasa"
+      "tr": "kasa",
+      "picture": "safe",
+      "example": "Is there a safe in the room?",
+      "exampleTr": "Odada kasa var mı?"
     },
     {
       "en": "luggage storage",
-      "tr": "bagaj emanet"
+      "tr": "bagaj emanet",
+      "picture": "suitcase",
+      "example": "Do you have luggage storage?",
+      "exampleTr": "Bagaj emanetiniz var mı?"
+    },
+    {
+      "en": "upgrade",
+      "tr": "üst sınıfa yükseltme",
+      "picture": "upgrade",
+      "example": "Is an upgrade possible?",
+      "exampleTr": "Oda yükseltmesi mümkün mü?"
     }
   ],
-  "scene": {
-    "role": "Front desk agent",
-    "setting": "Hudson Hotel, Manhattan · Front desk",
-    "goalsTr": [
-      "Erken giriş yapıp yapamayacağını sor",
-      "Manzaralı ya da sessiz bir oda iste",
-      "Kahvaltının nerede ve ne zaman olduğunu sor",
-      "Uyandırma servisi iste",
-      "Oda servisinin saatlerini sor",
-      "Geç çıkış rica et"
-    ],
-    "twistsTr": [
-      "Manzaralı oda ekstra ücretli",
-      "Oda servisi sadece akşam 10'a kadar",
-      "Kasa çalışmıyor"
+  "pronounce": [
+    {
+      "word": "towels",
+      "ipa": "/ˈtaʊ.əlz/",
+      "stress": "TOW-ulz",
+      "tipTr": "\"Tovel\" değil: TAU-ılz."
+    },
+    {
+      "word": "quiet",
+      "ipa": "/ˈkwaɪ.ət/",
+      "stress": "KWY-et",
+      "tipTr": "\"Quite\" (oldukça) ile karıştırma: quiet iki hecedir, KUAY-ıt."
+    },
+    {
+      "word": "suite",
+      "ipa": "/swiːt/",
+      "stress": "SWEET",
+      "tipTr": "Lüks oda anlamındaki suite \"sviit\" diye okunur, tatlı (sweet) gibi."
+    }
+  ],
+  "match": [
+    "view",
+    "quiet room",
+    "extra towels",
+    "wake-up call",
+    "safe",
+    "upgrade"
+  ],
+  "recognize": [
+    {
+      "audio": "Your room will be ready at three p.m.",
+      "prompt": "Listen. When can you go to your room?",
+      "options": [
+        "At 3 p.m.",
+        "At 1 p.m.",
+        "At 3 a.m."
+      ],
+      "answer": 0,
+      "explainTr": "Three p.m. = öğleden sonra 3. ABD'de saatler genelde a.m./p.m. ile söylenir."
+    },
+    {
+      "prompt": "You want to sleep well. You ask for a…",
+      "options": [
+        "quiet room",
+        "room with a view",
+        "safe"
+      ],
+      "answer": 0,
+      "explainTr": "Quiet = sessiz. Asansörden ve caddeden uzak bir oda istersin."
+    },
+    {
+      "audio": "A room with a view is forty dollars extra per night.",
+      "prompt": "Listen. What does the extra cost pay for?",
+      "options": [
+        "A room with a view",
+        "Breakfast",
+        "Late check-out"
+      ],
+      "answer": 0,
+      "explainTr": "\"Forty dollars extra per night\" = gecelik 40 dolar fazladan."
+    }
+  ],
+  "use": {
+    "word": "wake-up call",
+    "phrase": "Could I have a wake-up call at seven?",
+    "phraseTr": "Saat yedide uyandırma servisi alabilir miyim?",
+    "situation": "You have an early tour tomorrow. Ask the hotel to wake you at seven.",
+    "situationTr": "Yarın erken bir turun var. Otelden seni saat yedide uyandırmasını iste.",
+    "tiles": [
+      "Could I have",
+      "a wake-up call",
+      "at seven",
+      "?"
     ]
   },
-  "notesTr": "Amerikan İngilizcesi farkları: elevator (lift), trunk (boot), check (bill)."
+  "survive": {
+    "scenario": "hotel-silver"
+  }
 }

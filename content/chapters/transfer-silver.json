@@ -1,72 +1,202 @@
 {
   "slug": "transfer-silver",
-  "draft": true,
   "mission": "Meet your driver and chat on the way",
-  "missionTr": "Seni bekleyen transfer şoförünü bul, yolda kısa sohbet et",
+  "missionTr": "Seni bekleyen transfer şoförünü bul, bavulunu yerleştir, yolda şehir hakkında sohbet et",
   "stamp": "PICKED UP",
-  "trip": "New York",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
-    "RECOGNIZE",
     "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "driver",
-      "tr": "şoför"
+      "tr": "şoför",
+      "picture": "driver",
+      "example": "Your driver is waiting outside.",
+      "exampleTr": "Şoförünüz dışarıda bekliyor."
     },
     {
       "en": "name sign",
-      "tr": "isim tabelası"
+      "tr": "isim tabelası",
+      "picture": "name-sign",
+      "example": "He's holding a name sign.",
+      "exampleTr": "Elinde isim tabelası tutuyor."
     },
     {
       "en": "pick up",
-      "tr": "almak (birini)"
+      "tr": "(birini) almak",
+      "picture": "car",
+      "example": "I'll pick you up at the airport.",
+      "exampleTr": "Sizi havalimanından alacağım."
     },
     {
       "en": "arrivals hall",
-      "tr": "geliş salonu"
+      "tr": "geliş salonu",
+      "picture": "arrivals",
+      "example": "I'm in the arrivals hall.",
+      "exampleTr": "Geliş salonundayım."
     },
     {
       "en": "meeting point",
-      "tr": "buluşma noktası"
-    },
-    {
-      "en": "booked",
-      "tr": "rezerve edilmiş"
+      "tr": "buluşma noktası",
+      "picture": "map-pin",
+      "example": "Let's meet at the meeting point.",
+      "exampleTr": "Buluşma noktasında buluşalım."
     },
     {
       "en": "trunk",
-      "tr": "bagaj (araba, ABD)"
+      "tr": "bagaj (araba, ABD)",
+      "picture": "trunk",
+      "example": "Can you put my bag in the trunk?",
+      "exampleTr": "Çantamı bagaja koyabilir misiniz?"
+    },
+    {
+      "en": "seat belt",
+      "tr": "emniyet kemeri",
+      "picture": "seatbelt",
+      "example": "Please put on your seat belt.",
+      "exampleTr": "Lütfen emniyet kemerinizi takın."
     },
     {
       "en": "highway",
-      "tr": "otoyol"
+      "tr": "otoyol",
+      "picture": "highway",
+      "example": "We'll take the highway.",
+      "exampleTr": "Otoyoldan gideceğiz."
     },
     {
       "en": "downtown",
-      "tr": "şehir merkezi"
+      "tr": "şehir merkezi",
+      "picture": "skyline",
+      "example": "Is the hotel downtown?",
+      "exampleTr": "Otel şehir merkezinde mi?"
+    },
+    {
+      "en": "tip",
+      "tr": "bahşiş",
+      "picture": "coins",
+      "example": "This is for you — a little tip.",
+      "exampleTr": "Bu sizin için, küçük bir bahşiş."
     }
   ],
-  "scene": {
-    "role": "Shuttle driver",
-    "setting": "JFK · Arrivals hall",
-    "goalsTr": [
-      "Adının yazılı olduğu tabelayı tutan şoförü bul ve kendini tanıt",
-      "Rezervasyon adını ve otelini doğrula",
-      "Bavulunu bagaja koymasını rica et",
-      "Yolda şehir hakkında bir soru sor",
-      "Klimayı açmasını ya da kapatmasını rica et",
-      "Varınca teşekkür et ve bahşiş ver"
-    ],
-    "twistsTr": [
-      "Şoför seni bulamıyor, telefonla arıyor: buluşma noktasını tarif et",
-      "Başka bir yolcuyla aynı aracı paylaşacaksın",
-      "Şoför yanlış otelin adını söylüyor"
+  "pronounce": [
+    {
+      "word": "driver",
+      "ipa": "/ˈdraɪ.vɚ/",
+      "stress": "DRY-ver",
+      "tipTr": "\"Drayvır\": vurgu başta, sondaki r Amerikan İngilizcesinde duyulur."
+    },
+    {
+      "word": "highway",
+      "ipa": "/ˈhaɪ.weɪ/",
+      "stress": "HY-way",
+      "tipTr": "İki hece: HAY-wey. Ortadaki gh okunmaz."
+    },
+    {
+      "word": "downtown",
+      "ipa": "/ˌdaʊnˈtaʊn/",
+      "stress": "down-TOWN",
+      "tipTr": "Vurgu ikinci hecede: daun-TAUN."
+    }
+  ],
+  "match": [
+    "driver",
+    "name sign",
+    "arrivals hall",
+    "trunk",
+    "seat belt",
+    "highway"
+  ],
+  "dialog": {
+    "titleTr": "Transfer şoförüyle",
+    "lines": [
+      {
+        "who": "Driver",
+        "text": "Hi! Are you Ozan? I'm Mike, your ___.",
+        "gap": "driver",
+        "options": [
+          "driver",
+          "trunk",
+          "tip"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Yes, that's me! Nice to meet you."
+      },
+      {
+        "who": "Driver",
+        "text": "Let me put your bag in the ___.",
+        "gap": "trunk",
+        "options": [
+          "trunk",
+          "highway",
+          "sign"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Thank you. Is the hotel far?"
+      },
+      {
+        "who": "Driver",
+        "text": "About forty minutes on the ___.",
+        "gap": "highway",
+        "options": [
+          "highway",
+          "meeting",
+          "seat"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "Please put on your seat ___.",
+        "gap": "belt",
+        "options": [
+          "belt",
+          "sign",
+          "point"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Sure. Is the hotel ___?",
+        "gap": "downtown",
+        "options": [
+          "downtown",
+          "arrivals",
+          "trunk"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "Yes, right in Midtown. Here we are!"
+      },
+      {
+        "who": "You",
+        "text": "Thanks, Mike. This is for you."
+      }
     ]
   },
-  "notesTr": "Notlarda ? olarak bırakılmıştı; transfer görevlisini bulma ve yolda sohbet önerisi."
+  "use": {
+    "word": "trunk",
+    "phrase": "Can you put my suitcase in the trunk?",
+    "phraseTr": "Bavulumu bagaja koyabilir misiniz?",
+    "situation": "Your driver is opening the car. Ask him to put your suitcase in the trunk.",
+    "situationTr": "Şoför arabayı açıyor. Bavulunu bagaja koymasını rica et.",
+    "tiles": [
+      "Can you",
+      "put",
+      "my suitcase",
+      "in the trunk",
+      "?"
+    ]
+  },
+  "survive": {
+    "scenario": "transfer-silver"
+  }
 }

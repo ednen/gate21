@@ -1,0 +1,312 @@
+{
+  "slug": "cafe-silver",
+  "chapter": "cafe-silver",
+  "title": "Coffee your way",
+  "titleTr": "Tam istediğin gibi",
+  "role": "Barista",
+  "setting": "Brew Brothers, SoHo · Counter",
+  "voice": "en-US",
+  "persona": "You are a fast, upbeat barista at Brew Brothers, a busy coffee shop in SoHo, New York. You speak quickly and casually.",
+  "briefTr": "SoHo'da bir kahvecidesin. Yulaf sütlü buzlu bir latte istiyorsun, yanına kızartılmış bir bagel. Götüreceksin.",
+  "opening": "Hey! What can I get started for you?",
+  "facts": [
+    {
+      "id": "price",
+      "values": [
+        "$7.45",
+        "$8.20",
+        "$6.90"
+      ],
+      "question": "How much was your order?",
+      "questionTr": "Siparişin ne kadar tuttu?"
+    },
+    {
+      "id": "code",
+      "values": [
+        "4721",
+        "1985",
+        "3360"
+      ],
+      "question": "What was the restroom code?",
+      "questionTr": "Tuvaletin kodu neydi?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "order",
+      "titleTr": "İçeceği ayrıntılı söylemek",
+      "instruction": "The customer orders a drink, ideally with details like iced, oat milk, decaf.",
+      "hint": "Can I get an iced latte with oat milk?",
+      "hintTr": "Yulaf sütlü buzlu bir latte alabilir miyim?",
+      "keywords": [
+        "latte",
+        "coffee",
+        "iced",
+        "oat",
+        "milk",
+        "americano",
+        "cappuccino",
+        "tea",
+        "can i get",
+        "decaf",
+        "cold brew"
+      ],
+      "successReply": "Sure thing.",
+      "retryReply": "What are you in the mood for? Hot or iced?"
+    },
+    {
+      "id": "size",
+      "titleTr": "Boyunu söylemek",
+      "ask": "What size?",
+      "instruction": "The customer says the size.",
+      "hint": "Large, please.",
+      "hintTr": "Büyük boy, lütfen.",
+      "keywords": [
+        "small",
+        "medium",
+        "large",
+        "regular",
+        "tall",
+        "grande"
+      ],
+      "successReply": "Large, got it.",
+      "retryReply": "What size — small, medium or large?"
+    },
+    {
+      "id": "syrup",
+      "titleTr": "Şurup ya da şeker isteyip istemediğini söylemek",
+      "ask": "Any syrup? We have vanilla and caramel.",
+      "instruction": "The customer says if they want syrup, sugar or an extra shot.",
+      "hint": "No syrup, thanks. But an extra shot, please.",
+      "hintTr": "Şurup yok, teşekkürler. Ama ekstra shot lütfen.",
+      "keywords": [
+        "no",
+        "yes",
+        "syrup",
+        "vanilla",
+        "caramel",
+        "sugar",
+        "shot",
+        "thanks"
+      ],
+      "successReply": "You got it.",
+      "retryReply": "Any syrup? Vanilla, caramel?"
+    },
+    {
+      "id": "food",
+      "titleTr": "Yiyecek söylemek",
+      "ask": "Anything to eat?",
+      "instruction": "The customer orders something to eat or says no.",
+      "hint": "A bagel, toasted, please.",
+      "hintTr": "Kızartılmış bir bagel, lütfen.",
+      "keywords": [
+        "bagel",
+        "toasted",
+        "muffin",
+        "cookie",
+        "croissant",
+        "no",
+        "yes",
+        "please"
+      ],
+      "successReply": "Toasted bagel, coming up.",
+      "retryReply": "Anything to eat with that?"
+    },
+    {
+      "id": "to-go",
+      "titleTr": "Burada mı götürmek mi",
+      "ask": "For here or to go?",
+      "instruction": "The customer says for here or to go.",
+      "hint": "To go, please.",
+      "hintTr": "Götürmek için, lütfen.",
+      "keywords": [
+        "to go",
+        "go",
+        "here",
+        "stay"
+      ],
+      "successReply": "That's {price}.",
+      "retryReply": "For here or to go?"
+    },
+    {
+      "id": "restroom",
+      "titleTr": "Tuvaleti ya da Wi-Fi'ı sormak",
+      "ask": "Anything else I can help with?",
+      "instruction": "The customer asks where the restroom is, or for the Wi-Fi or an outlet.",
+      "hint": "Where is the restroom?",
+      "hintTr": "Tuvalet nerede?",
+      "keywords": [
+        "restroom",
+        "bathroom",
+        "toilet",
+        "where",
+        "wifi",
+        "wi-fi",
+        "password",
+        "outlet"
+      ],
+      "successReply": "It's in the back. The code is {code}.",
+      "retryReply": "Anything else I can help with?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "no-oat",
+      "titleTr": "Yulaf sütü bitmiş",
+      "intro": "Oh, sorry — we just ran out of oat milk. We have almond or soy.",
+      "instruction": "There is no oat milk. The customer picks another milk or asks for lactose-free.",
+      "retryReply": "Sorry about that! Which milk would you like?",
+      "options": [
+        {
+          "text": "Almond is fine.",
+          "keywords": [
+            "almond",
+            "fine"
+          ],
+          "reply": "Almond it is."
+        },
+        {
+          "text": "Then regular milk, please.",
+          "keywords": [
+            "regular",
+            "normal",
+            "then",
+            "whole"
+          ],
+          "reply": "Regular milk, no problem."
+        },
+        {
+          "text": "Do you have lactose-free milk?",
+          "keywords": [
+            "lactose",
+            "lactose-free",
+            "free"
+          ],
+          "reply": "Yes, we do. Lactose-free it is."
+        }
+      ]
+    },
+    {
+      "id": "machine-down",
+      "titleTr": "Espresso makinesi bozuk",
+      "intro": "Bad news — our espresso machine just broke. We only have cold brew and tea right now.",
+      "instruction": "No espresso drinks. The customer chooses cold brew, tea, or asks how long it will take.",
+      "retryReply": "So sorry! What would you like instead?",
+      "options": [
+        {
+          "text": "Cold brew is fine.",
+          "keywords": [
+            "cold brew",
+            "cold",
+            "fine"
+          ],
+          "reply": "Great, one cold brew."
+        },
+        {
+          "text": "Then I'll have a tea.",
+          "keywords": [
+            "tea",
+            "then"
+          ],
+          "reply": "One tea, coming up."
+        },
+        {
+          "text": "How long will it be down?",
+          "keywords": [
+            "how long",
+            "down",
+            "fixed",
+            "when"
+          ],
+          "reply": "Maybe twenty minutes. Cold brew is ready now though!"
+        }
+      ]
+    },
+    {
+      "id": "wrong-name",
+      "titleTr": "İsim yanlış yazılmış",
+      "intro": "Large iced latte for… Oscar? Is that you?",
+      "instruction": "The barista called the wrong name. The customer corrects it politely or spells their name.",
+      "retryReply": "Is this one yours?",
+      "options": [
+        {
+          "text": "Close! It's {name}.",
+          "keywords": [
+            "close",
+            "it's"
+          ],
+          "reply": "Ha, sorry, {name}! Here you go."
+        },
+        {
+          "text": "Yes, that's mine. Thanks!",
+          "keywords": [
+            "yes",
+            "mine",
+            "thanks"
+          ],
+          "reply": "Enjoy!"
+        },
+        {
+          "text": "Let me spell my name for you.",
+          "keywords": [
+            "spell",
+            "let me"
+          ],
+          "reply": "Thanks — got it now. Sorry about that!"
+        }
+      ]
+    },
+    {
+      "id": "code-receipt",
+      "titleTr": "Tuvalet kodu fişte",
+      "intro": "The restroom code is on your receipt.",
+      "instruction": "The restroom needs a code from the receipt. The customer asks where on the receipt, finds it, or asks the barista to tell them.",
+      "retryReply": "It's printed at the bottom.",
+      "options": [
+        {
+          "text": "Where is it on the receipt?",
+          "keywords": [
+            "where",
+            "receipt"
+          ],
+          "reply": "Right at the bottom, under the total."
+        },
+        {
+          "text": "Oh, I see it. Thanks!",
+          "keywords": [
+            "see",
+            "found",
+            "thanks"
+          ],
+          "reply": "No problem!"
+        },
+        {
+          "text": "Can you tell me the code?",
+          "keywords": [
+            "tell",
+            "code",
+            "what"
+          ],
+          "reply": "Sure, it's on the door too — just ask me anytime."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "syrup",
+      "pool": [
+        "no-oat",
+        "machine-down"
+      ]
+    },
+    {
+      "after": "restroom",
+      "pool": [
+        "wrong-name",
+        "code-receipt"
+      ]
+    }
+  ],
+  "closing": "Have a good one!"
+}

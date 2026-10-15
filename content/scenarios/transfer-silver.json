@@ -1,0 +1,278 @@
+{
+  "slug": "transfer-silver",
+  "chapter": "transfer-silver",
+  "title": "Meeting your driver",
+  "titleTr": "Transfer şoförüyle buluşma",
+  "role": "Driver",
+  "setting": "JFK Airport · Arrivals hall",
+  "voice": "en-US",
+  "persona": "You are Mike, a friendly New York car service driver. You booked to pick up the guest at JFK and drive them to the Hudson Hotel on 58th Street in Manhattan. You like to chat about the city.",
+  "briefTr": "Havalimanından şehre transferin ayarlı. Şoför Mike seni arıyor. Otelin: Hudson Hotel, 58th Street. Kapı numarasını tabelalardan oku.",
+  "opening": "Hi, this is Mike, your driver! I'm in the arrivals hall, at door {door}. Where are you?",
+  "facts": [
+    {
+      "id": "door",
+      "values": [
+        "4",
+        "6",
+        "2",
+        "8"
+      ],
+      "question": "Which door did your driver wait at?",
+      "questionTr": "Şoför hangi kapıda bekliyordu?"
+    },
+    {
+      "id": "minutes",
+      "values": [
+        "45 minutes",
+        "50 minutes",
+        "40 minutes"
+      ],
+      "question": "How long was the drive to Manhattan?",
+      "questionTr": "Manhattan'a yolculuk ne kadar sürdü?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "meet",
+      "titleTr": "Nerede olduğunu söylemek",
+      "instruction": "The guest says where they are in the arrivals hall, for example a door number or a shop.",
+      "hint": "I'm next to the coffee shop. I'm coming to door 4.",
+      "hintTr": "Kahvecinin yanındayım. 4 numaralı kapıya geliyorum.",
+      "keywords": [
+        "door",
+        "next to",
+        "coffee",
+        "near",
+        "here",
+        "outside",
+        "coming",
+        "at"
+      ],
+      "successReply": "Great, see you in a minute!",
+      "retryReply": "Sorry, where exactly are you? A door number or a shop helps."
+    },
+    {
+      "id": "name",
+      "titleTr": "Kendini tanıtmak",
+      "ask": "There you are! Are you {name}?",
+      "instruction": "The driver checks the name. The guest confirms and greets him.",
+      "hint": "Yes, that's me! Nice to meet you.",
+      "hintTr": "Evet, benim! Tanıştığıma memnun oldum.",
+      "keywords": [
+        "yes",
+        "me",
+        "nice",
+        "i'm",
+        "hi",
+        "hello"
+      ],
+      "successReply": "Nice to meet you too!",
+      "retryReply": "Sorry — are you the guest for the Hudson Hotel?"
+    },
+    {
+      "id": "hotel",
+      "titleTr": "Oteli doğrulamak",
+      "ask": "You're going to the Hudson Hotel on 58th Street, right?",
+      "instruction": "The guest confirms the hotel.",
+      "hint": "Yes, the Hudson Hotel, please.",
+      "hintTr": "Evet, Hudson Hotel, lütfen.",
+      "keywords": [
+        "yes",
+        "hudson",
+        "hotel",
+        "right",
+        "correct",
+        "58th"
+      ],
+      "successReply": "Perfect.",
+      "retryReply": "Where are we going — the Hudson Hotel?"
+    },
+    {
+      "id": "luggage",
+      "titleTr": "Bavulu bagaja koydurmak",
+      "ask": "Can I help you with your bags?",
+      "instruction": "The guest accepts help with the bags, for example asks to put the suitcase in the trunk.",
+      "hint": "Yes, please. Can you put it in the trunk?",
+      "hintTr": "Evet, lütfen. Bagaja koyabilir misiniz?",
+      "keywords": [
+        "trunk",
+        "bag",
+        "bags",
+        "suitcase",
+        "yes",
+        "please",
+        "thanks"
+      ],
+      "successReply": "No problem. It's about {minutes} to Manhattan.",
+      "retryReply": "Do you want me to put your bags in the trunk?"
+    },
+    {
+      "id": "plans",
+      "titleTr": "Şehirle ilgili sohbet etmek",
+      "ask": "So, what are your plans in the city?",
+      "instruction": "The guest talks about their plans or asks the driver for a tip about what to see.",
+      "hint": "I want to see Central Park. Any tips?",
+      "hintTr": "Central Park'ı görmek istiyorum. Önerin var mı?",
+      "keywords": [
+        "see",
+        "visit",
+        "park",
+        "museum",
+        "want",
+        "tips",
+        "recommend",
+        "plan",
+        "times square",
+        "should"
+      ],
+      "successReply": "Great choice! Go early in the morning, it's beautiful.",
+      "retryReply": "So, what do you want to see in New York?"
+    },
+    {
+      "id": "thanks",
+      "titleTr": "Teşekkür edip bahşiş vermek",
+      "ask": "Here we are — the Hudson Hotel!",
+      "instruction": "They arrive. The guest thanks the driver and may give a tip.",
+      "hint": "Thank you, Mike! This is for you.",
+      "hintTr": "Teşekkürler Mike! Bu senin için.",
+      "keywords": [
+        "thank",
+        "thanks",
+        "tip",
+        "for you",
+        "great"
+      ],
+      "successReply": "Thank you! Enjoy New York!",
+      "retryReply": "Here we are! Anything else I can do for you?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "shared",
+      "titleTr": "Araç paylaşılıyor",
+      "intro": "Just so you know, we're picking up one more passenger on the way.",
+      "instruction": "The ride is shared. The guest agrees, asks how long it takes, or says they booked a private car.",
+      "retryReply": "It's just a short stop. Is that okay?",
+      "options": [
+        {
+          "text": "That's fine, no problem.",
+          "keywords": [
+            "fine",
+            "no problem",
+            "okay",
+            "ok"
+          ],
+          "reply": "Thanks! It's just five minutes away."
+        },
+        {
+          "text": "How much longer will it take?",
+          "keywords": [
+            "how much",
+            "longer",
+            "how long",
+            "take"
+          ],
+          "reply": "Only about ten minutes more."
+        },
+        {
+          "text": "I booked a private car, though.",
+          "keywords": [
+            "private",
+            "booked",
+            "though",
+            "only me"
+          ],
+          "reply": "Oh, you're right — sorry! Straight to the hotel then."
+        }
+      ]
+    },
+    {
+      "id": "accident",
+      "titleTr": "Otoyolda kaza var",
+      "intro": "Oh no, there's an accident on the highway. We'll take a different route.",
+      "instruction": "There is traffic because of an accident. The guest says it's okay, asks how long now, or asks for the fastest way.",
+      "retryReply": "Sorry about that. It might take a little longer.",
+      "options": [
+        {
+          "text": "That's okay, I'm not in a hurry.",
+          "keywords": [
+            "okay",
+            "ok",
+            "hurry",
+            "fine"
+          ],
+          "reply": "Great. Sit back and enjoy the skyline."
+        },
+        {
+          "text": "How long will it take now?",
+          "keywords": [
+            "how long",
+            "now",
+            "minutes",
+            "take"
+          ],
+          "reply": "Maybe twenty minutes more. Not too bad."
+        },
+        {
+          "text": "Is there a faster way?",
+          "keywords": [
+            "faster",
+            "quicker",
+            "fastest",
+            "way"
+          ],
+          "reply": "I'll take the bridge — it's usually quicker."
+        }
+      ]
+    },
+    {
+      "id": "big-bag",
+      "titleTr": "Bavul bagaja sığmıyor",
+      "intro": "Hmm, your suitcase doesn't fit in the trunk.",
+      "instruction": "The suitcase does not fit. The guest suggests the back seat, turning it, or holding a small bag.",
+      "retryReply": "Any ideas? It's a big one!",
+      "options": [
+        {
+          "text": "Can it go on the back seat?",
+          "keywords": [
+            "back seat",
+            "seat",
+            "back"
+          ],
+          "reply": "Good idea. It fits there."
+        },
+        {
+          "text": "Can you try it on its side?",
+          "keywords": [
+            "side",
+            "try",
+            "turn"
+          ],
+          "reply": "Let me see… Yes! It fits now."
+        },
+        {
+          "text": "I can hold the small bag in my lap.",
+          "keywords": [
+            "hold",
+            "small",
+            "lap",
+            "carry"
+          ],
+          "reply": "Thanks, that helps. Now it fits."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "luggage",
+      "pool": [
+        "shared",
+        "accident",
+        "big-bag"
+      ]
+    }
+  ],
+  "closing": "Have a great stay in the Big Apple!"
+}

@@ -23,9 +23,12 @@ class PlacementIT extends IntegrationTest {
         assertThat(r.body().path("score").asInt()).isEqualTo(96);
         assertThat(r.body().path("level").asText()).isEqualTo("Gold Traveller");
         assertThat(r.body().path("startDayApplied").asBoolean()).isTrue();
-        // Silver and Gold lessons are not out yet, so the journey still starts in week 1.
-        assertThat(r.body().path("startDay").asInt()).isEqualTo(1);
-        assertThat(getJson("/api/v1/me", token).body().path("journeyDay").asInt()).isEqualTo(1);
+        // Gold lessons are not out yet, so the journey starts at the latest week that has them: Silver.
+        assertThat(r.body().path("startDay").asInt()).isEqualTo(8);
+        var me = getJson("/api/v1/me", token).body();
+        assertThat(me.path("journeyDay").asInt()).isEqualTo(8);
+        assertThat(me.path("levelId").asText()).isEqualTo("SILVER");
+        assertThat(me.path("nextChapter").path("slug").asText()).isEqualTo("arrival-silver");
     }
 
     @Test

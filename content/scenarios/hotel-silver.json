@@ -1,0 +1,274 @@
+{
+  "slug": "hotel-silver",
+  "chapter": "hotel-silver",
+  "title": "Special requests",
+  "titleTr": "Özel istekler",
+  "role": "Front desk agent",
+  "setting": "Hudson Hotel, Manhattan · Front desk",
+  "voice": "en-US",
+  "persona": "You are a polite, efficient front desk agent at the Hudson Hotel in Manhattan. It is 10 a.m.; standard check-in is at 3 p.m. You try to help with every request.",
+  "briefTr": "Sabah 10'da otele vardın, rezervasyon {name} adına. Odaya erken girmek, manzaralı bir oda ve yarın sabah 7'de uyandırma servisi istiyorsun.",
+  "opening": "Good morning! Welcome to the Hudson. Are you checking in?",
+  "facts": [
+    {
+      "id": "room",
+      "values": [
+        "1408",
+        "2210",
+        "1712",
+        "906"
+      ],
+      "question": "What was your room number?",
+      "questionTr": "Oda numaran kaçtı?"
+    },
+    {
+      "id": "breakfast",
+      "values": [
+        "the lobby café",
+        "the second floor",
+        "the rooftop"
+      ],
+      "question": "Where was breakfast served?",
+      "questionTr": "Kahvaltı nerede veriliyordu?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "early",
+      "titleTr": "Erken giriş istemek",
+      "instruction": "The guest says they are checking in and asks if they can check in early.",
+      "hint": "Yes. Can I check in early?",
+      "hintTr": "Evet. Erken giriş yapabilir miyim?",
+      "keywords": [
+        "early",
+        "now",
+        "check in",
+        "yes",
+        "already"
+      ],
+      "successReply": "Let me see what I can do.",
+      "retryReply": "Are you checking in today? Standard check-in is at three."
+    },
+    {
+      "id": "view",
+      "titleTr": "Oda tercihini söylemek",
+      "ask": "Do you have any preference for your room?",
+      "instruction": "The guest asks for a room with a view, a high floor or a quiet room.",
+      "hint": "Could I have a room with a view?",
+      "hintTr": "Manzaralı bir oda alabilir miyim?",
+      "keywords": [
+        "view",
+        "quiet",
+        "high",
+        "floor",
+        "window",
+        "city"
+      ],
+      "successReply": "I'll do my best.",
+      "retryReply": "Any preference — a view, a quiet room, a high floor?"
+    },
+    {
+      "id": "breakfast",
+      "titleTr": "Kahvaltıyı sormak",
+      "ask": "Is there anything you'd like to know about the hotel?",
+      "instruction": "The guest asks where or when breakfast is served.",
+      "hint": "Where is breakfast served?",
+      "hintTr": "Kahvaltı nerede veriliyor?",
+      "keywords": [
+        "breakfast",
+        "where",
+        "what time",
+        "when",
+        "served"
+      ],
+      "successReply": "Breakfast is in {breakfast}, from six thirty to ten.",
+      "retryReply": "Would you like to know about breakfast?"
+    },
+    {
+      "id": "wake-up",
+      "titleTr": "Uyandırma servisi istemek",
+      "ask": "Would you like a wake-up call tomorrow?",
+      "instruction": "The guest asks for a wake-up call and gives a time.",
+      "hint": "Yes, please. At seven.",
+      "hintTr": "Evet, lütfen. Saat yedide.",
+      "keywords": [
+        "yes",
+        "no",
+        "seven",
+        "six",
+        "eight",
+        "am",
+        "a.m.",
+        "please",
+        "thanks"
+      ],
+      "successReply": "Wake-up call at seven, done.",
+      "retryReply": "Shall I set a wake-up call for you? What time?"
+    },
+    {
+      "id": "towels",
+      "titleTr": "Odaya ekstra bir şey istemek",
+      "ask": "Is there anything you need in your room?",
+      "instruction": "The guest asks for something extra for the room: towels, a pillow, a blanket, water.",
+      "hint": "Could I have some extra towels, please?",
+      "hintTr": "Ekstra havlu alabilir miyim, lütfen?",
+      "keywords": [
+        "towels",
+        "towel",
+        "pillow",
+        "blanket",
+        "extra",
+        "water"
+      ],
+      "successReply": "Of course, I'll send them up.",
+      "retryReply": "Is there anything you need in your room?"
+    },
+    {
+      "id": "late",
+      "titleTr": "Geç çıkış istemek",
+      "ask": "Check-out is at eleven on Sunday.",
+      "instruction": "The guest asks for a late check-out.",
+      "hint": "Could I have a late check-out?",
+      "hintTr": "Geç çıkış yapabilir miyim?",
+      "keywords": [
+        "late",
+        "later",
+        "check-out",
+        "check out",
+        "noon",
+        "one",
+        "two"
+      ],
+      "successReply": "Late check-out at one o'clock is fine.",
+      "retryReply": "Check-out is at eleven. Would that work for you?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "view-extra",
+      "titleTr": "Manzara ekstra ücretli",
+      "intro": "A room with a view is forty dollars extra per night.",
+      "instruction": "The view costs extra. The guest accepts, asks for something cheaper, or chooses a quiet room instead.",
+      "retryReply": "It's a beautiful view, but it's extra. What would you like?",
+      "options": [
+        {
+          "text": "That's fine, I'll take it.",
+          "keywords": [
+            "fine",
+            "take it",
+            "okay",
+            "ok"
+          ],
+          "reply": "Great choice — you'll see the park."
+        },
+        {
+          "text": "Is there a cheaper option?",
+          "keywords": [
+            "cheaper",
+            "less",
+            "option",
+            "discount"
+          ],
+          "reply": "I can do twenty dollars for a partial view."
+        },
+        {
+          "text": "Then a quiet room is fine.",
+          "keywords": [
+            "quiet",
+            "then",
+            "instead"
+          ],
+          "reply": "No problem, a quiet room on the twentieth floor."
+        }
+      ]
+    },
+    {
+      "id": "not-ready",
+      "titleTr": "Oda saat 3'e kadar hazır değil",
+      "intro": "I'm sorry, your room won't be ready until three p.m.",
+      "instruction": "The room is not ready yet. The guest asks to leave luggage, asks where to wait, or asks to be called.",
+      "retryReply": "I'm sorry for the wait. How can I help?",
+      "options": [
+        {
+          "text": "Can I leave my luggage here?",
+          "keywords": [
+            "luggage",
+            "bags",
+            "leave",
+            "suitcase"
+          ],
+          "reply": "Of course, our luggage storage is free."
+        },
+        {
+          "text": "Is there somewhere I can wait?",
+          "keywords": [
+            "somewhere",
+            "wait",
+            "lounge",
+            "sit"
+          ],
+          "reply": "Our lounge is right there — free coffee too."
+        },
+        {
+          "text": "Can you call me when it's ready?",
+          "keywords": [
+            "call",
+            "text",
+            "when",
+            "ready"
+          ],
+          "reply": "Sure, I'll text you as soon as it's ready."
+        }
+      ]
+    },
+    {
+      "id": "elevator",
+      "titleTr": "Odalar asansörün yanında",
+      "intro": "The only rooms left are next to the elevator. They can be a bit noisy.",
+      "instruction": "The room may be noisy. The guest accepts, asks for a quieter room, or asks for earplugs.",
+      "retryReply": "I understand. What would you prefer?",
+      "options": [
+        {
+          "text": "That's okay for me.",
+          "keywords": [
+            "okay",
+            "ok",
+            "fine",
+            "for me"
+          ],
+          "reply": "Great. Here's your key."
+        },
+        {
+          "text": "Do you have a quieter room?",
+          "keywords": [
+            "quieter",
+            "quiet",
+            "another",
+            "other"
+          ],
+          "reply": "Let me look… Yes, one on the other side."
+        },
+        {
+          "text": "Can I get earplugs, then?",
+          "keywords": [
+            "earplugs",
+            "plugs",
+            "ear"
+          ],
+          "reply": "Of course, I'll put some in your room."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "view",
+      "pool": [
+        "view-extra",
+        "not-ready",
+        "elevator"
+      ]
+    }
+  ],
+  "closing": "Here's your key — room {room}. Enjoy your stay in New York!"
+}

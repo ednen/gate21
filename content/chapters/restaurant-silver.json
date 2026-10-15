@@ -1,10 +1,8 @@
 {
   "slug": "restaurant-silver",
-  "draft": true,
   "mission": "Order with care: allergies and recommendations",
-  "missionTr": "Öneri iste, alerjini söyle, yemeğin nasıl pişeceğini seç, hesabı ayır",
-  "stamp": "TABLE FOR TWO",
-  "trip": "New York",
+  "missionTr": "Bir diner'da garsondan öneri iste, alerjini söyle, etin pişme derecesini ve garnitürü seç, hesabı ve bahşişi hallet",
+  "stamp": "DINER DONE",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
@@ -16,57 +14,213 @@
   "words": [
     {
       "en": "recommend",
-      "tr": "önermek"
+      "tr": "önermek",
+      "picture": "thumbs-up",
+      "example": "What do you recommend?",
+      "exampleTr": "Ne önerirsiniz?"
     },
     {
       "en": "allergic to",
-      "tr": "…e alerjisi olmak"
+      "tr": "…e alerjisi olmak",
+      "picture": "peanut",
+      "example": "I'm allergic to peanuts.",
+      "exampleTr": "Fıstığa alerjim var."
     },
     {
       "en": "gluten-free",
-      "tr": "glütensiz"
+      "tr": "glütensiz",
+      "picture": "wheat",
+      "example": "Do you have gluten-free bread?",
+      "exampleTr": "Glütensiz ekmeğiniz var mı?"
     },
     {
       "en": "spicy",
-      "tr": "acı"
+      "tr": "acı",
+      "picture": "chili",
+      "example": "Is it very spicy?",
+      "exampleTr": "Çok acı mı?"
     },
     {
       "en": "medium rare",
-      "tr": "az pişmiş (et)"
+      "tr": "az pişmiş (et)",
+      "picture": "steak",
+      "example": "Medium rare, please.",
+      "exampleTr": "Az pişmiş, lütfen."
     },
     {
       "en": "well done",
-      "tr": "iyi pişmiş"
+      "tr": "iyi pişmiş",
+      "picture": "fire",
+      "example": "I'd like it well done.",
+      "exampleTr": "İyi pişmiş olsun."
     },
     {
-      "en": "side dish",
-      "tr": "garnitür"
+      "en": "side",
+      "tr": "garnitür, yan yemek",
+      "picture": "fries",
+      "example": "Fries or salad on the side?",
+      "exampleTr": "Yanında patates mi salata mı?"
+    },
+    {
+      "en": "the check",
+      "tr": "hesap (ABD)",
+      "picture": "receipt",
+      "example": "Can we get the check, please?",
+      "exampleTr": "Hesabı alabilir miyiz, lütfen?"
     },
     {
       "en": "split the check",
-      "tr": "hesabı bölmek"
+      "tr": "hesabı bölmek",
+      "picture": "split",
+      "example": "Can we split the check?",
+      "exampleTr": "Hesabı bölebilir miyiz?"
     },
     {
       "en": "tip",
-      "tr": "bahşiş (ABD'de %15–20)"
+      "tr": "bahşiş",
+      "picture": "coins",
+      "example": "Is the tip included?",
+      "exampleTr": "Bahşiş dahil mi?"
     }
   ],
-  "scene": {
-    "role": "Server",
-    "setting": "Joe's Diner, Brooklyn · Lunch",
-    "goalsTr": [
-      "Garsondan yemek önerisi iste",
-      "Fıstık alerjin olduğunu söyle",
-      "Etin nasıl pişeceğini söyle (medium / well done)",
-      "Garnitür seç",
-      "Hesabı ikiye bölmek istediğini söyle",
-      "Bahşişin dahil olup olmadığını sor"
-    ],
-    "twistsTr": [
-      "Önerilen yemekte fıstık var",
-      "Mutfak glütensiz seçenek sunamıyor",
-      "Kart makinesi masaya gelemiyor, kasaya gitmen gerekiyor"
+  "pronounce": [
+    {
+      "word": "allergic",
+      "ipa": "/əˈlɝː.dʒɪk/",
+      "stress": "uh-LUR-jik",
+      "tipTr": "\"Alerjik\" değil: ı-LÖR-cik, vurgu ikinci hecede."
+    },
+    {
+      "word": "recommend",
+      "ipa": "/ˌrek.əˈmend/",
+      "stress": "rek-uh-MEND",
+      "tipTr": "Vurgu sonda: rek-ı-MEND."
+    },
+    {
+      "word": "gluten",
+      "ipa": "/ˈɡluː.tən/",
+      "stress": "GLOO-tun",
+      "tipTr": "\"Glüten\" değil: GLUU-tın."
+    }
+  ],
+  "match": [
+    "allergic to",
+    "gluten-free",
+    "spicy",
+    "medium rare",
+    "side",
+    "split the check"
+  ],
+  "recognize": [
+    {
+      "audio": "How would you like your burger cooked?",
+      "prompt": "Listen. What is the server asking?",
+      "options": [
+        "How you want your burger cooked",
+        "What you want to drink",
+        "If you want dessert"
+      ],
+      "answer": 0,
+      "explainTr": "\"How would you like it cooked?\" = Nasıl pişsin? Cevap: rare, medium, well done."
+    },
+    {
+      "prompt": "In the US, a normal tip at a restaurant is about…",
+      "options": [
+        "15–20%",
+        "0%",
+        "50%"
+      ],
+      "answer": 0,
+      "explainTr": "ABD'de bahşiş genellikle hesabın %15–20'si kadardır ve çoğu zaman hesaba dahil değildir."
+    },
+    {
+      "audio": "Would you like fries or a salad on the side?",
+      "prompt": "Listen. What can you choose?",
+      "options": [
+        "Fries or a salad",
+        "Water or soda",
+        "Cash or card"
+      ],
+      "answer": 0,
+      "explainTr": "\"On the side\" = yanında, garnitür olarak."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Diner'da",
+    "lines": [
+      {
+        "who": "Server",
+        "text": "Hi there! What can I get you?"
+      },
+      {
+        "who": "You",
+        "text": "What do you ___?",
+        "gap": "recommend",
+        "options": [
+          "recommend",
+          "remember",
+          "receive"
+        ]
+      },
+      {
+        "who": "Server",
+        "text": "The burger is great today."
+      },
+      {
+        "who": "You",
+        "text": "Okay. But I'm ___ to peanuts.",
+        "gap": "allergic",
+        "options": [
+          "allergic",
+          "spicy",
+          "medium"
+        ]
+      },
+      {
+        "who": "Server",
+        "text": "No problem, there are no peanuts in it. How would you like it cooked?"
+      },
+      {
+        "who": "You",
+        "text": "Medium ___, please.",
+        "gap": "rare",
+        "options": [
+          "rare",
+          "done",
+          "side"
+        ]
+      },
+      {
+        "who": "Server",
+        "text": "And on the ___ — fries or salad?",
+        "gap": "side",
+        "options": [
+          "side",
+          "check",
+          "tip"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Fries, please."
+      },
+      {
+        "who": "You",
+        "text": "Can we get the ___, please?",
+        "gap": "check",
+        "options": [
+          "check",
+          "chicken",
+          "cheek"
+        ]
+      },
+      {
+        "who": "Server",
+        "text": "Sure! Here you go."
+      }
     ]
   },
-  "notesTr": "ABD'de bahşiş kültürü ve \"check\" kelimesi bu derste."
+  "survive": {
+    "scenario": "restaurant-silver"
+  }
 }

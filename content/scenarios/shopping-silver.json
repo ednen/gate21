@@ -1,0 +1,262 @@
+{
+  "slug": "shopping-silver",
+  "chapter": "shopping-silver",
+  "title": "Gifts on Fifth Avenue",
+  "titleTr": "Beşinci Cadde'de hediyelik",
+  "role": "Sales assistant",
+  "setting": "Gift shop · Fifth Avenue",
+  "voice": "en-US",
+  "persona": "You are a friendly sales assistant at a souvenir and gift shop on Fifth Avenue in New York. Prices on the shelf do not include sales tax. You can ship parcels abroad.",
+  "briefTr": "Annene New York'tan bir hediye almak istiyorsun. Kırılabilecek bir şey olursa dikkatli paketlenmesini isteyeceksin.",
+  "opening": "Hi! Looking for anything special today?",
+  "facts": [
+    {
+      "id": "price",
+      "values": [
+        "$18",
+        "$24",
+        "$15"
+      ],
+      "question": "How much was the gift before tax?",
+      "questionTr": "Hediye vergisiz ne kadardı?"
+    },
+    {
+      "id": "days",
+      "values": [
+        "30",
+        "14",
+        "60"
+      ],
+      "question": "How many days did you have to exchange it?",
+      "questionTr": "Kaç gün içinde değiştirebilirdin?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "gift",
+      "titleTr": "Ne aradığını söylemek",
+      "instruction": "The customer says what they are looking for, like a gift or souvenir for someone.",
+      "hint": "I'm looking for a gift for my mother.",
+      "hintTr": "Annem için bir hediye arıyorum.",
+      "keywords": [
+        "gift",
+        "present",
+        "mother",
+        "souvenir",
+        "looking",
+        "mom",
+        "for"
+      ],
+      "successReply": "Lovely! These mugs are very popular.",
+      "retryReply": "Are you shopping for yourself or for someone else?"
+    },
+    {
+      "id": "price",
+      "titleTr": "Fiyatı sormak",
+      "ask": "This one says New York in gold. Isn't it nice?",
+      "instruction": "The customer asks the price.",
+      "hint": "How much is this mug?",
+      "hintTr": "Bu kupa ne kadar?",
+      "keywords": [
+        "how much",
+        "price",
+        "cost"
+      ],
+      "successReply": "It's {price}.",
+      "retryReply": "Would you like to know the price?"
+    },
+    {
+      "id": "tax",
+      "titleTr": "Verginin dahil olup olmadığını sormak",
+      "ask": "Great price for a souvenir, right?",
+      "instruction": "The customer asks whether tax is included or asks for the total.",
+      "hint": "Is tax included?",
+      "hintTr": "Vergi dahil mi?",
+      "keywords": [
+        "tax",
+        "included",
+        "total",
+        "with"
+      ],
+      "successReply": "No, sales tax is added at the register — about nine percent.",
+      "retryReply": "Anything else you want to know about the price?"
+    },
+    {
+      "id": "wrap",
+      "titleTr": "Hediye paketi istemek",
+      "ask": "Great choice! Anything else?",
+      "instruction": "The customer asks for gift wrapping.",
+      "hint": "Could you gift wrap it, please?",
+      "hintTr": "Hediye paketi yapabilir misiniz, lütfen?",
+      "keywords": [
+        "wrap",
+        "gift",
+        "box",
+        "bag",
+        "paper"
+      ],
+      "successReply": "Of course.",
+      "retryReply": "Is it a gift? I can wrap it."
+    },
+    {
+      "id": "fragile",
+      "titleTr": "Kırılgan olduğunu söylemek",
+      "ask": "It's going in your suitcase, right?",
+      "instruction": "The customer says it is fragile and asks for careful packing.",
+      "hint": "It's fragile. Can you pack it carefully?",
+      "hintTr": "Kırılgan. Dikkatli paketleyebilir misiniz?",
+      "keywords": [
+        "fragile",
+        "careful",
+        "carefully",
+        "break",
+        "bubble"
+      ],
+      "successReply": "Sure, I'll add bubble wrap.",
+      "retryReply": "Will it travel far? Should I pack it extra carefully?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemek ve fiş istemek",
+      "ask": "How would you like to pay?",
+      "instruction": "The customer pays and asks for a receipt.",
+      "hint": "By card, please. Can I have the receipt?",
+      "hintTr": "Kartla, lütfen. Fişi alabilir miyim?",
+      "keywords": [
+        "card",
+        "cash",
+        "receipt",
+        "phone",
+        "pay"
+      ],
+      "successReply": "Here's your receipt.",
+      "retryReply": "How would you like to pay?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "last-one",
+      "titleTr": "Son ürün",
+      "intro": "This is the last one in blue, actually.",
+      "instruction": "Only one is left. The customer takes it, asks for another colour, or asks to check it first.",
+      "retryReply": "Do you want it anyway?",
+      "options": [
+        {
+          "text": "That's fine, I'll take it.",
+          "keywords": [
+            "take it",
+            "fine",
+            "okay"
+          ],
+          "reply": "Great, it's yours."
+        },
+        {
+          "text": "Do you have it in another color?",
+          "keywords": [
+            "another",
+            "color",
+            "colour",
+            "red",
+            "white"
+          ],
+          "reply": "Yes, there's a white one with red letters."
+        },
+        {
+          "text": "Can I check it first?",
+          "keywords": [
+            "check",
+            "look",
+            "see",
+            "first"
+          ],
+          "reply": "Of course, here you go. It's perfect."
+        }
+      ]
+    },
+    {
+      "id": "ship-home",
+      "titleTr": "Kargo öneriyor",
+      "intro": "If you don't want to carry it, we can ship it home for you.",
+      "instruction": "The shop offers shipping. The customer asks if they ship to Turkey, asks the cost, or says they will carry it.",
+      "retryReply": "Lots of tourists ship their gifts. Interested?",
+      "options": [
+        {
+          "text": "Do you ship to Turkey?",
+          "keywords": [
+            "turkey",
+            "ship to"
+          ],
+          "reply": "Yes, we ship worldwide. Just fill in a short form."
+        },
+        {
+          "text": "How much is shipping?",
+          "keywords": [
+            "how much",
+            "shipping",
+            "cost"
+          ],
+          "reply": "About twenty dollars to Europe or Turkey."
+        },
+        {
+          "text": "No thanks, I'll carry it.",
+          "keywords": [
+            "carry",
+            "no thanks",
+            "myself"
+          ],
+          "reply": "No problem, I'll pack it well."
+        }
+      ]
+    },
+    {
+      "id": "wrap-cost",
+      "titleTr": "Hediye paketi ücretli",
+      "intro": "Gift wrapping is three dollars, by the way.",
+      "instruction": "Gift wrap costs extra. The customer accepts, asks for a free gift bag, or says no.",
+      "retryReply": "Would you still like it wrapped?",
+      "options": [
+        {
+          "text": "That's fine.",
+          "keywords": [
+            "fine",
+            "okay",
+            "sure"
+          ],
+          "reply": "Great, I'll wrap it."
+        },
+        {
+          "text": "Can I just have a gift bag?",
+          "keywords": [
+            "bag",
+            "just"
+          ],
+          "reply": "Sure, the gift bag is free."
+        },
+        {
+          "text": "No thanks, I'll wrap it myself.",
+          "keywords": [
+            "myself",
+            "no thanks"
+          ],
+          "reply": "No problem."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "tax",
+      "pool": [
+        "last-one",
+        "ship-home"
+      ]
+    },
+    {
+      "after": "wrap",
+      "pool": [
+        "wrap-cost"
+      ]
+    }
+  ],
+  "closing": "You can exchange it within {days} days. Have a great time in New York!"
+}

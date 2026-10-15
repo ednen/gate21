@@ -1,5 +1,5 @@
 {
-  "version": "2026.10.3",
+  "version": "2026.10.4",
   "freeDays": 2,
   "levels": [
     {
@@ -51,45 +51,380 @@
     ]
   },
   "stops": [
-    { "slug": "arrival", "order": 1, "title": "Arrival", "titleTr": "Varış ve pasaport kontrolü", "icon": "passport" },
-    { "slug": "transfer", "order": 2, "title": "Transfer", "titleTr": "Otele transfer", "icon": "car" },
-    { "slug": "hotel", "order": 3, "title": "Hotel", "titleTr": "Otel", "icon": "bed" },
-    { "slug": "restaurant", "order": 4, "title": "Lunch", "titleTr": "Restoranda öğle yemeği", "icon": "utensils" },
-    { "slug": "cafe", "order": 5, "title": "Coffee", "titleTr": "Kafede kahve", "icon": "coffee" },
-    { "slug": "shopping", "order": 6, "title": "Shopping", "titleTr": "Kıyafet ve hediye alışverişi", "icon": "bag" },
-    { "slug": "transport", "order": 7, "title": "Getting Around", "titleTr": "Toplu taşıma ve yol tarifi", "icon": "train" }
+    {
+      "slug": "arrival",
+      "order": 1,
+      "title": "Arrival",
+      "titleTr": "Varış ve pasaport kontrolü",
+      "icon": "passport"
+    },
+    {
+      "slug": "transfer",
+      "order": 2,
+      "title": "Transfer",
+      "titleTr": "Otele transfer",
+      "icon": "car"
+    },
+    {
+      "slug": "hotel",
+      "order": 3,
+      "title": "Hotel",
+      "titleTr": "Otel",
+      "icon": "bed"
+    },
+    {
+      "slug": "restaurant",
+      "order": 4,
+      "title": "Lunch",
+      "titleTr": "Restoranda öğle yemeği",
+      "icon": "utensils"
+    },
+    {
+      "slug": "cafe",
+      "order": 5,
+      "title": "Coffee",
+      "titleTr": "Kafede kahve",
+      "icon": "coffee"
+    },
+    {
+      "slug": "shopping",
+      "order": 6,
+      "title": "Shopping",
+      "titleTr": "Kıyafet ve hediye alışverişi",
+      "icon": "bag"
+    },
+    {
+      "slug": "transport",
+      "order": 7,
+      "title": "Getting Around",
+      "titleTr": "Toplu taşıma ve yol tarifi",
+      "icon": "train"
+    }
   ],
   "chapters": [
-    { "slug": "starter-alphabet", "kind": "starter", "stop": null, "week": 0, "day": 0, "order": 1, "title": "The alphabet", "titleTr": "Alfabe", "icon": "abc", "available": true },
-    { "slug": "starter-numbers", "kind": "starter", "stop": null, "week": 0, "day": 0, "order": 2, "title": "Numbers", "titleTr": "Sayılar", "icon": "hash", "available": true },
-    { "slug": "starter-spelling", "kind": "starter", "stop": null, "week": 0, "day": 0, "order": 3, "title": "Spelling", "titleTr": "Kodlama (harf harf söyleme)", "icon": "edit", "available": true },
-    { "slug": "starter-people", "kind": "starter", "stop": null, "week": 0, "day": 0, "order": 4, "title": "I, you, we", "titleTr": "Ben, sen, biz (zamirler)", "icon": "people", "available": true },
-    { "slug": "starter-basics", "kind": "starter", "stop": null, "week": 0, "day": 0, "order": 5, "title": "First words", "titleTr": "İlk kelimeler", "icon": "chat", "available": true },
-
-    { "slug": "arrival-bronze", "kind": "lesson", "stop": "arrival", "week": 1, "day": 1, "order": 11, "title": "Passport control", "titleTr": "Pasaport kontrolü", "icon": "passport", "available": true },
-    { "slug": "transfer-bronze", "kind": "lesson", "stop": "transfer", "week": 1, "day": 2, "order": 12, "title": "Taxi to the hotel", "titleTr": "Otele taksiyle", "icon": "car", "available": true },
-    { "slug": "hotel-bronze", "kind": "lesson", "stop": "hotel", "week": 1, "day": 3, "order": 13, "title": "Check-in", "titleTr": "Otele giriş", "icon": "bed", "available": true },
-    { "slug": "restaurant-bronze", "kind": "lesson", "stop": "restaurant", "week": 1, "day": 4, "order": 14, "title": "Lunch", "titleTr": "Öğle yemeği", "icon": "utensils", "available": true },
-    { "slug": "cafe-bronze", "kind": "lesson", "stop": "cafe", "week": 1, "day": 5, "order": 15, "title": "Your coffee", "titleTr": "Kahve siparişi", "icon": "coffee", "available": true },
-    { "slug": "shopping-bronze", "kind": "lesson", "stop": "shopping", "week": 1, "day": 6, "order": 16, "title": "Clothes", "titleTr": "Kıyafet almak", "icon": "bag", "available": true },
-    { "slug": "transport-bronze", "kind": "lesson", "stop": "transport", "week": 1, "day": 7, "order": 17, "title": "Buying a ticket", "titleTr": "Bilet almak", "icon": "train", "available": true },
-
-    { "slug": "arrival-silver", "kind": "lesson", "stop": "arrival", "week": 2, "day": 8, "order": 21, "title": "Talking to the officer", "titleTr": "Memurla sohbet", "icon": "passport", "available": false },
-    { "slug": "transfer-silver", "kind": "lesson", "stop": "transfer", "week": 2, "day": 9, "order": 22, "title": "Meeting your driver", "titleTr": "Transfer şoförüyle buluşma", "icon": "car", "available": false },
-    { "slug": "hotel-silver", "kind": "lesson", "stop": "hotel", "week": 2, "day": 10, "order": 23, "title": "Special requests", "titleTr": "Özel istekler", "icon": "bed", "available": false },
-    { "slug": "restaurant-silver", "kind": "lesson", "stop": "restaurant", "week": 2, "day": 11, "order": 24, "title": "Ordering with care", "titleTr": "Özenli sipariş", "icon": "utensils", "available": false },
-    { "slug": "cafe-silver", "kind": "lesson", "stop": "cafe", "week": 2, "day": 12, "order": 25, "title": "Just how you like it", "titleTr": "Tam istediğin gibi", "icon": "coffee", "available": false },
-    { "slug": "shopping-silver", "kind": "lesson", "stop": "shopping", "week": 2, "day": 13, "order": 26, "title": "Gifts & souvenirs", "titleTr": "Hediyelik eşya", "icon": "bag", "available": false },
-    { "slug": "transport-silver", "kind": "lesson", "stop": "transport", "week": 2, "day": 14, "order": 27, "title": "Changing lines", "titleTr": "Aktarma yapmak", "icon": "train", "available": false },
-
-    { "slug": "arrival-gold", "kind": "lesson", "stop": "arrival", "week": 3, "day": 15, "order": 31, "title": "Lost luggage", "titleTr": "Kayıp bagaj", "icon": "passport", "available": false },
-    { "slug": "transfer-gold", "kind": "lesson", "stop": "transfer", "week": 3, "day": 16, "order": 32, "title": "Trouble on the road", "titleTr": "Yolda sorunlar", "icon": "car", "available": false },
-    { "slug": "hotel-gold", "kind": "lesson", "stop": "hotel", "week": 3, "day": 17, "order": 33, "title": "Problems with the room", "titleTr": "Odada sorun", "icon": "bed", "available": false },
-    { "slug": "restaurant-gold", "kind": "lesson", "stop": "restaurant", "week": 3, "day": 18, "order": 34, "title": "Something's wrong", "titleTr": "Bir sorun var", "icon": "utensils", "available": false },
-    { "slug": "cafe-gold", "kind": "lesson", "stop": "cafe", "week": 3, "day": 19, "order": 35, "title": "Mix-ups and small talk", "titleTr": "Karışıklıklar ve sohbet", "icon": "coffee", "available": false },
-    { "slug": "shopping-gold", "kind": "lesson", "stop": "shopping", "week": 3, "day": 20, "order": 36, "title": "Returns & bargaining", "titleTr": "İade ve pazarlık", "icon": "bag", "available": false },
-    { "slug": "transport-gold", "kind": "lesson", "stop": "transport", "week": 3, "day": 21, "order": 37, "title": "Lost in the city", "titleTr": "Şehirde kaybolmak", "icon": "train", "available": false },
-
-    { "slug": "full-trip", "kind": "simulation", "stop": null, "week": 3, "day": 21, "order": 40, "title": "Full Trip", "titleTr": "Bütün yolculuk", "icon": "globe", "available": true }
+    {
+      "slug": "starter-alphabet",
+      "kind": "starter",
+      "stop": null,
+      "week": 0,
+      "day": 0,
+      "order": 1,
+      "title": "The alphabet",
+      "titleTr": "Alfabe",
+      "icon": "abc",
+      "available": true
+    },
+    {
+      "slug": "starter-numbers",
+      "kind": "starter",
+      "stop": null,
+      "week": 0,
+      "day": 0,
+      "order": 2,
+      "title": "Numbers",
+      "titleTr": "Sayılar",
+      "icon": "hash",
+      "available": true
+    },
+    {
+      "slug": "starter-spelling",
+      "kind": "starter",
+      "stop": null,
+      "week": 0,
+      "day": 0,
+      "order": 3,
+      "title": "Spelling",
+      "titleTr": "Kodlama (harf harf söyleme)",
+      "icon": "edit",
+      "available": true
+    },
+    {
+      "slug": "starter-people",
+      "kind": "starter",
+      "stop": null,
+      "week": 0,
+      "day": 0,
+      "order": 4,
+      "title": "I, you, we",
+      "titleTr": "Ben, sen, biz (zamirler)",
+      "icon": "people",
+      "available": true
+    },
+    {
+      "slug": "starter-basics",
+      "kind": "starter",
+      "stop": null,
+      "week": 0,
+      "day": 0,
+      "order": 5,
+      "title": "First words",
+      "titleTr": "İlk kelimeler",
+      "icon": "chat",
+      "available": true
+    },
+    {
+      "slug": "arrival-bronze",
+      "kind": "lesson",
+      "stop": "arrival",
+      "week": 1,
+      "day": 1,
+      "order": 11,
+      "title": "Passport control",
+      "titleTr": "Pasaport kontrolü",
+      "icon": "passport",
+      "available": true
+    },
+    {
+      "slug": "transfer-bronze",
+      "kind": "lesson",
+      "stop": "transfer",
+      "week": 1,
+      "day": 2,
+      "order": 12,
+      "title": "Taxi to the hotel",
+      "titleTr": "Otele taksiyle",
+      "icon": "car",
+      "available": true
+    },
+    {
+      "slug": "hotel-bronze",
+      "kind": "lesson",
+      "stop": "hotel",
+      "week": 1,
+      "day": 3,
+      "order": 13,
+      "title": "Check-in",
+      "titleTr": "Otele giriş",
+      "icon": "bed",
+      "available": true
+    },
+    {
+      "slug": "restaurant-bronze",
+      "kind": "lesson",
+      "stop": "restaurant",
+      "week": 1,
+      "day": 4,
+      "order": 14,
+      "title": "Lunch",
+      "titleTr": "Öğle yemeği",
+      "icon": "utensils",
+      "available": true
+    },
+    {
+      "slug": "cafe-bronze",
+      "kind": "lesson",
+      "stop": "cafe",
+      "week": 1,
+      "day": 5,
+      "order": 15,
+      "title": "Your coffee",
+      "titleTr": "Kahve siparişi",
+      "icon": "coffee",
+      "available": true
+    },
+    {
+      "slug": "shopping-bronze",
+      "kind": "lesson",
+      "stop": "shopping",
+      "week": 1,
+      "day": 6,
+      "order": 16,
+      "title": "Clothes",
+      "titleTr": "Kıyafet almak",
+      "icon": "bag",
+      "available": true
+    },
+    {
+      "slug": "transport-bronze",
+      "kind": "lesson",
+      "stop": "transport",
+      "week": 1,
+      "day": 7,
+      "order": 17,
+      "title": "Buying a ticket",
+      "titleTr": "Bilet almak",
+      "icon": "train",
+      "available": true
+    },
+    {
+      "slug": "arrival-silver",
+      "kind": "lesson",
+      "stop": "arrival",
+      "week": 2,
+      "day": 8,
+      "order": 21,
+      "title": "Talking to the officer",
+      "titleTr": "Memurla sohbet",
+      "icon": "passport",
+      "available": true
+    },
+    {
+      "slug": "transfer-silver",
+      "kind": "lesson",
+      "stop": "transfer",
+      "week": 2,
+      "day": 9,
+      "order": 22,
+      "title": "Meeting your driver",
+      "titleTr": "Transfer şoförüyle buluşma",
+      "icon": "car",
+      "available": true
+    },
+    {
+      "slug": "hotel-silver",
+      "kind": "lesson",
+      "stop": "hotel",
+      "week": 2,
+      "day": 10,
+      "order": 23,
+      "title": "Special requests",
+      "titleTr": "Özel istekler",
+      "icon": "bed",
+      "available": true
+    },
+    {
+      "slug": "restaurant-silver",
+      "kind": "lesson",
+      "stop": "restaurant",
+      "week": 2,
+      "day": 11,
+      "order": 24,
+      "title": "Ordering with care",
+      "titleTr": "Özenli sipariş",
+      "icon": "utensils",
+      "available": true
+    },
+    {
+      "slug": "cafe-silver",
+      "kind": "lesson",
+      "stop": "cafe",
+      "week": 2,
+      "day": 12,
+      "order": 25,
+      "title": "Just how you like it",
+      "titleTr": "Tam istediğin gibi",
+      "icon": "coffee",
+      "available": true
+    },
+    {
+      "slug": "shopping-silver",
+      "kind": "lesson",
+      "stop": "shopping",
+      "week": 2,
+      "day": 13,
+      "order": 26,
+      "title": "Gifts & souvenirs",
+      "titleTr": "Hediyelik eşya",
+      "icon": "bag",
+      "available": true
+    },
+    {
+      "slug": "transport-silver",
+      "kind": "lesson",
+      "stop": "transport",
+      "week": 2,
+      "day": 14,
+      "order": 27,
+      "title": "Changing lines",
+      "titleTr": "Aktarma yapmak",
+      "icon": "train",
+      "available": true
+    },
+    {
+      "slug": "arrival-gold",
+      "kind": "lesson",
+      "stop": "arrival",
+      "week": 3,
+      "day": 15,
+      "order": 31,
+      "title": "Lost luggage",
+      "titleTr": "Kayıp bagaj",
+      "icon": "passport",
+      "available": false
+    },
+    {
+      "slug": "transfer-gold",
+      "kind": "lesson",
+      "stop": "transfer",
+      "week": 3,
+      "day": 16,
+      "order": 32,
+      "title": "Trouble on the road",
+      "titleTr": "Yolda sorunlar",
+      "icon": "car",
+      "available": false
+    },
+    {
+      "slug": "hotel-gold",
+      "kind": "lesson",
+      "stop": "hotel",
+      "week": 3,
+      "day": 17,
+      "order": 33,
+      "title": "Problems with the room",
+      "titleTr": "Odada sorun",
+      "icon": "bed",
+      "available": false
+    },
+    {
+      "slug": "restaurant-gold",
+      "kind": "lesson",
+      "stop": "restaurant",
+      "week": 3,
+      "day": 18,
+      "order": 34,
+      "title": "Something's wrong",
+      "titleTr": "Bir sorun var",
+      "icon": "utensils",
+      "available": false
+    },
+    {
+      "slug": "cafe-gold",
+      "kind": "lesson",
+      "stop": "cafe",
+      "week": 3,
+      "day": 19,
+      "order": 35,
+      "title": "Mix-ups and small talk",
+      "titleTr": "Karışıklıklar ve sohbet",
+      "icon": "coffee",
+      "available": false
+    },
+    {
+      "slug": "shopping-gold",
+      "kind": "lesson",
+      "stop": "shopping",
+      "week": 3,
+      "day": 20,
+      "order": 36,
+      "title": "Returns & bargaining",
+      "titleTr": "İade ve pazarlık",
+      "icon": "bag",
+      "available": false
+    },
+    {
+      "slug": "transport-gold",
+      "kind": "lesson",
+      "stop": "transport",
+      "week": 3,
+      "day": 21,
+      "order": 37,
+      "title": "Lost in the city",
+      "titleTr": "Şehirde kaybolmak",
+      "icon": "train",
+      "available": false
+    },
+    {
+      "slug": "full-trip",
+      "kind": "simulation",
+      "stop": null,
+      "week": 3,
+      "day": 21,
+      "order": 40,
+      "title": "Full Trip",
+      "titleTr": "Bütün yolculuk",
+      "icon": "globe",
+      "available": true
+    }
   ]
 }

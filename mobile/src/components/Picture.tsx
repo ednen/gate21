@@ -211,6 +211,379 @@ const DRAWINGS: Record<string, ReactNode> = {
       <P d="M40 30c2 2 4 5 4 8" w={2} />
     </>
   ),
+  // ---- week 2 · New York ----------------------------------------------------------------
+  fingerprint: (
+    <>
+      <P d="M32 8a20 20 0 0 1 20 20v8M12 36v-8A20 20 0 0 1 22 10.7" />
+      <P d="M32 16a12 12 0 0 1 12 12v10c0 8-3 14-7 18M20 28a12 12 0 0 1 6-10.4" />
+      <P d="M32 24a4 4 0 0 1 4 4v10c0 6-2 11-5 15M28 28v8c0 6-2 10-5 14M20 36v4c0 4-1 8-3 11" />
+    </>
+  ),
+  scanner: (
+    <>
+      <Rc x={8} y={30} w={48} h={24} r={4} fill={colors.inkLine} />
+      <Rc x={14} y={34} w={36} h={12} r={2} fill="#9CC4F0" />
+      <P d="M18 30V14a3 3 0 0 1 6 0v16M26 30V10a3 3 0 0 1 6 0v20M34 30V12a3 3 0 0 1 6 0v18M42 30V18a3 3 0 0 1 6 0v12" fill={Y} />
+    </>
+  ),
+  nervous: (
+    <>
+      <Ci x={30} y={34} r={22} fill={Y} />
+      <P d="M20 30h6M36 30h6M22 44c3-3 5 3 8 0s5 3 8 0" />
+      <P d="M52 10c-3 5-5 8-2 11s6-1 2-11z" fill="#9CC4F0" w={2} />
+    </>
+  ),
+  sweat: (
+    <>
+      <P d="M18 58V30l-6-8a3 3 0 0 1 5-3l6 7V12a3 3 0 0 1 6 0v12V8a3 3 0 0 1 6 0v16V12a3 3 0 0 1 6 0v28c0 10-6 18-14 18z" fill={Y} />
+      <P d="M52 18c-3 5-4 8-1 10s6-1 1-10zM54 38c-2 4-3 6-1 8s4-1 1-8z" fill="#9CC4F0" w={2} />
+    </>
+  ),
+  first: (
+    <>
+      <P d="M22 40l-6 18 10-4 6 8 4-16zM42 40l6 18-10-4-6 8-4-16z" fill={R} />
+      <Ci x={32} y={26} r={18} fill={Y} />
+      <T x={32} y={31} size={14}>1st</T>
+    </>
+  ),
+  skyline: (
+    <>
+      <P d="M4 56V36h8V24h6v32M18 56V16h10v40M28 56V8l4-4 4 4v48M36 56V20h10v36M46 56V30h12v26" fill={W} />
+      <P d="M2 56h60" />
+      {[22, 30, 38].map((y) => <Ln key={y} x1={22} y1={y} x2={24} y2={y} w={2} />)}
+      {[16, 24, 32, 40].map((y) => <Ln key={y} x1={32} y1={y} x2={32} y2={y + 2} w={2} />)}
+    </>
+  ),
+  customs: (
+    <>
+      <Rc x={6} y={26} w={34} h={26} r={4} fill={Y} />
+      <P d="M16 26v-6h14v6" />
+      <Ci x={44} y={22} r={10} fill={W} />
+      <P d="M51 29l8 8" w={4} />
+    </>
+  ),
+  'green-channel': (
+    <>
+      <Rc x={4} y={14} w={56} h={36} r={4} fill={GR} />
+      <T x={32} y={30} size={8} fill={W}>NOTHING TO</T>
+      <T x={32} y={42} size={8} fill={W}>DECLARE</T>
+    </>
+  ),
+  driver: (
+    <>
+      <Person x={32} y={6} fill={INK} />
+      <P d="M22 18h20l-3-7H25z" fill={INK} />
+      <Ln x1={20} y1={18} x2={44} y2={18} w={3} />
+      <Ci x={32} y={52} r={8} fill="none" />
+    </>
+  ),
+  'name-sign': (
+    <>
+      <Rc x={6} y={14} w={52} h={26} r={3} fill={W} />
+      <T x={32} y={31} size={12}>OZAN</T>
+      <P d="M18 40v18M46 40v18" />
+    </>
+  ),
+  arrivals: (
+    <>
+      <Rc x={4} y={16} w={56} h={32} r={4} fill={Y} />
+      <P d="M12 38l26-6 4 4-6 2" w={2} fill="none" />
+      <P d="M12 38l6-10 4 1-2 7" w={2} />
+      <T x={42} y={30} size={8}>ARR</T>
+    </>
+  ),
+  car: (
+    <>
+      <P d="M6 42v-8l6-12h40l6 12v8z" fill={B} />
+      <P d="M14 32l4-8h28l4 8z" fill="#DCEBF7" />
+      <Ci x={18} y={44} r={5} fill={INK} />
+      <Ci x={46} y={44} r={5} fill={INK} />
+    </>
+  ),
+  trunk: (
+    <>
+      <P d="M6 46v-10l8-12h20v-4l20-8 4 8-14 6v20z" fill={B} />
+      <Rc x={36} y={30} w={14} h={12} r={2} fill={Y} />
+      <Ci x={16} y={48} r={5} fill={INK} />
+      <Ci x={44} y={48} r={5} fill={INK} />
+    </>
+  ),
+  seatbelt: (
+    <>
+      <P d="M16 8h16a4 4 0 0 1 4 4v30H20a4 4 0 0 1-4-4z" fill={colors.inkLine} />
+      <P d="M20 42h28a4 4 0 0 1 4 4v4H20z" fill={colors.inkLine} />
+      <Path d="M34 12 18 46" stroke={R} strokeWidth={6} strokeLinecap="round" />
+      <Rc x={14} y={42} w={10} h={8} r={2} fill={W} />
+    </>
+  ),
+  highway: (
+    <>
+      <P d="M24 6 8 58h48L40 6z" fill={colors.inkLine} />
+      <Path d="M32 10v8M32 26v8M32 42v10" stroke={Y} strokeWidth={3} strokeLinecap="round" />
+    </>
+  ),
+  // ---- hotel requests ---------------------------------------------------------------------
+  view: (
+    <>
+      <Rc x={8} y={8} w={48} h={44} r={3} fill="#DCEBF7" />
+      <P d="M12 48V36h6v-6h6v18M26 48V24h8v24M36 48V32h6v16M44 48V28h8v20" fill={W} w={2} />
+      <Ln x1={32} y1={8} x2={32} y2={52} />
+      <P d="M4 56h56" />
+    </>
+  ),
+  quiet: (
+    <>
+      <P d="M40 8a20 20 0 1 0 16 30A18 18 0 0 1 40 8z" fill={Y} />
+      <T x={20} y={24} size={11}>Z</T>
+      <T x={12} y={14} size={8}>z</T>
+    </>
+  ),
+  towels: (
+    <>
+      <Rc x={10} y={34} w={44} h={10} r={3} fill={W} />
+      <Rc x={12} y={24} w={40} h={10} r={3} fill="#9CC4F0" />
+      <Rc x={14} y={14} w={36} h={10} r={3} fill={Y} />
+      <Rc x={8} y={44} w={48} h={10} r={3} fill={W} />
+    </>
+  ),
+  alarm: (
+    <>
+      <Ci x={32} y={34} r={20} fill={W} />
+      <P d="M32 22v12l8 4" />
+      <P d="M10 18l8-8M54 18l-8-8M20 56l-4 4M44 56l4 4" />
+    </>
+  ),
+  safe: (
+    <>
+      <Rc x={8} y={8} w={48} h={46} r={4} fill={colors.inkLine} />
+      <Rc x={14} y={14} w={36} h={34} r={2} fill={colors.line} />
+      <Ci x={30} y={31} r={8} fill={W} />
+      <P d="M30 25v6h5" w={2} />
+      <Rc x={42} y={26} w={4} h={10} r={1} fill={Y} />
+    </>
+  ),
+  upgrade: (
+    <>
+      <P d="M32 6 12 28h12v26h16V28h12z" fill={Y} />
+      <P d="M32 34l2 4 4 .6-3 3 .8 4.4-3.8-2-3.8 2 .8-4.4-3-3 4-.6z" fill={W} w={1.5} />
+    </>
+  ),
+  // ---- diner ------------------------------------------------------------------------------
+  'thumbs-up': <P d="M22 56V28l10-20c4 0 6 3 5 8l-2 10h14a4 4 0 0 1 4 5l-4 20a4 4 0 0 1-4 3zM10 28h12v28H10z" fill={Y} />,
+  peanut: (
+    <>
+      <P d="M24 8c-8 0-12 8-10 16 1 4 4 6 4 10s-4 8-2 14c2 8 12 10 18 6 4-3 4-7 6-10s8-4 10-10c3-8-3-16-10-16-6 0-8 4-12 4s-4-14-4-14z" fill="#D9A066" />
+      <P d="M20 18c2 2 4 2 6 0M28 44c2 2 4 2 6 0" w={1.5} />
+      <Path d="M8 56 56 8" stroke={R} strokeWidth={4} strokeLinecap="round" />
+    </>
+  ),
+  wheat: (
+    <>
+      <P d="M32 58V14" />
+      {[18, 28, 38].map((y) => (
+        <Group key={y}>
+          <P d={`M32 ${y + 6}c-6 0-10-4-10-10 6 0 10 4 10 10z`} fill={Y} w={2} />
+          <P d={`M32 ${y + 6}c6 0 10-4 10-10-6 0-10 4-10 10z`} fill={Y} w={2} />
+        </Group>
+      ))}
+      <Path d="M8 56 56 8" stroke={R} strokeWidth={4} strokeLinecap="round" />
+    </>
+  ),
+  chili: (
+    <>
+      <P d="M44 14c-8 2-10 10-16 20S12 52 8 54c12 2 30-6 38-20 4-8 2-16-2-20z" fill={R} />
+      <P d="M44 14c0-4 2-6 6-8M44 14c2 0 6 2 6 6" fill={GR} />
+    </>
+  ),
+  steak: (
+    <>
+      <P d="M10 30c0-12 14-20 28-18s18 12 16 22-12 18-26 16S10 42 10 30z" fill="#B5503C" />
+      <Ci x={40} y={28} r={6} fill={W} />
+      <P d="M20 28c4 4 10 6 16 4" w={2} />
+    </>
+  ),
+  fire: <P d="M32 58c-12 0-20-8-20-18 0-8 6-12 8-20 4 6 8 6 8 6 0-10 4-16 10-20 0 10 14 16 14 32 0 12-8 20-20 20z" fill={R} />,
+  fries: (
+    <>
+      <P d="M18 24v-14M24 24V8M30 24V12M36 24V6M42 24V10M46 24V14" w={3} />
+      <Path d="M18 24v-14M24 24V8M30 24V12M36 24V6M42 24V10M46 24V14" stroke={Y} strokeWidth={2} strokeLinecap="round" />
+      <P d="M14 24h36l-4 34H18z" fill={R} />
+    </>
+  ),
+  split: (
+    <>
+      <P d="M8 8h20v44l-4-3-4 3-4-3-4 3-4-3z" fill={W} />
+      <P d="M36 12h20v44l-4-3-4 3-4-3-4 3-4-3z" fill={W} />
+      <T x={18} y={30} size={9}>½</T>
+      <T x={46} y={34} size={9}>½</T>
+    </>
+  ),
+  // ---- coffee shop --------------------------------------------------------------------------
+  decaf: (
+    <>
+      <P d="M12 22h34v18a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14z" fill={W} />
+      <P d="M46 26h4a6 6 0 0 1 0 12h-4" />
+      <T x={29} y={42} size={11}>DE</T>
+      <T x={48} y={16} size={10}>z</T>
+    </>
+  ),
+  espresso: (
+    <>
+      <P d="M18 28h22v10a10 10 0 0 1-10 10h-2a10 10 0 0 1-10-10z" fill={W} />
+      <P d="M40 32h3a4 4 0 0 1 0 8h-3" />
+      <P d="M20 31h18" w={5} />
+      <P d="M10 52h40" />
+      <T x={52} y={22} size={10}>+1</T>
+    </>
+  ),
+  iced: (
+    <>
+      <P d="M16 10h32l-4 46H20z" fill="#DCEBF7" />
+      <Rc x={22} y={16} w={9} h={9} r={2} fill={W} />
+      <Rc x={33} y={20} w={9} h={9} r={2} fill={W} />
+      <P d="M19 32h26l-2 24H21z" fill="#C89B6D" />
+      <P d="M38 4l-4 16" w={3} />
+    </>
+  ),
+  refill: (
+    <>
+      <P d="M8 14h22l-2 16H12z" fill={colors.inkLine} />
+      <P d="M30 18l8-4" />
+      <Path d="M38 16c2 8 2 14 2 18" stroke="#8A5A2B" strokeWidth={3} strokeLinecap="round" fill="none" />
+      <P d="M30 36h22v12a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8z" fill={W} />
+    </>
+  ),
+  bagel: (
+    <>
+      <Ci x={32} y={34} r={22} fill="#D9A066" />
+      <Ci x={32} y={34} r={7} fill={W} />
+      {[0, 60, 120, 180, 240, 300].map((a) => {
+        const r = (a * Math.PI) / 180;
+        return <Ci key={a} x={32 + Math.cos(r) * 14} y={34 + Math.sin(r) * 14} r={1.2} fill={INK} />;
+      })}
+    </>
+  ),
+  toaster: (
+    <>
+      <Rc x={8} y={26} w={48} h={28} r={8} fill={colors.line} />
+      <P d="M20 26V14h8v12M34 26V12h8v14" fill="#D9A066" />
+      <Rc x={52} y={34} w={6} h={4} r={1} fill={INK} />
+    </>
+  ),
+  outlet: (
+    <>
+      <Rc x={14} y={10} w={36} h={44} r={6} fill={W} />
+      <Rc x={24} y={20} w={4} h={10} r={1} fill={INK} />
+      <Rc x={36} y={20} w={4} h={10} r={1} fill={INK} />
+      <P d="M28 40a4 4 0 0 1 8 0v4h-8z" fill={INK} />
+    </>
+  ),
+  // ---- gift shop ----------------------------------------------------------------------------
+  souvenir: (
+    <>
+      <Ci x={32} y={28} r={20} fill="#DCEBF7" />
+      <P d="M22 38V24h4v14M28 38V16l2-2 2 2v22M34 38V22h6v16" fill={W} w={2} />
+      <P d="M16 48h32l-4 10H20z" fill={R} />
+    </>
+  ),
+  gift: (
+    <>
+      <Rc x={10} y={24} w={44} h={32} r={3} fill={R} />
+      <Rc x={8} y={18} w={48} h={10} r={2} fill={R} />
+      <Path d="M32 18v38M8 23h48" stroke={Y} strokeWidth={4} />
+      <P d="M32 18c-4-10-14-10-12-2 1 3 8 2 12 2zM32 18c4-10 14-10 12-2-1 3-8 2-12 2z" fill={Y} />
+    </>
+  ),
+  mug: (
+    <>
+      <P d="M12 16h32v32a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z" fill={W} />
+      <P d="M44 24h4a8 8 0 0 1 0 16h-4" />
+      <T x={28} y={40} size={10} fill={R}>NY</T>
+    </>
+  ),
+  postcard: (
+    <>
+      <Rc x={4} y={14} w={56} h={36} r={2} fill={W} />
+      <Ln x1={32} y1={20} x2={32} y2={44} w={1.5} />
+      <Rc x={44} y={18} w={10} h={12} r={1} fill={R} />
+      <Ln x1={36} y1={36} x2={54} y2={36} w={1.5} />
+      <Ln x1={36} y1={42} x2={50} y2={42} w={1.5} />
+      <P d="M10 26h16M10 32h14M10 38h16" w={1.5} />
+    </>
+  ),
+  sale: (
+    <>
+      <P d="M30 8h22v22L28 54 8 34z" fill={R} />
+      <Ci x={44} y={16} r={3} fill={W} />
+      <T x={30} y={36} size={10} fill={W}>-30%</T>
+    </>
+  ),
+  tax: (
+    <>
+      <P d="M16 6h32v52l-5-4-5 4-6-4-6 4-5-4-5 4z" fill={W} />
+      <Ln x1={22} y1={16} x2={42} y2={16} w={2} />
+      <Ln x1={22} y1={24} x2={38} y2={24} w={2} />
+      <T x={32} y={42} size={11} fill={R}>+TAX</T>
+    </>
+  ),
+  fragile: (
+    <>
+      <Rc x={8} y={14} w={48} h={40} r={2} fill="#D9A066" />
+      <P d="M24 22h16l-2 12a6 6 0 0 1-12 0z" fill={W} w={2} />
+      <P d="M32 40v8M27 48h10" w={2} />
+      <Path d="M28 24l4 4-3 3" stroke={R} strokeWidth={2} fill="none" />
+    </>
+  ),
+  parcel: (
+    <>
+      <P d="M8 24l24-12 24 12v24L32 60 8 48z" fill="#D9A066" />
+      <P d="M8 24l24 12 24-12M32 36v24" />
+      <P d="M44 8l12 4-4 8" w={2} />
+      <P d="M56 12C48 14 42 20 40 26" w={2} />
+    </>
+  ),
+  // ---- subway -------------------------------------------------------------------------------
+  'day-pass': (
+    <>
+      <Rc x={6} y={16} w={52} h={32} r={5} fill={Y} />
+      <T x={32} y={32} size={10}>1 DAY</T>
+      <Ln x1={14} y1={40} x2={50} y2={40} w={2} />
+    </>
+  ),
+  updown: (
+    <>
+      <P d="M20 54V12M10 22l10-10 10 10" />
+      <P d="M44 10v42M34 42l10 10 10-10" />
+      <Ci x={20} y={54} r={4} fill={Y} />
+      <Ci x={44} y={10} r={4} fill={Y} />
+    </>
+  ),
+  transfer: (
+    <>
+      <Path d="M6 20h52" stroke={R} strokeWidth={5} strokeLinecap="round" />
+      <Path d="M6 44h52" stroke={GR} strokeWidth={5} strokeLinecap="round" />
+      <Ci x={32} y={20} r={6} fill={W} />
+      <Ci x={32} y={44} r={6} fill={W} />
+      <P d="M32 26v12M28 34l4 4 4-4" />
+    </>
+  ),
+  express: (
+    <>
+      <Rc x={18} y={12} w={40} h={34} r={8} fill={colors.line} />
+      <Rc x={22} y={18} w={32} h={12} r={2} fill="#DCEBF7" />
+      <Ci x={38} y={40} r={4} fill={R} />
+      <P d="M4 20h10M2 30h12M6 40h8" w={3} />
+      <P d="M24 46l-4 8M52 46l4 8" />
+    </>
+  ),
+  turnstile: (
+    <>
+      <Rc x={8} y={20} w={14} h={36} r={2} fill={colors.inkLine} />
+      <Rc x={42} y={20} w={14} h={36} r={2} fill={colors.inkLine} />
+      <P d="M22 34h20M22 34l14-10M22 34l14 10" w={3} />
+      <Rc x={10} y={24} w={10} h={6} r={1} fill={GR} />
+    </>
+  ),
   // ---- transfer -------------------------------------------------------------------------
   taxi: (
     <>

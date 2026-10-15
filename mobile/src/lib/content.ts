@@ -13,6 +13,13 @@ import restaurantBronze from '../../../content/chapters/restaurant-bronze.json';
 import cafeBronze from '../../../content/chapters/cafe-bronze.json';
 import shoppingBronze from '../../../content/chapters/shopping-bronze.json';
 import transportBronze from '../../../content/chapters/transport-bronze.json';
+import arrivalSilver from '../../../content/chapters/arrival-silver.json';
+import transferSilver from '../../../content/chapters/transfer-silver.json';
+import hotelSilver from '../../../content/chapters/hotel-silver.json';
+import restaurantSilver from '../../../content/chapters/restaurant-silver.json';
+import cafeSilver from '../../../content/chapters/cafe-silver.json';
+import shoppingSilver from '../../../content/chapters/shopping-silver.json';
+import transportSilver from '../../../content/chapters/transport-silver.json';
 import fullTrip from '../../../content/chapters/full-trip.json';
 import placementJson from '../../../content/placement.json';
 import sosJson from '../../../content/sos.json';
@@ -105,7 +112,8 @@ const bundled: Pack = {
   manifest: bundledManifest as Manifest,
   chapters: Object.fromEntries(
     [starterAlphabet, starterNumbers, starterSpelling, starterPeople, starterBasics, arrivalBronze, transferBronze,
-      hotelBronze, restaurantBronze, cafeBronze, shoppingBronze, transportBronze, fullTrip].map((c) => [c.slug, c as Chapter]),
+      hotelBronze, restaurantBronze, cafeBronze, shoppingBronze, transportBronze, arrivalSilver, transferSilver,
+      hotelSilver, restaurantSilver, cafeSilver, shoppingSilver, transportSilver, fullTrip].map((c) => [c.slug, c as Chapter]),
   ),
 };
 

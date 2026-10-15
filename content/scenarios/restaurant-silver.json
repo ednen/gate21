@@ -1,0 +1,306 @@
+{
+  "slug": "restaurant-silver",
+  "chapter": "restaurant-silver",
+  "title": "Lunch at the diner",
+  "titleTr": "Diner'da öğle yemeği",
+  "role": "Server",
+  "setting": "Joe's Diner, Brooklyn · Lunch",
+  "voice": "en-US",
+  "persona": "You are a cheerful server at Joe's Diner, a busy classic diner in Brooklyn. You speak quickly and casually, like a real New York server, and you recommend things with enthusiasm.",
+  "briefTr": "Brooklyn'de bir diner'dasın, öğle yemeği yiyeceksin. Fıstık alerjin var. Burger'ın orta pişmiş olsun istiyorsun.",
+  "opening": "Hi there! Just one today?",
+  "facts": [
+    {
+      "id": "special",
+      "values": [
+        "the pastrami sandwich",
+        "the mac and cheese",
+        "the BBQ burger"
+      ],
+      "question": "What was the special of the day?",
+      "questionTr": "Günün spesiyali neydi?"
+    },
+    {
+      "id": "total",
+      "values": [
+        "$24.50",
+        "$31.80",
+        "$27.20"
+      ],
+      "question": "How much was the check before tip?",
+      "questionTr": "Bahşişsiz hesap ne kadardı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "table",
+      "titleTr": "Masa istemek",
+      "instruction": "The guest says how many people.",
+      "hint": "Yes, a table for one, please.",
+      "hintTr": "Evet, tek kişilik masa lütfen.",
+      "keywords": [
+        "one",
+        "two",
+        "table",
+        "yes",
+        "just me",
+        "booth",
+        "for"
+      ],
+      "successReply": "Great, follow me.",
+      "retryReply": "How many in your party?"
+    },
+    {
+      "id": "recommend",
+      "titleTr": "Öneri istemek",
+      "ask": "Here's the menu. Any questions?",
+      "instruction": "The guest asks the server for a recommendation.",
+      "hint": "What do you recommend?",
+      "hintTr": "Ne önerirsiniz?",
+      "keywords": [
+        "recommend",
+        "good",
+        "popular",
+        "best",
+        "special",
+        "suggest"
+      ],
+      "successReply": "Our special today is {special}, and the burger is amazing.",
+      "retryReply": "Do you need a minute, or can I suggest something?"
+    },
+    {
+      "id": "allergy",
+      "titleTr": "Alerjiyi söylemek",
+      "ask": "What can I get you? And any allergies?",
+      "instruction": "The guest orders and mentions their allergy (or says they have none).",
+      "hint": "I'll have the burger. I'm allergic to peanuts.",
+      "hintTr": "Burger alacağım. Fıstık alerjim var.",
+      "keywords": [
+        "allergic",
+        "allergy",
+        "peanuts",
+        "nuts",
+        "no",
+        "none"
+      ],
+      "successReply": "Got it, I'll tell the kitchen.",
+      "retryReply": "Any allergies I should know about?"
+    },
+    {
+      "id": "cooked",
+      "titleTr": "Pişme derecesini söylemek",
+      "ask": "How would you like your burger cooked?",
+      "instruction": "The guest says how they want the meat cooked: rare, medium or well done.",
+      "hint": "Medium, please.",
+      "hintTr": "Orta pişmiş, lütfen.",
+      "keywords": [
+        "medium",
+        "rare",
+        "well done",
+        "well",
+        "medium rare"
+      ],
+      "successReply": "Medium, perfect.",
+      "retryReply": "Rare, medium, or well done?"
+    },
+    {
+      "id": "side",
+      "titleTr": "Garnitürü seçmek",
+      "ask": "And for your side — fries or salad?",
+      "instruction": "The guest chooses a side dish.",
+      "hint": "Fries, please.",
+      "hintTr": "Patates kızartması, lütfen.",
+      "keywords": [
+        "fries",
+        "salad",
+        "side",
+        "chips",
+        "soup"
+      ],
+      "successReply": "Coming right up.",
+      "retryReply": "Fries or salad with that?"
+    },
+    {
+      "id": "check",
+      "titleTr": "Hesabı istemek",
+      "ask": "Can I get you anything else? Dessert?",
+      "instruction": "The guest asks for the check.",
+      "hint": "Just the check, please.",
+      "hintTr": "Sadece hesap, lütfen.",
+      "keywords": [
+        "check",
+        "bill",
+        "that's all",
+        "no thanks",
+        "nothing"
+      ],
+      "successReply": "Here you go. That's {total}.",
+      "retryReply": "Anything else, or are you ready for the check?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "peanut-sauce",
+      "titleTr": "Sosta fıstık var",
+      "intro": "Oh wait — the burger sauce has peanuts in it.",
+      "instruction": "The sauce contains peanuts. The guest asks to remove it, asks for another recommendation, or asks if something else is safe.",
+      "retryReply": "Sorry about that! What should we do?",
+      "options": [
+        {
+          "text": "Can you make it without the sauce?",
+          "keywords": [
+            "without",
+            "no sauce",
+            "sauce"
+          ],
+          "reply": "Absolutely. No sauce, no peanuts."
+        },
+        {
+          "text": "What else do you recommend?",
+          "keywords": [
+            "what else",
+            "recommend",
+            "else"
+          ],
+          "reply": "The grilled chicken sandwich is great and nut-free."
+        },
+        {
+          "text": "Is the chicken safe for me?",
+          "keywords": [
+            "chicken",
+            "safe"
+          ],
+          "reply": "Yes, the chicken has no nuts at all."
+        }
+      ]
+    },
+    {
+      "id": "spicy",
+      "titleTr": "Sos çok acı",
+      "intro": "Heads up — the house sauce on that burger is pretty spicy.",
+      "instruction": "The sauce is spicy. The guest asks for it mild, asks for the sauce on the side, or says spicy is fine.",
+      "retryReply": "Some people love it, some don't. What do you think?",
+      "options": [
+        {
+          "text": "Can I have it mild, please?",
+          "keywords": [
+            "mild",
+            "not spicy",
+            "less"
+          ],
+          "reply": "Sure, mild it is."
+        },
+        {
+          "text": "Can I get the sauce on the side?",
+          "keywords": [
+            "on the side",
+            "side",
+            "separate"
+          ],
+          "reply": "Great idea — sauce on the side."
+        },
+        {
+          "text": "That's fine, I like spicy food.",
+          "keywords": [
+            "like",
+            "fine",
+            "love",
+            "spicy food"
+          ],
+          "reply": "Awesome. You'll love it."
+        }
+      ]
+    },
+    {
+      "id": "tip",
+      "titleTr": "Bahşiş dahil değil",
+      "intro": "Just so you know, the tip isn't included. Most people leave fifteen to twenty percent.",
+      "instruction": "Tipping is expected. The guest agrees, asks to add it to the card, or thanks the server for explaining.",
+      "retryReply": "No pressure, just letting you know how it works here!",
+      "options": [
+        {
+          "text": "Okay, I'll add eighteen percent.",
+          "keywords": [
+            "add",
+            "percent",
+            "eighteen",
+            "fifteen",
+            "twenty"
+          ],
+          "reply": "Thank you so much!"
+        },
+        {
+          "text": "Can I add it on the card?",
+          "keywords": [
+            "card",
+            "on the card",
+            "machine"
+          ],
+          "reply": "Sure, the machine will ask you."
+        },
+        {
+          "text": "Thanks for telling me!",
+          "keywords": [
+            "thanks",
+            "telling",
+            "know"
+          ],
+          "reply": "No problem! Many visitors don't know."
+        }
+      ]
+    },
+    {
+      "id": "register",
+      "titleTr": "Ödeme kasada",
+      "intro": "Our card machine is at the register. Can you pay there?",
+      "instruction": "The guest must pay at the register. The guest agrees, asks where it is, or asks to pay cash at the table.",
+      "retryReply": "Sorry, it's just how we do it here.",
+      "options": [
+        {
+          "text": "Sure, no problem.",
+          "keywords": [
+            "sure",
+            "no problem",
+            "okay",
+            "ok"
+          ],
+          "reply": "Thanks! Have a great day."
+        },
+        {
+          "text": "Where is the register?",
+          "keywords": [
+            "where",
+            "register",
+            "counter"
+          ],
+          "reply": "Right by the door, next to the pies."
+        },
+        {
+          "text": "Can I pay cash here?",
+          "keywords": [
+            "cash",
+            "here"
+          ],
+          "reply": "Of course, cash at the table is fine."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "allergy",
+      "pool": [
+        "peanut-sauce",
+        "spicy"
+      ]
+    },
+    {
+      "after": "check",
+      "pool": [
+        "tip",
+        "register"
+      ]
+    }
+  ],
+  "closing": "Thanks for coming to Joe's! Have a great day!"
+}

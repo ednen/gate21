@@ -1,10 +1,8 @@
 {
   "slug": "arrival-silver",
-  "draft": true,
-  "mission": "Chat with the officer at JFK",
-  "missionTr": "JFK'de pasaport memuruyla kısa sohbet et, parmak izi taramasını geç",
+  "mission": "Chat with the officer and pass the fingerprint check",
+  "missionTr": "New York JFK'de göçmenlik memuruyla kısa sohbet et, parmak izi ve kamera kontrolünden geç, gümrükten çık",
   "stamp": "WELCOME TO NYC",
-  "trip": "New York",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
@@ -15,58 +13,214 @@
   ],
   "words": [
     {
+      "en": "immigration",
+      "tr": "göçmenlik (pasaport kontrolü, ABD)",
+      "picture": "officer",
+      "example": "Follow the signs to immigration.",
+      "exampleTr": "Göçmenlik tabelalarını takip edin."
+    },
+    {
       "en": "fingerprints",
-      "tr": "parmak izi"
+      "tr": "parmak izi",
+      "picture": "fingerprint",
+      "example": "We need your fingerprints.",
+      "exampleTr": "Parmak izinize ihtiyacımız var."
     },
     {
       "en": "scanner",
-      "tr": "tarayıcı"
+      "tr": "tarayıcı",
+      "picture": "scanner",
+      "example": "Put four fingers on the scanner.",
+      "exampleTr": "Dört parmağınızı tarayıcıya koyun."
     },
     {
-      "en": "Put your finger on…",
-      "tr": "Parmağını …üzerine koy"
-    },
-    {
-      "en": "look at the camera",
-      "tr": "kameraya bak"
+      "en": "Look at the camera.",
+      "tr": "Kameraya bakın.",
+      "picture": "camera",
+      "example": "Please look at the camera.",
+      "exampleTr": "Lütfen kameraya bakın."
     },
     {
       "en": "nervous",
-      "tr": "gergin"
+      "tr": "gergin, heyecanlı",
+      "picture": "nervous",
+      "example": "Sorry, I'm a little nervous.",
+      "exampleTr": "Pardon, biraz gerginim."
+    },
+    {
+      "en": "sweaty palms",
+      "tr": "terli avuçlar",
+      "picture": "sweat",
+      "example": "My palms are sweaty.",
+      "exampleTr": "Avuçlarım terli."
     },
     {
       "en": "first time",
-      "tr": "ilk kez"
+      "tr": "ilk kez",
+      "picture": "first",
+      "example": "It's my first time in the US.",
+      "exampleTr": "ABD'ye ilk gelişim."
     },
     {
       "en": "sightseeing",
-      "tr": "gezip görmek"
+      "tr": "gezip görmek",
+      "picture": "skyline",
+      "example": "I'm here for sightseeing.",
+      "exampleTr": "Gezmek için buradayım."
     },
     {
       "en": "customs",
-      "tr": "gümrük"
+      "tr": "gümrük",
+      "picture": "customs",
+      "example": "Go through customs after baggage claim.",
+      "exampleTr": "Bagajdan sonra gümrükten geçin."
     },
     {
-      "en": "Anything to declare?",
-      "tr": "Beyan edeceğiniz bir şey var mı?"
+      "en": "Nothing to declare.",
+      "tr": "Beyan edecek bir şeyim yok.",
+      "picture": "green-channel",
+      "example": "I have nothing to declare.",
+      "exampleTr": "Beyan edecek bir şeyim yok."
     }
   ],
-  "scene": {
-    "role": "CBP officer",
-    "setting": "JFK Airport · Immigration",
-    "goalsTr": [
-      "Pasaportu ve gümrük formunu ver",
-      "Ziyaret amacını ayrıntılı anlat (ne göreceksin?)",
-      "İlk ziyaretin mi, sohbete cevap ver",
-      "Parmak izi talimatlarını uygula (\"Right hand, four fingers\")",
-      "Gümrükte beyan edecek bir şeyin olmadığını söyle",
-      "Nerede kalacağını ve dönüş tarihini söyle"
-    ],
-    "twistsTr": [
-      "Elin terli, parmak izi okunmuyor: \"Sorry, my hands are sweaty. Can I try again?\"",
-      "Memur şakalaşıyor, ne dediğini anlamadın",
-      "Yanında yiyecek var mı diye soruyor"
+  "pronounce": [
+    {
+      "word": "immigration",
+      "ipa": "/ˌɪm.ɪˈɡreɪ.ʃən/",
+      "stress": "im-ih-GRAY-shun",
+      "tipTr": "Vurgu üçüncü hecede: im-i-GREY-şın."
+    },
+    {
+      "word": "customs",
+      "ipa": "/ˈkʌs.təmz/",
+      "stress": "KUS-tumz",
+      "tipTr": "\"Kustoms\" değil: KAS-tımz, vurgu başta."
+    },
+    {
+      "word": "declare",
+      "ipa": "/dɪˈkleər/",
+      "stress": "dih-KLAIR",
+      "tipTr": "Vurgu sonda: di-KLEIR. Amerikan İngilizcesinde sondaki r duyulur."
+    }
+  ],
+  "match": [
+    "fingerprints",
+    "scanner",
+    "Look at the camera.",
+    "nervous",
+    "sightseeing",
+    "customs"
+  ],
+  "recognize": [
+    {
+      "audio": "Right hand, four fingers on the glass, please.",
+      "prompt": "Listen. What should you do?",
+      "options": [
+        "Put four fingers of your right hand on the glass",
+        "Show your passport again",
+        "Take off your shoes"
+      ],
+      "answer": 0,
+      "explainTr": "\"Right hand, four fingers\" = sağ el, dört parmak. Sonra başparmak istenir."
+    },
+    {
+      "prompt": "The officer asks: “What brings you to New York?” He wants to know…",
+      "options": [
+        "why you came",
+        "how you came",
+        "when you came"
+      ],
+      "answer": 0,
+      "explainTr": "\"What brings you here?\" = Seni buraya ne getirdi? Ziyaret amacını soruyor."
+    },
+    {
+      "audio": "Can I have your customs form, please?",
+      "prompt": "Listen. What does the officer want?",
+      "options": [
+        "Your customs form",
+        "Your hotel key",
+        "Your phone"
+      ],
+      "answer": 0,
+      "explainTr": "Customs form = gümrük beyan formu. ABD'de genellikle ekrandan doldurulur."
+    }
+  ],
+  "dialog": {
+    "titleTr": "JFK'de göçmenlik",
+    "lines": [
+      {
+        "who": "Officer",
+        "text": "Next! Hi there. Passport, please."
+      },
+      {
+        "who": "You",
+        "text": "Here you go."
+      },
+      {
+        "who": "Officer",
+        "text": "What brings you to New York?"
+      },
+      {
+        "who": "You",
+        "text": "I'm here for ___. It's my first time!",
+        "gap": "sightseeing",
+        "options": [
+          "sightseeing",
+          "customs",
+          "scanner"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "Welcome. Right hand, four fingers on the ___.",
+        "gap": "scanner",
+        "options": [
+          "scanner",
+          "camera",
+          "customs"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Sorry, my palms are a bit ___. I'm nervous.",
+        "gap": "sweaty",
+        "options": [
+          "sweaty",
+          "sightseeing",
+          "first"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "No problem, try again… Good. Now look at the ___.",
+        "gap": "camera",
+        "options": [
+          "camera",
+          "scanner",
+          "passport"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "Are you bringing any food into the country?"
+      },
+      {
+        "who": "You",
+        "text": "No, I have nothing to ___.",
+        "gap": "declare",
+        "options": [
+          "declare",
+          "decide",
+          "describe"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "Great. Enjoy your stay!"
+      }
     ]
   },
-  "notesTr": "Notlardaki \"small talk with the officer; finger check; sweaty palms\" bu derste. Amerikan aksanı (en-US)."
+  "survive": {
+    "scenario": "arrival-silver"
+  }
 }

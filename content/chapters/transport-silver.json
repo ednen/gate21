@@ -1,72 +1,165 @@
 {
   "slug": "transport-silver",
-  "draft": true,
-  "mission": "Change lines and buy a day pass",
-  "missionTr": "Metroda aktarma yap, günlük kart al, doğru yöne bin",
-  "stamp": "TRANSFER MADE",
-  "trip": "New York",
+  "mission": "Find your way on the subway",
+  "missionTr": "Metroda yolunu bul: günlük kart al, hangi yöne bineceğini, aktarma gerekip gerekmediğini ve hangi durakta ineceğini sor",
+  "stamp": "SUBWAY PRO",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
     "RECOGNIZE",
-    "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "subway",
-      "tr": "metro (ABD)"
+      "tr": "metro (ABD)",
+      "picture": "metro",
+      "example": "Where is the subway station?",
+      "exampleTr": "Metro istasyonu nerede?"
     },
     {
-      "en": "MetroCard / day pass",
-      "tr": "günlük kart"
+      "en": "day pass",
+      "tr": "günlük kart",
+      "picture": "day-pass",
+      "example": "A day pass, please.",
+      "exampleTr": "Günlük kart, lütfen."
     },
     {
       "en": "uptown / downtown",
-      "tr": "kuzeye / güneye (yön)"
+      "tr": "kuzeye / güneye (yön)",
+      "picture": "updown",
+      "example": "Is this train going uptown?",
+      "exampleTr": "Bu tren kuzeye mi gidiyor?"
     },
     {
       "en": "transfer",
-      "tr": "aktarma"
+      "tr": "aktarma",
+      "picture": "transfer",
+      "example": "Do I need to transfer?",
+      "exampleTr": "Aktarma yapmam gerekiyor mu?"
     },
     {
       "en": "express",
-      "tr": "ekspres (az duraklı)"
+      "tr": "ekspres (az duraklı)",
+      "picture": "express",
+      "example": "The express train doesn't stop here.",
+      "exampleTr": "Ekspres tren burada durmuyor."
     },
     {
       "en": "local",
-      "tr": "her durakta duran"
+      "tr": "her durakta duran",
+      "picture": "bus-stop",
+      "example": "Take the local train.",
+      "exampleTr": "Her durakta duran trene bin."
     },
     {
       "en": "turnstile",
-      "tr": "turnike"
+      "tr": "turnike",
+      "picture": "turnstile",
+      "example": "Tap your card at the turnstile.",
+      "exampleTr": "Kartını turnikede okut."
     },
     {
       "en": "next stop",
-      "tr": "sonraki durak"
+      "tr": "sonraki durak",
+      "picture": "platform",
+      "example": "What's the next stop?",
+      "exampleTr": "Sonraki durak ne?"
     },
     {
       "en": "get off",
-      "tr": "inmek"
+      "tr": "inmek",
+      "picture": "exit",
+      "example": "Get off at 59th Street.",
+      "exampleTr": "59. Cadde'de in."
+    },
+    {
+      "en": "Which way…?",
+      "tr": "Hangi taraf…?",
+      "picture": "map",
+      "example": "Which way is Central Park?",
+      "exampleTr": "Central Park hangi tarafta?"
     }
   ],
-  "scene": {
-    "role": "MTA station agent",
-    "setting": "Times Square · Subway station",
-    "goalsTr": [
-      "Central Park'a nasıl gideceğini sor",
-      "Günlük kart al",
-      "Hangi yöne (uptown/downtown) bineceğini sor",
-      "Nerede aktarma yapacağını sor",
-      "Hangi durakta ineceğini sor",
-      "Turnikeden geçemediğinde yardım iste"
-    ],
-    "twistsTr": [
-      "Kartın turnikede çalışmıyor",
-      "Ekspres tren senin durağında durmuyor",
-      "Hafta sonu hat değişikliği var"
+  "pronounce": [
+    {
+      "word": "subway",
+      "ipa": "/ˈsʌb.weɪ/",
+      "stress": "SUB-way",
+      "tipTr": "\"Sabvey\": vurgu başta."
+    },
+    {
+      "word": "turnstile",
+      "ipa": "/ˈtɝːn.staɪl/",
+      "stress": "TURN-style",
+      "tipTr": "İki hece: TÖRN-stayl."
+    },
+    {
+      "word": "uptown",
+      "ipa": "/ˌʌpˈtaʊn/",
+      "stress": "up-TOWN",
+      "tipTr": "Vurgu sonda: ap-TAUN."
+    }
+  ],
+  "match": [
+    "day pass",
+    "uptown / downtown",
+    "transfer",
+    "express",
+    "turnstile",
+    "next stop"
+  ],
+  "recognize": [
+    {
+      "audio": "This is 59th Street. Columbus Circle.",
+      "prompt": "Listen. Where are you?",
+      "options": [
+        "At 59th Street",
+        "At 15th Street",
+        "At 95th Street"
+      ],
+      "answer": 0,
+      "explainTr": "Fifty-ninth = 59. Sokak numaraları sıra sayısıyla okunur: fifty-ninth Street."
+    },
+    {
+      "prompt": "You want to go north in Manhattan. You take a train going…",
+      "options": [
+        "uptown",
+        "downtown",
+        "express"
+      ],
+      "answer": 0,
+      "explainTr": "Manhattan'da uptown = kuzey, downtown = güney yönü."
+    },
+    {
+      "audio": "Stand clear of the closing doors, please.",
+      "prompt": "Listen. What should you do?",
+      "options": [
+        "Move away from the doors",
+        "Get off the train",
+        "Buy a ticket"
+      ],
+      "answer": 0,
+      "explainTr": "\"Stand clear of the closing doors\" = kapanan kapılardan uzak durun. New York metrosunun meşhur anonsu."
+    }
+  ],
+  "use": {
+    "word": "transfer",
+    "phrase": "Do I need to transfer to get to Central Park?",
+    "phraseTr": "Central Park'a gitmek için aktarma yapmam gerekiyor mu?",
+    "situation": "Ask the station agent if you need to change trains to reach Central Park.",
+    "situationTr": "İstasyon görevlisine Central Park'a giderken aktarma yapman gerekip gerekmediğini sor.",
+    "tiles": [
+      "Do I need",
+      "to transfer",
+      "to get to",
+      "Central Park",
+      "?"
     ]
   },
-  "notesTr": ""
+  "survive": {
+    "scenario": "transport-silver"
+  }
 }

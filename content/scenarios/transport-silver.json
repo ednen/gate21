@@ -1,0 +1,246 @@
+{
+  "slug": "transport-silver",
+  "chapter": "transport-silver",
+  "title": "Changing lines",
+  "titleTr": "Aktarma yapmak",
+  "role": "Station agent",
+  "setting": "Times Square · Subway station",
+  "voice": "en-US",
+  "persona": "You are an MTA station agent at the Times Square subway station in New York. You give quick, clear directions to visitors.",
+  "briefTr": "Times Square metro istasyonundasın. Central Park'a gitmek istiyorsun ve gün boyu metroyu kullanacaksın.",
+  "opening": "Hi, do you need some help?",
+  "facts": [
+    {
+      "id": "stop",
+      "values": [
+        "59th Street",
+        "72nd Street",
+        "66th Street"
+      ],
+      "question": "Which stop did you get off at?",
+      "questionTr": "Hangi durakta indin?"
+    },
+    {
+      "id": "minutes",
+      "values": [
+        "15 minutes",
+        "20 minutes",
+        "12 minutes"
+      ],
+      "question": "How long was the ride?",
+      "questionTr": "Yolculuk ne kadar sürdü?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "destination",
+      "titleTr": "Nereye gideceğini sormak",
+      "instruction": "The visitor asks how to get to a place.",
+      "hint": "Yes, how do I get to Central Park?",
+      "hintTr": "Evet, Central Park'a nasıl giderim?",
+      "keywords": [
+        "how",
+        "get",
+        "central park",
+        "park",
+        "go",
+        "to",
+        "where"
+      ],
+      "successReply": "Central Park, easy.",
+      "retryReply": "Where are you trying to go?"
+    },
+    {
+      "id": "ticket",
+      "titleTr": "Bilet tipini seçmek",
+      "ask": "Single ride or a day pass?",
+      "instruction": "The visitor chooses a single ride or a day pass.",
+      "hint": "A day pass, please.",
+      "hintTr": "Günlük kart, lütfen.",
+      "keywords": [
+        "day pass",
+        "pass",
+        "single",
+        "ride",
+        "day",
+        "week",
+        "tap"
+      ],
+      "successReply": "Here you go.",
+      "retryReply": "You can tap your bank card, or I can sell you a pass. Single ride or day pass?"
+    },
+    {
+      "id": "direction",
+      "titleTr": "Hangi trene bineceğini sormak",
+      "ask": "Anything else?",
+      "instruction": "The visitor asks which train or direction to take.",
+      "hint": "Which train do I take — uptown or downtown?",
+      "hintTr": "Hangi trene binmeliyim, kuzey mi güney mi?",
+      "keywords": [
+        "which",
+        "train",
+        "uptown",
+        "downtown",
+        "line",
+        "take",
+        "direction"
+      ],
+      "successReply": "Take the 1 train uptown.",
+      "retryReply": "Do you know which train to take?"
+    },
+    {
+      "id": "transfer",
+      "titleTr": "Aktarma gerekip gerekmediğini sormak",
+      "ask": "It's on the red line.",
+      "instruction": "The visitor asks if they need to change trains.",
+      "hint": "Do I need to transfer?",
+      "hintTr": "Aktarma yapmam gerekiyor mu?",
+      "keywords": [
+        "transfer",
+        "change",
+        "switch",
+        "need"
+      ],
+      "successReply": "No, it's direct. About {minutes}.",
+      "retryReply": "Is there anything else you want to check?"
+    },
+    {
+      "id": "stop",
+      "titleTr": "Hangi durakta ineceğini sormak",
+      "ask": "You'll see the park right when you come out.",
+      "instruction": "The visitor asks where to get off.",
+      "hint": "Which stop do I get off at?",
+      "hintTr": "Hangi durakta inmeliyim?",
+      "keywords": [
+        "stop",
+        "get off",
+        "station",
+        "where",
+        "off"
+      ],
+      "successReply": "Get off at {stop}.",
+      "retryReply": "Do you want to know where to get off?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "express",
+      "titleTr": "Ekspres tren durmuyor",
+      "intro": "Careful — the express train doesn't stop there. Take the local.",
+      "instruction": "Only local trains stop at the station. The visitor asks how to tell them apart, confirms, or asks where to wait.",
+      "retryReply": "Just watch the sign on the train.",
+      "options": [
+        {
+          "text": "How do I know which one is local?",
+          "keywords": [
+            "how do i know",
+            "know",
+            "which one"
+          ],
+          "reply": "The sign says 'local' and the number is in a circle."
+        },
+        {
+          "text": "Okay, the local train. Thanks!",
+          "keywords": [
+            "okay",
+            "local",
+            "thanks"
+          ],
+          "reply": "You got it."
+        },
+        {
+          "text": "Where do I wait for it?",
+          "keywords": [
+            "where",
+            "wait",
+            "platform"
+          ],
+          "reply": "Same platform, the right side."
+        }
+      ]
+    },
+    {
+      "id": "weekend",
+      "titleTr": "Hafta sonu sefer değişikliği",
+      "intro": "Oh, this weekend the 1 train isn't running uptown. There's a shuttle bus.",
+      "instruction": "The train is not running. The visitor asks where the bus is, asks for another train, or asks how long it takes.",
+      "retryReply": "Sorry, weekend work.",
+      "options": [
+        {
+          "text": "Where is the shuttle bus?",
+          "keywords": [
+            "where",
+            "shuttle",
+            "bus"
+          ],
+          "reply": "Right outside, on Seventh Avenue."
+        },
+        {
+          "text": "Is there another train?",
+          "keywords": [
+            "another",
+            "other",
+            "train"
+          ],
+          "reply": "Take the N or Q to 57th Street, then walk two blocks."
+        },
+        {
+          "text": "How long does it take?",
+          "keywords": [
+            "how long",
+            "take",
+            "minutes"
+          ],
+          "reply": "About twenty-five minutes with the bus."
+        }
+      ]
+    },
+    {
+      "id": "turnstile",
+      "titleTr": "Turnike açılmıyor",
+      "intro": "If the turnstile doesn't open, tap your card again a bit slower.",
+      "instruction": "The visitor gets a tip about the turnstile. They ask what to do if it still fails, thank the agent, or ask about the gate.",
+      "retryReply": "It happens all the time!",
+      "options": [
+        {
+          "text": "What if it still doesn't work?",
+          "keywords": [
+            "still",
+            "what if",
+            "doesn't"
+          ],
+          "reply": "Come back to me and I'll let you through the gate."
+        },
+        {
+          "text": "Okay, thanks for the tip!",
+          "keywords": [
+            "thanks",
+            "tip",
+            "okay"
+          ],
+          "reply": "Have a good one!"
+        },
+        {
+          "text": "Can I go through the big gate?",
+          "keywords": [
+            "gate",
+            "big",
+            "go through"
+          ],
+          "reply": "Only with a suitcase or stroller — ask me first."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "direction",
+      "pool": [
+        "express",
+        "weekend",
+        "turnstile"
+      ]
+    }
+  ],
+  "closing": "Enjoy the park!"
+}

@@ -1,0 +1,274 @@
+{
+  "slug": "arrival-silver",
+  "chapter": "arrival-silver",
+  "title": "Immigration at JFK",
+  "titleTr": "JFK'de göçmenlik",
+  "role": "CBP officer",
+  "setting": "JFK Airport · Immigration",
+  "voice": "en-US",
+  "persona": "You are a US Customs and Border Protection officer at JFK Airport in New York. You are professional but friendly and like a little small talk. You speak naturally, at normal speed.",
+  "briefTr": "New York JFK'ye indin. Adın {name}. Gezmek için geldin, Hudson Hotel'de bir hafta kalacaksın. ABD'ye ilk gelişin.",
+  "opening": "Next! Hi there. Passport, please.",
+  "facts": [
+    {
+      "id": "belt",
+      "values": [
+        "4",
+        "6",
+        "2",
+        "9"
+      ],
+      "question": "Which baggage carousel was yours?",
+      "questionTr": "Bagajın hangi bantta çıktı?"
+    },
+    {
+      "id": "hall",
+      "values": [
+        "B",
+        "C",
+        "D"
+      ],
+      "question": "Which hall was baggage claim in?",
+      "questionTr": "Bagaj alanı hangi salondaydı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "passport",
+      "titleTr": "Pasaportu vermek",
+      "instruction": "The traveller hands over the passport.",
+      "hint": "Here you go.",
+      "hintTr": "Buyurun.",
+      "keywords": [
+        "here",
+        "passport",
+        "sure",
+        "go"
+      ],
+      "successReply": "Thanks.",
+      "retryReply": "Can I see your passport, please?"
+    },
+    {
+      "id": "purpose",
+      "titleTr": "Ne için geldiğini anlatmak",
+      "ask": "What brings you to New York?",
+      "instruction": "The traveller explains why they came: sightseeing, vacation, business, visiting friends or family.",
+      "hint": "I'm here for sightseeing. I want to see Central Park.",
+      "hintTr": "Gezmek için geldim. Central Park'ı görmek istiyorum.",
+      "keywords": [
+        "sightseeing",
+        "vacation",
+        "holiday",
+        "business",
+        "visit",
+        "visiting",
+        "friends",
+        "family",
+        "see",
+        "tourism",
+        "conference"
+      ],
+      "successReply": "Nice.",
+      "retryReply": "What brings you to New York?"
+    },
+    {
+      "id": "first-time",
+      "titleTr": "İlk gelişin olduğunu söylemek",
+      "ask": "Is this your first time in the States?",
+      "instruction": "The traveller says whether this is their first time in the US.",
+      "hint": "Yes, it's my first time.",
+      "hintTr": "Evet, ilk gelişim.",
+      "keywords": [
+        "first",
+        "yes",
+        "no",
+        "time",
+        "before",
+        "second"
+      ],
+      "successReply": "Well, welcome!",
+      "retryReply": "Have you been to the United States before?"
+    },
+    {
+      "id": "fingerprints",
+      "titleTr": "Parmak izi talimatını uygulamak",
+      "ask": "Right hand, four fingers on the scanner, please.",
+      "instruction": "The officer asks for fingerprints. The traveller follows and confirms, for example 'Okay, like this?'.",
+      "hint": "Okay, like this?",
+      "hintTr": "Tamam, böyle mi?",
+      "keywords": [
+        "okay",
+        "ok",
+        "like this",
+        "sure",
+        "right",
+        "this"
+      ],
+      "successReply": "Perfect. Now look at the camera.",
+      "retryReply": "Just place your right hand on the scanner, four fingers."
+    },
+    {
+      "id": "customs",
+      "titleTr": "Gümrükte beyan edecek bir şeyin olmadığını söylemek",
+      "ask": "Are you bringing any food into the country?",
+      "instruction": "The traveller says they have nothing to declare and no food.",
+      "hint": "No, I have nothing to declare.",
+      "hintTr": "Hayır, beyan edecek bir şeyim yok.",
+      "keywords": [
+        "no",
+        "nothing",
+        "declare",
+        "food",
+        "don't"
+      ],
+      "successReply": "Okay.",
+      "retryReply": "Do you have any food or anything to declare?"
+    },
+    {
+      "id": "stay",
+      "titleTr": "Nerede ve ne kadar kalacağını söylemek",
+      "ask": "Where are you staying, and for how long?",
+      "instruction": "The traveller says where they are staying and for how long.",
+      "hint": "At the Hudson Hotel, for one week.",
+      "hintTr": "Hudson Hotel'de, bir hafta.",
+      "keywords": [
+        "hotel",
+        "week",
+        "days",
+        "staying",
+        "friend",
+        "apartment",
+        "nights"
+      ],
+      "successReply": "Sounds good.",
+      "retryReply": "Where are you staying, and how long?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "sweaty",
+      "titleTr": "Terli eller, parmak izi okunmuyor",
+      "intro": "Hmm, it's not reading your fingers. Are your hands a little sweaty?",
+      "instruction": "The scanner cannot read the prints. The traveller apologises, says they are nervous, asks to try again, or wipes their hands.",
+      "retryReply": "Let's try that again. Take your time.",
+      "options": [
+        {
+          "text": "Sorry, I'm a bit nervous. Can I try again?",
+          "keywords": [
+            "nervous",
+            "try",
+            "again"
+          ],
+          "reply": "Sure. Relax… There we go, got it."
+        },
+        {
+          "text": "Let me wipe my hands first.",
+          "keywords": [
+            "wipe",
+            "dry",
+            "clean",
+            "hands"
+          ],
+          "reply": "Good idea… Yes, that worked."
+        },
+        {
+          "text": "Should I use my other hand?",
+          "keywords": [
+            "other",
+            "left",
+            "hand",
+            "should"
+          ],
+          "reply": "Let's try the left… Okay, that's fine."
+        }
+      ]
+    },
+    {
+      "id": "small-talk",
+      "titleTr": "Memur şakalaşıyor",
+      "intro": "New York in October, huh? Hope you packed a warm jacket!",
+      "instruction": "The officer makes small talk. The traveller answers, asks them to repeat, or asks about the weather.",
+      "retryReply": "Just saying — it gets chilly here!",
+      "options": [
+        {
+          "text": "Yes, I did! I'm ready.",
+          "keywords": [
+            "yes",
+            "packed",
+            "ready",
+            "did"
+          ],
+          "reply": "Good for you. You'll need it."
+        },
+        {
+          "text": "Sorry, could you say that again?",
+          "keywords": [
+            "sorry",
+            "again",
+            "repeat",
+            "say"
+          ],
+          "reply": "I said, I hope you packed a warm jacket. It's cold!"
+        },
+        {
+          "text": "Is it very cold right now?",
+          "keywords": [
+            "cold",
+            "weather",
+            "now",
+            "very"
+          ],
+          "reply": "About ten degrees. Not too bad."
+        }
+      ]
+    },
+    {
+      "id": "selfie",
+      "titleTr": "Kamera görüntüsü net değil",
+      "intro": "The camera didn't get you. Can you take your glasses off?",
+      "instruction": "The camera photo failed. The traveller takes off glasses, asks what to do, or looks again.",
+      "retryReply": "We need a clear photo. Glasses off, please.",
+      "options": [
+        {
+          "text": "Sure, my glasses are off now.",
+          "keywords": [
+            "glasses",
+            "off",
+            "sure"
+          ],
+          "reply": "Perfect. Got it."
+        },
+        {
+          "text": "Like this? Should I stand closer?",
+          "keywords": [
+            "closer",
+            "stand",
+            "like this",
+            "should"
+          ],
+          "reply": "Yes, right there. Great."
+        },
+        {
+          "text": "Sorry, can you show me where to look?",
+          "keywords": [
+            "where",
+            "look",
+            "show"
+          ],
+          "reply": "Right at the little black circle. Good."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "fingerprints",
+      "pool": [
+        "sweaty",
+        "small-talk",
+        "selfie"
+      ]
+    }
+  ],
+  "closing": "Welcome to the United States. Baggage claim is in hall {hall}, carousel {belt}. Enjoy New York!"
+}
