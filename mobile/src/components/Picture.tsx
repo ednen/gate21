@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Svg, { Circle, G as Group, Line, Path, Rect, Text as SvgText } from 'react-native-svg';
+import Svg, { Circle, Defs, FeColorMatrix, Filter, G as Group, Line, Path, Rect, Text as SvgText } from 'react-native-svg';
 
 import { colors, fonts } from '@/theme';
 
@@ -8,7 +8,7 @@ import { colors, fonts } from '@/theme';
  * All share a 64×64 grid, a 2.5 stroke and at most two accent colours, so they read as a set
  * and can later be swapped for professional illustrations without touching the content.
  */
-export function Picture({ name, size = 72, label }: { name: string; size?: number; label?: string }) {
+export function Picture({ name, size = 72, label, shadow = false }: { name: string; size?: number; label?: string; shadow?: boolean }) {
   const drawing = DRAWINGS[name];
   if (!drawing) {
     return null;
@@ -23,7 +23,19 @@ export function Picture({ name, size = 72, label }: { name: string; size?: numbe
       accessibilityElementsHidden={!label}
       importantForAccessibility={label ? 'yes' : 'no'}
     >
-      {drawing}
+      {shadow ? (
+        <>
+          <Defs>
+            {/* Every colour becomes one flat grey, keeping only the shape: a word not learned yet. */}
+            <Filter id="silhouette">
+              <FeColorMatrix type="matrix" values="0 0 0 0 0.62  0 0 0 0 0.65  0 0 0 0 0.70  0 0 0 1 0" />
+            </Filter>
+          </Defs>
+          <Group filter="url(#silhouette)">{drawing}</Group>
+        </>
+      ) : (
+        drawing
+      )}
     </Svg>
   );
 }

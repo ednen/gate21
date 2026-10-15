@@ -39,9 +39,11 @@ public class ProgressService {
                              List<String> levelsEarned, boolean graduated, int xpTotal, int streak) {
     }
 
+    /** {@code doneSteps}: the chapter's finished steps, so the app can tell which words were learned. */
     public record PassportChapter(String slug, String kind, String stop, String title, String titleTr, int week,
                                   int day, int order, String icon, boolean available, boolean unlocked, int stepsDone,
-                                  int totalSteps, boolean complete, int stars, String stamp, Instant stampedAt) {
+                                  int totalSteps, List<Step> doneSteps, boolean complete, int stars, String stamp,
+                                  Instant stampedAt) {
     }
 
     /** A week's badge: earned when all seven of its lessons are complete. */
@@ -152,6 +154,7 @@ public class ProgressService {
                 unlocked(c, journeyDay, rows),
                 row == null ? 0 : Integer.bitCount(row.stepsDone() & required),
                 Integer.bitCount(required),
+                row == null ? List.of() : stepsIn(row.stepsDone() & required),
                 complete(c, rows),
                 row == null ? 0 : row.stars(),
                 stamp,
@@ -258,6 +261,10 @@ public class ProgressService {
 
     private Map<String, ChapterRow> rows(UUID userId) {
         return repo.chapters(userId).stream().collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
+    }
+
+    static List<Step> stepsIn(int bits) {
+        return java.util.Arrays.stream(Step.values()).filter(s -> (bits & s.bit()) != 0).toList();
     }
 
     /** The chapter's own steps; chapters that are not out yet need every step there is. */

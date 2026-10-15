@@ -85,6 +85,8 @@ class ProgressIT extends IntegrationTest {
         var hotel = findChapter(passport, "hotel-bronze");
         assertThat(hotel.path("complete").asBoolean()).isTrue();
         assertThat(hotel.path("totalSteps").asInt()).isEqualTo(6);
+        assertThat(hotel.path("doneSteps")).hasSize(6);
+        assertThat(hotel.path("doneSteps").toString()).contains("MATCH", "SURVIVE");
         assertThat(hotel.path("stars").asInt()).isEqualTo(3);
         assertThat(hotel.path("stamp").asText()).isEqualTo("CHECKED IN");
         assertThat(hotel.path("stop").asText()).isEqualTo("hotel");

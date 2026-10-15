@@ -44,6 +44,11 @@ export async function recordStep(chapter: string, step: Step, score: number | nu
   void flushProgress();
 }
 
+/** Attempts recorded on this device that the server has not confirmed yet. */
+export async function pendingAttempts(): Promise<Attempt[]> {
+  return [...(await load())];
+}
+
 export async function pendingCount(): Promise<number> {
   return (await load()).length;
 }

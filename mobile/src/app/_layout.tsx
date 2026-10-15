@@ -75,6 +75,7 @@ export default function RootLayout() {
           <Stack.Screen name="home" options={{ animation: 'none' }} />
           <Stack.Screen name="passport" options={{ animation: 'none' }} />
           <Stack.Screen name="practice" options={{ animation: 'none' }} />
+          <Stack.Screen name="words" options={{ animation: 'none' }} />
           <Stack.Screen name="membership" options={{ presentation: 'modal' }} />
           <Stack.Screen name="sos" options={{ animation: 'none' }} />
           <Stack.Screen name="progress" options={{ animation: 'none' }} />

@@ -69,6 +69,7 @@ export type PassportChapter = {
   unlocked: boolean;
   stepsDone: number;
   totalSteps: number;
+  doneSteps: Step[];
   complete: boolean;
   stars: number;
   stamp: string | null;

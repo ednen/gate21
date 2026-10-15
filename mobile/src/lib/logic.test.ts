@@ -4,6 +4,7 @@ import { acknowledge, type Attempt, enqueue, MAX_BATCH, nextBatch } from './queu
 import { average, joinTiles, shuffledOrder, surviveScore } from './sentence';
 import { canPlay, matchPairs } from './rules';
 import { compareVersions } from './version';
+import { buildCollection, learnedChapters } from './words';
 import hotel from '../../../content/chapters/hotel-bronze.json';
 import alphabet from '../../../content/chapters/starter-alphabet.json';
 
@@ -91,5 +92,28 @@ describe('plan access', () => {
     expect(canPlay({ kind: 'lesson', day: 3 }, false, 2)).toBe(false);
     expect(canPlay({ kind: 'simulation', day: 21 }, false, 2)).toBe(false);
     expect(canPlay({ kind: 'lesson', day: 17 }, true, 2)).toBe(true);
+  });
+});
+
+describe('word collection', () => {
+  const chapters = [
+    { slug: 'a', title: 'A', subtitle: '', words: [{ en: 'passport', tr: 'pasaport' }, { en: 'receipt', tr: 'fiş' }] },
+    { slug: 'b', title: 'B', subtitle: '', words: [{ en: 'Receipt', tr: 'fiş' }, { en: 'taxi', tr: 'taksi' }] },
+  ];
+
+  it('counts a chapter as learned after its matching step, on the server or still queued', () => {
+    const learned = learnedChapters(
+      [{ slug: 'a', complete: false, doneSteps: ['DISCOVER', 'MATCH'] }, { slug: 'b', complete: false, doneSteps: ['DISCOVER'] }],
+      [{ chapter: 'c', step: 'MATCH' }, { chapter: 'b', step: 'PRONOUNCE' }],
+    );
+    expect([...learned].sort()).toEqual(['a', 'c']);
+  });
+
+  it('shows each word once and marks it learned from any chapter', () => {
+    const c = buildCollection(chapters, new Set(['b']));
+    expect(c.sections.map((s) => s.words.map((w) => w.en))).toEqual([['passport', 'receipt'], ['taxi']]);
+    expect(c.sections[0].words.map((w) => w.learned)).toEqual([false, true]);
+    expect(c.total).toBe(3);
+    expect(c.learned).toBe(2);
   });
 });

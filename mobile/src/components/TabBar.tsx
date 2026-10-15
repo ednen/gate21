@@ -6,10 +6,11 @@ import { colors, fonts } from '@/theme';
 
 import { Icon, type IconName } from './Icon';
 
-type Tab = 'home' | 'passport' | 'practice' | 'sos' | 'progress';
+type Tab = 'home' | 'words' | 'passport' | 'practice' | 'sos' | 'progress';
 
-const TABS: { key: Tab; label: string; icon: IconName; href: '/home' | '/passport' | '/practice' | '/sos' | '/progress' }[] = [
+const TABS: { key: Tab; label: string; icon: IconName; href: '/home' | '/words' | '/passport' | '/practice' | '/sos' | '/progress' }[] = [
   { key: 'home', label: 'Bugün', icon: 'home', href: '/home' },
+  { key: 'words', label: 'Kelimeler', icon: 'book', href: '/words' },
   { key: 'passport', label: 'Pasaport', icon: 'passport', href: '/passport' },
   { key: 'practice', label: 'Pratik', icon: 'repeat', href: '/practice' },
   { key: 'sos', label: 'SOS', icon: 'alert', href: '/sos' },
@@ -51,5 +52,5 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   tab: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 4, minHeight: 52 },
-  text: { fontSize: 11 },
+  text: { fontSize: 10 },
 });

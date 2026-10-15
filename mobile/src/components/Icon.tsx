@@ -4,7 +4,7 @@ export type IconName =
   | 'plane' | 'bed' | 'utensils' | 'bag' | 'train' | 'map' | 'alert' | 'chat' | 'edit' | 'ticket' | 'globe'
   | 'mic' | 'speaker' | 'flame' | 'star' | 'target' | 'home' | 'passport' | 'chart' | 'check' | 'close'
   | 'arrowLeft' | 'arrowRight' | 'lock' | 'wifiOff' | 'car' | 'coffee' | 'abc' | 'hash' | 'people' | 'medal'
-  | 'repeat';
+  | 'repeat' | 'book';
 
 type Props = { name: IconName; size?: number; color?: string; fill?: string; strokeWidth?: number };
 
@@ -134,6 +134,8 @@ function paths(name: IconName, c: Common) {
       );
     case 'repeat':
       return <Path {...line} d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3" />;
+    case 'book':
+      return <Path {...line} d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z" />;
     case 'wifiOff':
       return <Path {...line} d="m2 2 20 20M8.5 16.5a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.6M10.7 5c4-.4 8.1.9 11.3 3.8M16.9 11.3a10 10 0 0 1 2.2 1.6M5 13a10 10 0 0 1 5.2-2.8M12 20h.01" />;
   }
