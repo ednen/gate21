@@ -1,72 +1,167 @@
 {
   "slug": "transport-gold",
-  "draft": true,
   "mission": "Find your way when you're lost",
-  "missionTr": "Şehirde kayboldun: yerel birinden yol sor, tarifi anla, iptal olan seferde alternatif bul",
+  "missionTr": "Şehirde kayboldun: yerel birinden yol sor, tarifi tekrar ederek kontrol et; iptal olan feribot yerine başka bir yol bul",
   "stamp": "ROUND TRIP",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
     "RECOGNIZE",
-    "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "I'm lost.",
-      "tr": "Kayboldum."
+      "tr": "Kayboldum.",
+      "picture": "lost",
+      "example": "Excuse me, I'm lost.",
+      "exampleTr": "Affedersiniz, kayboldum."
     },
     {
       "en": "turn left / right",
-      "tr": "sola / sağa dön"
+      "tr": "sola / sağa dön",
+      "picture": "turn",
+      "example": "Turn left at the lights.",
+      "exampleTr": "Işıklardan sola dön."
     },
     {
       "en": "go straight on",
-      "tr": "düz git"
+      "tr": "düz git",
+      "picture": "straight",
+      "example": "Go straight on for two blocks.",
+      "exampleTr": "İki blok düz git."
+    },
+    {
+      "en": "on the corner",
+      "tr": "köşede",
+      "picture": "corner",
+      "example": "The café is on the corner.",
+      "exampleTr": "Kafe köşede."
     },
     {
       "en": "opposite",
-      "tr": "karşısında"
+      "tr": "karşısında",
+      "picture": "opposite",
+      "example": "It's opposite the station.",
+      "exampleTr": "İstasyonun karşısında."
     },
     {
       "en": "next to",
-      "tr": "yanında"
+      "tr": "yanında",
+      "picture": "next-to",
+      "example": "It's next to the bank.",
+      "exampleTr": "Bankanın yanında."
     },
     {
       "en": "ferry",
-      "tr": "feribot"
+      "tr": "feribot",
+      "picture": "ferry",
+      "example": "When is the next ferry?",
+      "exampleTr": "Sonraki feribot ne zaman?"
     },
     {
       "en": "cancelled",
-      "tr": "iptal"
+      "tr": "iptal",
+      "picture": "cancelled",
+      "example": "The ferry is cancelled.",
+      "exampleTr": "Feribot iptal."
     },
     {
       "en": "replacement bus",
-      "tr": "yerine konan otobüs"
+      "tr": "yerine konan otobüs",
+      "picture": "bus",
+      "example": "Take the replacement bus.",
+      "exampleTr": "Yerine konan otobüse bin."
     },
     {
       "en": "on foot",
-      "tr": "yürüyerek"
+      "tr": "yürüyerek",
+      "picture": "walk",
+      "example": "It's ten minutes on foot.",
+      "exampleTr": "Yürüyerek on dakika."
     }
   ],
-  "scene": {
-    "role": "Local on the street",
-    "setting": "Circular Quay, Sydney",
-    "goalsTr": [
-      "Kaybolduğunu söyle ve Opera Binası'na nasıl gideceğini sor",
-      "Tarifi tekrar et ve doğru anladığını kontrol et",
-      "Yürüyerek ne kadar sürdüğünü sor",
-      "Feribot saatini sor",
-      "İptal olan sefer için alternatif sor",
-      "Teşekkür et"
-    ],
-    "twistsTr": [
-      "Tarif çok hızlı ve uzun",
-      "Feribot seferi iptal",
-      "Yanlış otobüse bindin, şoföre nerede inmen gerektiğini sor"
+  "pronounce": [
+    {
+      "word": "straight",
+      "ipa": "/streɪt/",
+      "stress": "STRAYT",
+      "tipTr": "Tek hece: STREYT. gh okunmaz."
+    },
+    {
+      "word": "opposite",
+      "ipa": "/ˈɒp.ə.zɪt/",
+      "stress": "OP-uh-zit",
+      "tipTr": "Vurgu başta: OP-ı-zit."
+    },
+    {
+      "word": "ferry",
+      "ipa": "/ˈfer.i/",
+      "stress": "FER-ee",
+      "tipTr": "\"Feri\": vurgu başta, kısa e."
+    }
+  ],
+  "match": [
+    "I'm lost.",
+    "turn left / right",
+    "go straight on",
+    "opposite",
+    "ferry",
+    "on foot"
+  ],
+  "recognize": [
+    {
+      "audio": "Go straight on, past the ferry wharf, and it's on your right.",
+      "prompt": "Listen. Where is the Opera House?",
+      "options": [
+        "Past the ferry wharf, on the right",
+        "Opposite the station",
+        "Next to the bank"
+      ],
+      "answer": 0,
+      "explainTr": "\"Go straight on… past the wharf… on your right\" = düz git, iskeleyi geç, sağında."
+    },
+    {
+      "prompt": "You want to check you understood. You say:",
+      "options": [
+        "So, straight on and then left?",
+        "What?",
+        "I know."
+      ],
+      "answer": 0,
+      "explainTr": "Duyduğun tarifi tekrar etmek (\"So, … ?\") yanlış anlamayı önler."
+    },
+    {
+      "audio": "Attention please: the three-thirty ferry to Manly is cancelled.",
+      "prompt": "Listen. What happened to the ferry?",
+      "options": [
+        "It's cancelled",
+        "It's late",
+        "It's full"
+      ],
+      "answer": 0,
+      "explainTr": "\"Cancelled\" = iptal. Yerine \"replacement bus\" konur."
+    }
+  ],
+  "use": {
+    "word": "I'm lost.",
+    "phrase": "Excuse me, I'm lost. How do I get to the Opera House?",
+    "phraseTr": "Affedersiniz, kayboldum. Opera Binası'na nasıl giderim?",
+    "situation": "You're lost in the city. Ask someone how to get to the Opera House.",
+    "situationTr": "Şehirde kayboldun. Birine Opera Binası'na nasıl gideceğini sor.",
+    "tiles": [
+      "Excuse me",
+      ",",
+      "I'm lost",
+      ".",
+      "How do I get",
+      "to the Opera House",
+      "?"
     ]
   },
-  "notesTr": "Yol tarifi dili: left/right/straight on/opposite/next to."
+  "survive": {
+    "scenario": "transport-gold"
+  }
 }

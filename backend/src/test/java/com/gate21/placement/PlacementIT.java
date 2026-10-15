@@ -14,7 +14,7 @@ class PlacementIT extends IntegrationTest {
     private static final List<Integer> ALL_CORRECT = List.of(1, 0, 1, 2, 1);
 
     @Test
-    void aStrongResultSkipsAheadOnlyToWeeksThatHaveLessons() throws Exception {
+    void aStrongResultStartsTheJourneyInWeekThree() throws Exception {
         String token = token("Ozan");
         Response r = postJson("/api/v1/placement", token,
             Map.of("kind", "INITIAL", "answers", ALL_CORRECT, "speakingScores", List.of(90, 80)));
@@ -23,12 +23,11 @@ class PlacementIT extends IntegrationTest {
         assertThat(r.body().path("score").asInt()).isEqualTo(96);
         assertThat(r.body().path("level").asText()).isEqualTo("Gold Traveller");
         assertThat(r.body().path("startDayApplied").asBoolean()).isTrue();
-        // Gold lessons are not out yet, so the journey starts at the latest week that has them: Silver.
-        assertThat(r.body().path("startDay").asInt()).isEqualTo(8);
+        assertThat(r.body().path("startDay").asInt()).isEqualTo(15);
         var me = getJson("/api/v1/me", token).body();
-        assertThat(me.path("journeyDay").asInt()).isEqualTo(8);
-        assertThat(me.path("levelId").asText()).isEqualTo("SILVER");
-        assertThat(me.path("nextChapter").path("slug").asText()).isEqualTo("arrival-silver");
+        assertThat(me.path("journeyDay").asInt()).isEqualTo(15);
+        assertThat(me.path("levelId").asText()).isEqualTo("GOLD");
+        assertThat(me.path("nextChapter").path("slug").asText()).isEqualTo("arrival-gold");
     }
 
     @Test

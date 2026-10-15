@@ -1,0 +1,374 @@
+{
+  "slug": "transport-gold",
+  "chapter": "transport-gold",
+  "title": "Lost in the city",
+  "titleTr": "Şehirde kaybolmak",
+  "role": "Local",
+  "setting": "Circular Quay, Sydney",
+  "voice": "en-AU",
+  "persona": "You are a helpful Sydney local walking near Circular Quay. You give directions quickly, with landmarks, and you use Australian expressions.",
+  "briefTr": "Opera Binası'nı arıyorsun ama kayboldun. Sonra Manly'ye feribotla gideceksin. Tarifi tekrar ederek kontrol et.",
+  "opening": "You right there? You look a bit lost.",
+  "facts": [
+    {
+      "id": "minutes",
+      "values": [
+        "ten minutes",
+        "fifteen minutes",
+        "eight minutes"
+      ],
+      "question": "How long was the walk to the Opera House?",
+      "questionTr": "Opera Binası'na yürüyüş ne kadar sürdü?"
+    },
+    {
+      "id": "stand",
+      "values": [
+        "C",
+        "D",
+        "B"
+      ],
+      "question": "Which stand did the replacement bus leave from?",
+      "questionTr": "Yedek otobüs hangi perondan kalkıyordu?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "lost",
+      "titleTr": "Kaybolduğunu söyleyip yol sormak",
+      "instruction": "The visitor says they are lost and asks how to get to a place.",
+      "hint": "Yes, I'm lost. How do I get to the Opera House?",
+      "hintTr": "Evet, kayboldum. Opera Binası'na nasıl giderim?",
+      "keywords": [
+        "lost",
+        "how do i get",
+        "opera house",
+        "where",
+        "way",
+        "get to"
+      ],
+      "successReply": "Easy — go straight on, past the ferry wharf, and it's on your right.",
+      "retryReply": "Need a hand finding something?"
+    },
+    {
+      "id": "check",
+      "titleTr": "Tarifi tekrar ederek kontrol etmek",
+      "ask": "Got that?",
+      "instruction": "The visitor repeats the directions to check.",
+      "hint": "So, straight on, past the wharf, and it's on the right?",
+      "hintTr": "Yani düz, iskeleyi geç, sağda mı?",
+      "keywords": [
+        "so",
+        "straight",
+        "right",
+        "past",
+        "wharf",
+        "left",
+        "then"
+      ],
+      "successReply": "Spot on!",
+      "retryReply": "Want me to say that again?"
+    },
+    {
+      "id": "time",
+      "titleTr": "Yürüyerek ne kadar sürdüğünü sormak",
+      "ask": "Easy walk from here.",
+      "instruction": "The visitor asks how long it takes on foot.",
+      "hint": "How long does it take on foot?",
+      "hintTr": "Yürüyerek ne kadar sürer?",
+      "keywords": [
+        "how long",
+        "on foot",
+        "walk",
+        "minutes",
+        "far"
+      ],
+      "successReply": "Only about {minutes}.",
+      "retryReply": "Anything else you need to know?"
+    },
+    {
+      "id": "ferry",
+      "titleTr": "Sonraki feribotu sormak",
+      "ask": "Ferry tickets here! Where are you off to?",
+      "instruction": "A new character: a ferry ticket officer. The visitor asks when the next ferry to Manly is.",
+      "hint": "When is the next ferry to Manly?",
+      "hintTr": "Manly'ye sonraki feribot ne zaman?",
+      "keywords": [
+        "next ferry",
+        "when",
+        "ferry",
+        "manly",
+        "time",
+        "next"
+      ],
+      "successReply": "Let me check for you.",
+      "retryReply": "Where are you heading today?",
+      "role": "Ferry ticket officer",
+      "setting": "Circular Quay · Wharf 3",
+      "voice": "en-AU",
+      "persona": "You are a ferry ticket officer at Circular Quay in Sydney. You are brisk but helpful, and today some ferries are cancelled."
+    },
+    {
+      "id": "alternative",
+      "titleTr": "Alternatif sormak",
+      "ask": "Sorry, the three-thirty to Manly is cancelled.",
+      "instruction": "The ferry is cancelled. The visitor asks for another way, such as a replacement bus.",
+      "hint": "Is there a replacement bus?",
+      "hintTr": "Yerine otobüs var mı?",
+      "keywords": [
+        "replacement",
+        "bus",
+        "another",
+        "other way",
+        "alternative",
+        "how else"
+      ],
+      "successReply": "Yes — take the replacement bus from stand {stand}.",
+      "retryReply": "Do you want to know other ways to get there?"
+    },
+    {
+      "id": "get-off",
+      "titleTr": "Nerede ineceğini sormak",
+      "ask": "It takes about forty minutes.",
+      "instruction": "The visitor asks where to get off.",
+      "hint": "Where do I get off?",
+      "hintTr": "Nerede inmeliyim?",
+      "keywords": [
+        "where",
+        "get off",
+        "stop",
+        "which stop",
+        "off"
+      ],
+      "successReply": "Get off at Manly Wharf — it's the last stop.",
+      "retryReply": "Anything else?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "too-fast",
+      "titleTr": "Tarif çok hızlı",
+      "intro": "Yeah-so-straight-down-there-left-at-the-Quay-past-the-wharf-can't-miss-it!",
+      "instruction": "The directions were too fast. The visitor asks to repeat slowly, asks one step at a time, or asks to show it on the map.",
+      "retryReply": "Sorry, I talk heaps fast!",
+      "options": [
+        {
+          "text": "Sorry, could you say that more slowly?",
+          "keywords": [
+            "slowly",
+            "slower",
+            "say that"
+          ],
+          "reply": "Sure. Straight on. Past the wharf. On your right."
+        },
+        {
+          "text": "One step at a time, please?",
+          "keywords": [
+            "one step",
+            "step",
+            "at a time"
+          ],
+          "reply": "First, go straight. Then, pass the wharf. It's on the right."
+        },
+        {
+          "text": "Could you show me on my map?",
+          "keywords": [
+            "map",
+            "show"
+          ],
+          "reply": "Here — you're here, and it's just there."
+        }
+      ]
+    },
+    {
+      "id": "roadworks",
+      "titleTr": "Yol çalışması",
+      "intro": "Oh wait, there are roadworks on that path. You'll have to go around.",
+      "instruction": "The path is closed. The visitor asks for the new way, asks how long it adds, or asks if there's a bus.",
+      "retryReply": "It's always something in this city!",
+      "options": [
+        {
+          "text": "Which way should I go then?",
+          "keywords": [
+            "which way",
+            "then",
+            "should"
+          ],
+          "reply": "Go left at the corner, then follow the water."
+        },
+        {
+          "text": "How much longer will it take?",
+          "keywords": [
+            "how much",
+            "longer"
+          ],
+          "reply": "Maybe five minutes more."
+        },
+        {
+          "text": "Is there a bus instead?",
+          "keywords": [
+            "bus",
+            "instead"
+          ],
+          "reply": "You could, but walking is quicker."
+        }
+      ]
+    },
+    {
+      "id": "which-one",
+      "titleTr": "Hangi Opera Binası?",
+      "intro": "The Opera House or the Opera Bar? Lots of tourists mix them up!",
+      "instruction": "The local is unsure which place. The visitor clarifies, describes it, or shows a photo.",
+      "retryReply": "Which one do you mean?",
+      "options": [
+        {
+          "text": "The Opera House, the big white building.",
+          "keywords": [
+            "white",
+            "building",
+            "big"
+          ],
+          "reply": "Ah, the big one! Straight on, you can't miss it."
+        },
+        {
+          "text": "Let me show you a photo.",
+          "keywords": [
+            "photo",
+            "show"
+          ],
+          "reply": "Oh, the Opera House. Straight on!"
+        },
+        {
+          "text": "The one with the concerts.",
+          "keywords": [
+            "concerts",
+            "one with"
+          ],
+          "reply": "Right, the Opera House. Straight ahead."
+        }
+      ]
+    },
+    {
+      "id": "bus-full",
+      "titleTr": "Otobüs dolu",
+      "intro": "The first replacement bus is already full, I'm afraid.",
+      "instruction": "The bus is full. The visitor asks when the next one is, asks about a taxi, or asks to wait.",
+      "retryReply": "Sorry, it's a busy day.",
+      "options": [
+        {
+          "text": "When is the next one?",
+          "keywords": [
+            "when",
+            "next one"
+          ],
+          "reply": "Every fifteen minutes."
+        },
+        {
+          "text": "Should I take a taxi instead?",
+          "keywords": [
+            "taxi",
+            "instead"
+          ],
+          "reply": "It's about forty dollars to Manly. Up to you."
+        },
+        {
+          "text": "Okay, I'll wait for the next bus.",
+          "keywords": [
+            "wait",
+            "okay",
+            "next bus"
+          ],
+          "reply": "Good on ya. Not long."
+        }
+      ]
+    },
+    {
+      "id": "ticket-valid",
+      "titleTr": "Bilet geçerli mi?",
+      "intro": "Do you have an Opal card? Your ferry ticket might not work on the bus.",
+      "instruction": "The visitor's ticket might not be valid. The visitor asks if they need a new ticket, says they paid for the ferry, or asks where to buy one.",
+      "retryReply": "Better to check.",
+      "options": [
+        {
+          "text": "Do I need a new ticket?",
+          "keywords": [
+            "new ticket",
+            "need"
+          ],
+          "reply": "No, with a cancelled ferry the bus is free."
+        },
+        {
+          "text": "But I already paid for the ferry.",
+          "keywords": [
+            "already",
+            "paid"
+          ],
+          "reply": "Fair point — you can ride the bus for free."
+        },
+        {
+          "text": "Where can I buy a ticket?",
+          "keywords": [
+            "where",
+            "buy",
+            "ticket"
+          ],
+          "reply": "No need — replacement buses are free today."
+        }
+      ]
+    },
+    {
+      "id": "wrong-bus",
+      "titleTr": "Yanlış otobüs",
+      "intro": "Careful — that bus at stand A goes to Bondi, not Manly.",
+      "instruction": "The visitor nearly takes the wrong bus. The visitor thanks the officer, asks which bus is right, or asks where stand is.",
+      "retryReply": "Lots of buses here!",
+      "options": [
+        {
+          "text": "Thanks! Which bus is mine?",
+          "keywords": [
+            "which bus",
+            "mine",
+            "thanks"
+          ],
+          "reply": "The one that says Manly Replacement."
+        },
+        {
+          "text": "Where exactly is the right stand?",
+          "keywords": [
+            "where exactly",
+            "right stand",
+            "stand"
+          ],
+          "reply": "Turn around — it's the one with the yellow sign."
+        },
+        {
+          "text": "Oops, good thing you told me!",
+          "keywords": [
+            "good thing",
+            "oops",
+            "told"
+          ],
+          "reply": "No worries, mate."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "check",
+      "pool": [
+        "too-fast",
+        "roadworks",
+        "which-one"
+      ]
+    },
+    {
+      "after": "alternative",
+      "pool": [
+        "bus-full",
+        "ticket-valid",
+        "wrong-bus"
+      ]
+    }
+  ],
+  "closing": "Enjoy Manly, mate!"
+}

@@ -1,0 +1,338 @@
+{
+  "slug": "hotel-gold",
+  "chapter": "hotel-gold",
+  "title": "Problems with the room",
+  "titleTr": "Odada sorun",
+  "role": "Duty manager",
+  "setting": "Harbour Hotel, Sydney · Front desk",
+  "voice": "en-AU",
+  "persona": "You are the duty manager at the Harbour Hotel in Sydney. You are polite and apologetic, but you first try cheap solutions (sending maintenance, free breakfast) before offering a room change or a discount.",
+  "briefTr": "Odanın kliması çalışmıyor ve cadde tarafında olduğu için çok gürültülü. Resepsiyona indin. Kibar ama kararlı ol: oda değişikliği ya da indirim istiyorsun.",
+  "opening": "Good evening. How can I help you?",
+  "facts": [
+    {
+      "id": "room",
+      "values": [
+        "1204",
+        "807",
+        "1510"
+      ],
+      "question": "What was your new room number?",
+      "questionTr": "Yeni oda numaran kaçtı?"
+    },
+    {
+      "id": "discount",
+      "values": [
+        "20 percent",
+        "30 percent",
+        "15 percent"
+      ],
+      "question": "How much discount did you get?",
+      "questionTr": "Ne kadar indirim aldın?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "complaint",
+      "titleTr": "Şikâyete başlamak",
+      "instruction": "The guest says they want to make a complaint about the room.",
+      "hint": "I'd like to make a complaint about my room.",
+      "hintTr": "Odamla ilgili şikâyette bulunmak istiyorum.",
+      "keywords": [
+        "complaint",
+        "complain",
+        "problem",
+        "room",
+        "issue"
+      ],
+      "successReply": "I'm sorry to hear that.",
+      "retryReply": "Is there a problem with your stay?"
+    },
+    {
+      "id": "aircon",
+      "titleTr": "Klimayı anlatmak",
+      "ask": "What seems to be the problem?",
+      "instruction": "The guest explains that the air conditioning does not work.",
+      "hint": "The air conditioning doesn't work.",
+      "hintTr": "Klima çalışmıyor.",
+      "keywords": [
+        "air conditioning",
+        "aircon",
+        "air con",
+        "doesn't work",
+        "broken",
+        "hot",
+        "not working"
+      ],
+      "successReply": "Oh dear.",
+      "retryReply": "What seems to be the problem with the room?"
+    },
+    {
+      "id": "noise",
+      "titleTr": "Gürültüyü anlatmak",
+      "ask": "Is there anything else?",
+      "instruction": "The guest adds that the room is very noisy.",
+      "hint": "And it's very noisy. It faces the street.",
+      "hintTr": "Bir de çok gürültülü. Caddeye bakıyor.",
+      "keywords": [
+        "noisy",
+        "noise",
+        "loud",
+        "street",
+        "music",
+        "traffic"
+      ],
+      "successReply": "I see.",
+      "retryReply": "Is everything else okay with the room?"
+    },
+    {
+      "id": "change",
+      "titleTr": "Oda değişikliği istemek",
+      "ask": "I can send someone up to look at the air conditioning.",
+      "instruction": "The guest asks to change rooms.",
+      "hint": "Could I change rooms, please?",
+      "hintTr": "Oda değiştirebilir miyim, lütfen?",
+      "keywords": [
+        "change",
+        "another room",
+        "move",
+        "different room",
+        "switch",
+        "new room"
+      ],
+      "successReply": "Let me check what we have.",
+      "retryReply": "What would you like us to do?"
+    },
+    {
+      "id": "compensation",
+      "titleTr": "Telafi istemek",
+      "ask": "Your new room is {room}, on the quiet side.",
+      "instruction": "The guest asks for compensation: a discount, a refund or an upgrade.",
+      "hint": "I'd also like a discount for the trouble.",
+      "hintTr": "Yaşadığım sorun için indirim de istiyorum.",
+      "keywords": [
+        "discount",
+        "refund",
+        "upgrade",
+        "compensation",
+        "free",
+        "money",
+        "price"
+      ],
+      "successReply": "That's fair. I can give you {discount} off tonight.",
+      "retryReply": "Is there anything else that would make it right?"
+    },
+    {
+      "id": "writing",
+      "titleTr": "Yazılı onay istemek",
+      "ask": "Is there anything else I can do?",
+      "instruction": "The guest asks for the agreement in writing or by email.",
+      "hint": "Could you confirm that by email, please?",
+      "hintTr": "Bunu e-postayla teyit edebilir misiniz, lütfen?",
+      "keywords": [
+        "email",
+        "writing",
+        "confirm",
+        "written",
+        "paper",
+        "copy"
+      ],
+      "successReply": "Of course, I'll email you now.",
+      "retryReply": "Is there anything else you need from me?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "fully-booked",
+      "titleTr": "Otel tamamen dolu",
+      "intro": "Unfortunately we're fully booked tonight. There are no other rooms.",
+      "instruction": "No other rooms are free. The guest asks to speak to the manager, asks for a room at a partner hotel, or asks for a room tomorrow.",
+      "retryReply": "I really am sorry. What can I do for you?",
+      "options": [
+        {
+          "text": "Could I speak to the general manager?",
+          "keywords": [
+            "general manager",
+            "speak",
+            "manager"
+          ],
+          "reply": "Let me call her… She says we can upgrade you to a suite after all."
+        },
+        {
+          "text": "Can you find me a room at another hotel?",
+          "keywords": [
+            "another hotel",
+            "other hotel",
+            "find"
+          ],
+          "reply": "Yes, our sister hotel next door has a room. We'll pay for it."
+        },
+        {
+          "text": "Then can I move first thing tomorrow?",
+          "keywords": [
+            "tomorrow",
+            "first thing",
+            "then"
+          ],
+          "reply": "Yes, a quiet room will be ready at nine a.m."
+        }
+      ]
+    },
+    {
+      "id": "same-problem",
+      "titleTr": "Diğer odada da aynı sorun",
+      "intro": "The other free room has the same air conditioning problem, I'm afraid.",
+      "instruction": "The new room has the same problem. The guest asks for a fan, an upgrade, or someone to fix it tonight.",
+      "retryReply": "It's an old building, sorry.",
+      "options": [
+        {
+          "text": "Could you bring me a fan, at least?",
+          "keywords": [
+            "fan",
+            "at least"
+          ],
+          "reply": "Absolutely, a fan is on its way."
+        },
+        {
+          "text": "Then could you upgrade me?",
+          "keywords": [
+            "upgrade",
+            "suite",
+            "then"
+          ],
+          "reply": "Let me see… yes, I can upgrade you to a harbour view room."
+        },
+        {
+          "text": "Can someone fix it tonight?",
+          "keywords": [
+            "fix",
+            "tonight",
+            "repair",
+            "someone"
+          ],
+          "reply": "Our technician can come in twenty minutes."
+        }
+      ]
+    },
+    {
+      "id": "only-breakfast",
+      "titleTr": "Sadece kahvaltı teklif ediyor",
+      "intro": "The best I can offer is free breakfast tomorrow.",
+      "instruction": "The offer is too small. The guest politely says it's not enough, asks for a discount, or asks for the manager.",
+      "retryReply": "That's what I'm allowed to offer.",
+      "options": [
+        {
+          "text": "Thanks, but that's not enough.",
+          "keywords": [
+            "not enough",
+            "enough"
+          ],
+          "reply": "I understand. Let me add a twenty percent discount."
+        },
+        {
+          "text": "I'd prefer a discount on the room.",
+          "keywords": [
+            "discount",
+            "prefer"
+          ],
+          "reply": "Okay, twenty percent off tonight."
+        },
+        {
+          "text": "Can I talk to the manager on duty?",
+          "keywords": [
+            "manager",
+            "talk",
+            "on duty"
+          ],
+          "reply": "Of course — she agrees: a new room and a discount."
+        }
+      ]
+    },
+    {
+      "id": "refund-wait",
+      "titleTr": "İade 10 gün sürüyor",
+      "intro": "The refund will take about ten business days to reach your card.",
+      "instruction": "The refund is slow. The guest asks for cash, asks for a receipt, or accepts.",
+      "retryReply": "That's how long the bank takes.",
+      "options": [
+        {
+          "text": "Can I get it in cash instead?",
+          "keywords": [
+            "cash",
+            "instead"
+          ],
+          "reply": "Sure, I can take it off your bill right away."
+        },
+        {
+          "text": "Can I have a receipt for the refund?",
+          "keywords": [
+            "receipt",
+            "proof"
+          ],
+          "reply": "Of course, I'll print one now."
+        },
+        {
+          "text": "That's fine, thank you.",
+          "keywords": [
+            "fine",
+            "thank"
+          ],
+          "reply": "Thank you for your patience."
+        }
+      ]
+    },
+    {
+      "id": "manager-tomorrow",
+      "titleTr": "Müdür yarın gelecek",
+      "intro": "The general manager isn't here until tomorrow.",
+      "instruction": "The manager is not available. The guest asks for the manager's email, asks for a call tomorrow, or asks the duty manager to decide now.",
+      "retryReply": "I'll make sure she knows.",
+      "options": [
+        {
+          "text": "Can I have her email address?",
+          "keywords": [
+            "email",
+            "address"
+          ],
+          "reply": "Sure, here's her card."
+        },
+        {
+          "text": "Could she call me tomorrow morning?",
+          "keywords": [
+            "call",
+            "tomorrow",
+            "morning"
+          ],
+          "reply": "I'll leave her a note to call you at nine."
+        },
+        {
+          "text": "Can't you decide now?",
+          "keywords": [
+            "decide",
+            "now",
+            "can't you"
+          ],
+          "reply": "You're right. I'll approve it myself."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "change",
+      "pool": [
+        "fully-booked",
+        "same-problem",
+        "only-breakfast"
+      ]
+    },
+    {
+      "after": "compensation",
+      "pool": [
+        "refund-wait",
+        "manager-tomorrow"
+      ]
+    }
+  ],
+  "closing": "Again, I'm very sorry. Enjoy the rest of your stay."
+}

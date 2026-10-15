@@ -1,68 +1,209 @@
 {
   "slug": "transfer-gold",
-  "draft": true,
   "mission": "Handle trouble on the road",
-  "missionTr": "Taksi yolunda sorunları çöz: taksimetre açık değil, yanlış yol, ödeme sorunu",
+  "missionTr": "Taksi yolculuğunda sorunları çöz: sabit fiyat sor, taksimetreyi açtır, en kısa yoldan gitmesini iste, köprü ücretini sor, doğru yerde indir",
   "stamp": "SAFE ARRIVAL",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
-    "RECOGNIZE",
     "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "meter",
-      "tr": "taksimetre"
-    },
-    {
-      "en": "wrong way",
-      "tr": "yanlış yol"
+      "tr": "taksimetre",
+      "picture": "meter",
+      "example": "Could you turn on the meter, please?",
+      "exampleTr": "Taksimetreyi açar mısınız, lütfen?"
     },
     {
       "en": "fixed price",
-      "tr": "sabit fiyat"
+      "tr": "sabit fiyat",
+      "picture": "tag",
+      "example": "Is there a fixed price to the city?",
+      "exampleTr": "Şehre sabit fiyat var mı?"
+    },
+    {
+      "en": "wrong way",
+      "tr": "yanlış yol",
+      "picture": "u-turn",
+      "example": "I think we're going the wrong way.",
+      "exampleTr": "Sanırım yanlış yoldan gidiyoruz."
+    },
+    {
+      "en": "shortest way",
+      "tr": "en kısa yol",
+      "picture": "straight",
+      "example": "Can we take the shortest way?",
+      "exampleTr": "En kısa yoldan gidebilir miyiz?"
     },
     {
       "en": "toll",
-      "tr": "geçiş ücreti"
+      "tr": "geçiş ücreti",
+      "picture": "toll",
+      "example": "Is there a toll on the bridge?",
+      "exampleTr": "Köprüde geçiş ücreti var mı?"
+    },
+    {
+      "en": "bridge",
+      "tr": "köprü",
+      "picture": "bridge",
+      "example": "We'll go over the Harbour Bridge.",
+      "exampleTr": "Liman Köprüsü'nden geçeceğiz."
     },
     {
       "en": "detour",
-      "tr": "dolambaçlı yol"
+      "tr": "dolambaçlı yol",
+      "picture": "detour",
+      "example": "The road is closed, so we'll take a detour.",
+      "exampleTr": "Yol kapalı, o yüzden dolaşarak gideceğiz."
     },
     {
       "en": "rideshare",
-      "tr": "araç paylaşımı (Uber vb.)"
+      "tr": "araç paylaşım uygulaması (Uber vb.)",
+      "picture": "rideshare",
+      "example": "I'll book a rideshare.",
+      "exampleTr": "Uygulamadan araç çağıracağım."
     },
     {
       "en": "pick-up point",
-      "tr": "alınma noktası"
+      "tr": "alınma noktası",
+      "picture": "map-pin",
+      "example": "The rideshare pick-up point is outside door 3.",
+      "exampleTr": "Araç alınma noktası 3. kapının önünde."
     },
     {
       "en": "Can you pull over here?",
-      "tr": "Burada kenara çekebilir misiniz?"
+      "tr": "Burada kenara çekebilir misiniz?",
+      "picture": "pull-over",
+      "example": "Can you pull over here, please?",
+      "exampleTr": "Burada kenara çekebilir misiniz, lütfen?"
     }
   ],
-  "scene": {
-    "role": "Taxi driver",
-    "setting": "Sydney Airport · Taxi rank",
-    "goalsTr": [
-      "Gideceğin yeri söyle ve sabit fiyat olup olmadığını sor",
-      "Taksimetrenin açık olmadığını fark et ve aç diye rica et",
-      "Neden bu yoldan gittiğini kibarca sor",
-      "Köprü geçiş ücretini sor",
-      "Otelin önünde kenara çekmesini iste",
-      "Fiş iste"
-    ],
-    "twistsTr": [
-      "Şoför yanlış yola sapıyor",
-      "Kartın reddediliyor ve nakdin yetmiyor",
-      "Uygulamadan çağırdığın araç başka bir kapıda bekliyor"
+  "pronounce": [
+    {
+      "word": "meter",
+      "ipa": "/ˈmiː.tə/",
+      "stress": "MEE-tuh",
+      "tipTr": "Avustralya'da sondaki r neredeyse duyulmaz: Mİİ-tı."
+    },
+    {
+      "word": "detour",
+      "ipa": "/ˈdiː.tʊə/",
+      "stress": "DEE-tour",
+      "tipTr": "Vurgu başta: Dİİ-tuı."
+    },
+    {
+      "word": "toll",
+      "ipa": "/təʊl/",
+      "stress": "TOHL",
+      "tipTr": "\"Tol\" değil, uzun o: TOUL."
+    }
+  ],
+  "match": [
+    "meter",
+    "wrong way",
+    "toll",
+    "bridge",
+    "detour",
+    "Can you pull over here?"
+  ],
+  "dialog": {
+    "titleTr": "Taksiyle şehre",
+    "lines": [
+      {
+        "who": "Driver",
+        "text": "G'day! Where to?"
+      },
+      {
+        "who": "You",
+        "text": "The Harbour Hotel, please. Is there a ___ price?",
+        "gap": "fixed",
+        "options": [
+          "fixed",
+          "free",
+          "full"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "No, it's on the meter."
+      },
+      {
+        "who": "You",
+        "text": "Sorry, could you turn on the ___, please?",
+        "gap": "meter",
+        "options": [
+          "meter",
+          "mirror",
+          "music"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "Oh, sorry mate! Done."
+      },
+      {
+        "who": "You",
+        "text": "Is there a ___ on the bridge?",
+        "gap": "toll",
+        "options": [
+          "toll",
+          "tall",
+          "tool"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "Yeah, four dollars."
+      },
+      {
+        "who": "You",
+        "text": "Hmm, are we going the ___ way?",
+        "gap": "wrong",
+        "options": [
+          "wrong",
+          "long",
+          "right"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "No, it's a detour — the road's closed."
+      },
+      {
+        "who": "You",
+        "text": "Okay. Can you ___ over here, please?",
+        "gap": "pull",
+        "options": [
+          "pull",
+          "push",
+          "put"
+        ]
+      },
+      {
+        "who": "Driver",
+        "text": "No worries. That's sixty-two dollars."
+      }
     ]
   },
-  "notesTr": "Avustralya aksanı (en-AU)."
+  "use": {
+    "word": "meter",
+    "phrase": "Could you turn on the meter, please?",
+    "phraseTr": "Taksimetreyi açar mısınız, lütfen?",
+    "situation": "The taxi has started driving but the meter is off. Ask the driver to turn it on.",
+    "situationTr": "Taksi yola çıktı ama taksimetre kapalı. Şoförden açmasını iste.",
+    "tiles": [
+      "Could you",
+      "turn on",
+      "the meter, please",
+      "?"
+    ]
+  },
+  "survive": {
+    "scenario": "transfer-gold"
+  }
 }

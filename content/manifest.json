@@ -1,5 +1,5 @@
 {
-  "version": "2026.10.4",
+  "version": "2026.10.5",
   "freeDays": 2,
   "levels": [
     {
@@ -340,7 +340,7 @@
       "title": "Lost luggage",
       "titleTr": "Kayıp bagaj",
       "icon": "passport",
-      "available": false
+      "available": true
     },
     {
       "slug": "transfer-gold",
@@ -352,7 +352,7 @@
       "title": "Trouble on the road",
       "titleTr": "Yolda sorunlar",
       "icon": "car",
-      "available": false
+      "available": true
     },
     {
       "slug": "hotel-gold",
@@ -364,7 +364,7 @@
       "title": "Problems with the room",
       "titleTr": "Odada sorun",
       "icon": "bed",
-      "available": false
+      "available": true
     },
     {
       "slug": "restaurant-gold",
@@ -376,7 +376,7 @@
       "title": "Something's wrong",
       "titleTr": "Bir sorun var",
       "icon": "utensils",
-      "available": false
+      "available": true
     },
     {
       "slug": "cafe-gold",
@@ -388,7 +388,7 @@
       "title": "Mix-ups and small talk",
       "titleTr": "Karışıklıklar ve sohbet",
       "icon": "coffee",
-      "available": false
+      "available": true
     },
     {
       "slug": "shopping-gold",
@@ -400,7 +400,7 @@
       "title": "Returns & bargaining",
       "titleTr": "İade ve pazarlık",
       "icon": "bag",
-      "available": false
+      "available": true
     },
     {
       "slug": "transport-gold",
@@ -412,7 +412,7 @@
       "title": "Lost in the city",
       "titleTr": "Şehirde kaybolmak",
       "icon": "train",
-      "available": false
+      "available": true
     },
     {
       "slug": "full-trip",

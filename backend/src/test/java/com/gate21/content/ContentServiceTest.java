@@ -34,9 +34,9 @@ class ContentServiceTest {
             assertThat(lessons.stream().map(ChapterInfo::day).toList())
                 .containsExactly(week * 7 - 6, week * 7 - 5, week * 7 - 4, week * 7 - 3, week * 7 - 2, week * 7 - 1, week * 7);
         }
-        assertThat(content.lessonsOfWeek(1)).allMatch(ChapterInfo::available);
-        assertThat(content.lessonsOfWeek(2)).allMatch(ChapterInfo::available);
-        assertThat(content.hasAvailableLessons(3)).isFalse();
+        for (int week = 1; week <= 3; week++) {
+            assertThat(content.lessonsOfWeek(week)).as("week " + week).allMatch(ChapterInfo::available);
+        }
     }
 
     @Test
@@ -46,7 +46,9 @@ class ContentServiceTest {
             "arrival-bronze", "transfer-bronze", "hotel-bronze", "restaurant-bronze", "cafe-bronze",
             "shopping-bronze", "transport-bronze",
             "arrival-silver", "transfer-silver", "hotel-silver", "restaurant-silver", "cafe-silver",
-            "shopping-silver", "transport-silver", "full-trip");
+            "shopping-silver", "transport-silver",
+            "arrival-gold", "transfer-gold", "hotel-gold", "restaurant-gold", "cafe-gold",
+            "shopping-gold", "transport-gold", "full-trip");
         for (ChapterInfo chapter : content.availableChapters()) {
             var meta = content.chapterMeta(chapter.slug()).orElseThrow();
             assertThat(meta.mission()).as(chapter.slug()).isNotBlank();

@@ -1,0 +1,376 @@
+{
+  "slug": "transfer-gold",
+  "chapter": "transfer-gold",
+  "title": "Trouble on the road",
+  "titleTr": "Yolda sorunlar",
+  "role": "Taxi driver",
+  "setting": "Sydney Airport · Taxi rank",
+  "voice": "en-AU",
+  "persona": "You are a talkative Sydney taxi driver. You are friendly but a bit careless: you forget to start the meter and like taking the 'scenic route'. You use Australian expressions and speak quickly.",
+  "briefTr": "Sidney Havalimanı'ndan Harbour Hotel'e taksiyle gideceksin. Taksimetrenin açık olduğundan, en kısa yoldan gidildiğinden emin ol. Otelin önünde inmek istiyorsun.",
+  "opening": "G'day! Where are we headed?",
+  "facts": [
+    {
+      "id": "fare",
+      "values": [
+        "$62",
+        "$58",
+        "$71"
+      ],
+      "question": "How much was the taxi?",
+      "questionTr": "Taksi ne kadar tuttu?"
+    },
+    {
+      "id": "toll",
+      "values": [
+        "$4",
+        "$3.50",
+        "$5"
+      ],
+      "question": "How much was the bridge toll?",
+      "questionTr": "Köprü geçiş ücreti ne kadardı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "destination",
+      "titleTr": "Nereye gideceğini ve sabit fiyatı sormak",
+      "instruction": "The passenger says where to go and asks if there is a fixed price.",
+      "hint": "To the Harbour Hotel, please. Is there a fixed price?",
+      "hintTr": "Harbour Hotel'e, lütfen. Sabit fiyat var mı?",
+      "keywords": [
+        "hotel",
+        "harbour",
+        "to",
+        "fixed",
+        "price",
+        "how much"
+      ],
+      "successReply": "No fixed price, mate — it's on the meter.",
+      "retryReply": "Where to, mate?"
+    },
+    {
+      "id": "meter",
+      "titleTr": "Taksimetreyi açtırmak",
+      "ask": "Righto, off we go!",
+      "instruction": "The meter is not on. The passenger politely asks the driver to turn it on.",
+      "hint": "Could you turn on the meter, please?",
+      "hintTr": "Taksimetreyi açar mısınız, lütfen?",
+      "keywords": [
+        "meter",
+        "turn on",
+        "switch on",
+        "start",
+        "on"
+      ],
+      "successReply": "Oh, whoops! Sorry, mate. It's on now.",
+      "retryReply": "Comfortable back there? All good?"
+    },
+    {
+      "id": "route",
+      "titleTr": "En kısa yoldan gitmesini istemek",
+      "ask": "I'll take you the scenic route — you'll love the view!",
+      "instruction": "The driver suggests a longer, 'scenic' route. The passenger asks for the fastest or shortest way.",
+      "hint": "Can we take the shortest way, please?",
+      "hintTr": "En kısa yoldan gidebilir miyiz, lütfen?",
+      "keywords": [
+        "shortest",
+        "fastest",
+        "quickest",
+        "direct",
+        "short",
+        "fast",
+        "quick",
+        "motorway"
+      ],
+      "successReply": "Fair enough, the quick way it is.",
+      "retryReply": "Is the scenic route okay with you, or are you in a hurry?"
+    },
+    {
+      "id": "toll",
+      "titleTr": "Köprü ücretini sormak",
+      "ask": "We'll go over the Harbour Bridge.",
+      "instruction": "The passenger asks about the toll or extra charges for the bridge.",
+      "hint": "Is there a toll on the bridge?",
+      "hintTr": "Köprüde geçiş ücreti var mı?",
+      "keywords": [
+        "toll",
+        "extra",
+        "bridge",
+        "cost",
+        "charge",
+        "pay"
+      ],
+      "successReply": "Yeah, it's {toll}. It goes on the fare.",
+      "retryReply": "Any questions about the trip?"
+    },
+    {
+      "id": "pull-over",
+      "titleTr": "Doğru yerde indirtmek",
+      "ask": "Here's the hotel. Front or side entrance?",
+      "instruction": "The passenger asks the driver to stop at the right place, for example the hotel entrance.",
+      "hint": "Can you pull over here, please?",
+      "hintTr": "Burada kenara çekebilir misiniz, lütfen?",
+      "keywords": [
+        "pull over",
+        "stop",
+        "here",
+        "drop",
+        "entrance",
+        "front"
+      ],
+      "successReply": "No worries.",
+      "retryReply": "Where would you like me to drop you?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemek ve fiş istemek",
+      "ask": "That's {fare} all up, mate.",
+      "instruction": "The passenger pays and asks for a receipt.",
+      "hint": "By card, please. And a receipt.",
+      "hintTr": "Kartla, lütfen. Bir de fiş.",
+      "keywords": [
+        "card",
+        "cash",
+        "receipt",
+        "pay",
+        "phone"
+      ],
+      "successReply": "Here's your receipt. Enjoy Sydney!",
+      "retryReply": "How would you like to pay?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "missed-turn",
+      "titleTr": "Yanlış yola sapıyor",
+      "intro": "Oops — I think I missed the turn.",
+      "instruction": "The driver took a wrong turn. The passenger asks to turn around, asks if it will cost more, or asks to use the map.",
+      "retryReply": "Sorry about that. Give me a sec.",
+      "options": [
+        {
+          "text": "Can you turn around, please?",
+          "keywords": [
+            "turn around",
+            "around",
+            "u-turn"
+          ],
+          "reply": "Yep, turning around now."
+        },
+        {
+          "text": "Will it cost more because of this?",
+          "keywords": [
+            "cost",
+            "more",
+            "extra",
+            "because"
+          ],
+          "reply": "No, I'll take ten dollars off. My mistake."
+        },
+        {
+          "text": "Can we use the map on my phone?",
+          "keywords": [
+            "map",
+            "phone",
+            "gps"
+          ],
+          "reply": "Good idea, I'll follow your map."
+        }
+      ]
+    },
+    {
+      "id": "road-closed",
+      "titleTr": "Yol kapalı",
+      "intro": "Road's closed ahead — we'll have to take a detour.",
+      "instruction": "A road is closed. The passenger asks how long it adds, asks for another way, or says it's fine.",
+      "retryReply": "Nothing I can do about that one!",
+      "options": [
+        {
+          "text": "How much longer will it take?",
+          "keywords": [
+            "how much",
+            "longer",
+            "how long"
+          ],
+          "reply": "About ten minutes more."
+        },
+        {
+          "text": "Is there another way?",
+          "keywords": [
+            "another",
+            "other",
+            "way"
+          ],
+          "reply": "I'll go around through the city, should be quick."
+        },
+        {
+          "text": "That's okay, no worries.",
+          "keywords": [
+            "okay",
+            "no worries",
+            "fine"
+          ],
+          "reply": "Good on ya. Won't be long."
+        }
+      ]
+    },
+    {
+      "id": "phone-call",
+      "titleTr": "Şoför telefonla konuşmak istiyor",
+      "intro": "Mind if I take a quick phone call?",
+      "instruction": "The driver wants to talk on the phone while driving. The passenger politely says no, agrees if hands-free, or asks to keep it short.",
+      "retryReply": "It's my wife, mate.",
+      "options": [
+        {
+          "text": "I'd prefer you didn't, sorry.",
+          "keywords": [
+            "prefer",
+            "didn't",
+            "rather"
+          ],
+          "reply": "Fair enough, I'll call her back."
+        },
+        {
+          "text": "Only if it's hands-free.",
+          "keywords": [
+            "hands-free",
+            "only if"
+          ],
+          "reply": "Yep, it's hands-free, don't worry."
+        },
+        {
+          "text": "Okay, but please keep it short.",
+          "keywords": [
+            "short",
+            "quick",
+            "keep"
+          ],
+          "reply": "Just a minute, promise."
+        }
+      ]
+    },
+    {
+      "id": "card-declined",
+      "titleTr": "Kart reddedildi",
+      "intro": "Hmm, your card's been declined.",
+      "instruction": "The card did not work. The passenger asks to try again, offers another card, or offers cash.",
+      "retryReply": "Happens all the time. Got another way to pay?",
+      "options": [
+        {
+          "text": "Could you try again, please?",
+          "keywords": [
+            "again",
+            "try",
+            "retry"
+          ],
+          "reply": "Let's see… yep, went through this time."
+        },
+        {
+          "text": "Can I use another card?",
+          "keywords": [
+            "another card",
+            "other card",
+            "different card"
+          ],
+          "reply": "Sure, tap it here… all good."
+        },
+        {
+          "text": "Can I pay in cash?",
+          "keywords": [
+            "cash",
+            "money"
+          ],
+          "reply": "Cash is fine, mate."
+        }
+      ]
+    },
+    {
+      "id": "no-change",
+      "titleTr": "Para üstü yok",
+      "intro": "I haven't got change for a hundred, sorry.",
+      "instruction": "The driver has no change. The passenger offers a card, asks to stop at a shop, or asks the hotel to break the note.",
+      "retryReply": "Have you got anything smaller?",
+      "options": [
+        {
+          "text": "Then I'll pay by card.",
+          "keywords": [
+            "card",
+            "then"
+          ],
+          "reply": "Perfect, tap away."
+        },
+        {
+          "text": "Can we stop at a shop for change?",
+          "keywords": [
+            "shop",
+            "stop",
+            "change"
+          ],
+          "reply": "There's one right here, no worries."
+        },
+        {
+          "text": "I'll ask the hotel reception for change.",
+          "keywords": [
+            "hotel",
+            "reception",
+            "ask"
+          ],
+          "reply": "Good idea, I'll wait here."
+        }
+      ]
+    },
+    {
+      "id": "surcharge",
+      "titleTr": "Kart ek ücreti",
+      "intro": "Just so you know, there's a five percent surcharge for cards.",
+      "instruction": "There is a card surcharge. The passenger accepts, pays cash instead, or asks why.",
+      "retryReply": "That's the rule in Sydney cabs.",
+      "options": [
+        {
+          "text": "That's fine, I'll still pay by card.",
+          "keywords": [
+            "fine",
+            "still",
+            "card"
+          ],
+          "reply": "No worries, tap here."
+        },
+        {
+          "text": "Then I'll pay cash.",
+          "keywords": [
+            "cash",
+            "then"
+          ],
+          "reply": "Thanks, mate."
+        },
+        {
+          "text": "Why is there a surcharge?",
+          "keywords": [
+            "why",
+            "surcharge"
+          ],
+          "reply": "The card companies charge us, so we pass it on. Sorry!"
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "route",
+      "pool": [
+        "missed-turn",
+        "road-closed",
+        "phone-call"
+      ]
+    },
+    {
+      "after": "pull-over",
+      "pool": [
+        "card-declined",
+        "no-change",
+        "surcharge"
+      ]
+    }
+  ],
+  "closing": "Cheers, mate. Have a ripper of a trip!"
+}

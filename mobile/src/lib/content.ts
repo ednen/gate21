@@ -20,6 +20,13 @@ import restaurantSilver from '../../../content/chapters/restaurant-silver.json';
 import cafeSilver from '../../../content/chapters/cafe-silver.json';
 import shoppingSilver from '../../../content/chapters/shopping-silver.json';
 import transportSilver from '../../../content/chapters/transport-silver.json';
+import arrivalGold from '../../../content/chapters/arrival-gold.json';
+import transferGold from '../../../content/chapters/transfer-gold.json';
+import hotelGold from '../../../content/chapters/hotel-gold.json';
+import restaurantGold from '../../../content/chapters/restaurant-gold.json';
+import cafeGold from '../../../content/chapters/cafe-gold.json';
+import shoppingGold from '../../../content/chapters/shopping-gold.json';
+import transportGold from '../../../content/chapters/transport-gold.json';
 import fullTrip from '../../../content/chapters/full-trip.json';
 import placementJson from '../../../content/placement.json';
 import sosJson from '../../../content/sos.json';
@@ -113,7 +120,8 @@ const bundled: Pack = {
   chapters: Object.fromEntries(
     [starterAlphabet, starterNumbers, starterSpelling, starterPeople, starterBasics, arrivalBronze, transferBronze,
       hotelBronze, restaurantBronze, cafeBronze, shoppingBronze, transportBronze, arrivalSilver, transferSilver,
-      hotelSilver, restaurantSilver, cafeSilver, shoppingSilver, transportSilver, fullTrip].map((c) => [c.slug, c as Chapter]),
+      hotelSilver, restaurantSilver, cafeSilver, shoppingSilver, transportSilver, arrivalGold, transferGold, hotelGold,
+      restaurantGold, cafeGold, shoppingGold, transportGold, fullTrip].map((c) => [c.slug, c as Chapter]),
   ),
 };
 

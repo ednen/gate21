@@ -119,6 +119,30 @@ class ProgressIT extends IntegrationTest {
     }
 
     @Test
+    void finishingAllTwentyOneDaysEarnsEveryBadgeAndGraduates() throws Exception {
+        String token = token("Ozan");
+        List<Map<String, Object>> attempts = new ArrayList<>();
+        for (int week = 1; week <= 3; week++) {
+            for (ChapterInfo lesson : content.lessonsOfWeek(week)) {
+                attempts.addAll(allSteps(lesson.slug(), Instant.now()));
+            }
+        }
+        assertThat(attempts.size()).isLessThanOrEqualTo(200);
+        Response r = sync(token, attempts);
+        assertThat(r.body().path("levelsEarned").toString()).contains("BRONZE", "SILVER", "GOLD");
+        assertThat(r.body().path("graduated").asBoolean()).isTrue();
+
+        var me = getJson("/api/v1/me", token).body();
+        assertThat(me.path("graduatedAt").isNull()).isFalse();
+        // Every lesson is done; the Full Trip finale is what is left.
+        assertThat(me.path("nextChapter").path("slug").asText()).isEqualTo("full-trip");
+        assertThat(getJson("/api/v1/progress/passport", token).body().path("levels").get(2).path("earned").asBoolean()).isTrue();
+
+        // Graduating happens once.
+        assertThat(sync(token, allSteps("cafe-gold", Instant.now())).body().path("graduated").asBoolean()).isFalse();
+    }
+
+    @Test
     void fullTripIsOneStepAndStaysOutOfTheMissionUntilWeekThree() throws Exception {
         String token = token("Ozan");
         Response passport = getJson("/api/v1/progress/passport", token);

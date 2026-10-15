@@ -1,68 +1,209 @@
 {
   "slug": "cafe-gold",
-  "draft": true,
-  "mission": "Handle mix-ups and make small talk",
-  "missionTr": "Kafede sipariş karışıklığını çöz, masa paylaşırken yanındakiyle sohbet et",
+  "mission": "Handle a mix-up and make small talk",
+  "missionTr": "Kafede sipariş karışıklığını çöz, kalabalık masada yer sor, yerel biriyle sohbet et, bir daveti kibarca yanıtla",
   "stamp": "NEW FRIEND",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
-    "RECOGNIZE",
     "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "flat white",
-      "tr": "flat white (Avustralya kahvesi)"
+      "tr": "flat white (Avustralya kahvesi)",
+      "picture": "flat-white",
+      "example": "A flat white, please.",
+      "exampleTr": "Bir flat white, lütfen."
     },
     {
       "en": "mix-up",
-      "tr": "karışıklık"
+      "tr": "karışıklık",
+      "picture": "swap",
+      "example": "Sorry, there's been a mix-up.",
+      "exampleTr": "Pardon, bir karışıklık olmuş."
     },
     {
       "en": "Is this seat taken?",
-      "tr": "Bu yer dolu mu?"
+      "tr": "Bu yer dolu mu?",
+      "picture": "chair",
+      "example": "Excuse me, is this seat taken?",
+      "exampleTr": "Affedersiniz, bu yer dolu mu?"
     },
     {
       "en": "Where are you from?",
-      "tr": "Nerelisin?"
+      "tr": "Nerelisin?",
+      "picture": "globe",
+      "example": "I'm from Turkey. Where are you from?",
+      "exampleTr": "Türkiye'denim. Sen nerelisin?"
     },
     {
       "en": "How long are you here for?",
-      "tr": "Ne kadar kalacaksın?"
-    },
-    {
-      "en": "recommend",
-      "tr": "önermek"
+      "tr": "Ne kadar kalacaksın?",
+      "picture": "calendar",
+      "example": "How long are you here for?",
+      "exampleTr": "Burada ne kadar kalacaksın?"
     },
     {
       "en": "must-see",
-      "tr": "mutlaka görülmesi gereken"
+      "tr": "mutlaka görülmesi gereken",
+      "picture": "binoculars",
+      "example": "What's a must-see in Sydney?",
+      "exampleTr": "Sidney'de mutlaka görülmesi gereken ne?"
+    },
+    {
+      "en": "beach",
+      "tr": "plaj",
+      "picture": "beach",
+      "example": "Let's go to the beach.",
+      "exampleTr": "Plaja gidelim."
+    },
+    {
+      "en": "arvo",
+      "tr": "öğleden sonra (Avustralya argosu)",
+      "picture": "sunset",
+      "example": "See you this arvo!",
+      "exampleTr": "Öğleden sonra görüşürüz!"
+    },
+    {
+      "en": "No worries.",
+      "tr": "Sorun değil. (Avustralya)",
+      "picture": "thumbs-up",
+      "example": "No worries, mate!",
+      "exampleTr": "Sorun değil, dostum!"
     },
     {
       "en": "Have a good one!",
-      "tr": "İyi günler!"
+      "tr": "İyi günler!",
+      "picture": "wave",
+      "example": "Thanks! Have a good one!",
+      "exampleTr": "Teşekkürler! İyi günler!"
     }
   ],
-  "scene": {
-    "role": "Local at the next table",
-    "setting": "Surry Hills café · Shared table",
-    "goalsTr": [
-      "Siparişinin karıştığını barista'ya söyle",
-      "Doğru içeceği iste",
-      "Kalabalık kafede birine yer dolu mu diye sor",
-      "Nereli olduğunu ve ne kadar kalacağını anlat",
-      "Şehirde görülecek yer önerisi iste",
-      "Sohbeti kibarca bitir"
-    ],
-    "twistsTr": [
-      "Başkasının siparişini almışsın",
-      "Yanındaki kişi çok hızlı ve argo konuşuyor (\"arvo\", \"heaps\")",
-      "Seni bir etkinliğe davet ediyor, kibarca reddetmen gerekiyor"
+  "pronounce": [
+    {
+      "word": "worries",
+      "ipa": "/ˈwʌr.iz/",
+      "stress": "WUH-reez",
+      "tipTr": "\"Vorriz\" değil: VA-riz."
+    },
+    {
+      "word": "arvo",
+      "ipa": "/ˈɑː.vəʊ/",
+      "stress": "AH-voh",
+      "tipTr": "Afternoon'un kısaltması: AA-vou."
+    },
+    {
+      "word": "Australia",
+      "ipa": "/ɒˈstreɪ.li.ə/",
+      "stress": "oss-TRAY-lee-uh",
+      "tipTr": "Vurgu ikinci hecede: os-TREY-li-ı."
+    }
+  ],
+  "match": [
+    "flat white",
+    "mix-up",
+    "Is this seat taken?",
+    "must-see",
+    "beach",
+    "arvo"
+  ],
+  "dialog": {
+    "titleTr": "Paylaşılan masada sohbet",
+    "lines": [
+      {
+        "who": "You",
+        "text": "Excuse me, is this seat ___?",
+        "gap": "taken",
+        "options": [
+          "taken",
+          "take",
+          "took"
+        ]
+      },
+      {
+        "who": "Local",
+        "text": "Not at all, go ahead!"
+      },
+      {
+        "who": "Local",
+        "text": "Where are you ___?",
+        "gap": "from",
+        "options": [
+          "from",
+          "for",
+          "to"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "I'm from Turkey. It's my first time here."
+      },
+      {
+        "who": "Local",
+        "text": "How long are you here ___?",
+        "gap": "for",
+        "options": [
+          "for",
+          "from",
+          "since"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Just one week. What's a ___ in Sydney?",
+        "gap": "must-see",
+        "options": [
+          "must-see",
+          "mix-up",
+          "seat"
+        ]
+      },
+      {
+        "who": "Local",
+        "text": "Bondi Beach! We're going this ___, want to come?",
+        "gap": "arvo",
+        "options": [
+          "arvo",
+          "avo",
+          "army"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Thanks, but I can't today. Maybe next time!"
+      },
+      {
+        "who": "Local",
+        "text": "No ___. Have a good one!",
+        "gap": "worries",
+        "options": [
+          "worries",
+          "worry",
+          "words"
+        ]
+      }
     ]
   },
-  "notesTr": "Avustralya argosu: arvo (afternoon), heaps (çok), no worries."
+  "use": {
+    "word": "Is this seat taken?",
+    "phrase": "Excuse me, is this seat taken?",
+    "phraseTr": "Affedersiniz, bu yer dolu mu?",
+    "situation": "The café is full. There's a free chair at a table with a stranger. Ask politely.",
+    "situationTr": "Kafe dolu. Bir yabancının masasında boş bir sandalye var. Kibarca sor.",
+    "tiles": [
+      "Excuse me",
+      ",",
+      "is this",
+      "seat",
+      "taken",
+      "?"
+    ]
+  },
+  "survive": {
+    "scenario": "cafe-gold"
+  }
 }

@@ -1,10 +1,8 @@
 {
   "slug": "shopping-gold",
-  "draft": true,
-  "mission": "Return, exchange and bargain",
-  "missionTr": "Ürün iade et, değiştir; pazarda pazarlık yap",
+  "mission": "Return something faulty and bargain at the market",
+  "missionTr": "Kusurlu bir ürünü iade et; sonra pazarda pazarlık yap, karşı teklif ver ve anlaş ya da kibarca vazgeç",
   "stamp": "GOOD DEAL",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
@@ -15,58 +13,208 @@
   ],
   "words": [
     {
+      "en": "faulty",
+      "tr": "kusurlu, arızalı",
+      "picture": "faulty",
+      "example": "These headphones are faulty.",
+      "exampleTr": "Bu kulaklık arızalı."
+    },
+    {
       "en": "refund",
-      "tr": "para iadesi"
+      "tr": "para iadesi",
+      "picture": "refund",
+      "example": "I'd like a refund, please.",
+      "exampleTr": "Para iadesi istiyorum, lütfen."
     },
     {
       "en": "exchange",
-      "tr": "değişim"
-    },
-    {
-      "en": "faulty",
-      "tr": "kusurlu"
+      "tr": "değişim",
+      "picture": "exchange",
+      "example": "Can I exchange it for a new one?",
+      "exampleTr": "Yenisiyle değiştirebilir miyim?"
     },
     {
       "en": "store credit",
-      "tr": "mağaza kredisi"
+      "tr": "mağaza kredisi",
+      "picture": "gift-card",
+      "example": "We can only give you store credit.",
+      "exampleTr": "Size sadece mağaza kredisi verebiliriz."
     },
     {
-      "en": "receipt",
-      "tr": "fiş"
-    },
-    {
-      "en": "Can you do a better price?",
-      "tr": "Daha iyi bir fiyat yapabilir misiniz?"
-    },
-    {
-      "en": "bargain",
-      "tr": "pazarlık / kelepir"
-    },
-    {
-      "en": "final offer",
-      "tr": "son teklif"
+      "en": "warranty",
+      "tr": "garanti",
+      "picture": "warranty",
+      "example": "Is it still under warranty?",
+      "exampleTr": "Hâlâ garantili mi?"
     },
     {
       "en": "market stall",
-      "tr": "pazar tezgâhı"
+      "tr": "pazar tezgâhı",
+      "picture": "stall",
+      "example": "I bought it at a market stall.",
+      "exampleTr": "Bir pazar tezgâhından aldım."
+    },
+    {
+      "en": "Can you do a better price?",
+      "tr": "Daha iyi bir fiyat yapabilir misiniz?",
+      "picture": "haggle",
+      "example": "It's nice. Can you do a better price?",
+      "exampleTr": "Güzel. Daha iyi bir fiyat yapabilir misiniz?"
+    },
+    {
+      "en": "How about…?",
+      "tr": "…'e ne dersiniz?",
+      "picture": "coins",
+      "example": "How about forty dollars?",
+      "exampleTr": "Kırk dolara ne dersiniz?"
+    },
+    {
+      "en": "final offer",
+      "tr": "son teklif",
+      "picture": "stop-hand",
+      "example": "Fifty dollars — that's my final offer.",
+      "exampleTr": "Elli dolar, son teklifim bu."
+    },
+    {
+      "en": "It's a deal!",
+      "tr": "Anlaştık!",
+      "picture": "handshake",
+      "example": "Forty-five? It's a deal!",
+      "exampleTr": "Kırk beş mi? Anlaştık!"
     }
   ],
-  "scene": {
-    "role": "Shop assistant / market seller",
-    "setting": "Paddy's Markets, Sydney",
-    "goalsTr": [
-      "Kusurlu ürünü iade etmek istediğini söyle",
-      "Fişini göster",
-      "Para iadesi mi değişim mi istediğini söyle",
-      "Pazarda bir ürünün fiyatını sor",
-      "Pazarlık yap ve karşı teklif ver",
-      "Anlaşmayı kabul et ya da kibarca vazgeç"
-    ],
-    "twistsTr": [
-      "Fişin yok",
-      "Mağaza para iadesi yerine sadece mağaza kredisi veriyor",
-      "Satıcı ilk teklifini düşürmüyor"
+  "pronounce": [
+    {
+      "word": "faulty",
+      "ipa": "/ˈfɒl.ti/",
+      "stress": "FOL-tee",
+      "tipTr": "\"Faulti\" değil: FOL-ti."
+    },
+    {
+      "word": "warranty",
+      "ipa": "/ˈwɒr.ən.ti/",
+      "stress": "WOR-un-tee",
+      "tipTr": "Vurgu başta: VOR-ın-ti."
+    },
+    {
+      "word": "exchange",
+      "ipa": "/ɪksˈtʃeɪndʒ/",
+      "stress": "iks-CHAYNJ",
+      "tipTr": "Vurgu ikinci hecede: iks-ÇEYNC."
+    }
+  ],
+  "match": [
+    "faulty",
+    "refund",
+    "exchange",
+    "market stall",
+    "final offer",
+    "It's a deal!"
+  ],
+  "recognize": [
+    {
+      "audio": "Sorry, we can't give refunds without a receipt — only store credit.",
+      "prompt": "Listen. What can't the shop give you?",
+      "options": [
+        "Your money back",
+        "A new pair",
+        "Store credit"
+      ],
+      "answer": 0,
+      "explainTr": "\"We can't give refunds\" = para iadesi yapamıyorlar; değişim ya da mağaza kredisi olabilir."
+    },
+    {
+      "prompt": "At a market, the seller says $60. A good first counter-offer is…",
+      "options": [
+        "How about forty?",
+        "Okay, sixty.",
+        "Can I have it free?"
+      ],
+      "answer": 0,
+      "explainTr": "Pazarlıkta önce daha düşük bir teklif verip ortada buluşulur."
+    },
+    {
+      "audio": "Fifty-five, mate. That's my final offer.",
+      "prompt": "Listen. Can you bargain with the seller any more?",
+      "options": [
+        "No, it's the final price",
+        "Yes, a lot",
+        "Only with cash"
+      ],
+      "answer": 0,
+      "explainTr": "\"Final offer\" = son teklif; daha fazla inmeyecek."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Pazarda pazarlık",
+    "lines": [
+      {
+        "who": "Seller",
+        "text": "Handmade boomerangs! Have a look."
+      },
+      {
+        "who": "You",
+        "text": "How much is this one?"
+      },
+      {
+        "who": "Seller",
+        "text": "That one's sixty dollars."
+      },
+      {
+        "who": "You",
+        "text": "It's lovely. Can you do a ___ price?",
+        "gap": "better",
+        "options": [
+          "better",
+          "bigger",
+          "bitter"
+        ]
+      },
+      {
+        "who": "Seller",
+        "text": "What's your offer?"
+      },
+      {
+        "who": "You",
+        "text": "How ___ forty?",
+        "gap": "about",
+        "options": [
+          "about",
+          "much",
+          "many"
+        ]
+      },
+      {
+        "who": "Seller",
+        "text": "Forty? No way. Fifty — final ___.",
+        "gap": "offer",
+        "options": [
+          "offer",
+          "office",
+          "order"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Forty-five?"
+      },
+      {
+        "who": "Seller",
+        "text": "Alright, forty-five."
+      },
+      {
+        "who": "You",
+        "text": "Great, it's a ___!",
+        "gap": "deal",
+        "options": [
+          "deal",
+          "meal",
+          "dear"
+        ]
+      }
     ]
   },
-  "notesTr": "Notlardaki \"different countries and different concepts\": pazarlık bazı ülkelerde normal, bazılarında değil — kültür notu eklenecek."
+  "survive": {
+    "scenario": "shopping-gold"
+  }
 }

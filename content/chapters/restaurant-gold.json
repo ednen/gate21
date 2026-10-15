@@ -1,10 +1,8 @@
 {
   "slug": "restaurant-gold",
-  "draft": true,
-  "mission": "When something's wrong with your meal",
-  "missionTr": "Yemekte sorun var: yanlış yemek, soğuk yemek, hesapta hata — kibarca şikâyet et",
+  "mission": "Complain politely when something's wrong",
+  "missionTr": "Yemekte sorun var: yanlış ve soğuk gelen yemeği kibarca söyle, çözüm iste, hesaptaki hatayı düzelttir",
   "stamp": "SORTED",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
@@ -16,53 +14,208 @@
   "words": [
     {
       "en": "This isn't what I ordered.",
-      "tr": "Sipariş ettiğim bu değil."
+      "tr": "Sipariş ettiğim bu değil.",
+      "picture": "wrong-order",
+      "example": "Excuse me, this isn't what I ordered.",
+      "exampleTr": "Affedersiniz, sipariş ettiğim bu değil."
     },
     {
       "en": "cold",
-      "tr": "soğuk"
+      "tr": "soğuk",
+      "picture": "snowflake",
+      "example": "My chips are cold.",
+      "exampleTr": "Patateslerim soğuk."
     },
     {
       "en": "overcooked",
-      "tr": "fazla pişmiş"
+      "tr": "fazla pişmiş",
+      "picture": "burnt",
+      "example": "The steak is overcooked.",
+      "exampleTr": "Biftek fazla pişmiş."
     },
     {
       "en": "mistake",
-      "tr": "hata"
+      "tr": "hata",
+      "picture": "cross",
+      "example": "I think there's a mistake on the bill.",
+      "exampleTr": "Sanırım hesapta bir hata var."
     },
     {
       "en": "charged twice",
-      "tr": "iki kez ücretlendirilmiş"
+      "tr": "iki kez ücretlendirilmiş",
+      "picture": "double-charge",
+      "example": "I was charged twice.",
+      "exampleTr": "İki kez ücret alındı."
     },
     {
       "en": "service charge",
-      "tr": "servis ücreti"
+      "tr": "servis ücreti",
+      "picture": "tax",
+      "example": "Is the service charge included?",
+      "exampleTr": "Servis ücreti dahil mi?"
     },
     {
-      "en": "complimentary",
-      "tr": "ikram"
+      "en": "on the house",
+      "tr": "ikram, müesseseden",
+      "picture": "free",
+      "example": "The dessert is on the house.",
+      "exampleTr": "Tatlı müesseseden."
     },
     {
-      "en": "I'd like to speak to the manager.",
-      "tr": "Müdürle görüşmek istiyorum."
+      "en": "manager",
+      "tr": "müdür",
+      "picture": "manager",
+      "example": "Could I speak to the manager?",
+      "exampleTr": "Müdürle görüşebilir miyim?"
+    },
+    {
+      "en": "Excuse me!",
+      "tr": "Affedersiniz! (garsonu çağırmak)",
+      "picture": "raise-hand",
+      "example": "Excuse me! Could you help me?",
+      "exampleTr": "Affedersiniz! Yardım edebilir misiniz?"
+    },
+    {
+      "en": "takeaway box",
+      "tr": "paket kutusu",
+      "picture": "doggy-bag",
+      "example": "Could I have a takeaway box?",
+      "exampleTr": "Paket kutusu alabilir miyim?"
     }
   ],
-  "scene": {
-    "role": "Waiter",
-    "setting": "Bondi beach café · Lunch",
-    "goalsTr": [
-      "Gelen yemeğin yanlış olduğunu söyle",
-      "Yemeğin soğuk olduğunu kibarca belirt",
-      "Yenisini ya da başka bir yemek iste",
-      "Hesapta yanlış kalem olduğunu fark et",
-      "Servis ücretini sor",
-      "Durumu çözdükleri için teşekkür et"
-    ],
-    "twistsTr": [
-      "Yeni yemek 30 dakika sürecek",
-      "Hesaba içmediğin şarap eklenmiş",
-      "Garson hatayı kabul etmiyor, müdürü istemen gerekiyor"
+  "pronounce": [
+    {
+      "word": "ordered",
+      "ipa": "/ˈɔː.dəd/",
+      "stress": "OR-dud",
+      "tipTr": "İki hece: OO-dıd. Sondaki ed \"d\" olarak okunur."
+    },
+    {
+      "word": "overcooked",
+      "ipa": "/ˌəʊ.vəˈkʊkt/",
+      "stress": "oh-vuh-KOOKT",
+      "tipTr": "Sondaki ed \"t\" diye okunur: ou-vı-KUKT."
+    },
+    {
+      "word": "charged",
+      "ipa": "/tʃɑːdʒd/",
+      "stress": "CHARJD",
+      "tipTr": "Tek hece: ÇAACD. \"Çarcıd\" değil."
+    }
+  ],
+  "match": [
+    "cold",
+    "overcooked",
+    "mistake",
+    "charged twice",
+    "on the house",
+    "takeaway box"
+  ],
+  "recognize": [
+    {
+      "audio": "So sorry about that — dessert's on the house today.",
+      "prompt": "Listen. What does the waiter offer?",
+      "options": [
+        "A free dessert",
+        "A new table",
+        "A discount on drinks"
+      ],
+      "answer": 0,
+      "explainTr": "\"On the house\" = ikram, ücretsiz."
+    },
+    {
+      "prompt": "Your food is wrong. The politest way to start is:",
+      "options": [
+        "Excuse me, I think there's been a mistake.",
+        "This is wrong!",
+        "I don't want this."
+      ],
+      "answer": 0,
+      "explainTr": "\"I think there's been a mistake\" kibar ve suçlamayan bir başlangıç."
+    },
+    {
+      "prompt": "In Australia, tipping at a café is…",
+      "options": [
+        "not required",
+        "always 20%",
+        "forbidden"
+      ],
+      "answer": 0,
+      "explainTr": "Avustralya'da bahşiş zorunlu değildir; çalışanlar asgari ücretin üstünde kazanır. Memnun kalırsan bırakabilirsin."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Kafede bir sorun",
+    "lines": [
+      {
+        "who": "You",
+        "text": "___ me! Sorry, this isn't what I ordered.",
+        "gap": "Excuse",
+        "options": [
+          "Excuse",
+          "Sorry",
+          "Hello"
+        ]
+      },
+      {
+        "who": "Waiter",
+        "text": "Oh no! What did you order?"
+      },
+      {
+        "who": "You",
+        "text": "The chicken salad. And the chips are ___.",
+        "gap": "cold",
+        "options": [
+          "cold",
+          "old",
+          "gold"
+        ]
+      },
+      {
+        "who": "Waiter",
+        "text": "I'm so sorry. I'll bring fresh ones."
+      },
+      {
+        "who": "Waiter",
+        "text": "Here's your bill."
+      },
+      {
+        "who": "You",
+        "text": "I think there's a ___. We didn't order wine.",
+        "gap": "mistake",
+        "options": [
+          "mistake",
+          "mistakes",
+          "miss"
+        ]
+      },
+      {
+        "who": "Waiter",
+        "text": "You're right. And I see you were charged ___ for the coffee.",
+        "gap": "twice",
+        "options": [
+          "twice",
+          "once",
+          "nice"
+        ]
+      },
+      {
+        "who": "Waiter",
+        "text": "I've fixed it. Dessert is on the ___.",
+        "gap": "house",
+        "options": [
+          "house",
+          "home",
+          "table"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Thank you for sorting it out!"
+      }
     ]
   },
-  "notesTr": "Avustralya'da bahşiş zorunlu değildir — kültür notu."
+  "survive": {
+    "scenario": "restaurant-gold"
+  }
 }

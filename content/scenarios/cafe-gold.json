@@ -1,0 +1,364 @@
+{
+  "slug": "cafe-gold",
+  "chapter": "cafe-gold",
+  "title": "Mix-ups and small talk",
+  "titleTr": "Karışıklıklar ve sohbet",
+  "role": "Barista",
+  "setting": "Surry Hills café · Counter",
+  "voice": "en-AU",
+  "persona": "You are a busy, cheerful barista at a crowded café in Surry Hills, Sydney.",
+  "briefTr": "Sabah kahveni alıyorsun: yulaf sütlü bir flat white. Sonra kalabalık kafede yer arayacak, masadaki yerel biriyle sohbet edeceksin.",
+  "opening": "Here you go — one long black!",
+  "facts": [
+    {
+      "id": "beach",
+      "values": [
+        "Bondi",
+        "Manly",
+        "Coogee"
+      ],
+      "question": "Which beach did the local recommend?",
+      "questionTr": "Yerel kişi hangi plajı önerdi?"
+    },
+    {
+      "id": "time",
+      "values": [
+        "four",
+        "three",
+        "five"
+      ],
+      "question": "What time was the beach plan?",
+      "questionTr": "Plaj planı saat kaçtaydı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "mixup",
+      "titleTr": "Yanlış kahveyi söylemek",
+      "instruction": "The customer got the wrong drink and politely says what they ordered.",
+      "hint": "Sorry, I ordered a flat white with oat milk.",
+      "hintTr": "Pardon, ben yulaf sütlü flat white istemiştim.",
+      "keywords": [
+        "ordered",
+        "flat white",
+        "not mine",
+        "sorry",
+        "isn't",
+        "mine",
+        "oat"
+      ],
+      "successReply": "Oh, sorry! Mix-up. One sec.",
+      "retryReply": "Is that the right one for you?"
+    },
+    {
+      "id": "seat",
+      "titleTr": "Masada yer sormak",
+      "ask": "Oh hi! It's packed in here today, isn't it?",
+      "instruction": "A new character: a local at a shared table. The customer asks if the seat is free.",
+      "hint": "Excuse me, is this seat taken?",
+      "hintTr": "Affedersiniz, bu yer dolu mu?",
+      "keywords": [
+        "seat",
+        "taken",
+        "sit",
+        "free",
+        "join",
+        "mind"
+      ],
+      "successReply": "Not at all, go ahead!",
+      "retryReply": "Hi! Looking for somewhere to sit?",
+      "role": "Local",
+      "setting": "Surry Hills café · Shared table",
+      "voice": "en-AU",
+      "persona": "You are a friendly Sydney local in your thirties, sitting at a shared café table. You love chatting to tourists, speak fast and use slang like arvo, heaps and no worries."
+    },
+    {
+      "id": "from",
+      "titleTr": "Nereli olduğunu söylemek",
+      "ask": "So, where are you from?",
+      "instruction": "The customer says where they are from.",
+      "hint": "I'm from Turkey, from Izmir.",
+      "hintTr": "Türkiye'denim, İzmir'den.",
+      "keywords": [
+        "turkey",
+        "from",
+        "izmir",
+        "istanbul",
+        "i'm",
+        "ankara"
+      ],
+      "successReply": "Oh, awesome! I've always wanted to go.",
+      "retryReply": "So, where are you from?"
+    },
+    {
+      "id": "how-long",
+      "titleTr": "Ne kadar kalacağını söylemek",
+      "ask": "How long are you here for?",
+      "instruction": "The customer says how long they are staying.",
+      "hint": "Just one week.",
+      "hintTr": "Sadece bir hafta.",
+      "keywords": [
+        "week",
+        "days",
+        "month",
+        "just",
+        "one",
+        "two",
+        "ten"
+      ],
+      "successReply": "Heaps of time to see the city.",
+      "retryReply": "How long are you in Sydney for?"
+    },
+    {
+      "id": "must-see",
+      "titleTr": "Öneri istemek",
+      "ask": "First time in Sydney, yeah?",
+      "instruction": "The customer asks what they must see.",
+      "hint": "What's a must-see in Sydney?",
+      "hintTr": "Sidney'de mutlaka görülmesi gereken ne?",
+      "keywords": [
+        "must-see",
+        "recommend",
+        "see",
+        "visit",
+        "should",
+        "best",
+        "suggest"
+      ],
+      "successReply": "You have to go to {beach} Beach — it's beautiful.",
+      "retryReply": "Want some tips from a local?"
+    },
+    {
+      "id": "invite",
+      "titleTr": "Daveti yanıtlamak",
+      "ask": "We're going there this arvo at {time}. Want to come?",
+      "instruction": "The local invites the customer to the beach. The customer accepts or politely declines.",
+      "hint": "Thanks, but I can't today. Maybe next time!",
+      "hintTr": "Teşekkürler ama bugün olmaz. Belki bir dahaki sefere!",
+      "keywords": [
+        "thanks",
+        "can't",
+        "sorry",
+        "maybe",
+        "next time",
+        "love to",
+        "yes",
+        "sure",
+        "sounds"
+      ],
+      "successReply": "No worries at all!",
+      "retryReply": "So, are you keen?"
+    },
+    {
+      "id": "bye",
+      "titleTr": "Sohbeti bitirmek",
+      "ask": "Right, gotta run. Have a good one!",
+      "instruction": "The local leaves. The customer says goodbye.",
+      "hint": "You too! Nice to meet you.",
+      "hintTr": "Sana da! Tanıştığıma memnun oldum.",
+      "keywords": [
+        "you too",
+        "nice",
+        "bye",
+        "thanks",
+        "see you",
+        "cheers"
+      ],
+      "successReply": "See ya!",
+      "retryReply": "Well, I'm off. Enjoy your trip!"
+    }
+  ],
+  "twists": [
+    {
+      "id": "no-oat",
+      "titleTr": "Yulaf sütü bitmiş",
+      "intro": "Ah, actually we're out of oat milk now. Soy or almond?",
+      "instruction": "There is no oat milk. The customer chooses another milk or asks for black coffee.",
+      "retryReply": "Sorry about that!",
+      "options": [
+        {
+          "text": "Soy is fine.",
+          "keywords": [
+            "soy",
+            "fine"
+          ],
+          "reply": "Soy flat white, coming up."
+        },
+        {
+          "text": "Almond, please.",
+          "keywords": [
+            "almond"
+          ],
+          "reply": "Almond it is."
+        },
+        {
+          "text": "Then just a black coffee.",
+          "keywords": [
+            "black",
+            "just",
+            "then"
+          ],
+          "reply": "One long black — oh wait, that's what you had! Here you go."
+        }
+      ]
+    },
+    {
+      "id": "pay-again",
+      "titleTr": "Tekrar ödeme istiyor",
+      "intro": "That'll be another five fifty for the flat white.",
+      "instruction": "The barista asks the customer to pay again. The customer explains they already paid, shows the receipt, or asks for the manager.",
+      "retryReply": "That's what the screen says.",
+      "options": [
+        {
+          "text": "I already paid for it.",
+          "keywords": [
+            "already",
+            "paid"
+          ],
+          "reply": "Oh, you're right — no charge. Sorry!"
+        },
+        {
+          "text": "Here's my receipt.",
+          "keywords": [
+            "receipt",
+            "here"
+          ],
+          "reply": "Yep, paid. My mistake!"
+        },
+        {
+          "text": "Could you check with your manager?",
+          "keywords": [
+            "manager",
+            "check"
+          ],
+          "reply": "She says it's fine — no charge."
+        }
+      ]
+    },
+    {
+      "id": "slang",
+      "titleTr": "Argo konuşuyor",
+      "intro": "Mate, it's heaps good — you should totally hit it this arvo, it's a ripper!",
+      "instruction": "The local uses slang. The customer asks what a word means, asks them to speak slowly, or repeats what they understood.",
+      "retryReply": "Ha, sorry — Aussie slang!",
+      "options": [
+        {
+          "text": "Sorry, what does arvo mean?",
+          "keywords": [
+            "what does",
+            "mean",
+            "arvo"
+          ],
+          "reply": "Arvo means afternoon! And heaps means very."
+        },
+        {
+          "text": "Could you say that more slowly?",
+          "keywords": [
+            "slowly",
+            "slower",
+            "say that"
+          ],
+          "reply": "Sure! It's very good. You should go this afternoon."
+        },
+        {
+          "text": "So it's really good this afternoon?",
+          "keywords": [
+            "really good",
+            "afternoon",
+            "so"
+          ],
+          "reply": "Exactly! You've got it."
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "titleTr": "Numara istiyor",
+      "intro": "Hey, want to swap numbers? I can send you some tips.",
+      "instruction": "The local offers to swap numbers. The customer accepts, suggests social media instead, or politely declines.",
+      "retryReply": "No pressure!",
+      "options": [
+        {
+          "text": "Sure, here's my number.",
+          "keywords": [
+            "number",
+            "sure",
+            "here's"
+          ],
+          "reply": "Awesome, I'll text you some spots."
+        },
+        {
+          "text": "Can I follow you on Instagram instead?",
+          "keywords": [
+            "instagram",
+            "follow",
+            "instead"
+          ],
+          "reply": "Sure, I'm @sydneyspots."
+        },
+        {
+          "text": "Thanks, but I'd rather not.",
+          "keywords": [
+            "rather not",
+            "thanks, but"
+          ],
+          "reply": "No worries at all!"
+        }
+      ]
+    },
+    {
+      "id": "fast-talk",
+      "titleTr": "Çok hızlı konuşuyor",
+      "intro": "And-if-you-get-there-before-four-grab-the-fish-and-chips-best-in-town!",
+      "instruction": "The local spoke very fast. The customer asks to repeat, asks to slow down, or checks one detail.",
+      "retryReply": "Sorry, I talk heaps fast!",
+      "options": [
+        {
+          "text": "Sorry, could you repeat that?",
+          "keywords": [
+            "repeat",
+            "again",
+            "sorry"
+          ],
+          "reply": "If you get there before four, grab fish and chips. Best in town!"
+        },
+        {
+          "text": "Could you slow down a bit?",
+          "keywords": [
+            "slow down",
+            "slowly",
+            "bit"
+          ],
+          "reply": "Sure. Fish. And. Chips. Before. Four. Best in town!"
+        },
+        {
+          "text": "Did you say fish and chips?",
+          "keywords": [
+            "fish",
+            "chips",
+            "did you say"
+          ],
+          "reply": "Yep! Best in town, before four."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "mixup",
+      "pool": [
+        "no-oat",
+        "pay-again"
+      ]
+    },
+    {
+      "after": "must-see",
+      "pool": [
+        "slang",
+        "numbers",
+        "fast-talk"
+      ]
+    }
+  ],
+  "closing": "See ya, mate!"
+}

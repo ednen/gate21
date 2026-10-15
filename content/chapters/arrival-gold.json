@@ -1,10 +1,8 @@
 {
   "slug": "arrival-gold",
-  "draft": true,
   "mission": "Sort out lost luggage",
-  "missionTr": "Bagajın gelmedi: kayıp bagaj ofisinde durumu anlat, şikâyet formunu doldur",
+  "missionTr": "Sidney'de bavulun gelmedi: bagaj ofisinde durumu anlat, bavulunu tarif et, şikâyet formunu doldur, referans numarası ve masraflarını sor",
   "stamp": "BAG FOUND",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
@@ -16,61 +14,222 @@
   "words": [
     {
       "en": "lost luggage",
-      "tr": "kayıp bagaj"
+      "tr": "kayıp bagaj",
+      "picture": "lost-luggage",
+      "example": "My luggage is lost.",
+      "exampleTr": "Bagajım kayıp."
     },
     {
       "en": "damaged",
-      "tr": "hasarlı"
+      "tr": "hasarlı",
+      "picture": "damaged",
+      "example": "My suitcase is damaged.",
+      "exampleTr": "Bavulum hasarlı."
     },
     {
       "en": "baggage services",
-      "tr": "bagaj hizmetleri ofisi"
+      "tr": "bagaj hizmetleri ofisi",
+      "picture": "baggage-desk",
+      "example": "Where is baggage services?",
+      "exampleTr": "Bagaj hizmetleri ofisi nerede?"
     },
     {
       "en": "claim form",
-      "tr": "talep/şikâyet formu"
+      "tr": "talep/şikâyet formu",
+      "picture": "form",
+      "example": "Please fill in this claim form.",
+      "exampleTr": "Lütfen bu talep formunu doldurun."
     },
     {
       "en": "reference number",
-      "tr": "referans numarası"
-    },
-    {
-      "en": "deliver",
-      "tr": "teslim etmek"
-    },
-    {
-      "en": "compensation",
-      "tr": "tazminat"
-    },
-    {
-      "en": "Have you been here before?",
-      "tr": "Daha önce burada bulundunuz mu?"
-    },
-    {
-      "en": "boarding pass",
-      "tr": "biniş kartı"
+      "tr": "referans numarası",
+      "picture": "ref-number",
+      "example": "Can I have a reference number?",
+      "exampleTr": "Bir referans numarası alabilir miyim?"
     },
     {
       "en": "baggage tag",
-      "tr": "bagaj etiketi"
+      "tr": "bagaj etiketi",
+      "picture": "bag-tag",
+      "example": "Here is my baggage tag.",
+      "exampleTr": "Bagaj etiketim burada."
+    },
+    {
+      "en": "boarding pass",
+      "tr": "biniş kartı",
+      "picture": "boarding-pass",
+      "example": "Can I see your boarding pass?",
+      "exampleTr": "Biniş kartınızı görebilir miyim?"
+    },
+    {
+      "en": "deliver",
+      "tr": "teslim etmek",
+      "picture": "van",
+      "example": "We'll deliver it to your hotel.",
+      "exampleTr": "Otelinize teslim edeceğiz."
+    },
+    {
+      "en": "compensation",
+      "tr": "tazminat",
+      "picture": "refund",
+      "example": "Can I get compensation?",
+      "exampleTr": "Tazminat alabilir miyim?"
+    },
+    {
+      "en": "Have you been here before?",
+      "tr": "Daha önce burada bulundunuz mu?",
+      "picture": "question",
+      "example": "Have you been to Australia before?",
+      "exampleTr": "Daha önce Avustralya'da bulundunuz mu?"
     }
   ],
-  "scene": {
-    "role": "Baggage services agent",
-    "setting": "Sydney Airport · Baggage services",
-    "goalsTr": [
-      "Memurla sohbet: \"Have you been here before?\" sorusuna cevap ver",
-      "Biniş kartını ve bagaj etiketini göster",
-      "Bavulunu tarif et (renk, boyut, marka)",
-      "Otel adresini ver ve bavulun oraya getirilmesini iste",
-      "Referans numarasını iste",
-      "Acil ihtiyaçlar için masraf karşılanıyor mu sor"
-    ],
-    "twistsTr": [
-      "Bavulun başka bir şehre gitmiş",
-      "Bavul gelmiş ama tekerleği kırık (damaged luggage)",
-      "Form sadece online doldurulabiliyor"
+  "pronounce": [
+    {
+      "word": "luggage",
+      "ipa": "/ˈlʌɡ.ɪdʒ/",
+      "stress": "LUG-ij",
+      "tipTr": "\"Lagaç\" gibi: LA-gıc. Sondaki e okunmaz."
+    },
+    {
+      "word": "damaged",
+      "ipa": "/ˈdæm.ɪdʒd/",
+      "stress": "DAM-ijd",
+      "tipTr": "İki hece: DEM-icd. \"Dameyc\" değil."
+    },
+    {
+      "word": "compensation",
+      "ipa": "/ˌkɒm.penˈseɪ.ʃən/",
+      "stress": "kom-pen-SAY-shun",
+      "tipTr": "Vurgu üçüncü hecede: kom-pın-SEY-şın."
+    }
+  ],
+  "match": [
+    "lost luggage",
+    "damaged",
+    "baggage services",
+    "reference number",
+    "baggage tag",
+    "deliver"
+  ],
+  "recognize": [
+    {
+      "audio": "Looks like your bag went to Melbourne by mistake.",
+      "prompt": "Listen. Where is your bag now?",
+      "options": [
+        "In Melbourne",
+        "In Sydney",
+        "In Istanbul"
+      ],
+      "answer": 0,
+      "explainTr": "\"Your bag went to Melbourne\" = bavulun Melbourne'a gitmiş. Bavulu bulduklarında getirecekler."
+    },
+    {
+      "audio": "G'day! Have you been to Australia before?",
+      "prompt": "Listen. The officer is being friendly. What does she ask?",
+      "options": [
+        "If you have visited before",
+        "If you have a visa",
+        "If you are alone"
+      ],
+      "answer": 0,
+      "explainTr": "\"Have you been here before?\" = Daha önce burada bulundunuz mu? Sıcak bir sohbet sorusu."
+    },
+    {
+      "prompt": "Your bag arrived but a wheel is broken. The bag is…",
+      "options": [
+        "damaged",
+        "lost",
+        "delivered"
+      ],
+      "answer": 0,
+      "explainTr": "Damaged = hasarlı. Lost = kayıp."
+    }
+  ],
+  "form": {
+    "title": "PROPERTY IRREGULARITY REPORT",
+    "titleTr": "Kayıp/hasarlı bagaj formu",
+    "situationTr": "Adın Ozan Yılmaz. Istanbul'dan TK8 seferiyle geldin. Bavulun büyük, siyah, tekerlekli, üstünde kırmızı kurdele var. Harbour Hotel'de kalıyorsun. Telefonun +90 532 000 00 00.",
+    "fields": [
+      {
+        "label": "Passenger name",
+        "labelTr": "Yolcu adı",
+        "options": [
+          "Ozan Yılmaz",
+          "Harbour Hotel",
+          "TK8"
+        ],
+        "answer": 0,
+        "explainTr": "Passenger = yolcu. Adını yaz."
+      },
+      {
+        "label": "Flight number",
+        "labelTr": "Uçuş numarası",
+        "options": [
+          "TK8",
+          "SYD",
+          "+90"
+        ],
+        "answer": 0,
+        "explainTr": "Uçuş numarası biletinde ve biniş kartında yazar: TK8."
+      },
+      {
+        "label": "Bag type",
+        "labelTr": "Bagaj tipi",
+        "options": [
+          "Large suitcase with wheels",
+          "Small backpack",
+          "Box"
+        ],
+        "answer": 0,
+        "explainTr": "Bavulun büyük ve tekerlekli: large suitcase with wheels."
+      },
+      {
+        "label": "Colour",
+        "labelTr": "Renk",
+        "options": [
+          "Black",
+          "Blue",
+          "Red"
+        ],
+        "answer": 0,
+        "explainTr": "Bavul siyah. Kırmızı olan sadece kurdele, onu \"distinctive marks\" kısmına yazarsın."
+      },
+      {
+        "label": "Distinctive marks",
+        "labelTr": "Ayırt edici işaret",
+        "options": [
+          "Red ribbon on the handle",
+          "No marks",
+          "Broken wheel"
+        ],
+        "answer": 0,
+        "explainTr": "Distinctive marks = bavulu tanıtan özel işaret: kırmızı kurdele."
+      },
+      {
+        "label": "Delivery address",
+        "labelTr": "Teslim adresi",
+        "options": [
+          "Harbour Hotel, Sydney",
+          "Istanbul Airport",
+          "Melbourne"
+        ],
+        "answer": 0,
+        "explainTr": "Bulduklarında bavulu kaldığın yere getirecekler."
+      },
+      {
+        "label": "Contact phone",
+        "labelTr": "İletişim telefonu",
+        "options": [
+          "+90 532 000 00 00",
+          "TK8",
+          "SYD48213"
+        ],
+        "answer": 0,
+        "explainTr": "Contact = iletişim. Telefon numaranı yaz."
+      }
     ]
   },
-  "notesTr": "Notlardaki 3. hafta: \"Have you been here before?\", \"Can I see your boarding pass?\", Lost luggage, Deformed luggage, Filling in a complaint form. FORM adımı: Property Irregularity Report."
+  "survive": {
+    "scenario": "arrival-gold"
+  }
 }

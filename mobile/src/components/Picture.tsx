@@ -597,6 +597,394 @@ const DRAWINGS: Record<string, ReactNode> = {
       <Rc x={10} y={24} w={10} h={6} r={1} fill={GR} />
     </>
   ),
+  // ---- week 3 · Sydney ------------------------------------------------------------------
+  'lost-luggage': (
+    <>
+      <Rc x={10} y={20} w={30} h={30} r={5} fill={Y} />
+      <P d="M19 20v-6h12v6" />
+      <Ci x={46} y={20} r={12} fill={W} />
+      <T x={46} y={25} size={14} fill={R}>?</T>
+    </>
+  ),
+  damaged: (
+    <>
+      <Rc x={14} y={18} w={36} h={34} r={5} fill={Y} />
+      <P d="M25 18v-6h14v6" />
+      <P d="M30 18l-4 10 6 4-4 10 4 10" w={2} />
+      <Ci x={22} y={56} r={2.5} fill={INK} />
+      <P d="M40 56l4 4M44 56l-4 4" w={2} />
+    </>
+  ),
+  'baggage-desk': (
+    <>
+      <Rc x={6} y={8} w={52} h={14} r={3} fill={Y} />
+      <T x={32} y={18.5} size={8}>BAGGAGE</T>
+      <Rc x={8} y={34} w={48} h={22} r={2} fill={W} />
+      <Person x={32} y={4} s={0.7} fill={B} />
+    </>
+  ),
+  'ref-number': (
+    <>
+      <Rc x={6} y={18} w={52} h={28} r={4} fill={W} />
+      <T x={32} y={30} size={7}>REF</T>
+      <T x={32} y={40} size={9}>SYD48213</T>
+    </>
+  ),
+  'bag-tag': (
+    <>
+      <Rc x={18} y={18} w={28} h={40} r={4} fill={GR} />
+      <Ci x={32} y={26} r={3} fill={W} />
+      <P d="M32 23V8M24 8h16" w={2} />
+      <T x={32} y={44} size={9} fill={W}>SYD</T>
+    </>
+  ),
+  van: (
+    <>
+      <P d="M4 44V16h34v28zM38 24h12l8 10v10H38z" fill={W} />
+      <Rc x={42} y={27} w={8} h={7} r={1} fill="#DCEBF7" />
+      <Ci x={16} y={46} r={5} fill={INK} />
+      <Ci x={48} y={46} r={5} fill={INK} />
+      <P d="M12 26h18M12 32h12" w={2} />
+    </>
+  ),
+  refund: (
+    <>
+      <Rc x={14} y={22} w={44} h={26} r={3} fill={GR} />
+      <T x={36} y={39} size={11} fill={W}>$</T>
+      <P d="M14 14H8a4 4 0 0 0-4 4v12M4 30l-3-4M4 30l3-4" w={3} />
+    </>
+  ),
+  question: (
+    <>
+      <P d="M8 12h48v32H28l-12 10V44H8z" fill={W} />
+      <T x={32} y={35} size={18}>?</T>
+    </>
+  ),
+  meter: (
+    <>
+      <Rc x={8} y={14} w={48} h={34} r={4} fill={INK} />
+      <Rc x={12} y={20} w={40} h={14} r={2} fill={GR} />
+      <T x={32} y={31} size={10} fill={W}>$ 0.00</T>
+      <Ci x={18} y={41} r={2.5} fill={R} />
+      <Ci x={28} y={41} r={2.5} fill={Y} />
+    </>
+  ),
+  'u-turn': (
+    <>
+      <P d="M18 58V26a12 12 0 0 1 24 0v18" w={4} />
+      <P d="M34 38l8 8 8-8" w={4} />
+    </>
+  ),
+  toll: (
+    <>
+      <P d="M6 20h52" w={4} />
+      <Rc x={8} y={20} w={14} h={34} r={2} fill={Y} />
+      <Path d="M22 34h34" stroke={R} strokeWidth={4} strokeLinecap="round" />
+      <Ci x={44} y={14} r={7} fill={Y} />
+      <T x={44} y={17.5} size={9}>$</T>
+    </>
+  ),
+  bridge: (
+    <>
+      <P d="M4 44h56" w={3} />
+      <P d="M8 44c6-30 42-30 48 0" />
+      {[16, 24, 32, 40, 48].map((x) => <Ln key={x} x1={x} y1={x === 32 ? 22 : x === 24 || x === 40 ? 25 : 32} x2={x} y2={44} w={1.5} />)}
+      <Rc x={4} y={30} w={6} h={24} r={1} fill={colors.line} />
+      <Rc x={54} y={30} w={6} h={24} r={1} fill={colors.line} />
+      <P d="M2 54c6-3 10 3 16 0s10 3 16 0 10 3 16 0 8 3 12 0" w={2} />
+    </>
+  ),
+  detour: (
+    <>
+      <Rc x={6} y={8} w={52} h={22} r={3} fill={Y} />
+      <T x={32} y={23} size={10}>DETOUR</T>
+      <P d="M14 56V44h20l8-8M36 36h6v6" w={3} />
+    </>
+  ),
+  rideshare: (
+    <>
+      <Rc x={18} y={4} w={28} h={56} r={5} fill={INK} />
+      <Rc x={21} y={10} w={22} h={42} r={2} fill={W} />
+      <P d="M24 36v-4l3-6h10l3 6v4z" fill={Y} w={1.5} />
+      <Ci x={32} y={18} r={3} fill={R} />
+    </>
+  ),
+  'pull-over': (
+    <>
+      <P d="M50 4v56" w={4} />
+      <P d="M14 46V30l14-16" w={3} />
+      <P d="M22 14h7v7" w={3} />
+      <Rc x={34} y={36} w={12} h={18} r={3} fill={B} />
+    </>
+  ),
+  aircon: (
+    <>
+      <Rc x={6} y={12} w={52} h={22} r={4} fill={W} />
+      <P d="M12 28h40" w={2} />
+      <P d="M18 40c-2 4 2 6 0 10M32 40c-2 4 2 6 0 10M46 40c-2 4 2 6 0 10" w={2} />
+      <Ci x={50} y={19} r={2} fill={GR} />
+    </>
+  ),
+  noise: (
+    <>
+      <P d="M8 26h10l12-10v32L18 38H8z" fill={W} />
+      <P d="M38 22c4 4 4 16 0 20M44 16c8 8 8 24 0 32M50 10c12 12 12 32 0 44" />
+    </>
+  ),
+  broken: (
+    <>
+      <P d="M22 8h20l6 22H16z" fill={Y} />
+      <P d="M32 30v20M22 56h20" />
+      <P d="M28 8l4 8-4 6 6 8" w={2} />
+    </>
+  ),
+  'out-of-order': (
+    <>
+      <Rc x={6} y={14} w={52} h={36} r={3} fill={W} />
+      <T x={32} y={30} size={8} fill={R}>OUT OF</T>
+      <T x={32} y={41} size={8} fill={R}>ORDER</T>
+    </>
+  ),
+  leak: (
+    <>
+      <P d="M10 14h26a8 8 0 0 1 8 8v6h-8v-4H10z" fill={colors.line} />
+      <P d="M40 36c-3 5-5 8-2 11s6-1 2-11zM42 50c-2 3-3 5-1 7s4-1 1-7z" fill="#9CC4F0" w={2} />
+    </>
+  ),
+  complaint: (
+    <>
+      <P d="M8 10h48v34H28L16 54V44H8z" fill={R} />
+      <T x={32} y={34} size={20} fill={W}>!</T>
+    </>
+  ),
+  manager: (
+    <>
+      <Person x={32} y={6} fill={INK} />
+      <P d="M32 36l-3 4 3 10 3-10z" fill={R} w={1.5} />
+      <Rc x={44} y={44} w={14} h={10} r={2} fill={W} />
+    </>
+  ),
+  overbooked: (
+    <>
+      <Rc x={10} y={12} w={44} h={42} r={4} fill={W} />
+      <Rect x={10} y={12} width={44} height={10} rx={4} fill={R} stroke={INK} strokeWidth={S} />
+      <Path d="M22 30l20 18M42 30 22 48" stroke={R} strokeWidth={4} strokeLinecap="round" />
+    </>
+  ),
+  // ---- food problems ----------------------------------------------------------------------
+  'wrong-order': (
+    <>
+      <Ci x={28} y={36} r={20} fill={W} />
+      <Ci x={28} y={36} r={12} fill={Y} />
+      <Ci x={50} y={14} r={10} fill={R} />
+      <Path d="M45 9l10 10M55 9 45 19" stroke={W} strokeWidth={3} strokeLinecap="round" />
+    </>
+  ),
+  snowflake: (
+    <>
+      <P d="M32 6v52M9 19l46 26M9 45l46-26" />
+      <P d="M26 10l6 6 6-6M26 54l6-6 6 6" w={2} />
+    </>
+  ),
+  burnt: (
+    <>
+      <Rc x={14} y={22} w={36} h={30} r={8} fill="#4A3426" />
+      <P d="M22 14c-2 3 2 5 0 8M32 10c-2 3 2 5 0 8M42 14c-2 3 2 5 0 8" w={2} />
+    </>
+  ),
+  'double-charge': (
+    <>
+      <Rc x={4} y={14} w={40} h={26} r={4} fill={B} />
+      <Rc x={18} y={26} w={40} h={26} r={4} fill={B} />
+      <T x={38} y={44} size={11} fill={W}>×2</T>
+    </>
+  ),
+  free: (
+    <>
+      <P d="M30 8h22v22L28 54 8 34z" fill={GR} />
+      <Ci x={44} y={16} r={3} fill={W} />
+      <T x={30} y={36} size={9} fill={W}>FREE</T>
+    </>
+  ),
+  'doggy-bag': (
+    <>
+      <P d="M14 24h36l-4 32H18z" fill={W} />
+      <P d="M14 24l6-10h24l6 10" fill={W} />
+      <P d="M26 14c0-6 12-6 12 0" />
+    </>
+  ),
+  // ---- café chat --------------------------------------------------------------------------
+  'flat-white': (
+    <>
+      <P d="M10 26h36v10a16 16 0 0 1-16 16h-4a16 16 0 0 1-16-16z" fill={W} />
+      <P d="M46 30h4a6 6 0 0 1 0 12h-4" />
+      <P d="M14 30h28" w={5} />
+      <P d="M28 34c-4-4-8 0-4 4l4 4 4-4c4-4 0-8-4-4z" fill={W} w={1.5} />
+      <P d="M6 56h44" />
+    </>
+  ),
+  swap: (
+    <>
+      <P d="M10 18h36M38 10l8 8-8 8" w={3} />
+      <P d="M54 46H18M26 38l-8 8 8 8" w={3} />
+    </>
+  ),
+  chair: (
+    <>
+      <P d="M18 8v48M18 32h28v24M18 32V8h22v24" />
+      <Rc x={16} y={30} w={32} h={6} r={2} fill={Y} />
+    </>
+  ),
+  globe: (
+    <>
+      <Ci x={32} y={32} r={24} fill="#9CC4F0" />
+      <P d="M20 18c6 2 4 8 10 8s2 8 8 8M40 46c-4-2-8 0-8 4" fill={GR} w={2} />
+      <P d="M8 32h48" w={1.5} />
+    </>
+  ),
+  binoculars: (
+    <>
+      <Ci x={18} y={40} r={12} fill={INK} />
+      <Ci x={46} y={40} r={12} fill={INK} />
+      <Ci x={18} y={40} r={6} fill="#9CC4F0" />
+      <Ci x={46} y={40} r={6} fill="#9CC4F0" />
+      <P d="M14 28l4-16h8l2 16M50 28l-4-16h-8l-2 16M28 30h8" fill={colors.inkLine} />
+    </>
+  ),
+  beach: (
+    <>
+      <Ci x={46} y={16} r={8} fill={Y} />
+      <P d="M2 42c8-4 14 4 22 0s14 4 22 0 12 4 16 0v20H2z" fill="#9CC4F0" />
+      <P d="M16 34l14-22M30 12c-6-2-14 2-16 8l16-8 2 16c4-6 4-14-2-16z" fill={R} w={2} />
+    </>
+  ),
+  sunset: (
+    <>
+      <P d="M12 42a20 20 0 0 1 40 0z" fill={Y} />
+      <P d="M4 42h56M10 50h44M18 58h28" />
+      <P d="M32 8v8M12 16l5 5M52 16l-5 5" w={2} />
+    </>
+  ),
+  // ---- returns & market ----------------------------------------------------------------------
+  exchange: (
+    <>
+      <Rc x={4} y={12} w={20} h={20} r={3} fill={Y} />
+      <Rc x={40} y={32} w={20} h={20} r={3} fill={GR} />
+      <P d="M28 18h14l-4-4M36 46H22l4 4" w={3} />
+    </>
+  ),
+  faulty: (
+    <>
+      <P d="M14 38V30a18 18 0 0 1 36 0v8" w={4} />
+      <Rc x={8} y={36} w={12} h={18} r={4} fill={INK} />
+      <Rc x={44} y={36} w={12} h={18} r={4} fill={INK} />
+      <Path d="M28 40l4 6-4 6M36 40l-4 6 4 6" stroke={R} strokeWidth={2.5} fill="none" />
+    </>
+  ),
+  'gift-card': (
+    <>
+      <Rc x={6} y={16} w={52} h={32} r={5} fill={R} />
+      <Path d="M24 16v32M6 30h52" stroke={Y} strokeWidth={4} />
+      <T x={44} y={44} size={8} fill={W}>CREDIT</T>
+    </>
+  ),
+  warranty: (
+    <>
+      <P d="M32 6l20 8v16c0 14-10 22-20 28-10-6-20-14-20-28V14z" fill={GR} />
+      <Path d="M22 32l7 7 13-14" stroke={W} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </>
+  ),
+  stall: (
+    <>
+      <P d="M4 22l6-12h44l6 12z" fill={R} />
+      <P d="M4 22c0 5 9 5 9 0 0 5 10 5 10 0 0 5 9 5 9 0 0 5 10 5 10 0 0 5 9 5 9 0 0 5 9 5 9 0" fill={W} w={2} />
+      <P d="M10 28v30M54 28v30M6 44h52" />
+      <Rc x={14} y={36} w={10} h={8} r={1} fill={Y} />
+      <Rc x={30} y={36} w={10} h={8} r={1} fill={GR} />
+    </>
+  ),
+  haggle: (
+    <>
+      <P d="M22 8h18v18L20 46 4 30z" fill={W} />
+      <T x={24} y={28} size={9}>$60</T>
+      <P d="M46 24v28M38 44l8 8 8-8" w={3} />
+    </>
+  ),
+  handshake: (
+    <>
+      <P d="M4 28l14-8 10 4 8-4 14 4 10 8-10 12-8 4-14-8-12 4z" fill={Y} />
+      <P d="M28 24l8 8M34 36l6 6M28 40l6 6" w={2} />
+    </>
+  ),
+  'stop-hand': (
+    <>
+      <P d="M22 58V30l-6-8a3 3 0 0 1 5-3l6 7V10a3 3 0 0 1 6 0v14V6a3 3 0 0 1 6 0v18V10a3 3 0 0 1 6 0v18V18a3 3 0 0 1 6 0v22c0 10-6 18-14 18z" fill={R} />
+    </>
+  ),
+  // ---- finding the way ------------------------------------------------------------------------
+  lost: (
+    <>
+      <Person x={26} y={12} s={0.85} />
+      <Ci x={48} y={16} r={10} fill={Y} />
+      <T x={48} y={21} size={13}>?</T>
+    </>
+  ),
+  turn: (
+    <>
+      <P d="M32 58V30a8 8 0 0 0-8-8H10M18 14l-8 8 8 8" w={4} />
+      <P d="M32 30a8 8 0 0 1 8-8h14M46 14l8 8-8 8" w={4} />
+    </>
+  ),
+  straight: (
+    <>
+      <P d="M32 58V8M20 20 32 8l12 12" w={4} />
+      <P d="M16 58V30M48 58V30" w={2} />
+    </>
+  ),
+  corner: (
+    <>
+      <P d="M8 8v48h48" w={3} />
+      <Rc x={14} y={34} w={16} h={16} r={2} fill={Y} />
+      <P d="M40 20l-6 6M34 20h6v6" w={2} />
+    </>
+  ),
+  opposite: (
+    <>
+      <Rc x={4} y={8} w={18} h={48} r={2} fill={W} />
+      <Rc x={42} y={8} w={18} h={48} r={2} fill={Y} />
+      <P d="M24 32h16M34 26l6 6-6 6M30 26l-6 6 6 6" w={2} />
+    </>
+  ),
+  'next-to': (
+    <>
+      <Rc x={6} y={16} w={24} h={40} r={2} fill={W} />
+      <Rc x={34} y={24} w={24} h={32} r={2} fill={Y} />
+      <P d="M18 8v4M46 16v4" w={2} />
+    </>
+  ),
+  ferry: (
+    <>
+      <P d="M6 38h52l-8 12H14z" fill={W} />
+      <Rc x={16} y={24} w={30} h={14} r={2} fill={GR} />
+      <Rc x={24} y={14} w={14} h={10} r={2} fill={Y} />
+      <P d="M2 56c6-3 10 3 16 0s10 3 16 0 10 3 16 0 8 3 12 0" w={2} />
+    </>
+  ),
+  cancelled: (
+    <>
+      <Rc x={6} y={12} w={52} h={40} r={3} fill={INK} />
+      <T x={32} y={28} size={8} fill={Y}>MANLY 15:30</T>
+      <Rc x={10} y={34} w={44} h={12} r={2} fill={R} />
+      <T x={32} y={43} size={8} fill={W}>CANCELLED</T>
+    </>
+  ),
+  walk: (
+    <>
+      <P d="M18 40c-3 0-6 4-6 10s2 8 5 8 5-3 5-8-1-10-4-10zM44 14c-3 0-6 4-6 10s2 8 5 8 5-3 5-8-1-10-4-10z" fill={Y} />
+      <Ci x={14} y={34} r={2} fill={INK} />
+      <Ci x={40} y={8} r={2} fill={INK} />
+    </>
+  ),
   // ---- transfer -------------------------------------------------------------------------
   taxi: (
     <>

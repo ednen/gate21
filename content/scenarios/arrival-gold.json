@@ -1,0 +1,406 @@
+{
+  "slug": "arrival-gold",
+  "chapter": "arrival-gold",
+  "title": "Lost luggage",
+  "titleTr": "Kayıp bagaj",
+  "role": "Baggage services agent",
+  "setting": "Sydney Airport · Baggage services",
+  "voice": "en-AU",
+  "persona": "You are a warm, chatty baggage services agent at Sydney Airport. You use Australian expressions like 'no worries' and 'mate', and you speak at a natural, quick pace.",
+  "briefTr": "Sidney'e indin ama bavulun banttan çıkmadı. Büyük, siyah, kırmızı kurdeleli bir bavul. Harbour Hotel'de kalıyorsun. Adın {name}.",
+  "opening": "G'day! Next please. How can I help you?",
+  "facts": [
+    {
+      "id": "ref",
+      "values": [
+        "SYD48213",
+        "SYD77102",
+        "SYD30591"
+      ],
+      "question": "What was your reference number?",
+      "questionTr": "Referans numaran neydi?"
+    },
+    {
+      "id": "hours",
+      "values": [
+        "24 hours",
+        "48 hours",
+        "12 hours"
+      ],
+      "question": "Within how many hours should your bag arrive?",
+      "questionTr": "Bavulunun kaç saat içinde gelmesi bekleniyordu?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "report",
+      "titleTr": "Bavulun gelmediğini söylemek",
+      "instruction": "The traveller says their suitcase did not arrive or is missing.",
+      "hint": "My suitcase didn't arrive.",
+      "hintTr": "Bavulum gelmedi.",
+      "keywords": [
+        "suitcase",
+        "bag",
+        "luggage",
+        "didn't",
+        "arrive",
+        "lost",
+        "missing",
+        "not here"
+      ],
+      "successReply": "Oh no, sorry to hear that.",
+      "retryReply": "What's the problem, mate? Is something missing?"
+    },
+    {
+      "id": "documents",
+      "titleTr": "Biniş kartını ve bagaj etiketini göstermek",
+      "ask": "Can I see your boarding pass and baggage tag?",
+      "instruction": "The traveller hands over the boarding pass and baggage tag.",
+      "hint": "Here are my boarding pass and baggage tag.",
+      "hintTr": "İşte biniş kartım ve bagaj etiketim.",
+      "keywords": [
+        "here",
+        "boarding",
+        "tag",
+        "pass",
+        "sure",
+        "ticket"
+      ],
+      "successReply": "Thanks, that helps.",
+      "retryReply": "I need your boarding pass and the baggage tag from check-in."
+    },
+    {
+      "id": "describe",
+      "titleTr": "Bavulu tarif etmek",
+      "ask": "What does it look like?",
+      "instruction": "The traveller describes the bag: colour, size, type, marks.",
+      "hint": "It's a large black suitcase with a red ribbon.",
+      "hintTr": "Büyük, siyah, kırmızı kurdeleli bir bavul.",
+      "keywords": [
+        "black",
+        "red",
+        "blue",
+        "grey",
+        "gray",
+        "large",
+        "small",
+        "big",
+        "suitcase",
+        "ribbon",
+        "wheels",
+        "colour",
+        "color"
+      ],
+      "successReply": "Got it, I'll put that in the system.",
+      "retryReply": "What does your bag look like? Colour, size?"
+    },
+    {
+      "id": "before",
+      "titleTr": "Sohbete cevap vermek",
+      "ask": "So, have you been to Australia before?",
+      "instruction": "The agent makes friendly small talk. The traveller answers whether they have been to Australia before.",
+      "hint": "No, it's my first time in Australia.",
+      "hintTr": "Hayır, Avustralya'ya ilk gelişim.",
+      "keywords": [
+        "no",
+        "yes",
+        "first",
+        "before",
+        "time",
+        "never",
+        "once"
+      ],
+      "successReply": "Welcome! You'll love it here.",
+      "retryReply": "Just curious — have you been here before?"
+    },
+    {
+      "id": "address",
+      "titleTr": "Teslim adresini vermek",
+      "ask": "Where are you staying in Sydney?",
+      "instruction": "The traveller says where to deliver the bag.",
+      "hint": "Please deliver it to the Harbour Hotel.",
+      "hintTr": "Lütfen Harbour Hotel'e getirin.",
+      "keywords": [
+        "hotel",
+        "deliver",
+        "address",
+        "harbour",
+        "staying",
+        "street"
+      ],
+      "successReply": "No worries, we'll bring it to you.",
+      "retryReply": "Where should we deliver it when we find it?"
+    },
+    {
+      "id": "reference",
+      "titleTr": "Referans numarası istemek",
+      "ask": "We'll call you as soon as it turns up.",
+      "instruction": "The traveller asks for a reference number or a copy of the claim.",
+      "hint": "Can I have a reference number?",
+      "hintTr": "Bir referans numarası alabilir miyim?",
+      "keywords": [
+        "reference",
+        "number",
+        "ref",
+        "claim",
+        "copy"
+      ],
+      "successReply": "Sure — your reference number is {ref}. It should arrive within {hours}.",
+      "retryReply": "Is there anything you need from me before you go?"
+    },
+    {
+      "id": "essentials",
+      "titleTr": "Acil masrafları sormak",
+      "ask": "Anything else I can do for you?",
+      "instruction": "The traveller asks if the airline will pay for essentials like clothes or a toothbrush.",
+      "hint": "Can I buy some clothes? Will you pay for them?",
+      "hintTr": "Biraz kıyafet alabilir miyim? Ücretini siz öder misiniz?",
+      "keywords": [
+        "pay",
+        "buy",
+        "clothes",
+        "toothbrush",
+        "compensation",
+        "refund",
+        "cover",
+        "essentials",
+        "money",
+        "receipts"
+      ],
+      "successReply": "Yes — keep your receipts and we'll pay you back.",
+      "retryReply": "Anything else you're worried about?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "melbourne",
+      "titleTr": "Bavul başka şehre gitmiş",
+      "intro": "Ah, found it in the system — your bag went to Melbourne by mistake.",
+      "instruction": "The bag is in another city. The traveller asks when it will arrive, asks for delivery to the hotel, or asks how this happened.",
+      "retryReply": "Sorry about that, mate. These things happen.",
+      "options": [
+        {
+          "text": "When will it get here?",
+          "keywords": [
+            "when",
+            "get here",
+            "arrive"
+          ],
+          "reply": "It'll be on the first flight tomorrow morning."
+        },
+        {
+          "text": "Can you send it straight to my hotel?",
+          "keywords": [
+            "send",
+            "straight",
+            "hotel"
+          ],
+          "reply": "Absolutely, we'll deliver it to your hotel."
+        },
+        {
+          "text": "How did that happen?",
+          "keywords": [
+            "how",
+            "happen",
+            "why"
+          ],
+          "reply": "A tag mix-up in Istanbul, by the look of it. Sorry!"
+        }
+      ]
+    },
+    {
+      "id": "broken-wheel",
+      "titleTr": "Bavul gelmiş ama hasarlı",
+      "intro": "Oh, wait — your bag just came in. But one of the wheels is broken.",
+      "instruction": "The bag arrived damaged. The traveller asks for a repair, compensation, or a damage report.",
+      "retryReply": "I'm really sorry. How would you like to handle it?",
+      "options": [
+        {
+          "text": "Can you repair it?",
+          "keywords": [
+            "repair",
+            "fix"
+          ],
+          "reply": "Yes, we'll repair it for free and bring it to your hotel."
+        },
+        {
+          "text": "Can I get compensation for the damage?",
+          "keywords": [
+            "compensation",
+            "pay",
+            "damage"
+          ],
+          "reply": "Yes, just fill in this damage form and we'll pay you back."
+        },
+        {
+          "text": "I'd like to make a damage report, please.",
+          "keywords": [
+            "report",
+            "make",
+            "write"
+          ],
+          "reply": "Of course, here's the report form."
+        }
+      ]
+    },
+    {
+      "id": "is-this-yours",
+      "titleTr": "Benzer bir bavul",
+      "intro": "We have a black suitcase here with no tag. Is this yours?",
+      "instruction": "A similar bag was found. The traveller checks it: it is not theirs, asks to look at it, or points out their red ribbon.",
+      "retryReply": "Have a good look, mate.",
+      "options": [
+        {
+          "text": "No, mine has a red ribbon.",
+          "keywords": [
+            "ribbon",
+            "red",
+            "mine has"
+          ],
+          "reply": "Ah, not yours then. We'll keep looking."
+        },
+        {
+          "text": "Can I have a closer look?",
+          "keywords": [
+            "closer",
+            "look",
+            "see"
+          ],
+          "reply": "Sure — hmm, no ribbon. Not yours."
+        },
+        {
+          "text": "Sorry, that isn't my bag.",
+          "keywords": [
+            "isn't",
+            "not my",
+            "not mine"
+          ],
+          "reply": "No worries, we'll keep searching."
+        }
+      ]
+    },
+    {
+      "id": "online",
+      "titleTr": "Form sadece online",
+      "intro": "Just so you know, you'll need to fill in the claim online. Here's the website.",
+      "instruction": "The claim must be filed online. The traveller asks for help, asks for a paper form, or asks if the website is in other languages.",
+      "retryReply": "Most people do it on their phone, it's quick.",
+      "options": [
+        {
+          "text": "Can you help me fill it in?",
+          "keywords": [
+            "help",
+            "fill"
+          ],
+          "reply": "Of course, let's do it together right now."
+        },
+        {
+          "text": "Can I have a paper form instead?",
+          "keywords": [
+            "paper",
+            "instead"
+          ],
+          "reply": "Sure, I've got a paper one here."
+        },
+        {
+          "text": "Is the website in Turkish?",
+          "keywords": [
+            "turkish",
+            "language"
+          ],
+          "reply": "Not Turkish, sorry, but it's very simple English."
+        }
+      ]
+    },
+    {
+      "id": "no-cover",
+      "titleTr": "İlk gün masraf karşılanmıyor",
+      "intro": "Just a heads up — we only pay for things you buy after the first 24 hours.",
+      "instruction": "Purchases on the first day are not covered. The traveller asks why, asks what is covered, or asks for an exception.",
+      "retryReply": "That's the airline's policy, sorry.",
+      "options": [
+        {
+          "text": "Why only after 24 hours?",
+          "keywords": [
+            "why",
+            "only",
+            "after"
+          ],
+          "reply": "Most bags turn up within a day. But I'll note your case."
+        },
+        {
+          "text": "What exactly do you cover?",
+          "keywords": [
+            "what",
+            "exactly",
+            "cover"
+          ],
+          "reply": "Toiletries and basic clothes, up to a hundred dollars a day."
+        },
+        {
+          "text": "Can you make an exception? I have nothing to wear.",
+          "keywords": [
+            "exception",
+            "nothing to wear"
+          ],
+          "reply": "Let me talk to my manager… Okay, we'll cover a toothbrush and a shirt today."
+        }
+      ]
+    },
+    {
+      "id": "two-days",
+      "titleTr": "İki gün sürebilir",
+      "intro": "Between you and me, it might take two days.",
+      "instruction": "The delivery may take two days. The traveller asks for updates, asks for faster delivery, or asks for a tracking link.",
+      "retryReply": "We'll do our best.",
+      "options": [
+        {
+          "text": "Can you send me updates?",
+          "keywords": [
+            "updates",
+            "update",
+            "send me"
+          ],
+          "reply": "Yes, you'll get a text every time it moves."
+        },
+        {
+          "text": "Is there any way to make it faster?",
+          "keywords": [
+            "faster",
+            "quicker",
+            "any way"
+          ],
+          "reply": "I'll mark it urgent. That usually helps."
+        },
+        {
+          "text": "Can I track it online?",
+          "keywords": [
+            "track",
+            "online",
+            "link"
+          ],
+          "reply": "Yes, use your reference number on our website."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "describe",
+      "pool": [
+        "melbourne",
+        "broken-wheel",
+        "is-this-yours"
+      ]
+    },
+    {
+      "after": "reference",
+      "pool": [
+        "online",
+        "no-cover",
+        "two-days"
+      ]
+    }
+  ],
+  "closing": "Hang in there, {name} — we'll find it. Enjoy Sydney!"
+}

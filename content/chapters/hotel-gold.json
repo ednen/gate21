@@ -1,72 +1,165 @@
 {
   "slug": "hotel-gold",
-  "draft": true,
   "mission": "Solve problems with your room",
-  "missionTr": "Odadaki sorunları çöz: klima bozuk, gürültü, fazla rezervasyon, oda değişikliği",
+  "missionTr": "Odadaki sorunları kibar ama kararlı bir şekilde çöz: klima ve gürültüyü anlat, oda değişikliği ve telafi iste, yazılı onay al",
   "stamp": "UPGRADED",
-  "trip": "Sydney",
   "steps": [
     "DISCOVER",
     "PRONOUNCE",
     "MATCH",
     "RECOGNIZE",
-    "DIALOG",
+    "USE",
     "SURVIVE"
   ],
   "words": [
     {
       "en": "air conditioning",
-      "tr": "klima"
+      "tr": "klima",
+      "picture": "aircon",
+      "example": "The air conditioning doesn't work.",
+      "exampleTr": "Klima çalışmıyor."
     },
     {
       "en": "noisy",
-      "tr": "gürültülü"
+      "tr": "gürültülü",
+      "picture": "noise",
+      "example": "My room is very noisy.",
+      "exampleTr": "Odam çok gürültülü."
     },
     {
       "en": "broken",
-      "tr": "bozuk"
-    },
-    {
-      "en": "overbooked",
-      "tr": "fazla rezervasyon alınmış"
-    },
-    {
-      "en": "upgrade",
-      "tr": "üst sınıfa yükseltme"
-    },
-    {
-      "en": "refund",
-      "tr": "para iadesi"
-    },
-    {
-      "en": "complaint",
-      "tr": "şikâyet"
-    },
-    {
-      "en": "manager",
-      "tr": "müdür"
+      "tr": "bozuk, kırık",
+      "picture": "broken",
+      "example": "The lamp is broken.",
+      "exampleTr": "Lamba bozuk."
     },
     {
       "en": "It doesn't work.",
-      "tr": "Çalışmıyor."
+      "tr": "Çalışmıyor.",
+      "picture": "out-of-order",
+      "example": "The shower doesn't work.",
+      "exampleTr": "Duş çalışmıyor."
+    },
+    {
+      "en": "leak",
+      "tr": "sızıntı",
+      "picture": "leak",
+      "example": "There's a leak in the bathroom.",
+      "exampleTr": "Banyoda sızıntı var."
+    },
+    {
+      "en": "complaint",
+      "tr": "şikâyet",
+      "picture": "complaint",
+      "example": "I'd like to make a complaint.",
+      "exampleTr": "Şikâyette bulunmak istiyorum."
+    },
+    {
+      "en": "manager",
+      "tr": "müdür",
+      "picture": "manager",
+      "example": "Could I speak to the manager?",
+      "exampleTr": "Müdürle görüşebilir miyim?"
+    },
+    {
+      "en": "overbooked",
+      "tr": "fazla rezervasyon alınmış",
+      "picture": "overbooked",
+      "example": "The hotel is overbooked.",
+      "exampleTr": "Otel fazla rezervasyon almış."
+    },
+    {
+      "en": "upgrade",
+      "tr": "üst sınıfa yükseltme",
+      "picture": "upgrade",
+      "example": "Could you give me an upgrade?",
+      "exampleTr": "Bir üst sınıfa yükseltebilir misiniz?"
+    },
+    {
+      "en": "refund",
+      "tr": "para iadesi",
+      "picture": "refund",
+      "example": "I'd like a partial refund.",
+      "exampleTr": "Kısmi para iadesi istiyorum."
     }
   ],
-  "scene": {
-    "role": "Duty manager",
-    "setting": "Harbour Hotel, Sydney · Front desk",
-    "goalsTr": [
-      "Klimanın çalışmadığını anlat",
-      "Odanın gürültülü olduğunu söyle ve oda değişikliği iste",
-      "Kibar ama kararlı ol: müdürle görüşmek iste",
-      "Telafi olarak ne önerdiklerini sor (upgrade / indirim)",
-      "Teklifi kabul et ya da başka bir şey öner",
-      "Yazılı onay iste"
-    ],
-    "twistsTr": [
-      "Otel fazla rezervasyon almış (overbooked)",
-      "Yeni oda da aynı sorunla geliyor",
-      "Para iadesi yerine sadece kahvaltı öneriyorlar"
+  "pronounce": [
+    {
+      "word": "complaint",
+      "ipa": "/kəmˈpleɪnt/",
+      "stress": "kum-PLAYNT",
+      "tipTr": "Vurgu ikinci hecede: kım-PLEYNT."
+    },
+    {
+      "word": "noisy",
+      "ipa": "/ˈnɔɪ.zi/",
+      "stress": "NOY-zee",
+      "tipTr": "\"Noysi\" değil: NOY-zi, ortada z sesi."
+    },
+    {
+      "word": "refund",
+      "ipa": "/ˈriː.fʌnd/",
+      "stress": "REE-fund",
+      "tipTr": "İsim olarak vurgu başta: Rİİ-fand."
+    }
+  ],
+  "match": [
+    "air conditioning",
+    "noisy",
+    "broken",
+    "leak",
+    "manager",
+    "refund"
+  ],
+  "recognize": [
+    {
+      "audio": "I can't move you tonight, but breakfast is on the house.",
+      "prompt": "Listen. What is the hotel offering?",
+      "options": [
+        "Free breakfast",
+        "A new room",
+        "A refund"
+      ],
+      "answer": 0,
+      "explainTr": "\"Breakfast on the house\" = kahvaltı otelden, yani ücretsiz."
+    },
+    {
+      "prompt": "You want to complain politely but firmly. The best start is:",
+      "options": [
+        "I'd like to make a complaint about my room.",
+        "Your hotel is terrible!",
+        "Room bad."
+      ],
+      "answer": 0,
+      "explainTr": "Kibar ama net: \"I'd like to make a complaint about…\""
+    },
+    {
+      "audio": "I'm sorry, we're fully booked tonight.",
+      "prompt": "Listen. Why can't you change rooms?",
+      "options": [
+        "The hotel is full",
+        "The manager is busy",
+        "It's too late"
+      ],
+      "answer": 0,
+      "explainTr": "\"We're fully booked\" = otel tamamen dolu."
+    }
+  ],
+  "use": {
+    "word": "complaint",
+    "phrase": "I'd like to make a complaint about my room.",
+    "phraseTr": "Odamla ilgili şikâyette bulunmak istiyorum.",
+    "situation": "You go down to reception. Start your complaint politely.",
+    "situationTr": "Resepsiyona indin. Şikâyetini kibarca başlat.",
+    "tiles": [
+      "I'd like to",
+      "make a complaint",
+      "about",
+      "my room",
+      "."
     ]
   },
-  "notesTr": ""
+  "survive": {
+    "scenario": "hotel-gold"
+  }
 }

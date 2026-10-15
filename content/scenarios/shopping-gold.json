@@ -1,0 +1,388 @@
+{
+  "slug": "shopping-gold",
+  "chapter": "shopping-gold",
+  "title": "Returns and bargaining",
+  "titleTr": "İade ve pazarlık",
+  "role": "Shop assistant",
+  "setting": "Electronics store, Pitt Street",
+  "voice": "en-AU",
+  "persona": "You are a polite shop assistant at an electronics store in Sydney. Store policy: refunds need a receipt; faulty items can be exchanged.",
+  "briefTr": "Dün aldığın kulaklık arızalı. Fişin çantanda. Önce mağazada iade et, sonra Paddy's Markets'ta bir bumerang için pazarlık yap.",
+  "opening": "Hi there! How can I help?",
+  "facts": [
+    {
+      "id": "price",
+      "values": [
+        "sixty dollars",
+        "seventy dollars",
+        "fifty-five dollars"
+      ],
+      "question": "What was the seller's first price?",
+      "questionTr": "Satıcının ilk fiyatı neydi?"
+    },
+    {
+      "id": "final",
+      "values": [
+        "forty-five dollars",
+        "fifty dollars",
+        "forty-eight dollars"
+      ],
+      "question": "What was the final price?",
+      "questionTr": "Son fiyat neydi?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "return",
+      "titleTr": "İade sebebini söylemek",
+      "instruction": "The customer says they want to return an item because it is faulty.",
+      "hint": "I'd like to return these headphones. They're faulty.",
+      "hintTr": "Bu kulaklığı iade etmek istiyorum. Arızalı.",
+      "keywords": [
+        "return",
+        "faulty",
+        "broken",
+        "doesn't work",
+        "refund",
+        "not working"
+      ],
+      "successReply": "Oh, sorry about that.",
+      "retryReply": "Is there a problem with something you bought?"
+    },
+    {
+      "id": "receipt",
+      "titleTr": "Fişi göstermek",
+      "ask": "Have you got the receipt?",
+      "instruction": "The customer shows the receipt.",
+      "hint": "Yes, here's the receipt.",
+      "hintTr": "Evet, işte fiş.",
+      "keywords": [
+        "yes",
+        "here",
+        "receipt"
+      ],
+      "successReply": "Thanks.",
+      "retryReply": "Do you have the receipt with you?"
+    },
+    {
+      "id": "choice",
+      "titleTr": "Para iadesi mi değişim mi",
+      "ask": "Would you like an exchange or a refund?",
+      "instruction": "The customer says whether they want a refund or an exchange.",
+      "hint": "A refund, please.",
+      "hintTr": "Para iadesi, lütfen.",
+      "keywords": [
+        "refund",
+        "exchange",
+        "money back",
+        "new one",
+        "replacement"
+      ],
+      "successReply": "No problem, that's done.",
+      "retryReply": "Would you like your money back or a new pair?"
+    },
+    {
+      "id": "price",
+      "titleTr": "Pazarda fiyat sormak",
+      "ask": "Handmade boomerangs! Have a look, love.",
+      "instruction": "At the market, the customer asks the price.",
+      "hint": "How much is this one?",
+      "hintTr": "Bu ne kadar?",
+      "keywords": [
+        "how much",
+        "price",
+        "cost"
+      ],
+      "successReply": "That one's {price}.",
+      "retryReply": "Want to know the price, love?",
+      "role": "Market seller",
+      "setting": "Paddy's Markets · Stall 12",
+      "voice": "en-AU",
+      "persona": "You are a cheeky market seller at Paddy's Markets in Sydney selling handmade boomerangs. You enjoy bargaining but you won't go below forty-five dollars."
+    },
+    {
+      "id": "bargain",
+      "titleTr": "Daha iyi fiyat istemek",
+      "ask": "It's real wood, hand-painted.",
+      "instruction": "The customer asks for a lower price.",
+      "hint": "It's lovely. Can you do a better price?",
+      "hintTr": "Çok güzel. Daha iyi bir fiyat yapabilir misiniz?",
+      "keywords": [
+        "better price",
+        "cheaper",
+        "discount",
+        "less",
+        "lower",
+        "deal",
+        "too much"
+      ],
+      "successReply": "Hmm, maybe. What's your offer?",
+      "retryReply": "Is that price okay for you?"
+    },
+    {
+      "id": "offer",
+      "titleTr": "Karşı teklif vermek",
+      "ask": "What's your offer?",
+      "instruction": "The customer makes a counter-offer with a number.",
+      "hint": "How about forty?",
+      "hintTr": "Kırka ne dersiniz?",
+      "keywords": [
+        "forty",
+        "thirty",
+        "fifty",
+        "how about",
+        "offer",
+        "dollars",
+        "45"
+      ],
+      "successReply": "Ha! Meet me in the middle.",
+      "retryReply": "Go on, name your price."
+    },
+    {
+      "id": "close",
+      "titleTr": "Anlaşmak ya da vazgeçmek",
+      "ask": "{final}, love — final offer.",
+      "instruction": "The customer accepts the final price or politely says no.",
+      "hint": "Okay, it's a deal!",
+      "hintTr": "Tamam, anlaştık!",
+      "keywords": [
+        "deal",
+        "okay",
+        "ok",
+        "no thanks",
+        "fine",
+        "take it",
+        "yes"
+      ],
+      "successReply": "Lovely! {final} it is. Enjoy it!",
+      "retryReply": "So, have we got a deal?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "no-receipt",
+      "titleTr": "Fiş kayıp",
+      "intro": "Hmm, this receipt is from a different store, actually.",
+      "instruction": "The receipt is wrong. The customer looks for the right one, offers the card statement, or asks for an exchange instead.",
+      "retryReply": "Without a receipt it's tricky.",
+      "options": [
+        {
+          "text": "Let me look for the right one.",
+          "keywords": [
+            "look",
+            "right one"
+          ],
+          "reply": "Take your time… yes, that's the one!"
+        },
+        {
+          "text": "Can I show my card payment instead?",
+          "keywords": [
+            "card",
+            "payment",
+            "statement",
+            "show"
+          ],
+          "reply": "That works — I can see it here."
+        },
+        {
+          "text": "Then could I just exchange them?",
+          "keywords": [
+            "exchange",
+            "then"
+          ],
+          "reply": "Sure, an exchange is fine without a receipt."
+        }
+      ]
+    },
+    {
+      "id": "credit-only",
+      "titleTr": "Sadece mağaza kredisi",
+      "intro": "We can only give you store credit, not cash.",
+      "instruction": "The store offers only store credit. The customer refers to the faulty product, asks for an exchange, or asks for the manager.",
+      "retryReply": "That's our policy, sorry.",
+      "options": [
+        {
+          "text": "But they're faulty, so I should get a refund.",
+          "keywords": [
+            "faulty",
+            "should",
+            "but"
+          ],
+          "reply": "You're right, for faulty items it's a full refund."
+        },
+        {
+          "text": "Then I'll take a new pair.",
+          "keywords": [
+            "new pair",
+            "new",
+            "then"
+          ],
+          "reply": "Here's a brand new pair. They work fine."
+        },
+        {
+          "text": "Can I speak to the manager?",
+          "keywords": [
+            "manager",
+            "speak"
+          ],
+          "reply": "She says a refund is fine. Sorry for the trouble."
+        }
+      ]
+    },
+    {
+      "id": "opened",
+      "titleTr": "Kutu açılmış",
+      "intro": "The box has been opened, so we need to test them first. Can you come back tomorrow?",
+      "instruction": "The store wants to test the item. The customer asks to test it now, explains they are leaving, or agrees.",
+      "retryReply": "It's quick, but our tech is out today.",
+      "options": [
+        {
+          "text": "Can you test them now?",
+          "keywords": [
+            "test",
+            "now"
+          ],
+          "reply": "Okay, let me plug them in… yep, faulty. Refund it is."
+        },
+        {
+          "text": "I'm leaving Sydney tomorrow.",
+          "keywords": [
+            "leaving",
+            "tomorrow"
+          ],
+          "reply": "Ah, then I'll do it now. Here's your refund."
+        },
+        {
+          "text": "Okay, I'll come back tomorrow.",
+          "keywords": [
+            "come back",
+            "okay"
+          ],
+          "reply": "Thanks. Actually — I can see the problem. I'll refund you now."
+        }
+      ]
+    },
+    {
+      "id": "wont-budge",
+      "titleTr": "Satıcı inmiyor",
+      "intro": "Nah, sixty's a fair price, mate. Can't go lower.",
+      "instruction": "The seller refuses. The customer says they will look around, offers to buy two, or explains their budget.",
+      "retryReply": "These take hours to make!",
+      "options": [
+        {
+          "text": "Okay, I'll have a look around first.",
+          "keywords": [
+            "look around",
+            "around",
+            "first"
+          ],
+          "reply": "Alright, alright — fifty-five for you."
+        },
+        {
+          "text": "What if I buy two?",
+          "keywords": [
+            "buy two",
+            "two",
+            "what if"
+          ],
+          "reply": "Two for a hundred? Deal."
+        },
+        {
+          "text": "Sorry, my budget is fifty.",
+          "keywords": [
+            "budget",
+            "sorry"
+          ],
+          "reply": "For you — fifty. Don't tell anyone!"
+        }
+      ]
+    },
+    {
+      "id": "cash-only",
+      "titleTr": "Sadece nakit",
+      "intro": "Just so you know, I only take cash.",
+      "instruction": "The seller only takes cash. The customer asks for an ATM, offers to pay by phone, or checks their wallet.",
+      "retryReply": "Most stalls here are cash only.",
+      "options": [
+        {
+          "text": "Is there an ATM nearby?",
+          "keywords": [
+            "atm",
+            "cash machine",
+            "nearby"
+          ],
+          "reply": "Right by the entrance."
+        },
+        {
+          "text": "Can I pay with my phone?",
+          "keywords": [
+            "phone",
+            "app",
+            "transfer"
+          ],
+          "reply": "Sorry, cash only."
+        },
+        {
+          "text": "Let me check my wallet.",
+          "keywords": [
+            "wallet",
+            "check"
+          ],
+          "reply": "Take your time, love."
+        }
+      ]
+    },
+    {
+      "id": "broken-piece",
+      "titleTr": "Ürünün ucu kırık",
+      "intro": "Oh — that one's got a small chip on the end.",
+      "instruction": "The item has a defect. The customer asks for another one, asks for a lower price, or says it's fine.",
+      "retryReply": "Want a different one?",
+      "options": [
+        {
+          "text": "Can I have another one?",
+          "keywords": [
+            "another",
+            "different"
+          ],
+          "reply": "Sure, here's a perfect one."
+        },
+        {
+          "text": "Then can you make it cheaper?",
+          "keywords": [
+            "cheaper",
+            "then"
+          ],
+          "reply": "Fair enough — five dollars off."
+        },
+        {
+          "text": "That's fine, I like it.",
+          "keywords": [
+            "fine",
+            "like it"
+          ],
+          "reply": "Good on ya."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "choice",
+      "pool": [
+        "no-receipt",
+        "credit-only",
+        "opened"
+      ]
+    },
+    {
+      "after": "bargain",
+      "pool": [
+        "wont-budge",
+        "cash-only",
+        "broken-piece"
+      ]
+    }
+  ],
+  "closing": "Cheers, love! Come back soon."
+}

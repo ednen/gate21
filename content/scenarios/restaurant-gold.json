@@ -1,0 +1,370 @@
+{
+  "slug": "restaurant-gold",
+  "chapter": "restaurant-gold",
+  "title": "Something's wrong",
+  "titleTr": "Bir sorun var",
+  "role": "Waiter",
+  "setting": "Bondi café · Lunch",
+  "voice": "en-AU",
+  "persona": "You are a relaxed waiter at a busy café near Bondi Beach. You make mistakes when it's busy, but you are kind and want to fix them. You speak casual Australian English.",
+  "briefTr": "Bondi'de bir kafede öğle yemeği yiyorsun. Tavuk salatası sipariş ettin. Yemeğinle ve hesapla ilgili sorunları kibarca çöz.",
+  "opening": "Here you go — the fish tacos!",
+  "facts": [
+    {
+      "id": "total",
+      "values": [
+        "$46.50",
+        "$52.00",
+        "$39.80"
+      ],
+      "question": "How much was the corrected bill?",
+      "questionTr": "Düzeltilmiş hesap ne kadardı?"
+    },
+    {
+      "id": "wine",
+      "values": [
+        "$14",
+        "$12",
+        "$16"
+      ],
+      "question": "How much was the wine you didn't order?",
+      "questionTr": "Sipariş etmediğin şarap ne kadardı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "wrong",
+      "titleTr": "Yanlış yemeği söylemek",
+      "instruction": "The guest politely says this is not what they ordered and says what they did order.",
+      "hint": "Sorry, this isn't what I ordered. I ordered the chicken salad.",
+      "hintTr": "Pardon, sipariş ettiğim bu değil. Tavuk salatası istemiştim.",
+      "keywords": [
+        "isn't",
+        "not",
+        "ordered",
+        "wrong",
+        "salad",
+        "mistake",
+        "didn't"
+      ],
+      "successReply": "Oh, my mistake! I'll fix that.",
+      "retryReply": "Everything look good?"
+    },
+    {
+      "id": "cold",
+      "titleTr": "Diğer sorunu da söylemek",
+      "ask": "The salad's coming. How's everything else?",
+      "instruction": "The guest mentions the second problem: the chips are cold.",
+      "hint": "And the chips are cold, too.",
+      "hintTr": "Bir de patatesler soğuk.",
+      "keywords": [
+        "cold",
+        "chips",
+        "fries",
+        "warm",
+        "hot",
+        "not"
+      ],
+      "successReply": "Oh dear, not our day.",
+      "retryReply": "How's everything else?"
+    },
+    {
+      "id": "solution",
+      "titleTr": "Çözüm istemek",
+      "ask": "What would you like me to do?",
+      "instruction": "The guest asks for fresh food, a replacement, or for it to be heated.",
+      "hint": "Could you bring fresh ones, please?",
+      "hintTr": "Yenilerini getirebilir misiniz, lütfen?",
+      "keywords": [
+        "fresh",
+        "new",
+        "another",
+        "replace",
+        "bring",
+        "heat",
+        "warm up"
+      ],
+      "successReply": "Of course, coming right up.",
+      "retryReply": "What would you like me to do?"
+    },
+    {
+      "id": "bill",
+      "titleTr": "Hesaptaki hatayı söylemek",
+      "ask": "Here's your bill.",
+      "instruction": "The guest notices a mistake on the bill, like wine they did not order.",
+      "hint": "I think there's a mistake. We didn't order wine.",
+      "hintTr": "Sanırım bir hata var. Şarap sipariş etmedik.",
+      "keywords": [
+        "mistake",
+        "didn't",
+        "wine",
+        "wrong",
+        "charged",
+        "extra",
+        "error"
+      ],
+      "successReply": "Let me check… you're right, sorry.",
+      "retryReply": "Does the bill look right to you?"
+    },
+    {
+      "id": "service",
+      "titleTr": "Servis ücretini sormak",
+      "ask": "I've taken the wine off.",
+      "instruction": "The guest asks if a service charge or tip is included.",
+      "hint": "Is the service charge included?",
+      "hintTr": "Servis ücreti dahil mi?",
+      "keywords": [
+        "service",
+        "charge",
+        "included",
+        "tip"
+      ],
+      "successReply": "No service charge here — tipping's up to you. That's {total} now.",
+      "retryReply": "Any other questions about the bill?"
+    },
+    {
+      "id": "thanks",
+      "titleTr": "Teşekkür etmek",
+      "ask": "All sorted?",
+      "instruction": "The guest thanks the waiter for sorting it out.",
+      "hint": "Thank you for sorting it out.",
+      "hintTr": "Hallettiğiniz için teşekkürler.",
+      "keywords": [
+        "thank",
+        "thanks",
+        "sorted",
+        "appreciate",
+        "great",
+        "cheers"
+      ],
+      "successReply": "No worries at all. Sorry again!",
+      "retryReply": "All sorted now?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "long-wait",
+      "titleTr": "Yeni salata 30 dakika",
+      "intro": "The new salad will take about thirty minutes — the kitchen's slammed.",
+      "instruction": "The replacement will take long. The guest asks for something faster, says they can't wait that long, or asks for the bill without it.",
+      "retryReply": "Sorry, it's a busy day.",
+      "options": [
+        {
+          "text": "Is there anything faster?",
+          "keywords": [
+            "faster",
+            "quicker",
+            "anything"
+          ],
+          "reply": "The soup's ready now. I'll bring that."
+        },
+        {
+          "text": "I can't wait that long, sorry.",
+          "keywords": [
+            "can't wait",
+            "that long"
+          ],
+          "reply": "Understood — I'll take it off the bill."
+        },
+        {
+          "text": "Then just the chips, please.",
+          "keywords": [
+            "just",
+            "chips",
+            "then"
+          ],
+          "reply": "Fresh chips, five minutes."
+        }
+      ]
+    },
+    {
+      "id": "chef-says",
+      "titleTr": "Şef salatanın doğru olduğunu söylüyor",
+      "intro": "The chef says that IS the chicken salad, actually.",
+      "instruction": "The kitchen disagrees. The guest politely insists, asks to see the menu, or explains clearly.",
+      "retryReply": "Are you sure, mate?",
+      "options": [
+        {
+          "text": "I'm sure. These are fish tacos.",
+          "keywords": [
+            "sure",
+            "tacos",
+            "fish"
+          ],
+          "reply": "Oh — you're right. Sorry, I'll sort it out."
+        },
+        {
+          "text": "Can I see the menu, please?",
+          "keywords": [
+            "menu",
+            "see"
+          ],
+          "reply": "Here… yep, that's definitely the tacos. My bad."
+        },
+        {
+          "text": "I'd like to speak to the manager, please.",
+          "keywords": [
+            "manager",
+            "speak"
+          ],
+          "reply": "Of course. She'll be right over… she's fixing it now."
+        }
+      ]
+    },
+    {
+      "id": "comp-dessert",
+      "titleTr": "Tatlı ikram",
+      "intro": "To make up for it, can I bring you a dessert on the house?",
+      "instruction": "The waiter offers free dessert. The guest accepts, declines politely, or asks what desserts there are.",
+      "retryReply": "It's the least we can do.",
+      "options": [
+        {
+          "text": "That's very kind, thank you!",
+          "keywords": [
+            "kind",
+            "thank"
+          ],
+          "reply": "My pleasure. Pavlova coming up!"
+        },
+        {
+          "text": "No thanks, I'm fine.",
+          "keywords": [
+            "no thanks",
+            "fine"
+          ],
+          "reply": "No worries."
+        },
+        {
+          "text": "What desserts do you have?",
+          "keywords": [
+            "what",
+            "desserts",
+            "have"
+          ],
+          "reply": "Pavlova, lamingtons or ice cream."
+        }
+      ]
+    },
+    {
+      "id": "denies",
+      "titleTr": "Sistem şarabı gösteriyor",
+      "intro": "Hmm, the system says your table had a glass of wine.",
+      "instruction": "The waiter thinks the bill is right. The guest insists politely, asks to check again, or asks for the manager.",
+      "retryReply": "That's what it says here.",
+      "options": [
+        {
+          "text": "No, we only had water.",
+          "keywords": [
+            "only",
+            "water",
+            "no"
+          ],
+          "reply": "Ah, it was table nine. Sorry about that!"
+        },
+        {
+          "text": "Could you check again, please?",
+          "keywords": [
+            "check",
+            "again"
+          ],
+          "reply": "Let me look… you're right, wrong table."
+        },
+        {
+          "text": "Can I talk to the manager?",
+          "keywords": [
+            "manager",
+            "talk"
+          ],
+          "reply": "Sure… she's taken it off. Sorry!"
+        }
+      ]
+    },
+    {
+      "id": "charged-twice",
+      "titleTr": "Kartından iki kez çekilmiş",
+      "intro": "Oh — it looks like your card was charged twice for the coffee.",
+      "instruction": "The card was charged twice. The guest asks for a refund, a receipt, or to cancel one payment.",
+      "retryReply": "Sorry about that, the machine played up.",
+      "options": [
+        {
+          "text": "Could you refund one of them?",
+          "keywords": [
+            "refund",
+            "one of them"
+          ],
+          "reply": "Done, the refund's on its way."
+        },
+        {
+          "text": "Can I have a receipt for both?",
+          "keywords": [
+            "receipt",
+            "both"
+          ],
+          "reply": "Sure, here are both receipts."
+        },
+        {
+          "text": "Please cancel the second payment.",
+          "keywords": [
+            "cancel",
+            "second"
+          ],
+          "reply": "Cancelled. Sorry again."
+        }
+      ]
+    },
+    {
+      "id": "card-only",
+      "titleTr": "Sadece kart",
+      "intro": "Sorry, we're card only — no cash.",
+      "instruction": "The café does not take cash. The guest pays by card, by phone, or asks where an ATM is.",
+      "retryReply": "Hope that's okay.",
+      "options": [
+        {
+          "text": "No problem, I'll use my card.",
+          "keywords": [
+            "card",
+            "no problem"
+          ],
+          "reply": "Perfect, tap here."
+        },
+        {
+          "text": "Can I pay with my phone?",
+          "keywords": [
+            "phone",
+            "apple pay",
+            "google pay"
+          ],
+          "reply": "Yep, phone's fine."
+        },
+        {
+          "text": "Is there an ATM nearby?",
+          "keywords": [
+            "atm",
+            "cash machine",
+            "nearby"
+          ],
+          "reply": "There's one next door, but card is easier!"
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "solution",
+      "pool": [
+        "long-wait",
+        "chef-says",
+        "comp-dessert"
+      ]
+    },
+    {
+      "after": "bill",
+      "pool": [
+        "denies",
+        "charged-twice",
+        "card-only"
+      ]
+    }
+  ],
+  "closing": "Thanks for coming in. Enjoy the beach!"
+}
