@@ -271,10 +271,9 @@ const DRAWINGS: Record<string, ReactNode> = {
   ),
   driver: (
     <>
-      <Person x={32} y={6} fill={INK} />
-      <P d="M22 18h20l-3-7H25z" fill={INK} />
-      <Ln x1={20} y1={18} x2={44} y2={18} w={3} />
-      <Ci x={32} y={52} r={8} fill="none" />
+      <Person x={32} y={6} fill={B} />
+      <P d="M23 18h18l-2-7H25z" fill={INK} />
+      <Ln x1={21} y1={18} x2={43} y2={18} w={3} />
     </>
   ),
   'name-sign': (
@@ -302,10 +301,12 @@ const DRAWINGS: Record<string, ReactNode> = {
   ),
   trunk: (
     <>
-      <P d="M6 46v-10l8-12h20v-4l20-8 4 8-14 6v20z" fill={B} />
-      <Rc x={36} y={30} w={14} h={12} r={2} fill={Y} />
+      <P d="M4 46v-10l8-12h22l6 10h16v12z" fill={B} />
+      <P d="M12 34l4-8h16l4 8z" fill="#DCEBF7" />
+      <P d="M56 34l4-18" w={3} />
+      <Rc x={42} y={24} w={12} h={10} r={2} fill={Y} />
       <Ci x={16} y={48} r={5} fill={INK} />
-      <Ci x={44} y={48} r={5} fill={INK} />
+      <Ci x={46} y={48} r={5} fill={INK} />
     </>
   ),
   seatbelt: (
