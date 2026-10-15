@@ -17,7 +17,7 @@ import { AppState, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useAuth } from '@/lib/auth';
-import { DEMO } from '@/lib/demo/flag';
+import { DEMO, reloadIfOutdated } from '@/lib/demo/flag';
 import { syncContent } from '@/lib/content';
 import { flushProgress } from '@/lib/progress';
 import { invalidateProgress, queryClient } from '@/lib/queries';
@@ -27,6 +27,10 @@ import { colors } from '@/theme';
  * The browser demo on a wide screen shows the app inside a phone-sized frame. The app itself
  * runs in an iframe, so it really has a phone's width and height (dialogs included).
  */
+if (DEMO && Platform.OS === 'web') {
+  reloadIfOutdated();
+}
+
 const FRAMED =
   DEMO && Platform.OS === 'web' && typeof window !== 'undefined' && window.self === window.top && window.innerWidth >= 700;
 

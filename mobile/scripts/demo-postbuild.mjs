@@ -21,4 +21,6 @@ const html = readFileSync(index, 'utf8')
 writeFileSync(index, html);
 copyFileSync(index, join(dir, '404.html'));
 writeFileSync(join(dir, '.nojekyll'), '');
+// Read by the app (with the cache bypassed) to notice that a newer demo has been published.
+writeFileSync(join(dir, 'version.json'), JSON.stringify({ build: process.env.EXPO_PUBLIC_DEMO_BUILD ?? 'local' }));
 console.log(`Demo ready in ${dir}`);

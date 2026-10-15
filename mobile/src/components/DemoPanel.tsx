@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Body, Button, Card, Label } from '@/components/ui';
+import { DEMO_BUILD } from '@/lib/demo/flag';
 import { demoSettings, finishWeekButOne, resetProgress, setDemoSettings } from '@/lib/demo/server';
 import { queryClient } from '@/lib/queries';
 import { colors, fonts } from '@/theme';
@@ -21,7 +22,7 @@ export function DemoPanel() {
 
   return (
     <Card style={styles.card}>
-      <Label color={colors.yellow}>DEMO AYARLARI</Label>
+      <Label color={colors.yellow}>{`DEMO AYARLARI · SÜRÜM ${DEMO_BUILD.slice(0, 7)}`}</Label>
       <Body size={14} color={colors.surface}>
         Bu sürüm sunucusuz çalışır; ilerlemen bu tarayıcıda saklanır. Sahnelerde cevaplar anahtar kelimeyle değerlendirilir.
       </Body>
