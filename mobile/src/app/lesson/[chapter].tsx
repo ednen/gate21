@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '@/components/Icon';
 import { DiscoverStep, PronounceStep, RecognizeStep, SpeakStep, UseStep } from '@/components/lesson/Steps';
 import { Body, Button, Card, Label, Title } from '@/components/ui';
-import { chapter as getChapter, chapterInfo } from '@/lib/content';
+import { chapter as getChapter, chapterInfo, isSimulation } from '@/lib/content';
 import { recordStep } from '@/lib/progress';
 import { useMe } from '@/lib/queries';
 import { STEPS } from '@/lib/types';
@@ -20,7 +20,9 @@ export default function Lesson() {
   const info = chapterInfo(slug);
   const me = useMe();
   const consent = me.data?.voiceConsent ?? false;
-  const [step, setStep] = useState(0);
+  // Full Trip has no lesson steps: it opens straight on the Survive step.
+  const simulation = chapter ? isSimulation(chapter) : false;
+  const [step, setStep] = useState(simulation ? 5 : 0);
 
   if (!chapter || !info) {
     return (
@@ -35,7 +37,7 @@ export default function Lesson() {
     void recordStep(chapter.slug, STEPS[step], score);
     setStep(step + 1);
   };
-  const props = { chapter, consent, onDone: done };
+  const props = isSimulation(chapter) ? null : { chapter, consent, onDone: done };
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.screen}>
@@ -48,27 +50,33 @@ export default function Lesson() {
             <Label>{`BÖLÜM ${info.order} · ${info.title.toUpperCase()}`}</Label>
             <Text style={styles.stepName}>{NAMES[step]}</Text>
           </View>
-          <Text style={styles.count} accessibilityLabel={`6 adımdan ${step + 1}.`}>{`${step + 1}/6`}</Text>
+          <Text style={styles.count} accessibilityLabel={simulation ? 'Tek sahne' : `6 adımdan ${step + 1}.`}>
+            {simulation ? '1/1' : `${step + 1}/6`}
+          </Text>
         </View>
-        <View style={styles.bars}>
-          {NAMES.map((n, i) => (
-            <View key={n} style={[styles.bar, { backgroundColor: i <= step ? colors.ink : colors.line }]} />
-          ))}
-        </View>
+        {simulation ? null : (
+          <View style={styles.bars}>
+            {NAMES.map((n, i) => (
+              <View key={n} style={[styles.bar, { backgroundColor: i <= step ? colors.ink : colors.line }]} />
+            ))}
+          </View>
+        )}
       </View>
 
       <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
-        {step === 0 && <DiscoverStep {...props} />}
-        {step === 1 && <PronounceStep {...props} />}
-        {step === 2 && <RecognizeStep {...props} />}
-        {step === 3 && <SpeakStep {...props} />}
-        {step === 4 && <UseStep {...props} />}
+        {props && step === 0 && <DiscoverStep {...props} />}
+        {props && step === 1 && <PronounceStep {...props} />}
+        {props && step === 2 && <RecognizeStep {...props} />}
+        {props && step === 3 && <SpeakStep {...props} />}
+        {props && step === 4 && <UseStep {...props} />}
         {step === 5 && (
           <View style={{ gap: 16 }}>
             <Text style={styles.surviveTag}>SURVIVE</Text>
-            <Title>Gerçek hayat simülasyonu</Title>
+            <Title>{simulation ? 'Bütün bir yolculuk' : 'Gerçek hayat simülasyonu'}</Title>
             <Body color={colors.inkLine}>
-              Şimdi öğrendiklerini bir sahnede kullanacaksın. Karşındaki yapay zekâ seninle konuşacak ve bir noktada beklenmedik bir şey olacak.
+              {simulation
+                ? 'Havalimanı, taksi, otel ve restoran — dört farklı kişi, dört farklı aksan ve yol boyunca birkaç sürpriz. Sonunda neyi hatırladığını da soracağız.'
+                : 'Şimdi öğrendiklerini bir sahnede kullanacaksın. Karşındaki yapay zekâ seninle konuşacak ve bir noktada beklenmedik bir şey olacak. Sonunda sana bir rapor vereceğiz.'}
             </Body>
             <Card style={{ gap: 6 }}>
               <Label>GÖREV</Label>

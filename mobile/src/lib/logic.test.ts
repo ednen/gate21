@@ -48,10 +48,10 @@ describe('sentence builder', () => {
 });
 
 describe('scores', () => {
-  it('rewards surviving without retries', () => {
-    expect(surviveScore(0)).toBe(100);
-    expect(surviveScore(2)).toBe(70);
-    expect(surviveScore(9)).toBe(50);
+  it('takes memory misses off the scene score, with a floor', () => {
+    expect(surviveScore(100, 0)).toBe(100);
+    expect(surviveScore(85, 2)).toBe(75);
+    expect(surviveScore(45, 3)).toBe(40);
   });
 
   it('averages scores', () => {

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import type { Chapter } from '@/lib/content';
+import type { LessonChapter } from '@/lib/content';
 import { average, joinTiles, shuffledOrder } from '@/lib/sentence';
 import { say } from '@/lib/voice';
 import { colors, fonts } from '@/theme';
@@ -13,7 +13,7 @@ import { SpeakPanel } from '../SpeakPanel';
 import { Body, Button, Card, Label, Title } from '../ui';
 
 /** Each step reports its speaking score (or null) through onDone; the screen records and advances. */
-type StepProps = { chapter: Chapter; consent: boolean; onDone: (score: number | null) => void };
+type StepProps = { chapter: LessonChapter; consent: boolean; onDone: (score: number | null) => void };
 
 export function DiscoverStep({ chapter, onDone }: StepProps) {
   const [heard, setHeard] = useState<Set<number>>(new Set());

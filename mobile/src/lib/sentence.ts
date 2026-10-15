@@ -26,9 +26,9 @@ export function shuffledOrder(length: number, seed: string): number[] {
   return order;
 }
 
-/** Score for the Survive step: 100 for a clean run, minus 15 for every retry, at least 50. */
-export function surviveScore(retries: number): number {
-  return Math.max(50, 100 - 15 * retries);
+/** The Survive score: the server's scene score, minus 5 for every memory question missed (at least 40). */
+export function surviveScore(sceneScore: number, memoryMissed: number): number {
+  return Math.max(40, sceneScore - 5 * memoryMissed);
 }
 
 /** Average of the numbers, rounded; null when there are none. */

@@ -105,14 +105,28 @@ export function assessPronunciation(recording: Recording, referenceText: string)
  * Sends one role-play turn. The text is what the learner meant to say (the chosen hint, or what
  * they typed); when audio is present the server transcribes it and uses that instead.
  */
-export function sendTurn(sessionId: string, text: string, recording: Recording | null): Promise<SceneView> {
+export function sendTurn(sessionId: string, text: string, recording: Recording | null, hintUsed: boolean): Promise<SceneView> {
   const form = recording ? audioForm(recording) : new FormData();
   form.append('text', text);
+  form.append('hintUsed', hintUsed ? 'true' : 'false');
   return apiUpload<SceneView>(`/api/v1/roleplay/sessions/${sessionId}/turns`, form);
 }
 
+type SayOptions = { slow?: boolean; voice?: string | null; rate?: number };
+
 /** Speaks English with the device's own voice: free, and works offline once the voice is installed. */
-export function say(text: string, opts: { slow?: boolean } = {}): void {
+export function say(text: string, opts: SayOptions = {}): void {
   void Speech.stop();
-  Speech.speak(text, { language: 'en-US', rate: opts.slow ? 0.7 : 0.92 });
+  speakOne(text, opts);
+}
+
+/** Speaks several lines one after another (a reply, then the surprise, then the next question). */
+export function sayAll(lines: { text: string; voice?: string | null }[], rate?: number): void {
+  void Speech.stop();
+  lines.forEach((l) => speakOne(l.text, { voice: l.voice, rate }));
+}
+
+function speakOne(text: string, opts: SayOptions): void {
+  // An accent the device has no voice for falls back to the default English voice.
+  Speech.speak(text, { language: opts.voice ?? 'en-US', rate: opts.rate ?? (opts.slow ? 0.7 : 0.92) });
 }

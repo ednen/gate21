@@ -168,8 +168,8 @@ function ChapterTile({ chapter, isNext }: { chapter: PassportChapter; isNext: bo
         <Text style={styles.tileNote}>{'★'.repeat(chapter.stars) + '☆'.repeat(3 - chapter.stars)}</Text>
       ) : (
         <>
-          <ProgressBar value={chapter.stepsDone / 6} track={colors.ground} />
-          <Text style={styles.tileNote}>{isNext ? 'Bugünün görevi' : `${chapter.stepsDone} / 6 adım`}</Text>
+          <ProgressBar value={chapter.stepsDone / chapter.totalSteps} track={colors.ground} />
+          <Text style={styles.tileNote}>{isNext ? 'Bugünün görevi' : `${chapter.stepsDone} / ${chapter.totalSteps} adım`}</Text>
         </>
       )}
     </>

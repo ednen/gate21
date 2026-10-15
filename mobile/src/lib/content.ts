@@ -5,6 +5,7 @@ import airport from '../../../content/chapters/airport.json';
 import hotel from '../../../content/chapters/hotel.json';
 import restaurant from '../../../content/chapters/restaurant.json';
 import shopping from '../../../content/chapters/shopping.json';
+import fullTrip from '../../../content/chapters/full-trip.json';
 import placementJson from '../../../content/placement.json';
 import sosJson from '../../../content/sos.json';
 import { apiGet } from './api';
@@ -30,7 +31,9 @@ export type Word = { en: string; tr: string };
 export type PronounceItem = { word: string; ipa: string; stress: string; tipTr: string };
 export type Question = { prompt: string; options: string[]; answer: number; explainTr: string; tag?: string };
 
-export type Chapter = {
+/** A regular chapter: the six-step lesson loop. */
+export type LessonChapter = {
+  type?: 'lesson';
   slug: string;
   mission: string;
   missionTr: string;
@@ -50,6 +53,22 @@ export type Chapter = {
   survive: { scenario: string };
 };
 
+/** Full Trip: only the Survive step, one long scene across several characters. */
+export type SimulationChapter = {
+  type: 'simulation';
+  slug: string;
+  mission: string;
+  missionTr: string;
+  stamp: string;
+  survive: { scenario: string };
+};
+
+export type Chapter = LessonChapter | SimulationChapter;
+
+export function isSimulation(chapter: Chapter): chapter is SimulationChapter {
+  return chapter.type === 'simulation';
+}
+
 export type Placement = {
   questions: Question[];
   speaking: { situationTr: string; phrase: string }[];
@@ -65,7 +84,7 @@ const STORAGE_KEY = 'gate21.content-pack';
 const bundled: Pack = {
   version: bundledManifest.version,
   manifest: bundledManifest as Manifest,
-  chapters: { airport, hotel, restaurant, shopping } as Record<string, Chapter>,
+  chapters: { airport, hotel, restaurant, shopping, 'full-trip': fullTrip } as Record<string, Chapter>,
 };
 
 let current: Pack = bundled;

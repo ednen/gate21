@@ -95,7 +95,7 @@ function Row({ chapter, last }: { chapter: PassportChapter; last: boolean }) {
       ) : locked ? (
         <Text style={styles.status}>{chapter.available ? 'Kilitli' : 'Yakında'}</Text>
       ) : (
-        <Text style={[styles.status, { backgroundColor: colors.yellow }]}>{`${chapter.stepsDone}/6`}</Text>
+        <Text style={[styles.status, { backgroundColor: colors.yellow }]}>{`${chapter.stepsDone}/${chapter.totalSteps}`}</Text>
       )}
     </View>
   );
