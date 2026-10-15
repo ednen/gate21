@@ -26,6 +26,7 @@ import type {
   Step,
   SyncResult,
 } from '../types';
+import { DEMO_EMAIL } from './flag';
 import { scenarios } from './scenarios';
 import * as scene from './scene';
 
@@ -578,12 +579,13 @@ function route(method: string, path: string, body: Body): unknown {
   }
   if (method === 'POST' && p === '/api/v1/auth/login') {
     const b = body as { email: string };
-    if (s.user && s.user.email.toLowerCase() === b.email.toLowerCase()) {
+    // The automatic demo sign-in continues whoever used this browser last.
+    if (s.user && (b.email === DEMO_EMAIL || s.user.email.toLowerCase() === b.email.toLowerCase())) {
       return { accessToken: 'demo-access', refreshToken: 'demo-refresh', expiresIn: 3600 };
     }
     const settings = s.settings;
     Object.assign(s, fresh(), { settings });
-    return signIn(s, b.email, b.email.split('@')[0] || 'Gezgin');
+    return signIn(s, b.email, b.email === DEMO_EMAIL ? 'Gezgin' : b.email.split('@')[0] || 'Gezgin');
   }
   if (p === '/api/v1/auth/logout') {
     return undefined;

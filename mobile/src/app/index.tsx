@@ -2,6 +2,7 @@ import { Redirect } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 
 import { useAuth } from '@/lib/auth';
+import { DEMO } from '@/lib/demo/flag';
 import { useMe } from '@/lib/queries';
 import { colors } from '@/theme';
 
@@ -18,7 +19,8 @@ export default function Index() {
     return <Redirect href="/home" />;
   }
   if (status === 'signedIn' && me.data) {
-    return <Redirect href={me.data.placementScore === null ? '/placement' : '/home'} />;
+    // The demo goes straight to the journey; the placement check is in the demo panel.
+    return <Redirect href={me.data.placementScore === null && !DEMO ? '/placement' : '/home'} />;
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.ink }}>

@@ -74,9 +74,10 @@ export default function Placement() {
     }
   };
 
-  const start = async () => {
+  const start = () => {
     if (!isFinal && me.data) {
-      await scheduleDailyReminder(me.data.reminderHour).catch(() => false);
+      // In the background: the journey must start even if the reminder can't be set.
+      void scheduleDailyReminder(me.data.reminderHour).catch(() => false);
     }
     router.replace(isFinal ? '/progress' : result?.starter ? '/lesson/starter-alphabet' : '/home');
   };
@@ -131,6 +132,21 @@ export default function Placement() {
               ) : null}
             </Card>
           )}
+          <Label style={{ marginTop: 6 }}>{`CEVAPLARIN · ${result.correct} / ${result.total} DOĞRU`}</Label>
+          {questions.map((q, i) => {
+            const mine = answers[i] ?? null;
+            const right = mine === q.answer;
+            return (
+              <Card key={q.prompt} style={{ gap: 6, borderLeftWidth: 4, borderLeftColor: right ? colors.green : colors.red }}>
+                <Body size={15} style={{ fontFamily: fonts.bodyBold }}>{`${i + 1}. ${q.prompt}`}</Body>
+                <Body size={14} color={right ? colors.green : colors.red}>
+                  {`${right ? '✓' : '✗'} Senin cevabın: ${mine === null ? '—' : q.options[mine]}`}
+                </Body>
+                {!right ? <Body size={14}>{`Doğrusu: ${q.options[q.answer]}`}</Body> : null}
+                <Body size={13} color={colors.muted}>{q.explainTr}</Body>
+              </Card>
+            );
+          })}
           {!isFinal ? <Body color={colors.muted} size={14}>21. günde tekrar test olacaksın, farkı kendin göreceksin.</Body> : null}
           <View style={{ flex: 1 }} />
           <Button label={isFinal ? 'Sonuçlarıma git' : result.starter ? 'Başlangıç paketiyle başla' : '21 günümü başlat'} onPress={start} />
@@ -161,19 +177,16 @@ export default function Placement() {
                   key={text}
                   index={i}
                   text={text}
-                  disabled={picked !== null}
-                  state={picked === null ? 'idle' : i === questions[qi].answer ? 'correct' : i === picked ? 'wrong' : 'idle'}
+                  state={i === picked ? 'selected' : 'idle'}
                   onPress={() => setAnswers((a) => Object.assign([...a], { [qi]: i }))}
                 />
               ))}
             </View>
-            {picked !== null ? (
-              <Card>
-                <Body size={14}>{questions[qi].explainTr}</Body>
-              </Card>
-            ) : null}
             <View style={{ flex: 1 }} />
-            <Button label="İleri" onPress={nextQuestion} disabled={picked === null} />
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              {qi > 0 ? <Button label="Geri" variant="outline" onPress={() => setQi(qi - 1)} style={{ flex: 1 }} /> : null}
+              <Button label="İleri" onPress={nextQuestion} disabled={picked === null} style={{ flex: 2 }} />
+            </View>
           </>
         ) : (
           <>

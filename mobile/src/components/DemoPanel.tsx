@@ -47,6 +47,7 @@ export function DemoPanel() {
           />
         ))}
       </View>
+      <Button label="Seviye testini dene" variant="onDark" onPress={() => router.push('/placement')} />
       <Button
         label="İlerlemeyi sıfırla"
         variant="onDark"

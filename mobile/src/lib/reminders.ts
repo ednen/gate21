@@ -1,9 +1,14 @@
 import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
 
 const REMINDER_ID = 'gate21-daily-lesson';
 
 /** Schedules (or moves) the daily lesson reminder at the user's chosen hour. */
 export async function scheduleDailyReminder(hour: number): Promise<boolean> {
+  // Browsers have no scheduled local notifications; there the permission request never settles.
+  if (Platform.OS === 'web') {
+    return false;
+  }
   const permission = await Notifications.requestPermissionsAsync();
   if (!permission.granted) {
     return false;

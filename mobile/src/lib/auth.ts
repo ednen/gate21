@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { apiSend } from './api';
+import { DEMO, DEMO_EMAIL } from './demo/flag';
 import { type TokenPair, tokens } from './tokens';
 
 type Status = 'loading' | 'signedIn' | 'signedOut';
@@ -27,6 +28,12 @@ export const useAuth = create<AuthState>((set) => ({
   /** Restores the session from the keychain. Offline with a saved session still counts as signed in. */
   async bootstrap() {
     const stored = await tokens.storedRefreshToken();
+    if (!stored && DEMO) {
+      // The demo skips sign-up: it opens straight on the journey with a ready-made traveller.
+      await tokens.save(await apiSend<TokenPair>('POST', '/api/v1/auth/login', { email: DEMO_EMAIL, password: 'demo' }, { auth: false }));
+      set({ status: 'signedIn' });
+      return;
+    }
     if (!stored) {
       set({ status: 'signedOut' });
       return;
