@@ -617,10 +617,10 @@ const DRAWINGS: Record<string, ReactNode> = {
   ),
   'baggage-desk': (
     <>
-      <Rc x={6} y={8} w={52} h={14} r={3} fill={Y} />
-      <T x={32} y={18.5} size={8}>BAGGAGE</T>
-      <Rc x={8} y={34} w={48} h={22} r={2} fill={W} />
-      <Person x={32} y={4} s={0.7} fill={B} />
+      <Rc x={6} y={4} w={52} h={14} r={3} fill={Y} />
+      <T x={32} y={14.5} size={8}>BAGGAGE</T>
+      <Person x={32} y={10} s={0.7} fill={B} />
+      <Rc x={8} y={40} w={48} h={18} r={2} fill={W} />
     </>
   ),
   'ref-number': (
@@ -885,7 +885,7 @@ const DRAWINGS: Record<string, ReactNode> = {
     <>
       <Rc x={6} y={16} w={52} h={32} r={5} fill={R} />
       <Path d="M24 16v32M6 30h52" stroke={Y} strokeWidth={4} />
-      <T x={44} y={44} size={8} fill={W}>CREDIT</T>
+      <T x={41} y={43} size={6.5} fill={W}>CREDIT</T>
     </>
   ),
   warranty: (
@@ -980,9 +980,8 @@ const DRAWINGS: Record<string, ReactNode> = {
   ),
   walk: (
     <>
-      <P d="M18 40c-3 0-6 4-6 10s2 8 5 8 5-3 5-8-1-10-4-10zM44 14c-3 0-6 4-6 10s2 8 5 8 5-3 5-8-1-10-4-10z" fill={Y} />
-      <Ci x={14} y={34} r={2} fill={INK} />
-      <Ci x={40} y={8} r={2} fill={INK} />
+      <Ci x={36} y={10} r={6} fill={Y} />
+      <P d="M34 18l-6 18 8 8-2 14M28 36l-8 22M32 22l10 8 8-2M32 22l-12 6-4 8" w={3.5} />
     </>
   ),
   // ---- transfer -------------------------------------------------------------------------
