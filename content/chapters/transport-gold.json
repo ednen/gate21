@@ -1,0 +1,72 @@
+{
+  "slug": "transport-gold",
+  "draft": true,
+  "mission": "Find your way when you're lost",
+  "missionTr": "Şehirde kayboldun: yerel birinden yol sor, tarifi anla, iptal olan seferde alternatif bul",
+  "stamp": "ROUND TRIP",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "I'm lost.",
+      "tr": "Kayboldum."
+    },
+    {
+      "en": "turn left / right",
+      "tr": "sola / sağa dön"
+    },
+    {
+      "en": "go straight on",
+      "tr": "düz git"
+    },
+    {
+      "en": "opposite",
+      "tr": "karşısında"
+    },
+    {
+      "en": "next to",
+      "tr": "yanında"
+    },
+    {
+      "en": "ferry",
+      "tr": "feribot"
+    },
+    {
+      "en": "cancelled",
+      "tr": "iptal"
+    },
+    {
+      "en": "replacement bus",
+      "tr": "yerine konan otobüs"
+    },
+    {
+      "en": "on foot",
+      "tr": "yürüyerek"
+    }
+  ],
+  "scene": {
+    "role": "Local on the street",
+    "setting": "Circular Quay, Sydney",
+    "goalsTr": [
+      "Kaybolduğunu söyle ve Opera Binası'na nasıl gideceğini sor",
+      "Tarifi tekrar et ve doğru anladığını kontrol et",
+      "Yürüyerek ne kadar sürdüğünü sor",
+      "Feribot saatini sor",
+      "İptal olan sefer için alternatif sor",
+      "Teşekkür et"
+    ],
+    "twistsTr": [
+      "Tarif çok hızlı ve uzun",
+      "Feribot seferi iptal",
+      "Yanlış otobüse bindin, şoföre nerede inmen gerektiğini sor"
+    ]
+  },
+  "notesTr": "Yol tarifi dili: left/right/straight on/opposite/next to."
+}

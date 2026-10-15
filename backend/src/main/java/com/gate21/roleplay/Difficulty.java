@@ -1,14 +1,14 @@
 package com.gate21.roleplay;
 
 /**
- * Scenes get harder with the learner's journey week.
- * READY: hints and reply options visible. CONFIDENT: hints behind a button, character lines
- * heard before they are shown. PRO: no hints and two surprises per slot.
+ * A scene is as hard as the level of its lesson.
+ * BRONZE: hints and reply options visible, slow speech. SILVER: hints behind a button,
+ * character lines heard before they are shown. GOLD: no hints and two surprises per slot.
  */
 public enum Difficulty {
-    READY(1, true),
-    CONFIDENT(1, true),
-    PRO(2, false);
+    BRONZE(1, true),
+    SILVER(1, true),
+    GOLD(2, false);
 
     private final int twistsPerSlot;
     private final boolean hintsAllowed;
@@ -27,6 +27,6 @@ public enum Difficulty {
     }
 
     public static Difficulty forWeek(int week) {
-        return week <= 1 ? READY : week == 2 ? CONFIDENT : PRO;
+        return week <= 1 ? BRONZE : week == 2 ? SILVER : GOLD;
     }
 }

@@ -66,3 +66,9 @@ gate21:
       base-url: https://generativelanguage.googleapis.com/v1beta
       timeout: 4s
       max-output-tokens: 200
+  membership:
+    # true only for local development and tests: purchases are granted without a store receipt.
+    sandbox-purchases: ${MEMBERSHIP_SANDBOX:false}
+    # Display prices until App Store / Google Play products exist (placeholders, not decided).
+    journey-price: ${PRICE_JOURNEY:₺449}
+    keep-ready-price: ${PRICE_KEEP_READY:₺99 / ay}

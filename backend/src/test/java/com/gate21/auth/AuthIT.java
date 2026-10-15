@@ -11,17 +11,19 @@ import org.junit.jupiter.api.Test;
 class AuthIT extends IntegrationTest {
 
     @Test
-    void registeredUserStartsOnDayOneWithTheAirportChapter() throws Exception {
+    void registeredUserStartsOnDayOneAtPassportControl() throws Exception {
         String token = token("Ozan");
         Response me = getJson("/api/v1/me", token);
 
         assertThat(me.status()).isEqualTo(200);
         assertThat(me.body().path("displayName").asText()).isEqualTo("Ozan");
         assertThat(me.body().path("journeyDay").asInt()).isEqualTo(1);
-        assertThat(me.body().path("level").asText()).isEqualTo("Travel Ready");
+        assertThat(me.body().path("level").asText()).isEqualTo("Bronze Traveller");
+        assertThat(me.body().path("levelId").asText()).isEqualTo("BRONZE");
+        assertThat(me.body().path("membership").path("plan").asText()).isEqualTo("FREE");
         assertThat(me.body().path("streak").asInt()).isZero();
         assertThat(me.body().path("voiceConsent").asBoolean()).isFalse();
-        assertThat(me.body().path("nextChapter").path("slug").asText()).isEqualTo("airport");
+        assertThat(me.body().path("nextChapter").path("slug").asText()).isEqualTo("arrival-bronze");
     }
 
     @Test
@@ -33,7 +35,8 @@ class AuthIT extends IntegrationTest {
     void contentIsPublic() throws Exception {
         Response manifest = call(get("/api/v1/content/manifest"));
         assertThat(manifest.status()).isEqualTo(200);
-        assertThat(manifest.body().path("chapters")).hasSize(12);
+        assertThat(manifest.body().path("chapters")).hasSize(27);
+        assertThat(manifest.body().path("stops")).hasSize(7);
         assertThat(call(get("/api/v1/content/chapters/nope")).code()).isEqualTo("CHAPTER_NOT_FOUND");
     }
 

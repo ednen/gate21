@@ -1,0 +1,60 @@
+{
+  "slug": "restaurant-bronze",
+  "mission": "Order lunch — even when the kitchen says no",
+  "missionTr": "Öğle yemeği siparişi ver; istediğin yemek bitmiş olsa bile çözüm bul ve hesabı öde",
+  "stamp": "LUNCH SERVED",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "RECOGNIZE", "DIALOG", "SURVIVE"],
+  "words": [
+    { "en": "table for two", "tr": "iki kişilik masa", "picture": "table", "example": "A table for two, please.", "exampleTr": "İki kişilik bir masa, lütfen." },
+    { "en": "menu", "tr": "menü", "picture": "menu", "example": "Can I see the menu, please?", "exampleTr": "Menüyü görebilir miyim?" },
+    { "en": "water", "tr": "su", "picture": "water", "example": "Just water, please.", "exampleTr": "Sadece su, lütfen." },
+    { "en": "soup", "tr": "çorba", "picture": "soup", "example": "I'd like the soup, please.", "exampleTr": "Çorba istiyorum, lütfen." },
+    { "en": "salad", "tr": "salata", "picture": "salad", "example": "Can I have a salad?", "exampleTr": "Bir salata alabilir miyim?" },
+    { "en": "fish and chips", "tr": "balık ve patates kızartması", "picture": "fish", "example": "Fish and chips, please.", "exampleTr": "Fish and chips, lütfen." },
+    { "en": "I'd like…", "tr": "…istiyorum (kibar)", "picture": "plate", "example": "I'd like the chicken, please.", "exampleTr": "Tavuğu istiyorum, lütfen." },
+    { "en": "the bill", "tr": "hesap", "picture": "receipt", "example": "Could we have the bill, please?", "exampleTr": "Hesabı alabilir miyiz, lütfen?" },
+    { "en": "vegetarian", "tr": "vejetaryen", "picture": "leaf", "example": "Is this vegetarian?", "exampleTr": "Bu vejetaryen mi?" },
+    { "en": "tip", "tr": "bahşiş", "picture": "coins", "example": "Is the tip included?", "exampleTr": "Bahşiş dahil mi?" }
+  ],
+  "pronounce": [
+    { "word": "vegetarian", "ipa": "/ˌvedʒ.əˈteə.ri.ən/", "stress": "vej-uh-TAIR-ee-un", "tipTr": "Vurgu \"TAIR\" hecesinde: vec-ı-TEİR-i-ın." },
+    { "word": "water", "ipa": "/ˈwɔː.tə/", "stress": "WAW-tuh", "tipTr": "\"Vater\" değil; dudakları yuvarlayıp \"WOO\" ile başla." },
+    { "word": "menu", "ipa": "/ˈmen.juː/", "stress": "MEN-yoo", "tipTr": "\"Menü\" değil, \"MEN-yu\": ü sesi yok." }
+  ],
+  "match": ["menu", "water", "soup", "salad", "the bill", "vegetarian"],
+  "recognize": [
+    {
+      "prompt": "The waiter asks: “Are you ready to order?” You need more time. You say:",
+      "options": ["Could we have a few more minutes?", "Yes, the bill.", "No, I am full."],
+      "answer": 0,
+      "explainTr": "Kibarca biraz daha zaman istemenin en doğal yolu."
+    },
+    {
+      "audio": "Still or sparkling?",
+      "prompt": "Listen. The waiter is asking about…",
+      "options": ["water", "the table", "dessert"],
+      "answer": 0,
+      "explainTr": "Still = sade su, sparkling = maden suyu."
+    },
+    {
+      "prompt": "You want to pay. You say:",
+      "options": ["Could we have the bill, please?", "Could we have the menu, please?", "Could we have a table, please?"],
+      "answer": 0,
+      "explainTr": "The bill = hesap (Amerika'da \"the check\")."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Öğle yemeğinde",
+    "lines": [
+      { "who": "Waiter", "text": "Hello! Table for how many?" },
+      { "who": "You", "text": "A table for ___, please.", "gap": "two", "options": ["two", "too", "to"] },
+      { "who": "Waiter", "text": "Here's the menu. Anything to drink?" },
+      { "who": "You", "text": "Just ___, please.", "gap": "water", "options": ["water", "waiter", "menu"] },
+      { "who": "Waiter", "text": "Are you ready to order?" },
+      { "who": "You", "text": "Yes. I'd ___ the fish and chips.", "gap": "like", "options": ["like", "want to", "love"] },
+      { "who": "Waiter", "text": "Lovely. Anything else?" },
+      { "who": "You", "text": "No, thanks. Could we have the ___, please?", "gap": "bill", "options": ["bill", "tip", "soup"] }
+    ]
+  },
+  "survive": { "scenario": "restaurant-bronze" }
+}

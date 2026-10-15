@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gate21.common.ApiException;
 import com.gate21.common.QuotaService;
 import com.gate21.config.AppProperties;
+import com.gate21.membership.MembershipService;
+import com.gate21.content.ContentModels.ChapterInfo;
 import com.gate21.content.ContentModels.Fact;
 import com.gate21.content.ContentModels.Option;
 import com.gate21.content.ContentModels.Scenario;
@@ -21,7 +23,6 @@ import com.gate21.roleplay.RoleplayModel.UserLine;
 import com.gate21.roleplay.RoleplayRepository.SessionRow;
 import com.gate21.roleplay.RoleplayRepository.TurnRow;
 import com.gate21.speech.SpeechService;
-import com.gate21.user.MeService;
 import com.gate21.user.UserRepository;
 import java.time.Clock;
 import java.time.Instant;
@@ -73,7 +74,7 @@ public class RoleplayService {
     private final RoleplayModel fallback = new ScriptedRoleplayModel();
     private final ContentService content;
     private final UserRepository users;
-    private final MeService me;
+    private final MembershipService membership;
     private final SpeechService speech;
     private final QuotaService quota;
     private final AppProperties props;
@@ -83,13 +84,13 @@ public class RoleplayService {
     private final Clock clock;
 
     public RoleplayService(RoleplayRepository repo, RoleplayModel model, ContentService content, UserRepository users,
-                           MeService me, SpeechService speech, QuotaService quota, AppProperties props,
+                           MembershipService membership, SpeechService speech, QuotaService quota, AppProperties props,
                            TransactionTemplate tx, ObjectMapper mapper, RandomGenerator sceneRandom, Clock clock) {
         this.repo = repo;
         this.model = model;
         this.content = content;
         this.users = users;
-        this.me = me;
+        this.membership = membership;
         this.speech = speech;
         this.quota = quota;
         this.props = props;
@@ -104,8 +105,10 @@ public class RoleplayService {
     public SceneView start(UUID userId, String scenarioSlug) {
         Scenario scenario = content.scenario(scenarioSlug)
             .orElseThrow(() -> ApiException.notFound("SCENARIO_NOT_FOUND", "No scenario " + scenarioSlug));
+        ChapterInfo chapter = content.chapterInfo(scenario.chapter()).orElseThrow();
+        membership.requirePlay(userId, chapter);
         String guestName = guestName(userId);
-        Difficulty difficulty = Difficulty.forWeek(me.journeyWeek(userId));
+        Difficulty difficulty = Difficulty.forWeek(chapter.week());
         List<String> plan = ScenePlanner.plan(scenario, difficulty, random);
         Map<String, String> facts = ScenePlanner.facts(scenario, random);
         List<SceneStep> steps = ScenePlanner.resolve(scenario, plan, facts, guestName);

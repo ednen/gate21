@@ -1,0 +1,243 @@
+{
+  "slug": "restaurant-bronze",
+  "chapter": "restaurant-bronze",
+  "title": "Lunch at the pub",
+  "titleTr": "Pub'da öğle yemeği",
+  "role": "Waiter",
+  "setting": "The Red Lion · Lunch",
+  "voice": "en-GB",
+  "persona": "You are a cheerful waiter at The Red Lion, a busy London pub that serves lunch. The guest has just walked in.",
+  "briefTr": "Bir arkadaşınla öğle yemeği yiyeceksin. Rezervasyonunuz yok.",
+  "opening": "Hello! Do you have a booking?",
+  "facts": [
+    {
+      "id": "total",
+      "values": [
+        "£34.50",
+        "£28.00",
+        "£41.20"
+      ],
+      "question": "How much was the bill?",
+      "questionTr": "Hesap ne kadardı?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "table",
+      "titleTr": "Masa istemek",
+      "instruction": "The guest asks for a table and says how many people.",
+      "hint": "No, a table for two, please.",
+      "hintTr": "Hayır, iki kişilik bir masa lütfen.",
+      "keywords": [
+        "table",
+        "two",
+        "three",
+        "for",
+        "people",
+        "one"
+      ],
+      "successReply": "Right this way.",
+      "retryReply": "How many people is the table for?"
+    },
+    {
+      "id": "drink",
+      "titleTr": "İçecek söylemek",
+      "ask": "Can I get you something to drink?",
+      "instruction": "The guest orders a drink.",
+      "hint": "Just water, please.",
+      "hintTr": "Sadece su, lütfen.",
+      "keywords": [
+        "water",
+        "cola",
+        "coke",
+        "juice",
+        "wine",
+        "beer",
+        "tea",
+        "coffee",
+        "lemonade",
+        "drink"
+      ],
+      "successReply": "Coming right up.",
+      "retryReply": "What would you like to drink? We have water, juice, soft drinks and wine."
+    },
+    {
+      "id": "order",
+      "titleTr": "Yemek siparişi vermek",
+      "ask": "Are you ready to order?",
+      "instruction": "The guest orders food politely, for example 'I'd like…' or 'Can I have…'.",
+      "hint": "I'd like the fish and chips, please.",
+      "hintTr": "Fish and chips istiyorum, lütfen.",
+      "keywords": [
+        "like",
+        "have",
+        "please",
+        "order",
+        "get",
+        "take"
+      ],
+      "successReply": "Good choice.",
+      "retryReply": "What would you like to have?"
+    },
+    {
+      "id": "dessert",
+      "titleTr": "Tatlıyı geri çevirip hesabı istemek",
+      "ask": "Would you like anything else? Some dessert?",
+      "instruction": "The guest says yes or no to dessert, or asks for the bill.",
+      "hint": "No, thank you. Just the bill, please.",
+      "hintTr": "Hayır, teşekkürler. Sadece hesap lütfen.",
+      "keywords": [
+        "no",
+        "yes",
+        "bill",
+        "check",
+        "dessert",
+        "thank"
+      ],
+      "successReply": "Of course.",
+      "retryReply": "Anything else for you? Or shall I bring the bill?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödeme şeklini söylemek",
+      "ask": "Will you pay by card or cash?",
+      "instruction": "The guest says how they will pay.",
+      "hint": "By card, please.",
+      "hintTr": "Kartla, lütfen.",
+      "keywords": [
+        "card",
+        "cash"
+      ],
+      "successReply": "Perfect, thank you.",
+      "retryReply": "Sorry — card or cash?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "sold-out",
+      "titleTr": "Yemek kalmamış",
+      "intro": "Oh — I'm sorry, we've just run out of that today.",
+      "instruction": "The dish is sold out. The guest asks for a recommendation, orders something else, or asks for a vegetarian option.",
+      "retryReply": "I'm so sorry. What else can I get you?",
+      "options": [
+        {
+          "text": "What do you recommend?",
+          "keywords": [
+            "recommend",
+            "suggest",
+            "good",
+            "popular",
+            "best"
+          ],
+          "reply": "The grilled fish is very popular tonight. I'll bring that."
+        },
+        {
+          "text": "Then I'll have the pasta, please.",
+          "keywords": [
+            "then",
+            "instead",
+            "pasta",
+            "other",
+            "else"
+          ],
+          "reply": "Perfect, one pasta. It'll be about fifteen minutes."
+        },
+        {
+          "text": "Is there a vegetarian option?",
+          "keywords": [
+            "vegetarian",
+            "vegan",
+            "without meat",
+            "veggie"
+          ],
+          "reply": "Yes — the mushroom risotto is vegetarian and very good."
+        }
+      ]
+    },
+    {
+      "id": "long-wait",
+      "titleTr": "Mutfak çok yoğun",
+      "intro": "I should tell you — the kitchen is very busy. It'll take about forty minutes.",
+      "instruction": "The food will take a long time. The guest asks for something faster, agrees to wait, or asks for bread while waiting.",
+      "retryReply": "Sorry about the wait. Is that okay for you?",
+      "options": [
+        {
+          "text": "Is there anything faster?",
+          "keywords": [
+            "faster",
+            "quick",
+            "quicker",
+            "fast"
+          ],
+          "reply": "The soup is ready in five minutes. Shall I bring that first?"
+        },
+        {
+          "text": "That's fine, we'll wait.",
+          "keywords": [
+            "wait",
+            "fine",
+            "okay",
+            "ok"
+          ],
+          "reply": "Thank you for your patience. I'll bring you some crisps on the house."
+        },
+        {
+          "text": "Could we have some bread while we wait?",
+          "keywords": [
+            "bread",
+            "snack",
+            "while"
+          ],
+          "reply": "Of course, fresh bread is coming right away."
+        }
+      ]
+    },
+    {
+      "id": "outside-only",
+      "titleTr": "Masayı değiştirmeleri gerekiyor",
+      "intro": "Sorry to ask — a big group just arrived. Could you move to a table outside?",
+      "instruction": "The waiter asks the guest to move. The guest agrees to sit outside, politely asks to stay, or asks to sit at the bar.",
+      "retryReply": "I'm really sorry. Would that be okay?",
+      "options": [
+        {
+          "text": "Sure, outside is fine.",
+          "keywords": [
+            "outside",
+            "fine",
+            "sure",
+            "okay",
+            "ok"
+          ],
+          "reply": "Thank you so much! Your food will come outside."
+        },
+        {
+          "text": "Can we stay here, please?",
+          "keywords": [
+            "stay",
+            "here"
+          ],
+          "reply": "Of course, no problem. I'll find them another table."
+        },
+        {
+          "text": "Can we sit at the bar?",
+          "keywords": [
+            "bar",
+            "counter"
+          ],
+          "reply": "Good idea — the bar is lovely. Follow me."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "order",
+      "pool": [
+        "sold-out",
+        "long-wait",
+        "outside-only"
+      ]
+    }
+  ],
+  "closing": "Here's your bill — {total} in total. Have a lovely afternoon!"
+}

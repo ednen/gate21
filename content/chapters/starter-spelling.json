@@ -1,0 +1,192 @@
+{
+  "slug": "starter-spelling",
+  "mission": "Spell your name and understand spelling",
+  "missionTr": "Adını harf harf söyle; otelde, havalimanında kodlananı anla",
+  "stamp": "SPELL IT",
+  "steps": [
+    "DISCOVER",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG"
+  ],
+  "words": [
+    {
+      "en": "spell",
+      "tr": "harf harf söylemek, kodlamak",
+      "example": "How do you spell your name?",
+      "exampleTr": "Adınızı nasıl yazıyorsunuz?"
+    },
+    {
+      "en": "Can you spell that?",
+      "tr": "Bunu kodlar mısınız?",
+      "example": "Can you spell that, please?",
+      "exampleTr": "Bunu kodlar mısınız, lütfen?"
+    },
+    {
+      "en": "double",
+      "tr": "çift (aynı harf iki kez)",
+      "example": "Double L, O.",
+      "exampleTr": "İki L, O."
+    },
+    {
+      "en": "capital letter",
+      "tr": "büyük harf",
+      "example": "With a capital O.",
+      "exampleTr": "Büyük O ile."
+    },
+    {
+      "en": "first name",
+      "tr": "ad",
+      "example": "My first name is Ozan.",
+      "exampleTr": "Adım Ozan."
+    },
+    {
+      "en": "surname",
+      "tr": "soyadı",
+      "example": "My surname is Yılmaz.",
+      "exampleTr": "Soyadım Yılmaz."
+    },
+    {
+      "en": "at",
+      "tr": "@ (et işareti)",
+      "example": "ozan at mail dot com",
+      "exampleTr": "ozan@mail.com"
+    },
+    {
+      "en": "dot",
+      "tr": ". (nokta, internet adresinde)",
+      "example": "mail dot com",
+      "exampleTr": "mail.com"
+    },
+    {
+      "en": "dash",
+      "tr": "- (tire)",
+      "example": "booking dash 42",
+      "exampleTr": "booking-42"
+    }
+  ],
+  "match": [
+    "spell",
+    "double",
+    "capital letter",
+    "surname",
+    "at",
+    "dot"
+  ],
+  "recognize": [
+    {
+      "audio": "K. E. Y.",
+      "prompt": "Listen. Which word is spelled?",
+      "options": [
+        "KEY",
+        "KAY",
+        "QUAY"
+      ],
+      "answer": 0,
+      "explainTr": "K (key) – E (ii) – Y (uay) = KEY."
+    },
+    {
+      "audio": "B. A. G.",
+      "prompt": "Listen. Which word is spelled?",
+      "options": [
+        "BEG",
+        "BAG",
+        "BIG"
+      ],
+      "answer": 1,
+      "explainTr": "A = \"ey\" diye okunur: B-A-G = BAG."
+    },
+    {
+      "audio": "G. A. T. E.",
+      "prompt": "Listen. Which word is spelled?",
+      "options": [
+        "JATE",
+        "GATE",
+        "GEAT"
+      ],
+      "answer": 1,
+      "explainTr": "G = \"ci\" ama kelimede \"g\" sesi verir: GATE."
+    },
+    {
+      "audio": "Ozan at mail dot com.",
+      "prompt": "Listen. What is the email?",
+      "options": [
+        "ozan@mail.com",
+        "ozan.mail@com",
+        "ozanat@mail.com"
+      ],
+      "answer": 0,
+      "explainTr": "at = @, dot = ."
+    },
+    {
+      "audio": "That's Yılmaz. Y. I. L. M. A. Z.",
+      "prompt": "Listen. How is the surname spelled?",
+      "options": [
+        "YILMAZ",
+        "JILMAS",
+        "YELMAZ"
+      ],
+      "answer": 0,
+      "explainTr": "Y = \"uay\", I = \"ay\": Y-I-L-M-A-Z."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Otelde adını kodlamak",
+    "lines": [
+      {
+        "who": "Receptionist",
+        "text": "What's your surname, please?"
+      },
+      {
+        "who": "You",
+        "text": "It's Yılmaz."
+      },
+      {
+        "who": "Receptionist",
+        "text": "Sorry, can you ___ that?",
+        "gap": "spell",
+        "options": [
+          "spell",
+          "spill",
+          "speak"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Y, I, L, M, A, Z."
+      },
+      {
+        "who": "Receptionist",
+        "text": "And your first name?"
+      },
+      {
+        "who": "You",
+        "text": "Ozan. With a ___ O.",
+        "gap": "capital",
+        "options": [
+          "capital",
+          "double",
+          "dot"
+        ]
+      },
+      {
+        "who": "Receptionist",
+        "text": "And your email?"
+      },
+      {
+        "who": "You",
+        "text": "ozan ___ mail dot com.",
+        "gap": "at",
+        "options": [
+          "at",
+          "dot",
+          "dash"
+        ]
+      },
+      {
+        "who": "Receptionist",
+        "text": "Perfect, thank you."
+      }
+    ]
+  }
+}

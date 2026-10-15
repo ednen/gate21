@@ -24,7 +24,7 @@ public class PlacementService {
     public enum Kind { INITIAL, FINAL }
 
     public record Result(int score, int correct, int total, String level, int startDay, String messageTr,
-                         boolean startDayApplied) {
+                         boolean starter, boolean startDayApplied) {
     }
 
     private final ContentService content;
@@ -59,13 +59,14 @@ public class PlacementService {
             : Math.round(0.3f * (float) speakingScores.stream().mapToInt(s -> Math.max(0, Math.min(100, s))).average().orElse(0));
         int score = Math.min(100, 10 + written + speaking);
         Band band = bandFor(placement.bands(), score);
+        int startDay = startDayWithContent(band.startDay());
 
         progress.lockStats(userId);
         boolean applied = false;
         if (kind == Kind.INITIAL) {
             // The starting day can only be chosen before the journey begins.
             applied = !progress.hasAnyActivity(userId);
-            progress.setPlacement(userId, score, applied ? band.startDay() : null);
+            progress.setPlacement(userId, score, applied ? startDay : null, band.starter());
         } else {
             progress.setFinalScore(userId, score);
         }
@@ -80,7 +81,19 @@ public class PlacementService {
             .param("level", band.level())
             .param("now", Db.ts(clock.instant()))
             .update();
-        return new Result(score, correct, total, band.level(), band.startDay(), band.messageTr(), applied);
+        return new Result(score, correct, total, band.level(), startDay, band.messageTr(), band.starter(), applied);
+    }
+
+    /**
+     * A strong learner may skip to a later week, but only to a week whose lessons are out; until
+     * then they start at the latest week that has content.
+     */
+    int startDayWithContent(int startDay) {
+        int week = content.levelForDay(startDay).week();
+        while (week > 1 && !content.hasAvailableLessons(week)) {
+            week--;
+        }
+        return Math.min(startDay, content.level(week).startDay());
     }
 
     static Band bandFor(List<Band> bands, int score) {

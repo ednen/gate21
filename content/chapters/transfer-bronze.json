@@ -1,0 +1,55 @@
+{
+  "slug": "transfer-bronze",
+  "mission": "Take a taxi to your hotel",
+  "missionTr": "Havalimanından otele taksiyle git: adresi söyle, fiyatı ve süreyi sor, ödemeyi yap",
+  "stamp": "ON MY WAY",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "RECOGNIZE", "USE", "SURVIVE"],
+  "words": [
+    { "en": "taxi", "tr": "taksi", "picture": "taxi", "example": "Where can I get a taxi?", "exampleTr": "Nereden taksiye binebilirim?" },
+    { "en": "taxi rank", "tr": "taksi durağı", "picture": "taxi-sign", "example": "The taxi rank is outside.", "exampleTr": "Taksi durağı dışarıda." },
+    { "en": "address", "tr": "adres", "picture": "map-pin", "example": "Here is the address.", "exampleTr": "Adres bu." },
+    { "en": "How much?", "tr": "Ne kadar?", "picture": "cash", "example": "How much is it to the hotel?", "exampleTr": "Otele ne kadar tutar?" },
+    { "en": "How long?", "tr": "Ne kadar sürer?", "picture": "clock", "example": "How long does it take?", "exampleTr": "Ne kadar sürer?" },
+    { "en": "traffic", "tr": "trafik", "picture": "traffic", "example": "There's a lot of traffic.", "exampleTr": "Çok trafik var." },
+    { "en": "suitcase", "tr": "bavul", "picture": "suitcase", "example": "Can you help me with my suitcase?", "exampleTr": "Bavulumla yardım edebilir misiniz?" },
+    { "en": "card", "tr": "kart", "picture": "card", "example": "Can I pay by card?", "exampleTr": "Kartla ödeyebilir miyim?" },
+    { "en": "cash", "tr": "nakit", "picture": "cash", "example": "I'll pay in cash.", "exampleTr": "Nakit ödeyeceğim." },
+    { "en": "receipt", "tr": "fiş", "picture": "receipt", "example": "Can I have a receipt, please?", "exampleTr": "Fiş alabilir miyim, lütfen?" }
+  ],
+  "pronounce": [
+    { "word": "address", "ipa": "/əˈdres/", "stress": "uh-DRESS", "tipTr": "İngiliz İngilizcesinde vurgu ikinci hecede: ı-DRES." },
+    { "word": "receipt", "ipa": "/rɪˈsiːt/", "stress": "ri-SEET", "tipTr": "Ortadaki p okunmaz: ri-SİİT." },
+    { "word": "suitcase", "ipa": "/ˈsuːt.keɪs/", "stress": "SOOT-case", "tipTr": "\"Suit\" uzun u ile: SUUT-keys." }
+  ],
+  "match": ["taxi", "address", "traffic", "suitcase", "card", "receipt"],
+  "recognize": [
+    {
+      "prompt": "The driver asks: “Where to?” He wants to know…",
+      "options": ["where you are going", "where you are from", "where your bag is"],
+      "answer": 0,
+      "explainTr": "\"Where to?\" = Nereye? Taksicilerin en sık sorusu."
+    },
+    {
+      "audio": "It's about forty minutes with this traffic.",
+      "prompt": "Listen. How long is the ride?",
+      "options": ["14 minutes", "40 minutes", "4 minutes"],
+      "answer": 1,
+      "explainTr": "Forty (40) ilk hecede vurgulanır: FOR-ty. Fourteen (14) ise sonda: four-TEEN."
+    },
+    {
+      "prompt": "You want proof that you paid. You say:",
+      "options": ["Can I have a receipt, please?", "Can I have a recipe, please?", "Can I have a reception, please?"],
+      "answer": 0,
+      "explainTr": "Receipt = fiş. Recipe = yemek tarifi."
+    }
+  ],
+  "use": {
+    "word": "How long?",
+    "phrase": "How long does it take to the hotel?",
+    "phraseTr": "Otele ne kadar sürer?",
+    "situation": "You are in the taxi. Ask how long the ride is.",
+    "situationTr": "Taksidesin. Yolculuğun ne kadar süreceğini sor.",
+    "tiles": ["How long", "does it", "take", "to the", "hotel", "?"]
+  },
+  "survive": { "scenario": "transfer-bronze" }
+}

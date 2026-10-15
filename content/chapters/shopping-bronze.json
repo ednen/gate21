@@ -1,0 +1,61 @@
+{
+  "slug": "shopping-bronze",
+  "mission": "Buy a jacket that actually fits",
+  "missionTr": "Üstüne olan bir ceket al: dene, beden iste, fiyatı sor ve öde",
+  "stamp": "SHOPPED",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "RECOGNIZE", "DIALOG", "SURVIVE"],
+  "words": [
+    { "en": "jacket", "tr": "ceket", "picture": "jacket", "example": "I like this jacket.", "exampleTr": "Bu ceketi beğendim." },
+    { "en": "T-shirt", "tr": "tişört", "picture": "shirt", "example": "How much is this T-shirt?", "exampleTr": "Bu tişört ne kadar?" },
+    { "en": "shoes", "tr": "ayakkabı", "picture": "shoes", "example": "Do you have these shoes in size 42?", "exampleTr": "Bu ayakkabının 42 numarası var mı?" },
+    { "en": "size", "tr": "beden", "picture": "sizes", "example": "Do you have a bigger size?", "exampleTr": "Daha büyük bedeni var mı?" },
+    { "en": "fitting room", "tr": "deneme kabini", "picture": "fitting-room", "example": "Where is the fitting room?", "exampleTr": "Deneme kabini nerede?" },
+    { "en": "try on", "tr": "denemek (giysi)", "picture": "mirror", "example": "Can I try this on?", "exampleTr": "Bunu deneyebilir miyim?" },
+    { "en": "price tag", "tr": "fiyat etiketi", "picture": "tag", "example": "There's no price tag.", "exampleTr": "Fiyat etiketi yok." },
+    { "en": "too small / too big", "tr": "çok küçük / çok büyük", "picture": "too-small", "example": "It's too small for me.", "exampleTr": "Bana çok küçük." },
+    { "en": "bag", "tr": "poşet / çanta", "picture": "bag", "example": "Do you need a bag?", "exampleTr": "Poşet ister misiniz?" },
+    { "en": "I'll take it", "tr": "alıyorum", "picture": "check", "example": "It's perfect. I'll take it.", "exampleTr": "Harika. Alıyorum." }
+  ],
+  "pronounce": [
+    { "word": "jacket", "ipa": "/ˈdʒæk.ɪt/", "stress": "JACK-it", "tipTr": "\"Ceket\" değil: CEK-it, vurgu başta." },
+    { "word": "fitting room", "ipa": "/ˈfɪt.ɪŋ ruːm/", "stress": "FIT-ting room", "tipTr": "\"Room\" uzun u ile: ruuum." },
+    { "word": "size", "ipa": "/saɪz/", "stress": "SIZE", "tipTr": "\"Sayz\" gibi; sondaki z titreşimli." }
+  ],
+  "match": ["jacket", "shoes", "size", "fitting room", "price tag", "bag"],
+  "recognize": [
+    {
+      "prompt": "You want to try on a jacket. You ask:",
+      "options": ["Where is the fitting room?", "Where is the exit?", "Where is the cash?"],
+      "answer": 0,
+      "explainTr": "Fitting room = deneme kabini (Amerika'da \"dressing room\")."
+    },
+    {
+      "audio": "That's thirty-nine ninety-nine.",
+      "prompt": "Listen. How much is it?",
+      "options": ["£39.99", "£19.99", "£93.90"],
+      "answer": 0,
+      "explainTr": "Fiyatlar ikiye bölünerek okunur: thirty-nine (39) ninety-nine (99)."
+    },
+    {
+      "prompt": "The jacket is too small. You ask:",
+      "options": ["Do you have a bigger size?", "Do you have a smaller price?", "Do you have a bag?"],
+      "answer": 0,
+      "explainTr": "Bigger size = daha büyük beden."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Mağazada",
+    "lines": [
+      { "who": "Assistant", "text": "Hi! Can I help you?" },
+      { "who": "You", "text": "Yes, can I try this jacket ___?", "gap": "on", "options": ["on", "in", "at"] },
+      { "who": "Assistant", "text": "Of course. The fitting room is over there." },
+      { "who": "Assistant", "text": "How is it?" },
+      { "who": "You", "text": "It's too ___. Do you have a bigger size?", "gap": "small", "options": ["small", "cheap", "big"] },
+      { "who": "Assistant", "text": "Here's a large." },
+      { "who": "You", "text": "Perfect. How ___ is it?", "gap": "much", "options": ["much", "many", "long"] },
+      { "who": "Assistant", "text": "It's £49." },
+      { "who": "You", "text": "Great, I'll ___ it.", "gap": "take", "options": ["take", "make", "give"] }
+    ]
+  },
+  "survive": { "scenario": "shopping-bronze" }
+}

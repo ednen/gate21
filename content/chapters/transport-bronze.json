@@ -1,0 +1,56 @@
+{
+  "slug": "transport-bronze",
+  "mission": "Buy a ticket and find your train",
+  "missionTr": "Metroda bilet al; hangi hatta bineceğini ve kaç durak olduğunu öğren",
+  "stamp": "ON TRACK",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "RECOGNIZE", "USE", "SURVIVE"],
+  "words": [
+    { "en": "ticket", "tr": "bilet", "picture": "ticket", "example": "One ticket to Camden, please.", "exampleTr": "Camden'a bir bilet, lütfen." },
+    { "en": "single", "tr": "tek yön", "picture": "arrow-right", "example": "A single, please.", "exampleTr": "Tek yön, lütfen." },
+    { "en": "return", "tr": "gidiş-dönüş", "picture": "arrows-both", "example": "A return ticket, please.", "exampleTr": "Gidiş-dönüş bilet, lütfen." },
+    { "en": "the Underground", "tr": "Londra metrosu", "picture": "metro", "example": "Where is the Underground station?", "exampleTr": "Metro istasyonu nerede?" },
+    { "en": "line", "tr": "hat", "picture": "line", "example": "Which line do I take?", "exampleTr": "Hangi hatta binmeliyim?" },
+    { "en": "platform", "tr": "peron", "picture": "platform", "example": "The train leaves from platform 2.", "exampleTr": "Tren 2. perondan kalkıyor." },
+    { "en": "stop", "tr": "durak", "picture": "bus-stop", "example": "How many stops is it?", "exampleTr": "Kaç durak var?" },
+    { "en": "bus", "tr": "otobüs", "picture": "bus", "example": "Does this bus go to the centre?", "exampleTr": "Bu otobüs merkeze gidiyor mu?" },
+    { "en": "map", "tr": "harita", "picture": "map", "example": "Can I have a map, please?", "exampleTr": "Bir harita alabilir miyim?" },
+    { "en": "Where is…?", "tr": "…nerede?", "picture": "map-pin", "example": "Where is the station?", "exampleTr": "İstasyon nerede?" }
+  ],
+  "pronounce": [
+    { "word": "platform", "ipa": "/ˈplæt.fɔːm/", "stress": "PLAT-form", "tipTr": "Vurgu ilk hecede; \"form\" uzun o ile." },
+    { "word": "single", "ipa": "/ˈsɪŋ.ɡəl/", "stress": "SING-gul", "tipTr": "\"Singıl\": n ve g birleşir, ng sesi." },
+    { "word": "Underground", "ipa": "/ˈʌn.də.ɡraʊnd/", "stress": "UN-der-ground", "tipTr": "Vurgu başta: AN-dır-graund." }
+  ],
+  "match": ["ticket", "single", "return", "platform", "bus", "map"],
+  "recognize": [
+    {
+      "prompt": "You want to go and come back the same day. You buy a…",
+      "options": ["return ticket", "single ticket", "map"],
+      "answer": 0,
+      "explainTr": "Return = gidiş-dönüş. Single = tek yön (Amerika'da \"round trip\" / \"one way\")."
+    },
+    {
+      "audio": "Take the Northern line, from platform two.",
+      "prompt": "Listen. Which platform?",
+      "options": ["Platform 2", "Platform 10", "Platform 4"],
+      "answer": 0,
+      "explainTr": "\"Platform two\" = 2. peron. Dikkatli dinle: two / ten / four."
+    },
+    {
+      "audio": "Mind the gap.",
+      "prompt": "Listen. What should you be careful about?",
+      "options": ["The space between the train and the platform", "Your bag", "The time"],
+      "answer": 0,
+      "explainTr": "Londra metrosunun ünlü anonsu: tren ile peron arasındaki boşluğa dikkat."
+    }
+  ],
+  "use": {
+    "word": "line",
+    "phrase": "Which line goes to Camden Town?",
+    "phraseTr": "Hangi hat Camden Town'a gidiyor?",
+    "situation": "You're at the station. Ask which line goes to Camden Town.",
+    "situationTr": "İstasyondasın. Camden Town'a hangi hattın gittiğini sor.",
+    "tiles": ["Which", "line", "goes to", "Camden Town", "?"]
+  },
+  "survive": { "scenario": "transport-bronze" }
+}

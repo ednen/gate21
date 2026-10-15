@@ -2,6 +2,7 @@ package com.gate21.progress;
 
 import com.gate21.common.ApiException;
 import com.gate21.content.ContentModels.ChapterInfo;
+import com.gate21.content.ContentModels.LevelInfo;
 import com.gate21.content.ContentService;
 import com.gate21.progress.ProgressRepository.ChapterRow;
 import com.gate21.progress.ProgressRepository.StatsRow;
@@ -33,13 +34,20 @@ public class ProgressService {
     public record AttemptInput(UUID clientId, String chapter, Step step, Integer score, Instant occurredAt) {
     }
 
+    /** {@code levelsEarned}: Bronze/Silver/Gold badges completed by this batch; {@code graduated}: the journey too. */
     public record SyncResult(int accepted, int duplicates, int xpGained, List<String> stampedChapters,
-                             int xpTotal, int streak) {
+                             List<String> levelsEarned, boolean graduated, int xpTotal, int streak) {
     }
 
-    public record PassportChapter(String slug, String title, String titleTr, int week, int order, String icon,
-                                  boolean available, boolean unlocked, int stepsDone, int totalSteps, boolean complete,
-                                  int stars, String stamp, Instant stampedAt) {
+    public record PassportChapter(String slug, String kind, String stop, String title, String titleTr, int week,
+                                  int day, int order, String icon, boolean available, boolean unlocked, int stepsDone,
+                                  int totalSteps, boolean complete, int stars, String stamp, Instant stampedAt) {
+    }
+
+    /** A week's badge: earned when all seven of its lessons are complete. */
+    public record LevelBadge(String id, int week, String title, String titleTr, String tagline, String message,
+                             String messageTr, String trip, int lessonsDone, int lessons, boolean earned,
+                             Instant earnedAt) {
     }
 
     private final ProgressRepository repo;
@@ -94,9 +102,10 @@ public class ProgressService {
         }
 
         List<String> stamped = new ArrayList<>();
+        List<String> levelsEarned = new ArrayList<>();
+        boolean graduated = false;
         if (accepted > 0) {
-            Map<String, ChapterRow> rows = repo.chapters(userId).stream()
-                .collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
+            Map<String, ChapterRow> rows = rows(userId);
             for (String slug : touchedChapters) {
                 ChapterRow row = rows.get(slug);
                 if (row != null && row.complete(requiredBits(slug))) {
@@ -105,6 +114,17 @@ public class ProgressService {
                     }
                     repo.stamp(userId, slug, ProgressRules.stars(row.averageScore()), now);
                 }
+            }
+            for (LevelInfo level : content.manifest().levels()) {
+                boolean touched = touchedChapters.stream()
+                    .anyMatch(slug -> content.chapterInfo(slug).map(c -> c.isLesson() && c.week() == level.week()).orElse(false));
+                if (touched && newlyCompleted(level.week(), rows, touchedChapters)) {
+                    levelsEarned.add(level.id());
+                }
+            }
+            if (stats.graduatedAt() == null && journeyComplete(rows)) {
+                repo.setGraduated(userId, now);
+                graduated = true;
             }
         }
 
@@ -115,25 +135,24 @@ public class ProgressService {
         repo.saveStats(userId, xpGained, streak, best, lastActive, speakingSum, speakingCount);
 
         LocalDate today = LocalDate.now(clock.withZone(zone));
-        return new SyncResult(accepted, attempts.size() - accepted, xpGained, stamped,
+        return new SyncResult(accepted, attempts.size() - accepted, xpGained, stamped, levelsEarned, graduated,
             stats.xpTotal() + xpGained, ProgressRules.effectiveStreak(streak, lastActive, today));
     }
 
     public List<PassportChapter> passport(UUID userId, int journeyDay) {
-        Map<String, ChapterRow> rows = repo.chapters(userId).stream()
-            .collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
+        Map<String, ChapterRow> rows = rows(userId);
         List<PassportChapter> result = new ArrayList<>();
         for (ChapterInfo c : content.manifest().chapters()) {
             ChapterRow row = rows.get(c.slug());
             int required = requiredBits(c.slug());
             String stamp = content.chapterMeta(c.slug()).map(m -> m.stamp()).orElse(null);
             result.add(new PassportChapter(
-                c.slug(), c.title(), c.titleTr(), c.week(), c.order(), c.icon(),
+                c.slug(), c.kind(), c.stop(), c.title(), c.titleTr(), c.week(), c.day(), c.order(), c.icon(),
                 c.available(),
-                c.available() && journeyDay >= weekStart(c),
+                unlocked(c, journeyDay, rows),
                 row == null ? 0 : Integer.bitCount(row.stepsDone() & required),
                 Integer.bitCount(required),
-                row != null && row.complete(required),
+                complete(c, rows),
                 row == null ? 0 : row.stars(),
                 stamp,
                 row == null ? null : row.stampedAt()));
@@ -141,31 +160,109 @@ public class ProgressService {
         return result;
     }
 
+    public List<LevelBadge> levels(UUID userId) {
+        Map<String, ChapterRow> rows = rows(userId);
+        List<LevelBadge> result = new ArrayList<>();
+        for (LevelInfo level : content.manifest().levels()) {
+            List<ChapterInfo> lessons = content.lessonsOfWeek(level.week());
+            int done = (int) lessons.stream().filter(c -> complete(c, rows)).count();
+            boolean earned = weekComplete(level.week(), rows);
+            Instant earnedAt = earned
+                ? lessons.stream().map(c -> rows.get(c.slug()).stampedAt()).filter(java.util.Objects::nonNull)
+                    .max(Instant::compareTo).orElse(null)
+                : null;
+            result.add(new LevelBadge(level.id(), level.week(), level.title(), level.titleTr(), level.tagline(),
+                level.message(), level.messageTr(), level.trip(), done, lessons.size(), earned, earnedAt));
+        }
+        return result;
+    }
+
     /**
-     * The first unlocked chapter that is not finished yet, or null when everything unlocked is
-     * done. Chapters of a later week stay out of the mission until that week starts.
+     * Today's mission. Learners who were advised to start from zero get the Starter pack first;
+     * then the first unfinished, unlocked chapter of the week they started in or later, and
+     * failing that, anything unfinished they skipped. Null when everything unlocked is done.
      */
-    public ChapterInfo nextChapter(UUID userId, int journeyDay) {
-        Map<String, ChapterRow> rows = repo.chapters(userId).stream()
-            .collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
-        for (ChapterInfo c : content.availableChapters()) {
-            ChapterRow row = rows.get(c.slug());
-            if (journeyDay >= weekStart(c) && (row == null || !row.complete(requiredBits(c.slug())))) {
-                return c;
+    public ChapterInfo nextChapter(UUID userId, int journeyDay, int startDay, boolean starterFirst) {
+        Map<String, ChapterRow> rows = rows(userId);
+        if (starterFirst) {
+            for (ChapterInfo c : content.starterChapters()) {
+                if (!complete(c, rows)) {
+                    return c;
+                }
             }
         }
-        return null;
+        int startWeek = content.levelForDay(startDay).week();
+        ChapterInfo skipped = null;
+        for (ChapterInfo c : content.availableChapters()) {
+            if (c.isStarter() || complete(c, rows) || !unlocked(c, journeyDay, rows)) {
+                continue;
+            }
+            if (c.week() >= startWeek) {
+                return c;
+            }
+            if (skipped == null) {
+                skipped = c;
+            }
+        }
+        return skipped;
     }
 
-    /** A simulation chapter (Full Trip) is only the Survive step; a lesson chapter has all six. */
+    /** When the last Starter lesson was finished, if all of them are. */
+    public java.util.Optional<Instant> starterFinishedAt(UUID userId) {
+        Map<String, ChapterRow> rows = rows(userId);
+        List<ChapterInfo> starter = content.starterChapters();
+        if (starter.isEmpty() || !starter.stream().allMatch(c -> complete(c, rows))) {
+            return java.util.Optional.empty();
+        }
+        return starter.stream().map(c -> rows.get(c.slug()).stampedAt()).filter(java.util.Objects::nonNull)
+            .max(Instant::compareTo);
+    }
+
+    /**
+     * Starter lessons are always open. A week opens on its first journey day, or as soon as the
+     * week before it is finished, so a fast learner never waits for the calendar.
+     */
+    boolean unlocked(ChapterInfo c, int journeyDay, Map<String, ChapterRow> rows) {
+        if (!c.available()) {
+            return false;
+        }
+        if (c.isStarter() || c.week() <= 1) {
+            return true;
+        }
+        return journeyDay >= content.level(c.week()).startDay() || weekComplete(c.week() - 1, rows);
+    }
+
+    /** All seven lessons of the week exist, are available and are complete. */
+    boolean weekComplete(int week, Map<String, ChapterRow> rows) {
+        List<ChapterInfo> lessons = content.lessonsOfWeek(week);
+        return lessons.size() == 7 && lessons.stream().allMatch(c -> c.available() && complete(c, rows));
+    }
+
+    private boolean newlyCompleted(int week, Map<String, ChapterRow> rows, Set<String> touched) {
+        if (!weekComplete(week, rows)) {
+            return false;
+        }
+        // Newly complete when one of the touched lessons got its stamp in this batch.
+        return content.lessonsOfWeek(week).stream()
+            .anyMatch(c -> touched.contains(c.slug()) && rows.get(c.slug()).stampedAt() == null);
+    }
+
+    private boolean journeyComplete(Map<String, ChapterRow> rows) {
+        return content.manifest().levels().stream().allMatch(l -> weekComplete(l.week(), rows));
+    }
+
+    private boolean complete(ChapterInfo c, Map<String, ChapterRow> rows) {
+        ChapterRow row = rows.get(c.slug());
+        return row != null && c.available() && row.complete(requiredBits(c.slug()));
+    }
+
+    private Map<String, ChapterRow> rows(UUID userId) {
+        return repo.chapters(userId).stream().collect(Collectors.toMap(ChapterRow::chapterSlug, Function.identity()));
+    }
+
+    /** The chapter's own steps; chapters that are not out yet need every step there is. */
     int requiredBits(String slug) {
-        boolean simulation = content.chapterMeta(slug).map(m -> m.simulation()).orElse(false);
-        return simulation ? Step.SURVIVE.bit() : Step.ALL_BITS;
-    }
-
-    private int weekStart(ChapterInfo c) {
-        return content.manifest().weeks().stream()
-            .filter(w -> w.week() == c.week()).findFirst().map(w -> w.startDay()).orElse(1);
+        return content.chapterMeta(slug).map(m -> m.requiredBits()).orElse((1 << Step.values().length) - 1);
     }
 
     static Instant clamp(Instant occurredAt, Instant now) {

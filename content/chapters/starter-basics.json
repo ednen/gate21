@@ -1,0 +1,133 @@
+{
+  "slug": "starter-basics",
+  "mission": "Your first ten travel words",
+  "missionTr": "Her yolcunun bilmesi gereken ilk kelimeler: merhaba, lütfen, teşekkürler, tuvalet, yardım",
+  "stamp": "HELLO",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "SPEAK"
+  ],
+  "words": [
+    {
+      "en": "hello",
+      "tr": "merhaba",
+      "picture": "wave",
+      "example": "Hello! How are you?",
+      "exampleTr": "Merhaba! Nasılsın?"
+    },
+    {
+      "en": "goodbye",
+      "tr": "hoşça kal",
+      "picture": "door",
+      "example": "Goodbye, see you tomorrow!",
+      "exampleTr": "Hoşça kal, yarın görüşürüz!"
+    },
+    {
+      "en": "please",
+      "tr": "lütfen",
+      "picture": "hands",
+      "example": "A coffee, please.",
+      "exampleTr": "Bir kahve, lütfen."
+    },
+    {
+      "en": "thank you",
+      "tr": "teşekkür ederim",
+      "picture": "heart",
+      "example": "Thank you very much!",
+      "exampleTr": "Çok teşekkür ederim!"
+    },
+    {
+      "en": "sorry",
+      "tr": "özür dilerim / pardon",
+      "picture": "sorry",
+      "example": "Sorry, I don't understand.",
+      "exampleTr": "Pardon, anlamıyorum."
+    },
+    {
+      "en": "excuse me",
+      "tr": "affedersiniz (dikkat çekmek için)",
+      "picture": "raise-hand",
+      "example": "Excuse me, where is the exit?",
+      "exampleTr": "Affedersiniz, çıkış nerede?"
+    },
+    {
+      "en": "yes",
+      "tr": "evet",
+      "picture": "check",
+      "example": "Yes, please.",
+      "exampleTr": "Evet, lütfen."
+    },
+    {
+      "en": "no",
+      "tr": "hayır",
+      "picture": "cross",
+      "example": "No, thank you.",
+      "exampleTr": "Hayır, teşekkürler."
+    },
+    {
+      "en": "toilet",
+      "tr": "tuvalet",
+      "picture": "toilet",
+      "example": "Where is the toilet?",
+      "exampleTr": "Tuvalet nerede?"
+    },
+    {
+      "en": "help",
+      "tr": "yardım",
+      "picture": "help",
+      "example": "Can you help me?",
+      "exampleTr": "Bana yardım edebilir misiniz?"
+    },
+    {
+      "en": "water",
+      "tr": "su",
+      "picture": "water",
+      "example": "Water, please.",
+      "exampleTr": "Su, lütfen."
+    }
+  ],
+  "pronounce": [
+    {
+      "word": "thank you",
+      "ipa": "/ˈθæŋk juː/",
+      "stress": "THANK you",
+      "tipTr": "Dili dişlerin arasına koy: θenk-yu. \"Tenk\" değil."
+    },
+    {
+      "word": "excuse me",
+      "ipa": "/ɪkˈskjuːz miː/",
+      "stress": "ik-SKYOOZ me",
+      "tipTr": "Vurgu ortada: ik-SKYUUZ mi."
+    },
+    {
+      "word": "toilet",
+      "ipa": "/ˈtɔɪ.lət/",
+      "stress": "TOY-lit",
+      "tipTr": "\"Tuvalet\" değil: TOY-lıt."
+    }
+  ],
+  "match": [
+    "hello",
+    "thank you",
+    "yes",
+    "no",
+    "toilet",
+    "help"
+  ],
+  "speak": {
+    "picture": "toilet",
+    "prompt": "What do you see?",
+    "answer": "toilet",
+    "accept": [
+      "toilet",
+      "toilets",
+      "the toilet",
+      "restroom",
+      "bathroom",
+      "loo",
+      "wc"
+    ]
+  }
+}

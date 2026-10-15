@@ -1,0 +1,48 @@
+{
+  "slug": "hotel-bronze",
+  "mission": "Check in — and handle a surprise",
+  "missionTr": "Otele giriş yap; kahvaltıyı ve Wi-Fi şifresini öğren, bir sorun çıkarsa çöz",
+  "stamp": "CHECKED IN",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "DIALOG", "USE", "SURVIVE"],
+  "words": [
+    { "en": "reservation", "tr": "rezervasyon", "picture": "calendar", "example": "I have a reservation.", "exampleTr": "Rezervasyonum var." },
+    { "en": "reception", "tr": "resepsiyon", "picture": "bell", "example": "The reception is open 24 hours.", "exampleTr": "Resepsiyon 24 saat açık." },
+    { "en": "check in", "tr": "otele giriş yapmak", "picture": "hotel", "example": "I'd like to check in, please.", "exampleTr": "Giriş yapmak istiyorum, lütfen." },
+    { "en": "check out", "tr": "otelden çıkış yapmak", "picture": "exit", "example": "What time is check-out?", "exampleTr": "Çıkış saat kaçta?" },
+    { "en": "key card", "tr": "kart anahtar", "picture": "key-card", "example": "Here's your key card.", "exampleTr": "Kart anahtarınız burada." },
+    { "en": "room", "tr": "oda", "picture": "bed", "example": "My room is on the fifth floor.", "exampleTr": "Odam beşinci katta." },
+    { "en": "breakfast", "tr": "kahvaltı", "picture": "croissant", "example": "Is breakfast included?", "exampleTr": "Kahvaltı dahil mi?" },
+    { "en": "lift", "tr": "asansör", "picture": "lift", "example": "The lift is on your right.", "exampleTr": "Asansör sağınızda." },
+    { "en": "Wi-Fi password", "tr": "Wi-Fi şifresi", "picture": "wifi", "example": "What's the Wi-Fi password?", "exampleTr": "Wi-Fi şifresi ne?" },
+    { "en": "floor", "tr": "kat", "picture": "stairs", "example": "Which floor is it on?", "exampleTr": "Hangi katta?" }
+  ],
+  "pronounce": [
+    { "word": "reservation", "ipa": "/ˌrez.əˈveɪ.ʃən/", "stress": "rez-er-VAY-shun", "tipTr": "Vurgu üçüncü hecede: rez-ır-VEY-şın." },
+    { "word": "breakfast", "ipa": "/ˈbrek.fəst/", "stress": "BREK-fust", "tipTr": "\"Break-fast\" diye ayırma; \"brekfıst\" gibi tek nefeste söyle." },
+    { "word": "receipt", "ipa": "/rɪˈsiːt/", "stress": "ri-SEET", "tipTr": "Ortadaki p okunmaz: ri-SİİT." }
+  ],
+  "match": ["reservation", "key card", "breakfast", "lift", "Wi-Fi password", "check out"],
+  "dialog": {
+    "titleTr": "Resepsiyonda",
+    "lines": [
+      { "who": "Receptionist", "text": "Good afternoon! How can I help you?" },
+      { "who": "You", "text": "Hi, I have a ___ under Ozan.", "gap": "reservation", "options": ["reservation", "reception", "receipt"] },
+      { "who": "Receptionist", "text": "Lovely. Could I see your passport, please?" },
+      { "who": "You", "text": "Sure, here you ___.", "gap": "are", "options": ["are", "go", "is"] },
+      { "who": "Receptionist", "text": "Thank you. You're in room 412, on the fourth floor." },
+      { "who": "You", "text": "Is ___ included?", "gap": "breakfast", "options": ["breakfast", "floor", "lift"] },
+      { "who": "Receptionist", "text": "Yes, from 7 to 10. And here's your key card." },
+      { "who": "You", "text": "Thank you! What time is check-___?", "gap": "out", "options": ["out", "off", "in"] },
+      { "who": "Receptionist", "text": "At 11 o'clock. Enjoy your stay!" }
+    ]
+  },
+  "use": {
+    "word": "check out",
+    "phrase": "What time is check-out?",
+    "phraseTr": "Çıkış saat kaçta?",
+    "situation": "You're leaving tomorrow morning. Ask when you must leave the room.",
+    "situationTr": "Yarın sabah ayrılıyorsun. Odayı en geç kaçta boşaltman gerektiğini sor.",
+    "tiles": ["What", "time", "is", "check-out", "?"]
+  },
+  "survive": { "scenario": "hotel-bronze" }
+}

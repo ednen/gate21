@@ -1,0 +1,68 @@
+{
+  "slug": "restaurant-gold",
+  "draft": true,
+  "mission": "When something's wrong with your meal",
+  "missionTr": "Yemekte sorun var: yanlış yemek, soğuk yemek, hesapta hata — kibarca şikâyet et",
+  "stamp": "SORTED",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "This isn't what I ordered.",
+      "tr": "Sipariş ettiğim bu değil."
+    },
+    {
+      "en": "cold",
+      "tr": "soğuk"
+    },
+    {
+      "en": "overcooked",
+      "tr": "fazla pişmiş"
+    },
+    {
+      "en": "mistake",
+      "tr": "hata"
+    },
+    {
+      "en": "charged twice",
+      "tr": "iki kez ücretlendirilmiş"
+    },
+    {
+      "en": "service charge",
+      "tr": "servis ücreti"
+    },
+    {
+      "en": "complimentary",
+      "tr": "ikram"
+    },
+    {
+      "en": "I'd like to speak to the manager.",
+      "tr": "Müdürle görüşmek istiyorum."
+    }
+  ],
+  "scene": {
+    "role": "Waiter",
+    "setting": "Bondi beach café · Lunch",
+    "goalsTr": [
+      "Gelen yemeğin yanlış olduğunu söyle",
+      "Yemeğin soğuk olduğunu kibarca belirt",
+      "Yenisini ya da başka bir yemek iste",
+      "Hesapta yanlış kalem olduğunu fark et",
+      "Servis ücretini sor",
+      "Durumu çözdükleri için teşekkür et"
+    ],
+    "twistsTr": [
+      "Yeni yemek 30 dakika sürecek",
+      "Hesaba içmediğin şarap eklenmiş",
+      "Garson hatayı kabul etmiyor, müdürü istemen gerekiyor"
+    ]
+  },
+  "notesTr": "Avustralya'da bahşiş zorunlu değildir — kültür notu."
+}

@@ -1,0 +1,72 @@
+{
+  "slug": "restaurant-silver",
+  "draft": true,
+  "mission": "Order with care: allergies and recommendations",
+  "missionTr": "Öneri iste, alerjini söyle, yemeğin nasıl pişeceğini seç, hesabı ayır",
+  "stamp": "TABLE FOR TWO",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "recommend",
+      "tr": "önermek"
+    },
+    {
+      "en": "allergic to",
+      "tr": "…e alerjisi olmak"
+    },
+    {
+      "en": "gluten-free",
+      "tr": "glütensiz"
+    },
+    {
+      "en": "spicy",
+      "tr": "acı"
+    },
+    {
+      "en": "medium rare",
+      "tr": "az pişmiş (et)"
+    },
+    {
+      "en": "well done",
+      "tr": "iyi pişmiş"
+    },
+    {
+      "en": "side dish",
+      "tr": "garnitür"
+    },
+    {
+      "en": "split the check",
+      "tr": "hesabı bölmek"
+    },
+    {
+      "en": "tip",
+      "tr": "bahşiş (ABD'de %15–20)"
+    }
+  ],
+  "scene": {
+    "role": "Server",
+    "setting": "Joe's Diner, Brooklyn · Lunch",
+    "goalsTr": [
+      "Garsondan yemek önerisi iste",
+      "Fıstık alerjin olduğunu söyle",
+      "Etin nasıl pişeceğini söyle (medium / well done)",
+      "Garnitür seç",
+      "Hesabı ikiye bölmek istediğini söyle",
+      "Bahşişin dahil olup olmadığını sor"
+    ],
+    "twistsTr": [
+      "Önerilen yemekte fıstık var",
+      "Mutfak glütensiz seçenek sunamıyor",
+      "Kart makinesi masaya gelemiyor, kasaya gitmen gerekiyor"
+    ]
+  },
+  "notesTr": "ABD'de bahşiş kültürü ve \"check\" kelimesi bu derste."
+}

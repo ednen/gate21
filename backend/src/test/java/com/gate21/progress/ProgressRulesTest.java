@@ -60,8 +60,10 @@ class ProgressRulesTest {
     }
 
     @Test
-    void stepBitsCoverSixSteps() {
-        assertThat(Step.ALL_BITS).isEqualTo(0b111111);
+    void stepBitsNeverMoveWhenNewStepKindsAreAdded() {
+        // Stored progress depends on these: new kinds are appended, never inserted.
+        assertThat(Step.DISCOVER.bit()).isEqualTo(0b1);
         assertThat(Step.SURVIVE.bit()).isEqualTo(0b100000);
+        assertThat(Step.FORM.bit()).isEqualTo(0b100000000);
     }
 }

@@ -1,0 +1,112 @@
+{
+  "slug": "transfer-bronze",
+  "chapter": "transfer-bronze",
+  "title": "Taxi to the hotel",
+  "titleTr": "Otele taksiyle",
+  "role": "Taxi driver",
+  "setting": "Heathrow · Taxi rank",
+  "voice": "en-GB",
+  "persona": "You are a friendly London black-cab driver picking up a passenger at Heathrow. You speak in short, warm sentences.",
+  "briefTr": "Heathrow'dan Grand Hotel'e (25 King Street) gideceksin. Bavulun büyük. Kartla ödemek istiyorsun.",
+  "opening": "Hello there! Where to?",
+  "facts": [
+    { "id": "fare", "values": ["£45", "£52", "£38"], "question": "How much was the taxi?", "questionTr": "Taksi ne kadar tuttu?" },
+    { "id": "minutes", "values": ["40 minutes", "50 minutes", "35 minutes"], "question": "How long was the ride?", "questionTr": "Yolculuk ne kadar sürdü?" }
+  ],
+  "goals": [
+    {
+      "id": "destination",
+      "titleTr": "Nereye gideceğini söylemek",
+      "instruction": "The passenger says where they want to go, for example a hotel name or an address.",
+      "hint": "To the Grand Hotel, please.",
+      "hintTr": "Grand Hotel'e, lütfen.",
+      "keywords": ["hotel", "to", "street", "address", "station", "centre", "center"],
+      "successReply": "The Grand Hotel, lovely.",
+      "retryReply": "Sorry, where would you like to go?"
+    },
+    {
+      "id": "address",
+      "titleTr": "Adresi vermek",
+      "ask": "Have you got the address?",
+      "instruction": "The passenger gives the address or shows it on their phone.",
+      "hint": "Yes, it's 25 King Street.",
+      "hintTr": "Evet, King Street 25 numara.",
+      "keywords": ["yes", "street", "address", "phone", "here", "king", "road"],
+      "successReply": "King Street, got it. Let me put your suitcase in the back.",
+      "retryReply": "Do you know the street? It helps me find the right one."
+    },
+    {
+      "id": "price",
+      "titleTr": "Fiyatı sormak",
+      "ask": "Right, off we go!",
+      "instruction": "The passenger asks how much the ride will cost.",
+      "hint": "How much will it be?",
+      "hintTr": "Ne kadar tutar?",
+      "keywords": ["how much", "price", "cost", "fare", "pay", "expensive"],
+      "successReply": "It's on the meter — about {fare}.",
+      "retryReply": "Anything you'd like to know before we go? The price, maybe?"
+    },
+    {
+      "id": "time",
+      "titleTr": "Ne kadar süreceğini sormak",
+      "ask": "First time in London?",
+      "instruction": "The passenger answers and asks how long the ride takes.",
+      "hint": "Yes! How long does it take?",
+      "hintTr": "Evet! Ne kadar sürer?",
+      "keywords": ["how long", "long", "time", "minutes", "far"],
+      "successReply": "About {minutes}.",
+      "retryReply": "You'll love it. Want to know how long the drive is?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemek ve fiş istemek",
+      "ask": "Here we are — the Grand Hotel. That's {fare}, please.",
+      "instruction": "The passenger pays (by card or cash), and may ask for a receipt.",
+      "hint": "Can I pay by card? And a receipt, please.",
+      "hintTr": "Kartla ödeyebilir miyim? Bir de fiş lütfen.",
+      "keywords": ["card", "cash", "pay", "receipt", "contactless", "here"],
+      "successReply": "Of course. Here's your receipt.",
+      "retryReply": "How would you like to pay — card or cash?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "traffic",
+      "titleTr": "Yoğun trafik",
+      "intro": "Oh dear — look at this traffic. It's going to take longer.",
+      "instruction": "There is heavy traffic. The passenger says it's okay, asks how long now, or asks about another way.",
+      "retryReply": "Sorry about this. Are you in a hurry?",
+      "options": [
+        { "text": "That's okay, no problem.", "keywords": ["okay", "ok", "no problem", "fine"], "reply": "Good. Sit back and enjoy the view of London." },
+        { "text": "How long will it take now?", "keywords": ["how long", "now", "minutes"], "reply": "Maybe fifteen minutes more. Not too bad." },
+        { "text": "Is there another way?", "keywords": ["another", "other", "way", "road", "faster"], "reply": "Good idea — I'll take the back roads. Much quicker." }
+      ]
+    },
+    {
+      "id": "card-machine",
+      "titleTr": "Kart makinesi bozuk",
+      "intro": "Just so you know — my card machine isn't working today.",
+      "instruction": "The driver's card machine is broken. The passenger offers cash, asks for a cash machine, or asks to pay by phone.",
+      "retryReply": "Sorry about that. Can you pay another way?",
+      "options": [
+        { "text": "No problem, I can pay in cash.", "keywords": ["cash", "money"], "reply": "Brilliant, thank you." },
+        { "text": "Can we stop at a cash machine?", "keywords": ["cash machine", "atm", "stop", "bank"], "reply": "Sure, there's one on the way. I'll stop there." },
+        { "text": "Can I pay with my phone?", "keywords": ["phone", "apple pay", "google pay", "transfer", "app"], "reply": "Oh, the phone one works! Perfect." }
+      ]
+    },
+    {
+      "id": "two-hotels",
+      "titleTr": "İki tane Grand Hotel var",
+      "intro": "Hang on — there are two Grand Hotels. The one in Soho or the one near the river?",
+      "instruction": "There are two hotels with the same name. The passenger gives the street, checks the booking, or shows the map.",
+      "retryReply": "Which one is it? Do you know the street?",
+      "options": [
+        { "text": "It's on King Street.", "keywords": ["king", "street"], "reply": "King Street — that's the Soho one. Great." },
+        { "text": "Let me check my booking.", "keywords": ["check", "booking", "look"], "reply": "Take your time… Ah, Soho. Lovely." },
+        { "text": "Here, it's on the map.", "keywords": ["map", "here", "show"], "reply": "Perfect, I see it. The Soho one." }
+      ]
+    }
+  ],
+  "twistSlots": [{ "after": "time", "pool": ["traffic", "card-machine", "two-hotels"] }],
+  "closing": "Have a brilliant stay in London. Cheers!"
+}

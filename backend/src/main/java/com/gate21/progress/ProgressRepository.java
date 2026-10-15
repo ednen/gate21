@@ -15,7 +15,7 @@ public class ProgressRepository {
 
     public record StatsRow(UUID userId, int xpTotal, int streakCurrent, int streakBest, LocalDate lastActiveDate,
                            int startDay, Integer placementScore, Integer finalScore, int speakingSum,
-                           int speakingCount) {
+                           int speakingCount, boolean starterRecommended, Instant graduatedAt) {
 
         public Integer speakingAverage() {
             return speakingCount == 0 ? null : Math.round((float) speakingSum / speakingCount);
@@ -79,14 +79,23 @@ public class ProgressRepository {
             .update();
     }
 
-    public void setPlacement(UUID userId, int score, Integer startDay) {
+    public void setPlacement(UUID userId, int score, Integer startDay, boolean starterRecommended) {
         jdbc.sql("""
                 UPDATE user_stats
-                SET placement_score = :score, start_day = COALESCE(:startDay, start_day)
+                SET placement_score = :score, start_day = COALESCE(:startDay, start_day),
+                    starter_recommended = :starter
                 WHERE user_id = :userId
                 """)
             .param("score", score)
             .param("startDay", startDay, Types.SMALLINT)
+            .param("starter", starterRecommended)
+            .param("userId", userId)
+            .update();
+    }
+
+    public void setGraduated(UUID userId, Instant now) {
+        jdbc.sql("UPDATE user_stats SET graduated_at = COALESCE(graduated_at, :now) WHERE user_id = :userId")
+            .param("now", Db.ts(now))
             .param("userId", userId)
             .update();
     }
@@ -147,6 +156,20 @@ public class ProgressRepository {
             .list();
     }
 
+    /** Days that met the daily goal after {@code after} (exclusive) and before {@code day}. */
+    public int activeDaysBetween(UUID userId, LocalDate after, LocalDate day) {
+        return jdbc.sql("""
+                SELECT count(*) FROM daily_activity
+                WHERE user_id = :userId AND local_date > :after AND local_date < :day AND xp >= :goal
+                """)
+            .param("userId", userId)
+            .param("after", after)
+            .param("day", day)
+            .param("goal", ProgressRules.DAILY_GOAL_XP)
+            .query(Integer.class)
+            .single();
+    }
+
     public int activeDaysBefore(UUID userId, LocalDate day) {
         return jdbc.sql("""
                 SELECT count(*) FROM daily_activity
@@ -166,6 +189,20 @@ public class ProgressRepository {
             .query(Integer.class)
             .optional()
             .orElse(0);
+    }
+
+    /** Local days between {@code from} and {@code to} (inclusive) with any practice at all. */
+    public List<LocalDate> practiceDays(UUID userId, LocalDate from, LocalDate to) {
+        return jdbc.sql("""
+                SELECT local_date FROM daily_activity
+                WHERE user_id = :userId AND local_date BETWEEN :from AND :to AND xp > 0
+                ORDER BY local_date
+                """)
+            .param("userId", userId)
+            .param("from", from)
+            .param("to", to)
+            .query((rs, n) -> rs.getObject("local_date", LocalDate.class))
+            .list();
     }
 
     public boolean hasAnyActivity(UUID userId) {
@@ -231,6 +268,8 @@ public class ProgressRepository {
             Db.nullableInt(rs, "placement_score"),
             Db.nullableInt(rs, "final_score"),
             rs.getInt("speaking_sum"),
-            rs.getInt("speaking_count"));
+            rs.getInt("speaking_count"),
+            rs.getBoolean("starter_recommended"),
+            Db.instant(rs, "graduated_at"));
     }
 }

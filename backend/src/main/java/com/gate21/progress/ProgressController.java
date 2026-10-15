@@ -2,6 +2,7 @@ package com.gate21.progress;
 
 import com.gate21.common.CurrentUser;
 import com.gate21.progress.ProgressService.AttemptInput;
+import com.gate21.progress.ProgressService.LevelBadge;
 import com.gate21.progress.ProgressService.PassportChapter;
 import com.gate21.progress.ProgressService.SyncResult;
 import com.gate21.user.MeService;
@@ -38,7 +39,7 @@ public class ProgressController {
     }
 
     public record PassportResponse(String holder, Instant issuedAt, int journeyDay, String level, int stamps,
-                                   List<PassportChapter> chapters) {
+                                   List<LevelBadge> levels, List<PassportChapter> chapters) {
     }
 
     private final ProgressService progress;
@@ -62,8 +63,9 @@ public class ProgressController {
         UUID userId = CurrentUser.id(jwt);
         var summary = me.summary(userId);
         List<PassportChapter> chapters = progress.passport(userId, summary.journeyDay());
-        int stamps = (int) chapters.stream().filter(c -> c.stampedAt() != null).count();
+        // Starter lessons are practice, not places: they get no passport stamp.
+        int stamps = (int) chapters.stream().filter(c -> c.stampedAt() != null && !"starter".equals(c.kind())).count();
         return new PassportResponse(summary.displayName(), summary.memberSince(), summary.journeyDay(),
-            summary.level(), stamps, chapters);
+            summary.level(), stamps, progress.levels(userId), chapters);
     }
 }

@@ -1,0 +1,72 @@
+{
+  "slug": "cafe-silver",
+  "draft": true,
+  "mission": "Get your coffee exactly how you like it",
+  "missionTr": "Kahveni tam istediğin gibi sipariş et: süt tipi, şeker, sıcaklık; Wi-Fi ve priz sor",
+  "stamp": "JUST RIGHT",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "oat milk",
+      "tr": "yulaf sütü"
+    },
+    {
+      "en": "decaf",
+      "tr": "kafeinsiz"
+    },
+    {
+      "en": "extra shot",
+      "tr": "ekstra shot (sert)"
+    },
+    {
+      "en": "iced",
+      "tr": "buzlu"
+    },
+    {
+      "en": "refill",
+      "tr": "tekrar doldurma"
+    },
+    {
+      "en": "to go",
+      "tr": "götürmek için (ABD)"
+    },
+    {
+      "en": "bagel",
+      "tr": "simit benzeri ekmek"
+    },
+    {
+      "en": "outlet",
+      "tr": "priz (ABD)"
+    },
+    {
+      "en": "restroom",
+      "tr": "tuvalet (ABD)"
+    }
+  ],
+  "scene": {
+    "role": "Barista",
+    "setting": "Brew Brothers, SoHo · Counter",
+    "goalsTr": [
+      "İçeceğini ayrıntılı sipariş et (süt tipi, boy)",
+      "Şeker ya da şurup isteyip istemediğini söyle",
+      "Götürmek için olduğunu söyle (to go)",
+      "Yanına bir bagel iste ve ısıtılmasını rica et",
+      "Tuvaletin nerede olduğunu sor",
+      "Wi-Fi şifresini ve priz sor"
+    ],
+    "twistsTr": [
+      "Yulaf sütü bitmiş",
+      "Tuvalet sadece müşteriler için, kodu fişte",
+      "Adını bardağa yanlış yazıyorlar"
+    ]
+  },
+  "notesTr": ""
+}

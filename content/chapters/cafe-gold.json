@@ -1,0 +1,68 @@
+{
+  "slug": "cafe-gold",
+  "draft": true,
+  "mission": "Handle mix-ups and make small talk",
+  "missionTr": "Kafede sipariş karışıklığını çöz, masa paylaşırken yanındakiyle sohbet et",
+  "stamp": "NEW FRIEND",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "flat white",
+      "tr": "flat white (Avustralya kahvesi)"
+    },
+    {
+      "en": "mix-up",
+      "tr": "karışıklık"
+    },
+    {
+      "en": "Is this seat taken?",
+      "tr": "Bu yer dolu mu?"
+    },
+    {
+      "en": "Where are you from?",
+      "tr": "Nerelisin?"
+    },
+    {
+      "en": "How long are you here for?",
+      "tr": "Ne kadar kalacaksın?"
+    },
+    {
+      "en": "recommend",
+      "tr": "önermek"
+    },
+    {
+      "en": "must-see",
+      "tr": "mutlaka görülmesi gereken"
+    },
+    {
+      "en": "Have a good one!",
+      "tr": "İyi günler!"
+    }
+  ],
+  "scene": {
+    "role": "Local at the next table",
+    "setting": "Surry Hills café · Shared table",
+    "goalsTr": [
+      "Siparişinin karıştığını barista'ya söyle",
+      "Doğru içeceği iste",
+      "Kalabalık kafede birine yer dolu mu diye sor",
+      "Nereli olduğunu ve ne kadar kalacağını anlat",
+      "Şehirde görülecek yer önerisi iste",
+      "Sohbeti kibarca bitir"
+    ],
+    "twistsTr": [
+      "Başkasının siparişini almışsın",
+      "Yanındaki kişi çok hızlı ve argo konuşuyor (\"arvo\", \"heaps\")",
+      "Seni bir etkinliğe davet ediyor, kibarca reddetmen gerekiyor"
+    ]
+  },
+  "notesTr": "Avustralya argosu: arvo (afternoon), heaps (çok), no worries."
+}

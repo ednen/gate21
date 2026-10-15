@@ -1,0 +1,123 @@
+{
+  "slug": "cafe-bronze",
+  "chapter": "cafe-bronze",
+  "title": "Your coffee",
+  "titleTr": "Kahve siparişi",
+  "role": "Barista",
+  "setting": "Bean & Leaf Café · Counter",
+  "voice": "en-GB",
+  "persona": "You are a quick, friendly barista at a busy London café called Bean & Leaf. You speak in short, casual sentences.",
+  "briefTr": "Sabah kahveni almak için kafeye girdin. Orta boy bir latte istiyorsun.",
+  "opening": "Hi! What can I get you?",
+  "facts": [
+    { "id": "price", "values": ["£4.20", "£3.80", "£5.10"], "question": "How much was your order?", "questionTr": "Siparişin ne kadar tuttu?" },
+    { "id": "wait", "values": ["two minutes", "five minutes", "three minutes"], "question": "How long did you wait for your coffee?", "questionTr": "Kahven için ne kadar bekledin?" }
+  ],
+  "goals": [
+    {
+      "id": "order",
+      "titleTr": "İçeceğini söylemek",
+      "instruction": "The customer orders a drink: a coffee, tea, latte, cappuccino and so on.",
+      "hint": "A latte, please.",
+      "hintTr": "Bir latte, lütfen.",
+      "keywords": ["latte", "coffee", "tea", "cappuccino", "americano", "espresso", "flat white", "hot chocolate", "mocha", "please"],
+      "successReply": "Sure.",
+      "retryReply": "Sorry, what would you like to drink?"
+    },
+    {
+      "id": "size",
+      "titleTr": "Boyunu söylemek",
+      "ask": "What size would you like?",
+      "instruction": "The customer says the size: small, medium, large or regular.",
+      "hint": "Medium, please.",
+      "hintTr": "Orta boy, lütfen.",
+      "keywords": ["small", "medium", "large", "regular", "big"],
+      "successReply": "Medium, okay.",
+      "retryReply": "We have small, medium or large. Which one?"
+    },
+    {
+      "id": "place",
+      "titleTr": "Burada mı götürmek mi",
+      "ask": "Is that for here or to take away?",
+      "instruction": "The customer says if they will drink it in the café or take it away.",
+      "hint": "For here, please.",
+      "hintTr": "Burada, lütfen.",
+      "keywords": ["here", "take away", "takeaway", "to go", "away", "sit"],
+      "successReply": "Lovely.",
+      "retryReply": "Will you drink it here, or take it with you?"
+    },
+    {
+      "id": "extra",
+      "titleTr": "Yanına bir şey almak",
+      "ask": "Anything else? A croissant, maybe?",
+      "instruction": "The customer orders something to eat, or says no thank you.",
+      "hint": "Yes, a croissant, please.",
+      "hintTr": "Evet, bir kruvasan lütfen.",
+      "keywords": ["yes", "no", "croissant", "cake", "muffin", "cookie", "please", "thanks", "nothing"],
+      "successReply": "No problem.",
+      "retryReply": "Something to eat with that? Or just the drink?"
+    },
+    {
+      "id": "name",
+      "titleTr": "Adını söylemek",
+      "ask": "Can I get a name for the cup?",
+      "instruction": "The customer says their name.",
+      "hint": "It's {name}.",
+      "hintTr": "{name}.",
+      "keywords": ["it's", "i'm", "name", "my", "is", "call"],
+      "successReply": "Got it, {name}.",
+      "retryReply": "Sorry — what's your name, for the cup?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemek",
+      "ask": "That's {price}. Card or cash?",
+      "instruction": "The customer says how they will pay.",
+      "hint": "Card, please.",
+      "hintTr": "Kartla, lütfen.",
+      "keywords": ["card", "cash", "phone", "contactless"],
+      "successReply": "Thanks! It'll be about {wait}.",
+      "retryReply": "Would you like to pay by card or cash?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "card-only",
+      "titleTr": "Sadece kart geçiyor",
+      "intro": "Oh, sorry — we don't take cash today. Card only.",
+      "instruction": "The café only takes cards. The customer says they will pay by card, asks for a cash machine, or asks to pay by phone.",
+      "retryReply": "Sorry about that. Do you have a card?",
+      "options": [
+        { "text": "No problem, I have a card.", "keywords": ["card", "no problem"], "reply": "Perfect, thanks." },
+        { "text": "Is there a cash machine near here?", "keywords": ["cash machine", "atm", "near", "bank"], "reply": "There's one next door. But you can pay by phone too!" },
+        { "text": "Can I pay with my phone?", "keywords": ["phone", "apple pay", "google pay"], "reply": "Yes, phone is fine." }
+      ]
+    },
+    {
+      "id": "slow-machine",
+      "titleTr": "Kahve makinesi yavaş",
+      "intro": "Just so you know, our coffee machine is very slow today. It'll be ten minutes.",
+      "instruction": "The coffee will be slow. The customer says they can wait, changes to something faster, or asks how long.",
+      "retryReply": "Sorry! Is that okay for you?",
+      "options": [
+        { "text": "That's fine, I can wait.", "keywords": ["wait", "fine", "okay", "ok"], "reply": "Thank you! I'll bring it to you." },
+        { "text": "Then I'll have a tea instead.", "keywords": ["tea", "instead", "then"], "reply": "Good idea, tea is quick." },
+        { "text": "Is there anything faster?", "keywords": ["faster", "quick", "quicker"], "reply": "A tea or a cold drink — ready right now." }
+      ]
+    },
+    {
+      "id": "no-wifi",
+      "titleTr": "Wi-Fi çalışmıyor",
+      "intro": "Oh, and sorry — the Wi-Fi isn't working today.",
+      "instruction": "The Wi-Fi is down. The customer says it's okay, asks where else to find Wi-Fi, or asks for a socket to charge a phone.",
+      "retryReply": "Sorry about that. Is that a problem?",
+      "options": [
+        { "text": "That's okay, no problem.", "keywords": ["okay", "ok", "no problem", "fine"], "reply": "Great. Enjoy your coffee!" },
+        { "text": "Is there Wi-Fi somewhere near here?", "keywords": ["somewhere", "near", "where", "library"], "reply": "The library next door has free Wi-Fi." },
+        { "text": "Can I charge my phone here?", "keywords": ["charge", "socket", "plug", "battery"], "reply": "Sure, there's a socket by the window." }
+      ]
+    }
+  ],
+  "twistSlots": [{ "after": "extra", "pool": ["card-only", "slow-machine", "no-wifi"] }],
+  "closing": "Here you go, {name}! Enjoy."
+}

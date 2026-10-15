@@ -1,0 +1,185 @@
+{
+  "slug": "starter-people",
+  "mission": "Talk about yourself and others",
+  "missionTr": "Ben, sen, o, biz, onlar: kendini ve yanındakileri tanıt",
+  "stamp": "I YOU WE",
+  "steps": [
+    "DISCOVER",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG"
+  ],
+  "words": [
+    {
+      "en": "I",
+      "tr": "ben",
+      "picture": "me",
+      "example": "I am Ozan.",
+      "exampleTr": "Ben Ozan'ım."
+    },
+    {
+      "en": "you",
+      "tr": "sen / siz",
+      "picture": "you",
+      "example": "You are very kind.",
+      "exampleTr": "Çok naziksiniz."
+    },
+    {
+      "en": "he",
+      "tr": "o (erkek)",
+      "picture": "man",
+      "example": "He is my brother.",
+      "exampleTr": "O benim erkek kardeşim."
+    },
+    {
+      "en": "she",
+      "tr": "o (kadın)",
+      "picture": "woman",
+      "example": "She is my wife.",
+      "exampleTr": "O benim eşim."
+    },
+    {
+      "en": "it",
+      "tr": "o (eşya, hayvan)",
+      "picture": "suitcase",
+      "example": "It is my suitcase.",
+      "exampleTr": "O benim bavulum."
+    },
+    {
+      "en": "we",
+      "tr": "biz",
+      "picture": "we",
+      "example": "We are from Turkey.",
+      "exampleTr": "Biz Türkiye'denyiz."
+    },
+    {
+      "en": "they",
+      "tr": "onlar",
+      "picture": "they",
+      "example": "They are my children.",
+      "exampleTr": "Onlar benim çocuklarım."
+    },
+    {
+      "en": "my",
+      "tr": "benim",
+      "picture": "passport",
+      "example": "This is my passport.",
+      "exampleTr": "Bu benim pasaportum."
+    },
+    {
+      "en": "your",
+      "tr": "senin / sizin",
+      "picture": "key-card",
+      "example": "Here is your key.",
+      "exampleTr": "Anahtarınız burada."
+    },
+    {
+      "en": "our",
+      "tr": "bizim",
+      "picture": "bed",
+      "example": "Our room is 412.",
+      "exampleTr": "Odamız 412."
+    }
+  ],
+  "match": [
+    "I",
+    "you",
+    "he",
+    "she",
+    "we",
+    "they"
+  ],
+  "recognize": [
+    {
+      "prompt": "Your wife is next to you. You say: “___ is my wife.”",
+      "options": [
+        "He",
+        "She",
+        "It"
+      ],
+      "answer": 1,
+      "explainTr": "Kadınlar için she, erkekler için he."
+    },
+    {
+      "prompt": "“This is ___ passport.” (benim)",
+      "options": [
+        "I",
+        "me",
+        "my"
+      ],
+      "answer": 2,
+      "explainTr": "Benim = my. My passport = benim pasaportum."
+    },
+    {
+      "prompt": "You and your family: “___ are from Turkey.”",
+      "options": [
+        "We",
+        "They",
+        "You"
+      ],
+      "answer": 0,
+      "explainTr": "Biz = we."
+    },
+    {
+      "prompt": "“Where is ___ suitcase?” The officer asks about YOUR bag.",
+      "options": [
+        "my",
+        "your",
+        "our"
+      ],
+      "answer": 1,
+      "explainTr": "Memur sana soruyor: your suitcase = sizin bavulunuz."
+    }
+  ],
+  "dialog": {
+    "titleTr": "Kendini tanıtmak",
+    "lines": [
+      {
+        "who": "Guide",
+        "text": "Hello! What's your name?"
+      },
+      {
+        "who": "You",
+        "text": "Hi! ___ am Ozan.",
+        "gap": "I",
+        "options": [
+          "I",
+          "My",
+          "Me"
+        ]
+      },
+      {
+        "who": "Guide",
+        "text": "Nice to meet you. Who is this?"
+      },
+      {
+        "who": "You",
+        "text": "This is ___ wife, Ayşe.",
+        "gap": "my",
+        "options": [
+          "my",
+          "I",
+          "she"
+        ]
+      },
+      {
+        "who": "Guide",
+        "text": "Where are you from?"
+      },
+      {
+        "who": "You",
+        "text": "___ are from Turkey.",
+        "gap": "We",
+        "options": [
+          "We",
+          "They",
+          "Our"
+        ]
+      },
+      {
+        "who": "Guide",
+        "text": "Welcome to London!"
+      }
+    ]
+  }
+}

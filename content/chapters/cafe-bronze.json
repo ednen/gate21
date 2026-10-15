@@ -1,0 +1,47 @@
+{
+  "slug": "cafe-bronze",
+  "mission": "Order your coffee your way",
+  "missionTr": "Kafede kahveni sipariş et: boyunu, burada mı götürmek mi olduğunu söyle, adını ver",
+  "stamp": "COFFEE TIME",
+  "steps": ["DISCOVER", "PRONOUNCE", "MATCH", "DIALOG", "USE", "SURVIVE"],
+  "words": [
+    { "en": "coffee", "tr": "kahve", "picture": "coffee", "example": "A coffee, please.", "exampleTr": "Bir kahve, lütfen." },
+    { "en": "tea", "tr": "çay", "picture": "tea", "example": "Can I have a tea with milk?", "exampleTr": "Sütlü bir çay alabilir miyim?" },
+    { "en": "latte", "tr": "latte (sütlü kahve)", "picture": "latte", "example": "A medium latte, please.", "exampleTr": "Orta boy bir latte, lütfen." },
+    { "en": "small / medium / large", "tr": "küçük / orta / büyük", "picture": "sizes", "example": "What size? — Small, please.", "exampleTr": "Hangi boy? — Küçük, lütfen." },
+    { "en": "for here", "tr": "burada içeceğim", "picture": "table", "example": "For here, please.", "exampleTr": "Burada, lütfen." },
+    { "en": "to take away", "tr": "götürmek için", "picture": "takeaway", "example": "To take away, please.", "exampleTr": "Götürmek için, lütfen." },
+    { "en": "milk", "tr": "süt", "picture": "milk", "example": "With milk, please.", "exampleTr": "Sütlü olsun, lütfen." },
+    { "en": "sugar", "tr": "şeker", "picture": "sugar", "example": "No sugar, thanks.", "exampleTr": "Şekersiz, teşekkürler." },
+    { "en": "croissant", "tr": "kruvasan", "picture": "croissant", "example": "And a croissant, please.", "exampleTr": "Bir de kruvasan, lütfen." },
+    { "en": "cake", "tr": "kek / pasta", "picture": "cake", "example": "What cakes do you have?", "exampleTr": "Hangi kekleriniz var?" }
+  ],
+  "pronounce": [
+    { "word": "coffee", "ipa": "/ˈkɒf.i/", "stress": "KOF-ee", "tipTr": "\"Kofi\" gibi kısa ve net; sondaki e \"i\" okunur." },
+    { "word": "croissant", "ipa": "/ˈkwæs.ɒ̃/", "stress": "KWASS-on", "tipTr": "İngilizler Fransızca okur: KUAS-on. Sondaki t okunmaz." },
+    { "word": "medium", "ipa": "/ˈmiː.di.əm/", "stress": "MEE-dee-um", "tipTr": "\"Medyum\" değil: Mİİ-di-ım." }
+  ],
+  "match": ["coffee", "tea", "milk", "sugar", "croissant", "to take away"],
+  "dialog": {
+    "titleTr": "Kafede",
+    "lines": [
+      { "who": "Barista", "text": "Hi! What can I get you?" },
+      { "who": "You", "text": "A ___, please.", "gap": "latte", "options": ["latte", "later", "letter"] },
+      { "who": "Barista", "text": "Sure. What size?" },
+      { "who": "You", "text": "___, please.", "gap": "Medium", "options": ["Medium", "Middle", "Half"] },
+      { "who": "Barista", "text": "For here or to take away?" },
+      { "who": "You", "text": "For ___, please.", "gap": "here", "options": ["here", "hear", "there"] },
+      { "who": "Barista", "text": "Anything else?" },
+      { "who": "You", "text": "A croissant, please. No ___, thanks.", "gap": "sugar", "options": ["sugar", "shoes", "sizes"] }
+    ]
+  },
+  "use": {
+    "word": "to take away",
+    "phrase": "Can I have a small coffee to take away?",
+    "phraseTr": "Götürmek için küçük bir kahve alabilir miyim?",
+    "situation": "You're in a hurry. Order a small coffee to take with you.",
+    "situationTr": "Acelen var. Yanında götürmek için küçük bir kahve iste.",
+    "tiles": ["Can I have", "a small", "coffee", "to take away", "?"]
+  },
+  "survive": { "scenario": "cafe-bronze" }
+}

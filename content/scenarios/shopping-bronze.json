@@ -1,0 +1,233 @@
+{
+  "slug": "shopping-bronze",
+  "chapter": "shopping-bronze",
+  "title": "Clothing store",
+  "titleTr": "Giyim mağazası",
+  "role": "Shop assistant",
+  "setting": "Oxford Street · Clothes shop",
+  "voice": "en-GB",
+  "persona": "You are a helpful shop assistant in a clothes shop on Oxford Street, London. The customer is looking at a blue jacket.",
+  "briefTr": "Mavi bir ceket beğendin ama bedeni sana küçük görünüyor.",
+  "opening": "Hi there! Can I help you find anything?",
+  "facts": [
+    {
+      "id": "days",
+      "values": [
+        "14",
+        "30",
+        "7"
+      ],
+      "question": "How many days do you have to return it?",
+      "questionTr": "Kaç gün içinde iade edebilirsin?"
+    }
+  ],
+  "goals": [
+    {
+      "id": "try-on",
+      "titleTr": "Denemek istemek",
+      "instruction": "The customer asks to try something on, or asks where the fitting room is.",
+      "hint": "Yes, can I try this jacket on?",
+      "hintTr": "Evet, bu ceketi deneyebilir miyim?",
+      "keywords": [
+        "try",
+        "fitting",
+        "room",
+        "on"
+      ],
+      "successReply": "Of course. The fitting room is just over there.",
+      "retryReply": "Would you like to try something on?"
+    },
+    {
+      "id": "size",
+      "titleTr": "Başka beden istemek",
+      "ask": "How does it fit?",
+      "instruction": "The customer says the size is wrong and asks for another size.",
+      "hint": "It's too small. Do you have a bigger size?",
+      "hintTr": "Çok küçük. Daha büyük bedeni var mı?",
+      "keywords": [
+        "small",
+        "big",
+        "bigger",
+        "larger",
+        "size",
+        "medium",
+        "large",
+        "tight"
+      ],
+      "successReply": "Let me check.",
+      "retryReply": "Is it the right size for you?"
+    },
+    {
+      "id": "decide",
+      "titleTr": "Almaya karar vermek",
+      "ask": "So, will you take it?",
+      "instruction": "The customer says they will take it (or not).",
+      "hint": "Yes, I'll take it.",
+      "hintTr": "Evet, alıyorum.",
+      "keywords": [
+        "yes",
+        "take",
+        "buy",
+        "i'll",
+        "no"
+      ],
+      "successReply": "Great!",
+      "retryReply": "Would you like to buy it?"
+    },
+    {
+      "id": "bag",
+      "titleTr": "Poşet istememek",
+      "ask": "Would you like a bag?",
+      "instruction": "The customer says whether they want a bag.",
+      "hint": "No, thanks. I don't need a bag.",
+      "hintTr": "Hayır, teşekkürler. Poşete gerek yok.",
+      "keywords": [
+        "no",
+        "yes",
+        "bag",
+        "thanks",
+        "please"
+      ],
+      "successReply": "Okay.",
+      "retryReply": "Do you need a bag for it?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödeme şeklini söylemek",
+      "ask": "Cash or card?",
+      "instruction": "The customer says how they will pay.",
+      "hint": "Card, please.",
+      "hintTr": "Kartla, lütfen.",
+      "keywords": [
+        "card",
+        "cash"
+      ],
+      "successReply": "Thank you.",
+      "retryReply": "How would you like to pay — cash or card?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "no-size",
+      "titleTr": "Beden yok",
+      "intro": "I'm sorry, we don't have a bigger size in blue.",
+      "instruction": "The size is not available. The customer asks for another colour, asks the shop to order one, or asks for a similar item.",
+      "retryReply": "I'm sorry about that. Can I help you with anything else?",
+      "options": [
+        {
+          "text": "Do you have it in another colour?",
+          "keywords": [
+            "color",
+            "colour",
+            "black",
+            "another",
+            "different"
+          ],
+          "reply": "Yes! We have it in black in a large. Here you go."
+        },
+        {
+          "text": "Can you order one for me?",
+          "keywords": [
+            "order",
+            "online",
+            "arrive",
+            "deliver"
+          ],
+          "reply": "Sure — it'll arrive in three days. I just need your phone number."
+        },
+        {
+          "text": "Is there a similar jacket?",
+          "keywords": [
+            "similar",
+            "like this",
+            "other jacket",
+            "else"
+          ],
+          "reply": "This one is very similar, and it's 20% off today."
+        }
+      ]
+    },
+    {
+      "id": "price-mismatch",
+      "titleTr": "Fiyat farklı çıktı",
+      "intro": "Oh, wait — this jacket is actually £89, not £59.",
+      "instruction": "The price is higher than the tag. The customer points to the tag, asks for a discount, or says they will leave it.",
+      "retryReply": "Sorry for the confusion. What would you like to do?",
+      "options": [
+        {
+          "text": "But the tag says £59.",
+          "keywords": [
+            "tag",
+            "says",
+            "label"
+          ],
+          "reply": "You're right — we'll honour the price on the tag."
+        },
+        {
+          "text": "Is there a discount?",
+          "keywords": [
+            "discount",
+            "cheaper",
+            "sale"
+          ],
+          "reply": "I can give you 10% off for the trouble."
+        },
+        {
+          "text": "Then I'll leave it, thanks.",
+          "keywords": [
+            "leave",
+            "then",
+            "skip"
+          ],
+          "reply": "Wait — I can give you the tag price after all."
+        }
+      ]
+    },
+    {
+      "id": "last-one",
+      "titleTr": "Son ürün lekeli",
+      "intro": "This is the last one, and it has a small stain on the sleeve.",
+      "instruction": "The only item left is stained. The customer asks for a discount, asks the shop to order a new one, or asks if it can be cleaned.",
+      "retryReply": "It's a small stain. How would you like to handle it?",
+      "options": [
+        {
+          "text": "Can I get a discount for that?",
+          "keywords": [
+            "discount",
+            "cheaper",
+            "price"
+          ],
+          "reply": "Sure, 20% off."
+        },
+        {
+          "text": "Can you order a new one?",
+          "keywords": [
+            "order",
+            "new"
+          ],
+          "reply": "Yes, a new one will arrive in three days."
+        },
+        {
+          "text": "Can it be cleaned?",
+          "keywords": [
+            "clean",
+            "cleaned",
+            "wash"
+          ],
+          "reply": "Yes, our dry cleaner can fix it by tomorrow — free of charge."
+        }
+      ]
+    }
+  ],
+  "twistSlots": [
+    {
+      "after": "size",
+      "pool": [
+        "no-size",
+        "price-mismatch",
+        "last-one"
+      ]
+    }
+  ],
+  "closing": "Here's your receipt. You can return it within {days} days."
+}

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gate21.IntegrationTest;
 import com.gate21.common.CurrentUser;
+import com.gate21.content.ContentModels.ChapterInfo;
+import com.gate21.content.ContentService;
 import com.gate21.progress.ProgressService.AttemptInput;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -27,6 +29,21 @@ class ProgressIT extends IntegrationTest {
     @Autowired
     JwtDecoder jwtDecoder;
 
+    @Autowired
+    ContentService content;
+
+    /** One attempt for every step the chapter has, all scored 90. */
+    private List<Map<String, Object>> allSteps(String chapter, Instant at) {
+        int bits = content.chapterMeta(chapter).orElseThrow().requiredBits();
+        List<Map<String, Object>> attempts = new ArrayList<>();
+        for (Step step : Step.values()) {
+            if ((bits & step.bit()) != 0) {
+                attempts.add(attempt(UUID.randomUUID(), chapter, step.name(), 90, at));
+            }
+        }
+        return attempts;
+    }
+
     private static Map<String, Object> attempt(UUID clientId, String chapter, String step, Integer score, Instant at) {
         var m = new java.util.HashMap<String, Object>();
         m.put("clientId", clientId);
@@ -45,7 +62,7 @@ class ProgressIT extends IntegrationTest {
     void aRetriedSyncNeverAwardsXpTwice() throws Exception {
         String token = token("Ozan");
         UUID clientId = UUID.randomUUID();
-        var batch = List.of(attempt(clientId, "airport", "PRONOUNCE", 82, Instant.now()));
+        var batch = List.of(attempt(clientId, "arrival-bronze", "PRONOUNCE", 82, Instant.now()));
 
         Response first = sync(token, batch);
         Response retry = sync(token, batch);
@@ -58,28 +75,45 @@ class ProgressIT extends IntegrationTest {
     }
 
     @Test
-    void finishingAllSixStepsStampsThePassport() throws Exception {
+    void finishingEveryStepOfAChapterStampsThePassport() throws Exception {
         String token = token("Ozan");
-        Instant now = Instant.now();
-        List<Map<String, Object>> steps = new ArrayList<>();
-        for (Step step : Step.values()) {
-            Integer score = step == Step.DISCOVER || step == Step.RECOGNIZE ? null : 90;
-            steps.add(attempt(UUID.randomUUID(), "hotel", step.name(), score, now));
-        }
-
-        Response r = sync(token, steps);
-        assertThat(r.body().path("stampedChapters").get(0).asText()).isEqualTo("hotel");
+        Response r = sync(token, allSteps("hotel-bronze", Instant.now()));
+        assertThat(r.body().path("stampedChapters").get(0).asText()).isEqualTo("hotel-bronze");
+        assertThat(r.body().path("levelsEarned")).isEmpty();
 
         Response passport = getJson("/api/v1/progress/passport", token);
-        var hotel = findChapter(passport, "hotel");
+        var hotel = findChapter(passport, "hotel-bronze");
         assertThat(hotel.path("complete").asBoolean()).isTrue();
+        assertThat(hotel.path("totalSteps").asInt()).isEqualTo(6);
         assertThat(hotel.path("stars").asInt()).isEqualTo(3);
-        assertThat(hotel.path("stamp").asText()).isEqualTo("HOTEL READY");
+        assertThat(hotel.path("stamp").asText()).isEqualTo("CHECKED IN");
+        assertThat(hotel.path("stop").asText()).isEqualTo("hotel");
         assertThat(passport.body().path("stamps").asInt()).isEqualTo(1);
-        assertThat(findChapter(passport, "transportation").path("unlocked").asBoolean()).isFalse();
+        assertThat(findChapter(passport, "hotel-silver").path("unlocked").asBoolean()).isFalse();
 
         // Hotel is done, so today's mission moves on to the first unfinished chapter.
-        assertThat(getJson("/api/v1/me", token).body().path("nextChapter").path("slug").asText()).isEqualTo("airport");
+        assertThat(getJson("/api/v1/me", token).body().path("nextChapter").path("slug").asText()).isEqualTo("arrival-bronze");
+    }
+
+    @Test
+    void finishingAllSevenStopsEarnsTheBronzeBadge() throws Exception {
+        String token = token("Ozan");
+        List<Map<String, Object>> attempts = new ArrayList<>();
+        for (ChapterInfo lesson : content.lessonsOfWeek(1)) {
+            attempts.addAll(allSteps(lesson.slug(), Instant.now()));
+        }
+        Response r = sync(token, attempts);
+        assertThat(r.body().path("levelsEarned").get(0).asText()).isEqualTo("BRONZE");
+        assertThat(r.body().path("graduated").asBoolean()).isFalse();
+
+        var levels = getJson("/api/v1/progress/passport", token).body().path("levels");
+        assertThat(levels.get(0).path("earned").asBoolean()).isTrue();
+        assertThat(levels.get(0).path("tagline").asText()).isEqualTo("Your journey has begun!");
+        assertThat(levels.get(0).path("lessonsDone").asInt()).isEqualTo(7);
+        assertThat(levels.get(1).path("earned").asBoolean()).isFalse();
+
+        // Earned once: replaying a lesson does not award the badge again.
+        assertThat(sync(token, allSteps("cafe-bronze", Instant.now())).body().path("levelsEarned")).isEmpty();
     }
 
     @Test
@@ -89,11 +123,11 @@ class ProgressIT extends IntegrationTest {
         var trip = findChapter(passport, "full-trip");
         assertThat(trip.path("totalSteps").asInt()).isEqualTo(1);
         assertThat(trip.path("unlocked").asBoolean()).isFalse();
-        assertThat(findChapter(passport, "hotel").path("totalSteps").asInt()).isEqualTo(6);
+        assertThat(findChapter(passport, "arrival-bronze").path("totalSteps").asInt()).isEqualTo(6);
 
         Response r = sync(token, List.of(attempt(UUID.randomUUID(), "full-trip", "SURVIVE", 90, Instant.now())));
         assertThat(r.body().path("stampedChapters").get(0).asText()).isEqualTo("full-trip");
-        assertThat(getJson("/api/v1/me", token).body().path("nextChapter").path("slug").asText()).isEqualTo("airport");
+        assertThat(getJson("/api/v1/me", token).body().path("nextChapter").path("slug").asText()).isEqualTo("arrival-bronze");
     }
 
     @Test
@@ -104,9 +138,9 @@ class ProgressIT extends IntegrationTest {
         Instant twoDaysAgo = now.minus(2, ChronoUnit.DAYS);
 
         sync(token, List.of(
-            attempt(UUID.randomUUID(), "airport", "SURVIVE", 70, twoDaysAgo),
-            attempt(UUID.randomUUID(), "airport", "SURVIVE", 70, yesterday),
-            attempt(UUID.randomUUID(), "airport", "SURVIVE", 70, now)));
+            attempt(UUID.randomUUID(), "arrival-bronze", "SURVIVE", 70, twoDaysAgo),
+            attempt(UUID.randomUUID(), "arrival-bronze", "SURVIVE", 70, yesterday),
+            attempt(UUID.randomUUID(), "arrival-bronze", "SURVIVE", 70, now)));
 
         var me = getJson("/api/v1/me", token).body();
         assertThat(me.path("streak").asInt()).isEqualTo(3);
@@ -119,7 +153,7 @@ class ProgressIT extends IntegrationTest {
     @Test
     void aDayBelowTheDailyGoalDoesNotCount() throws Exception {
         String token = token("Ozan");
-        sync(token, List.of(attempt(UUID.randomUUID(), "airport", "DISCOVER", null, Instant.now())));
+        sync(token, List.of(attempt(UUID.randomUUID(), "arrival-bronze", "DISCOVER", null, Instant.now())));
 
         var me = getJson("/api/v1/me", token).body();
         assertThat(me.path("todayXp").asInt()).isEqualTo(10);
@@ -148,7 +182,7 @@ class ProgressIT extends IntegrationTest {
                 jobs.add(() -> {
                     List<AttemptInput> batch = new ArrayList<>();
                     for (int i = 0; i < perDevice; i++) {
-                        batch.add(new AttemptInput(UUID.randomUUID(), "restaurant", Step.DISCOVER, null, Instant.now()));
+                        batch.add(new AttemptInput(UUID.randomUUID(), "restaurant-bronze", Step.DISCOVER, null, Instant.now()));
                     }
                     return progress.sync(userId, batch);
                 });
@@ -163,6 +197,18 @@ class ProgressIT extends IntegrationTest {
         var me = getJson("/api/v1/me", token).body();
         assertThat(me.path("xp").asInt()).isEqualTo(devices * perDevice * 10);
         assertThat(me.path("todayXp").asInt()).isEqualTo(devices * perDevice * 10);
+    }
+
+    @Test
+    void practiceDaysCountTowardsTheWeeklyGoal() throws Exception {
+        String token = token("Ozan");
+        assertThat(postJson("/api/v1/practice/done", token, Map.of()).code()).isEqualTo("MEMBERSHIP_REQUIRED");
+
+        withJourney(token);
+        Response done = postJson("/api/v1/practice/done", token, Map.of());
+        assertThat(done.status()).isEqualTo(200);
+        assertThat(done.body().path("thisWeek").asInt()).isEqualTo(1);
+        assertThat(getJson("/api/v1/me", token).body().path("practice").path("thisWeek").asInt()).isEqualTo(1);
     }
 
     private static com.fasterxml.jackson.databind.JsonNode findChapter(Response passport, String slug) {

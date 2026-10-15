@@ -88,6 +88,20 @@ public class RoleplayRepository {
     }
 
     /** Stores the report once; a second, concurrent generation keeps the first. */
+    /** The newest saved scene reports of a user, as stored JSON. */
+    public List<String> recentReports(UUID userId, int limit) {
+        return jdbc.sql("""
+                SELECT report FROM roleplay_sessions
+                WHERE user_id = :userId AND report IS NOT NULL
+                ORDER BY updated_at DESC
+                LIMIT :limit
+                """)
+            .param("userId", userId)
+            .param("limit", limit)
+            .query(String.class)
+            .list();
+    }
+
     public void saveReport(UUID id, String reportJson) {
         jdbc.sql("UPDATE roleplay_sessions SET report = :report WHERE id = :id AND report IS NULL")
             .param("report", reportJson)

@@ -4,7 +4,8 @@ import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("gate21")
-public record AppProperties(JwtProps jwt, QuotaProps quota, SpeechProps speech, RoleplayProps roleplay) {
+public record AppProperties(JwtProps jwt, QuotaProps quota, SpeechProps speech, RoleplayProps roleplay,
+                            MembershipProps membership) {
 
     public record JwtProps(String secret, String issuer, Duration accessTokenTtl, Duration refreshTokenTtl) {
     }
@@ -19,6 +20,10 @@ public record AppProperties(JwtProps jwt, QuotaProps quota, SpeechProps speech, 
     }
 
     public record RoleplayProps(String provider, GeminiProps gemini) {
+    }
+
+    /** Prices are display labels until store products exist; sandbox grants purchases without payment. */
+    public record MembershipProps(boolean sandboxPurchases, String journeyPrice, String keepReadyPrice) {
     }
 
     public record GeminiProps(String apiKey, String model, String baseUrl, Duration timeout, int maxOutputTokens) {

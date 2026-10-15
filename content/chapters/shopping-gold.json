@@ -1,0 +1,72 @@
+{
+  "slug": "shopping-gold",
+  "draft": true,
+  "mission": "Return, exchange and bargain",
+  "missionTr": "Ürün iade et, değiştir; pazarda pazarlık yap",
+  "stamp": "GOOD DEAL",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "refund",
+      "tr": "para iadesi"
+    },
+    {
+      "en": "exchange",
+      "tr": "değişim"
+    },
+    {
+      "en": "faulty",
+      "tr": "kusurlu"
+    },
+    {
+      "en": "store credit",
+      "tr": "mağaza kredisi"
+    },
+    {
+      "en": "receipt",
+      "tr": "fiş"
+    },
+    {
+      "en": "Can you do a better price?",
+      "tr": "Daha iyi bir fiyat yapabilir misiniz?"
+    },
+    {
+      "en": "bargain",
+      "tr": "pazarlık / kelepir"
+    },
+    {
+      "en": "final offer",
+      "tr": "son teklif"
+    },
+    {
+      "en": "market stall",
+      "tr": "pazar tezgâhı"
+    }
+  ],
+  "scene": {
+    "role": "Shop assistant / market seller",
+    "setting": "Paddy's Markets, Sydney",
+    "goalsTr": [
+      "Kusurlu ürünü iade etmek istediğini söyle",
+      "Fişini göster",
+      "Para iadesi mi değişim mi istediğini söyle",
+      "Pazarda bir ürünün fiyatını sor",
+      "Pazarlık yap ve karşı teklif ver",
+      "Anlaşmayı kabul et ya da kibarca vazgeç"
+    ],
+    "twistsTr": [
+      "Fişin yok",
+      "Mağaza para iadesi yerine sadece mağaza kredisi veriyor",
+      "Satıcı ilk teklifini düşürmüyor"
+    ]
+  },
+  "notesTr": "Notlardaki \"different countries and different concepts\": pazarlık bazı ülkelerde normal, bazılarında değil — kültür notu eklenecek."
+}

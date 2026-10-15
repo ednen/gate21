@@ -36,7 +36,8 @@ import org.testcontainers.utility.DockerImageName;
     "gate21.quota.speech-per-day=3",
     "gate21.quota.roleplay-sessions-per-day=5",
     "gate21.speech.provider=fake",
-    "gate21.roleplay.provider=fake"
+    "gate21.roleplay.provider=fake",
+    "gate21.membership.sandbox-purchases=true"
 })
 @AutoConfigureMockMvc
 @Import(IntegrationTest.Containers.class)
@@ -111,6 +112,15 @@ public abstract class IntegrationTest {
         Response r = patchJson("/api/v1/me", token, Map.of("voiceConsent", true));
         if (r.status() != 200) {
             throw new IllegalStateException("consent failed: " + r.body());
+        }
+        return token;
+    }
+
+    /** Buys the full journey in sandbox mode, so every chapter can be played. */
+    protected String withJourney(String token) throws Exception {
+        Response r = postJson("/api/v1/membership/purchase", token, Map.of("plan", "JOURNEY"));
+        if (r.status() != 200) {
+            throw new IllegalStateException("purchase failed: " + r.body());
         }
         return token;
     }

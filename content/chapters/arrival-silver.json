@@ -1,0 +1,72 @@
+{
+  "slug": "arrival-silver",
+  "draft": true,
+  "mission": "Chat with the officer at JFK",
+  "missionTr": "JFK'de pasaport memuruyla kısa sohbet et, parmak izi taramasını geç",
+  "stamp": "WELCOME TO NYC",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "fingerprints",
+      "tr": "parmak izi"
+    },
+    {
+      "en": "scanner",
+      "tr": "tarayıcı"
+    },
+    {
+      "en": "Put your finger on…",
+      "tr": "Parmağını …üzerine koy"
+    },
+    {
+      "en": "look at the camera",
+      "tr": "kameraya bak"
+    },
+    {
+      "en": "nervous",
+      "tr": "gergin"
+    },
+    {
+      "en": "first time",
+      "tr": "ilk kez"
+    },
+    {
+      "en": "sightseeing",
+      "tr": "gezip görmek"
+    },
+    {
+      "en": "customs",
+      "tr": "gümrük"
+    },
+    {
+      "en": "Anything to declare?",
+      "tr": "Beyan edeceğiniz bir şey var mı?"
+    }
+  ],
+  "scene": {
+    "role": "CBP officer",
+    "setting": "JFK Airport · Immigration",
+    "goalsTr": [
+      "Pasaportu ve gümrük formunu ver",
+      "Ziyaret amacını ayrıntılı anlat (ne göreceksin?)",
+      "İlk ziyaretin mi, sohbete cevap ver",
+      "Parmak izi talimatlarını uygula (\"Right hand, four fingers\")",
+      "Gümrükte beyan edecek bir şeyin olmadığını söyle",
+      "Nerede kalacağını ve dönüş tarihini söyle"
+    ],
+    "twistsTr": [
+      "Elin terli, parmak izi okunmuyor: \"Sorry, my hands are sweaty. Can I try again?\"",
+      "Memur şakalaşıyor, ne dediğini anlamadın",
+      "Yanında yiyecek var mı diye soruyor"
+    ]
+  },
+  "notesTr": "Notlardaki \"small talk with the officer; finger check; sweaty palms\" bu derste. Amerikan aksanı (en-US)."
+}

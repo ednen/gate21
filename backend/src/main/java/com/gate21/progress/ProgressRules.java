@@ -9,6 +9,8 @@ public final class ProgressRules {
     /** XP a learner needs in one local day for the day to count towards the streak and journey. */
     public static final int DAILY_GOAL_XP = 50;
     public static final int JOURNEY_DAYS = 21;
+    /** After the journey: "practise at least twice a week" to stay travel ready. */
+    public static final int PRACTICE_DAYS_PER_WEEK = 2;
 
     private ProgressRules() {
     }

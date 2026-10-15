@@ -1,0 +1,273 @@
+{
+  "slug": "starter-alphabet",
+  "mission": "Say the English alphabet",
+  "missionTr": "İngiliz alfabesini öğren; özellikle Türkçeden farklı okunan harflere dikkat et",
+  "stamp": "ABC",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE"
+  ],
+  "words": [
+    {
+      "en": "A",
+      "tr": "ey",
+      "example": "A — apple",
+      "exampleTr": "“A” harfi “apple” kelimesinde"
+    },
+    {
+      "en": "B",
+      "tr": "bi",
+      "example": "B — bag",
+      "exampleTr": "“B” harfi “bag” kelimesinde"
+    },
+    {
+      "en": "C",
+      "tr": "si",
+      "example": "C — card",
+      "exampleTr": "“C” harfi “card” kelimesinde"
+    },
+    {
+      "en": "D",
+      "tr": "di",
+      "example": "D — door",
+      "exampleTr": "“D” harfi “door” kelimesinde"
+    },
+    {
+      "en": "E",
+      "tr": "ii",
+      "example": "E — exit",
+      "exampleTr": "“E” harfi “exit” kelimesinde"
+    },
+    {
+      "en": "F",
+      "tr": "ef",
+      "example": "F — flight",
+      "exampleTr": "“F” harfi “flight” kelimesinde"
+    },
+    {
+      "en": "G",
+      "tr": "ci",
+      "example": "G — gate",
+      "exampleTr": "“G” harfi “gate” kelimesinde"
+    },
+    {
+      "en": "H",
+      "tr": "eyç",
+      "example": "H — hotel",
+      "exampleTr": "“H” harfi “hotel” kelimesinde"
+    },
+    {
+      "en": "I",
+      "tr": "ay",
+      "example": "I — information",
+      "exampleTr": "“I” harfi “information” kelimesinde"
+    },
+    {
+      "en": "J",
+      "tr": "cey",
+      "example": "J — jacket",
+      "exampleTr": "“J” harfi “jacket” kelimesinde"
+    },
+    {
+      "en": "K",
+      "tr": "key",
+      "example": "K — key",
+      "exampleTr": "“K” harfi “key” kelimesinde"
+    },
+    {
+      "en": "L",
+      "tr": "el",
+      "example": "L — lift",
+      "exampleTr": "“L” harfi “lift” kelimesinde"
+    },
+    {
+      "en": "M",
+      "tr": "em",
+      "example": "M — menu",
+      "exampleTr": "“M” harfi “menu” kelimesinde"
+    },
+    {
+      "en": "N",
+      "tr": "en",
+      "example": "N — name",
+      "exampleTr": "“N” harfi “name” kelimesinde"
+    },
+    {
+      "en": "O",
+      "tr": "ou",
+      "example": "O — open",
+      "exampleTr": "“O” harfi “open” kelimesinde"
+    },
+    {
+      "en": "P",
+      "tr": "pi",
+      "example": "P — passport",
+      "exampleTr": "“P” harfi “passport” kelimesinde"
+    },
+    {
+      "en": "Q",
+      "tr": "kyu",
+      "example": "Q — queue",
+      "exampleTr": "“Q” harfi “queue” kelimesinde"
+    },
+    {
+      "en": "R",
+      "tr": "ar",
+      "example": "R — room",
+      "exampleTr": "“R” harfi “room” kelimesinde"
+    },
+    {
+      "en": "S",
+      "tr": "es",
+      "example": "S — size",
+      "exampleTr": "“S” harfi “size” kelimesinde"
+    },
+    {
+      "en": "T",
+      "tr": "ti",
+      "example": "T — taxi",
+      "exampleTr": "“T” harfi “taxi” kelimesinde"
+    },
+    {
+      "en": "U",
+      "tr": "yu",
+      "example": "U — Underground",
+      "exampleTr": "“U” harfi “Underground” kelimesinde"
+    },
+    {
+      "en": "V",
+      "tr": "vi",
+      "example": "V — visa",
+      "exampleTr": "“V” harfi “visa” kelimesinde"
+    },
+    {
+      "en": "W",
+      "tr": "dabıl-yu",
+      "example": "W — water",
+      "exampleTr": "“W” harfi “water” kelimesinde"
+    },
+    {
+      "en": "X",
+      "tr": "eks",
+      "example": "X — exit",
+      "exampleTr": "“X” harfi “exit” kelimesinde"
+    },
+    {
+      "en": "Y",
+      "tr": "uay",
+      "example": "Y — yes",
+      "exampleTr": "“Y” harfi “yes” kelimesinde"
+    },
+    {
+      "en": "Z",
+      "tr": "zed",
+      "example": "Z — zero",
+      "exampleTr": "“Z” harfi “zero” kelimesinde"
+    }
+  ],
+  "pronounce": [
+    {
+      "word": "E",
+      "ipa": "/iː/",
+      "stress": "EE",
+      "tipTr": "E harfi \"i\" diye okunur: İİ. Türkçedeki \"e\" ile karıştırma."
+    },
+    {
+      "word": "I",
+      "ipa": "/aɪ/",
+      "stress": "EYE",
+      "tipTr": "I harfi \"ay\" diye okunur."
+    },
+    {
+      "word": "G",
+      "ipa": "/dʒiː/",
+      "stress": "JEE",
+      "tipTr": "G harfi \"ci\" diye okunur."
+    },
+    {
+      "word": "J",
+      "ipa": "/dʒeɪ/",
+      "stress": "JAY",
+      "tipTr": "J harfi \"cey\" diye okunur. G ile en çok karışan harf."
+    },
+    {
+      "word": "R",
+      "ipa": "/ɑː/",
+      "stress": "AR",
+      "tipTr": "R harfi \"ar\" diye okunur; İngilizcede r sesi yuvarlanmaz."
+    },
+    {
+      "word": "W",
+      "ipa": "/ˈdʌb.əl.juː/",
+      "stress": "DUB-ul-yoo",
+      "tipTr": "W \"çift u\" demektir: dabıl-yu."
+    }
+  ],
+  "match": [
+    "A",
+    "E",
+    "I",
+    "G",
+    "J",
+    "Y"
+  ],
+  "recognize": [
+    {
+      "audio": "G",
+      "prompt": "Listen. Which letter is it?",
+      "options": [
+        "G",
+        "J",
+        "Z"
+      ],
+      "answer": 0,
+      "explainTr": "G = \"ci\". J = \"cey\". Z = \"zed\"."
+    },
+    {
+      "audio": "J",
+      "prompt": "Listen. Which letter is it?",
+      "options": [
+        "G",
+        "J",
+        "Y"
+      ],
+      "answer": 1,
+      "explainTr": "J = \"cey\". G ile karıştırma."
+    },
+    {
+      "audio": "E",
+      "prompt": "Listen. Which letter is it?",
+      "options": [
+        "A",
+        "I",
+        "E"
+      ],
+      "answer": 2,
+      "explainTr": "E = \"ii\". A = \"ey\", I = \"ay\"."
+    },
+    {
+      "audio": "I",
+      "prompt": "Listen. Which letter is it?",
+      "options": [
+        "E",
+        "I",
+        "A"
+      ],
+      "answer": 1,
+      "explainTr": "I = \"ay\"."
+    },
+    {
+      "audio": "R",
+      "prompt": "Listen. Which letter is it?",
+      "options": [
+        "R",
+        "A",
+        "H"
+      ],
+      "answer": 0,
+      "explainTr": "R = \"ar\". H = \"eyç\"."
+    }
+  ]
+}

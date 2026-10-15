@@ -1,0 +1,72 @@
+{
+  "slug": "hotel-silver",
+  "draft": true,
+  "mission": "Ask for what you need at the hotel",
+  "missionTr": "Otelde isteklerini söyle: erken giriş, manzaralı oda, ekstra havlu, oda servisi",
+  "stamp": "ROOM WITH A VIEW",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "early check-in",
+      "tr": "erken giriş"
+    },
+    {
+      "en": "late check-out",
+      "tr": "geç çıkış"
+    },
+    {
+      "en": "view",
+      "tr": "manzara"
+    },
+    {
+      "en": "quiet room",
+      "tr": "sessiz oda"
+    },
+    {
+      "en": "extra towels",
+      "tr": "ekstra havlu"
+    },
+    {
+      "en": "room service",
+      "tr": "oda servisi"
+    },
+    {
+      "en": "wake-up call",
+      "tr": "uyandırma servisi"
+    },
+    {
+      "en": "safe",
+      "tr": "kasa"
+    },
+    {
+      "en": "luggage storage",
+      "tr": "bagaj emanet"
+    }
+  ],
+  "scene": {
+    "role": "Front desk agent",
+    "setting": "Hudson Hotel, Manhattan · Front desk",
+    "goalsTr": [
+      "Erken giriş yapıp yapamayacağını sor",
+      "Manzaralı ya da sessiz bir oda iste",
+      "Kahvaltının nerede ve ne zaman olduğunu sor",
+      "Uyandırma servisi iste",
+      "Oda servisinin saatlerini sor",
+      "Geç çıkış rica et"
+    ],
+    "twistsTr": [
+      "Manzaralı oda ekstra ücretli",
+      "Oda servisi sadece akşam 10'a kadar",
+      "Kasa çalışmıyor"
+    ]
+  },
+  "notesTr": "Amerikan İngilizcesi farkları: elevator (lift), trunk (boot), check (bill)."
+}

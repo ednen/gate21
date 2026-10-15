@@ -1,0 +1,187 @@
+{
+  "slug": "starter-numbers",
+  "mission": "Understand numbers, prices and room numbers",
+  "missionTr": "Sayıları öğren: fiyatları, oda numaralarını ve saatleri duyunca anla",
+  "stamp": "123",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE"
+  ],
+  "words": [
+    {
+      "en": "zero",
+      "tr": "0 · sıfır (telefon numarasında \"oh\")"
+    },
+    {
+      "en": "one",
+      "tr": "1 · bir"
+    },
+    {
+      "en": "two",
+      "tr": "2 · iki"
+    },
+    {
+      "en": "three",
+      "tr": "3 · üç"
+    },
+    {
+      "en": "four",
+      "tr": "4 · dört"
+    },
+    {
+      "en": "five",
+      "tr": "5 · beş"
+    },
+    {
+      "en": "six",
+      "tr": "6 · altı"
+    },
+    {
+      "en": "seven",
+      "tr": "7 · yedi"
+    },
+    {
+      "en": "eight",
+      "tr": "8 · sekiz"
+    },
+    {
+      "en": "nine",
+      "tr": "9 · dokuz"
+    },
+    {
+      "en": "ten",
+      "tr": "10 · on"
+    },
+    {
+      "en": "eleven",
+      "tr": "11 · on bir"
+    },
+    {
+      "en": "twelve",
+      "tr": "12 · on iki"
+    },
+    {
+      "en": "thirteen",
+      "tr": "13 · on üç"
+    },
+    {
+      "en": "thirty",
+      "tr": "30 · otuz"
+    },
+    {
+      "en": "fifteen",
+      "tr": "15 · on beş"
+    },
+    {
+      "en": "fifty",
+      "tr": "50 · elli"
+    },
+    {
+      "en": "twenty",
+      "tr": "20 · yirmi"
+    },
+    {
+      "en": "a hundred",
+      "tr": "100 · yüz"
+    }
+  ],
+  "pronounce": [
+    {
+      "word": "thirteen",
+      "ipa": "/θɜːˈtiːn/",
+      "stress": "thir-TEEN",
+      "tipTr": "13'te vurgu SONDA: thır-TİİN."
+    },
+    {
+      "word": "thirty",
+      "ipa": "/ˈθɜː.ti/",
+      "stress": "THIR-ty",
+      "tipTr": "30'da vurgu BAŞTA: THIR-ti. 13 ile farkı bu."
+    },
+    {
+      "word": "fifteen",
+      "ipa": "/ˌfɪfˈtiːn/",
+      "stress": "fif-TEEN",
+      "tipTr": "15: fif-TİİN, vurgu sonda."
+    },
+    {
+      "word": "fifty",
+      "ipa": "/ˈfɪf.ti/",
+      "stress": "FIF-ty",
+      "tipTr": "50: FİF-ti, vurgu başta."
+    },
+    {
+      "word": "three",
+      "ipa": "/θriː/",
+      "stress": "THREE",
+      "tipTr": "Dili dişlerin arasına koy: θrii. \"Tri\" değil."
+    }
+  ],
+  "match": [
+    "thirteen",
+    "thirty",
+    "fifteen",
+    "fifty",
+    "twelve",
+    "twenty"
+  ],
+  "recognize": [
+    {
+      "audio": "Your room is four one two.",
+      "prompt": "Listen. What is your room number?",
+      "options": [
+        "412",
+        "421",
+        "214"
+      ],
+      "answer": 0,
+      "explainTr": "Oda numaraları rakam rakam okunur: four-one-two = 412."
+    },
+    {
+      "audio": "That's fifteen pounds, please.",
+      "prompt": "Listen. How much is it?",
+      "options": [
+        "£50",
+        "£15",
+        "£5"
+      ],
+      "answer": 1,
+      "explainTr": "Fif-TEEN = 15. FIF-ty = 50."
+    },
+    {
+      "audio": "Your flight leaves from gate thirty.",
+      "prompt": "Listen. Which gate?",
+      "options": [
+        "13",
+        "3",
+        "30"
+      ],
+      "answer": 2,
+      "explainTr": "THIR-ty = 30. Vurgu başta."
+    },
+    {
+      "audio": "The bus leaves at eight thirty.",
+      "prompt": "Listen. What time?",
+      "options": [
+        "8:30",
+        "8:13",
+        "3:08"
+      ],
+      "answer": 0,
+      "explainTr": "Eight thirty = 8:30. Saatler iki sayı olarak okunur."
+    },
+    {
+      "audio": "My phone number is oh seven nine, two two five.",
+      "prompt": "Listen. Which number?",
+      "options": [
+        "079 225",
+        "079 252",
+        "709 225"
+      ],
+      "answer": 0,
+      "explainTr": "Telefonda 0 \"oh\" okunur; \"two two\" bazen \"double two\" denir."
+    }
+  ]
+}

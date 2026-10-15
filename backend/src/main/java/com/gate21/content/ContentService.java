@@ -12,13 +12,16 @@ import com.gate21.content.ContentModels.Placement;
 import com.gate21.content.ContentModels.Scenario;
 import com.gate21.content.ContentModels.Twist;
 import com.gate21.content.ContentModels.TwistSlot;
-import com.gate21.content.ContentModels.WeekInfo;
+import com.gate21.content.ContentModels.LevelInfo;
+import com.gate21.content.ContentModels.Stop;
+import com.gate21.progress.Step;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,28 +57,72 @@ public class ContentService {
         this.placement = parse(mapper, placementJson, Placement.class);
         this.sosJson = read("content/sos.json");
 
+        validateManifest(manifest);
         for (ChapterInfo chapter : manifest.chapters()) {
             if (!chapter.available()) {
                 continue;
             }
             byte[] json = read("content/chapters/" + chapter.slug() + ".json");
             JsonNode node = parse(mapper, json, JsonNode.class);
-            String scenarioSlug = node.path("survive").path("scenario").asText();
+            check(chapter.slug().equals(node.path("slug").asText()), "Chapter file " + chapter.slug() + " has another slug");
+            List<Step> steps = new ArrayList<>();
+            node.path("steps").forEach(step -> steps.add(Step.valueOf(step.asText())));
+            validateSteps(chapter, steps);
+
+            String scenarioSlug = steps.contains(Step.SURVIVE) ? node.path("survive").path("scenario").asText() : null;
             chapterJson.put(chapter.slug(), json);
             chapterMeta.put(chapter.slug(), new ChapterMeta(
                 chapter.slug(),
-                "simulation".equals(node.path("type").asText()),
+                chapter.kind(),
+                steps.stream().mapToInt(Step::bit).reduce(0, (a, b) -> a | b),
                 node.path("mission").asText(),
                 node.path("missionTr").asText(),
                 node.path("stamp").asText(),
                 scenarioSlug));
 
-            Scenario scenario = parse(mapper, read("content/scenarios/" + scenarioSlug + ".json"), Scenario.class);
-            validate(scenario, chapter.slug());
-            scenarios.put(scenario.slug(), scenario);
+            if (scenarioSlug != null) {
+                Scenario scenario = parse(mapper, read("content/scenarios/" + scenarioSlug + ".json"), Scenario.class);
+                validate(scenario, chapter.slug());
+                scenarios.put(scenario.slug(), scenario);
+            }
         }
         if (placement.bands().isEmpty() || placement.bands().getFirst().min() != 0) {
             throw new IllegalStateException("placement.json must have a band starting at 0");
+        }
+    }
+
+    /**
+     * Seven stops, each taught once per week at its own level: the stop's order is its day in
+     * week 1, and every week adds seven days.
+     */
+    static void validateManifest(Manifest m) {
+        check(m.levels().size() == 3, "The journey has three levels");
+        Map<String, Stop> stops = new HashMap<>();
+        m.stops().forEach(stop -> check(stops.put(stop.slug(), stop) == null, "Duplicate stop " + stop.slug()));
+        Set<String> slugs = new HashSet<>();
+        Set<String> stopWeeks = new HashSet<>();
+        for (ChapterInfo c : m.chapters()) {
+            check(slugs.add(c.slug()), "Duplicate chapter " + c.slug());
+            check(c.isLesson() || c.isStarter() || c.isSimulation(), "Chapter " + c.slug() + " has unknown kind " + c.kind());
+            if (c.isLesson()) {
+                Stop stop = stops.get(c.stop());
+                check(stop != null, "Chapter " + c.slug() + " has unknown stop " + c.stop());
+                check(c.week() >= 1 && c.week() <= 3, "Chapter " + c.slug() + " is outside the three weeks");
+                check(stopWeeks.add(c.stop() + "/" + c.week()), "Two chapters for " + c.stop() + " in week " + c.week());
+                check(c.day() == (c.week() - 1) * 7 + stop.order(), "Chapter " + c.slug() + " is on the wrong day");
+            }
+        }
+    }
+
+    static void validateSteps(ChapterInfo chapter, List<Step> steps) {
+        String where = "Chapter " + chapter.slug() + ": ";
+        check(!steps.isEmpty() && steps.size() == Set.copyOf(steps).size(), where + "needs distinct steps");
+        if (chapter.isStarter()) {
+            check(!steps.contains(Step.SURVIVE), where + "starter lessons have no scene");
+        } else if (chapter.isSimulation()) {
+            check(steps.equals(List.of(Step.SURVIVE)), where + "a simulation is only the Survive step");
+        } else {
+            check(steps.getLast() == Step.SURVIVE, where + "a lesson ends with its Survive scene");
         }
     }
 
@@ -103,10 +150,29 @@ public class ContentService {
         return chapterJson.containsKey(slug);
     }
 
+    public Optional<ChapterInfo> chapterInfo(String slug) {
+        return manifest.chapters().stream().filter(c -> c.slug().equals(slug)).findFirst();
+    }
+
     /** Available chapters in learning order. */
     public List<ChapterInfo> availableChapters() {
         return manifest.chapters().stream()
             .filter(ChapterInfo::available)
+            .sorted(Comparator.comparingInt(ChapterInfo::order))
+            .toList();
+    }
+
+    /** The seven journey lessons of one week, available or not, in day order. */
+    public List<ChapterInfo> lessonsOfWeek(int week) {
+        return manifest.chapters().stream()
+            .filter(c -> c.isLesson() && c.week() == week)
+            .sorted(Comparator.comparingInt(ChapterInfo::day))
+            .toList();
+    }
+
+    public List<ChapterInfo> starterChapters() {
+        return manifest.chapters().stream()
+            .filter(c -> c.isStarter() && c.available())
             .sorted(Comparator.comparingInt(ChapterInfo::order))
             .toList();
     }
@@ -127,14 +193,26 @@ public class ContentService {
         return sosJson;
     }
 
-    public WeekInfo weekForDay(int journeyDay) {
-        WeekInfo current = manifest.weeks().getFirst();
-        for (WeekInfo week : manifest.weeks()) {
-            if (journeyDay >= week.startDay()) {
-                current = week;
+    public LevelInfo levelForDay(int journeyDay) {
+        LevelInfo current = manifest.levels().getFirst();
+        for (LevelInfo level : manifest.levels()) {
+            if (journeyDay >= level.startDay()) {
+                current = level;
             }
         }
         return current;
+    }
+
+    public LevelInfo level(int week) {
+        return manifest.levels().stream()
+            .filter(l -> l.week() == Math.max(1, Math.min(3, week)))
+            .findFirst()
+            .orElseThrow();
+    }
+
+    /** Whether any lesson of the week can be played yet (later weeks ship as content updates). */
+    public boolean hasAvailableLessons(int week) {
+        return lessonsOfWeek(week).stream().anyMatch(ChapterInfo::available);
     }
 
     private static final Pattern PLACEHOLDER = Pattern.compile("\\{(\\w+)}");

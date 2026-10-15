@@ -1,0 +1,72 @@
+{
+  "slug": "hotel-gold",
+  "draft": true,
+  "mission": "Solve problems with your room",
+  "missionTr": "Odadaki sorunları çöz: klima bozuk, gürültü, fazla rezervasyon, oda değişikliği",
+  "stamp": "UPGRADED",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "air conditioning",
+      "tr": "klima"
+    },
+    {
+      "en": "noisy",
+      "tr": "gürültülü"
+    },
+    {
+      "en": "broken",
+      "tr": "bozuk"
+    },
+    {
+      "en": "overbooked",
+      "tr": "fazla rezervasyon alınmış"
+    },
+    {
+      "en": "upgrade",
+      "tr": "üst sınıfa yükseltme"
+    },
+    {
+      "en": "refund",
+      "tr": "para iadesi"
+    },
+    {
+      "en": "complaint",
+      "tr": "şikâyet"
+    },
+    {
+      "en": "manager",
+      "tr": "müdür"
+    },
+    {
+      "en": "It doesn't work.",
+      "tr": "Çalışmıyor."
+    }
+  ],
+  "scene": {
+    "role": "Duty manager",
+    "setting": "Harbour Hotel, Sydney · Front desk",
+    "goalsTr": [
+      "Klimanın çalışmadığını anlat",
+      "Odanın gürültülü olduğunu söyle ve oda değişikliği iste",
+      "Kibar ama kararlı ol: müdürle görüşmek iste",
+      "Telafi olarak ne önerdiklerini sor (upgrade / indirim)",
+      "Teklifi kabul et ya da başka bir şey öner",
+      "Yazılı onay iste"
+    ],
+    "twistsTr": [
+      "Otel fazla rezervasyon almış (overbooked)",
+      "Yeni oda da aynı sorunla geliyor",
+      "Para iadesi yerine sadece kahvaltı öneriyorlar"
+    ]
+  },
+  "notesTr": ""
+}

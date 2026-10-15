@@ -1,11 +1,13 @@
 package com.gate21.content;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.gate21.content.ContentModels.ChapterInfo;
 import com.gate21.content.ContentModels.Scenario;
+import com.gate21.progress.Step;
 import com.gate21.roleplay.RoleplayModel.Context;
 import com.gate21.roleplay.RoleplayModel.Reply;
 import com.gate21.roleplay.SceneStep;
@@ -24,17 +26,46 @@ class ContentServiceTest {
         JsonMapper.builder().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build());
 
     @Test
-    void everyAvailableChapterHasItsMissionAndScenario() {
-        assertThat(content.availableChapters().stream().map(ChapterInfo::slug).toList())
-            .containsExactly("airport", "hotel", "restaurant", "shopping", "full-trip");
+    void theJourneyIsSevenStopsAtThreeLevels() {
+        assertThat(content.manifest().stops()).hasSize(7);
+        for (int week = 1; week <= 3; week++) {
+            List<ChapterInfo> lessons = content.lessonsOfWeek(week);
+            assertThat(lessons).hasSize(7);
+            assertThat(lessons.stream().map(ChapterInfo::day).toList())
+                .containsExactly(week * 7 - 6, week * 7 - 5, week * 7 - 4, week * 7 - 3, week * 7 - 2, week * 7 - 1, week * 7);
+        }
+        assertThat(content.lessonsOfWeek(1)).allMatch(ChapterInfo::available);
+        assertThat(content.hasAvailableLessons(2)).isFalse();
+    }
+
+    @Test
+    void everyAvailableChapterHasItsMissionAndItsOwnSteps() {
+        assertThat(content.availableChapters().stream().map(ChapterInfo::slug).toList()).containsExactly(
+            "starter-alphabet", "starter-numbers", "starter-spelling", "starter-people", "starter-basics",
+            "arrival-bronze", "transfer-bronze", "hotel-bronze", "restaurant-bronze", "cafe-bronze",
+            "shopping-bronze", "transport-bronze", "full-trip");
         for (ChapterInfo chapter : content.availableChapters()) {
             var meta = content.chapterMeta(chapter.slug()).orElseThrow();
-            assertThat(meta.mission()).isNotBlank();
-            assertThat(meta.stamp()).isNotBlank();
-            assertThat(content.scenario(meta.scenario())).isPresent();
+            assertThat(meta.mission()).as(chapter.slug()).isNotBlank();
+            assertThat(meta.stamp()).as(chapter.slug()).isNotBlank();
+            assertThat(meta.scenario() != null).as(chapter.slug() + " has a scene").isEqualTo(!chapter.isStarter());
+            if (meta.scenario() != null) {
+                assertThat(content.scenario(meta.scenario())).isPresent();
+            }
         }
-        assertThat(content.chapterMeta("full-trip").orElseThrow().simulation()).isTrue();
-        assertThat(content.chapterMeta("hotel").orElseThrow().simulation()).isFalse();
+        assertThat(content.chapterMeta("full-trip").orElseThrow().requiredBits()).isEqualTo(Step.SURVIVE.bit());
+        assertThat(content.chapterMeta("arrival-bronze").orElseThrow().requiredBits() & Step.FORM.bit()).isNotZero();
+        assertThat(content.chapterMeta("starter-alphabet").orElseThrow().requiredBits() & Step.SURVIVE.bit()).isZero();
+    }
+
+    @Test
+    void aLessonMustEndWithItsScene() {
+        ChapterInfo lesson = content.chapterInfo("hotel-bronze").orElseThrow();
+        assertThatThrownBy(() -> ContentService.validateSteps(lesson, List.of(Step.SURVIVE, Step.DISCOVER)))
+            .hasMessageContaining("ends with its Survive scene");
+        ChapterInfo starter = content.chapterInfo("starter-basics").orElseThrow();
+        assertThatThrownBy(() -> ContentService.validateSteps(starter, List.of(Step.DISCOVER, Step.SURVIVE)))
+            .hasMessageContaining("no scene");
     }
 
     @Test
@@ -75,21 +106,25 @@ class ContentServiceTest {
     }
 
     @Test
-    void weeksMapToJourneyDays() {
-        assertThat(content.weekForDay(1).level()).isEqualTo("Travel Ready");
-        assertThat(content.weekForDay(8).level()).isEqualTo("Travel Confident");
-        assertThat(content.weekForDay(21).level()).isEqualTo("Travel Pro");
+    void levelsMapToJourneyDays() {
+        assertThat(content.levelForDay(1).id()).isEqualTo("BRONZE");
+        assertThat(content.levelForDay(8).title()).isEqualTo("Silver Traveller");
+        assertThat(content.levelForDay(21).id()).isEqualTo("GOLD");
+        assertThat(content.manifest().graduation().lines()).hasSize(3);
     }
 
     @Test
-    void placementHasFiveQuestionsAndBands() {
+    void placementHasFiveQuestionsAndAStarterBand() {
         assertThat(content.placement().questions()).hasSize(5);
-        assertThat(content.placement().bands().stream().map(b -> b.startDay()).toList()).containsExactly(1, 8, 15);
+        assertThat(content.placement().bands().getFirst().starter()).isTrue();
+        assertThat(content.placement().bands().stream().map(b -> b.startDay()).toList()).containsExactly(1, 1, 8, 15);
     }
 
     private List<Scenario> scenarios() {
         return content.availableChapters().stream()
-            .map(c -> content.scenario(content.chapterMeta(c.slug()).orElseThrow().scenario()).orElseThrow())
+            .map(c -> content.chapterMeta(c.slug()).orElseThrow().scenario())
+            .filter(slug -> slug != null)
+            .map(slug -> content.scenario(slug).orElseThrow())
             .toList();
     }
 }

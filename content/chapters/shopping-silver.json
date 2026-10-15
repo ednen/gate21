@@ -1,0 +1,72 @@
+{
+  "slug": "shopping-silver",
+  "draft": true,
+  "mission": "Buy gifts and get tax back",
+  "missionTr": "Hediyelik eşya al, hediye paketi iste, vergi iadesini (tax refund) sor",
+  "stamp": "GIFTS BOUGHT",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "souvenir",
+      "tr": "hediyelik eşya"
+    },
+    {
+      "en": "gift wrap",
+      "tr": "hediye paketi"
+    },
+    {
+      "en": "on sale",
+      "tr": "indirimde"
+    },
+    {
+      "en": "receipt",
+      "tr": "fiş"
+    },
+    {
+      "en": "tax",
+      "tr": "vergi"
+    },
+    {
+      "en": "exchange",
+      "tr": "değiştirmek"
+    },
+    {
+      "en": "fragile",
+      "tr": "kırılgan"
+    },
+    {
+      "en": "for my mother",
+      "tr": "annem için"
+    },
+    {
+      "en": "Do you ship to Turkey?",
+      "tr": "Türkiye'ye gönderiyor musunuz?"
+    }
+  ],
+  "scene": {
+    "role": "Sales assistant",
+    "setting": "Gift shop, Fifth Avenue",
+    "goalsTr": [
+      "Annen için hediye önerisi iste",
+      "Fiyatı ve vergi dahil olup olmadığını sor",
+      "Hediye paketi iste",
+      "Kırılgan olduğu için iyi sarılmasını rica et",
+      "Değişim/iade süresini sor",
+      "Kartla öde ve fişi iste"
+    ],
+    "twistsTr": [
+      "Fiyata vergi eklenince tutar yükseliyor (ABD'de etiket fiyatı vergisiz)",
+      "Hediye paketi ücretli",
+      "İstediğin renk sadece online"
+    ]
+  },
+  "notesTr": "Notlardaki \"different countries and different concepts\": ABD'de etiket fiyatına vergi kasada eklenir."
+}

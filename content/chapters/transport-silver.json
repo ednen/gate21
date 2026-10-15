@@ -1,0 +1,72 @@
+{
+  "slug": "transport-silver",
+  "draft": true,
+  "mission": "Change lines and buy a day pass",
+  "missionTr": "Metroda aktarma yap, günlük kart al, doğru yöne bin",
+  "stamp": "TRANSFER MADE",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "subway",
+      "tr": "metro (ABD)"
+    },
+    {
+      "en": "MetroCard / day pass",
+      "tr": "günlük kart"
+    },
+    {
+      "en": "uptown / downtown",
+      "tr": "kuzeye / güneye (yön)"
+    },
+    {
+      "en": "transfer",
+      "tr": "aktarma"
+    },
+    {
+      "en": "express",
+      "tr": "ekspres (az duraklı)"
+    },
+    {
+      "en": "local",
+      "tr": "her durakta duran"
+    },
+    {
+      "en": "turnstile",
+      "tr": "turnike"
+    },
+    {
+      "en": "next stop",
+      "tr": "sonraki durak"
+    },
+    {
+      "en": "get off",
+      "tr": "inmek"
+    }
+  ],
+  "scene": {
+    "role": "MTA station agent",
+    "setting": "Times Square · Subway station",
+    "goalsTr": [
+      "Central Park'a nasıl gideceğini sor",
+      "Günlük kart al",
+      "Hangi yöne (uptown/downtown) bineceğini sor",
+      "Nerede aktarma yapacağını sor",
+      "Hangi durakta ineceğini sor",
+      "Turnikeden geçemediğinde yardım iste"
+    ],
+    "twistsTr": [
+      "Kartın turnikede çalışmıyor",
+      "Ekspres tren senin durağında durmuyor",
+      "Hafta sonu hat değişikliği var"
+    ]
+  },
+  "notesTr": ""
+}

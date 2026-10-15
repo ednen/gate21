@@ -1,0 +1,68 @@
+{
+  "slug": "transfer-gold",
+  "draft": true,
+  "mission": "Handle trouble on the road",
+  "missionTr": "Taksi yolunda sorunları çöz: taksimetre açık değil, yanlış yol, ödeme sorunu",
+  "stamp": "SAFE ARRIVAL",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "meter",
+      "tr": "taksimetre"
+    },
+    {
+      "en": "wrong way",
+      "tr": "yanlış yol"
+    },
+    {
+      "en": "fixed price",
+      "tr": "sabit fiyat"
+    },
+    {
+      "en": "toll",
+      "tr": "geçiş ücreti"
+    },
+    {
+      "en": "detour",
+      "tr": "dolambaçlı yol"
+    },
+    {
+      "en": "rideshare",
+      "tr": "araç paylaşımı (Uber vb.)"
+    },
+    {
+      "en": "pick-up point",
+      "tr": "alınma noktası"
+    },
+    {
+      "en": "Can you pull over here?",
+      "tr": "Burada kenara çekebilir misiniz?"
+    }
+  ],
+  "scene": {
+    "role": "Taxi driver",
+    "setting": "Sydney Airport · Taxi rank",
+    "goalsTr": [
+      "Gideceğin yeri söyle ve sabit fiyat olup olmadığını sor",
+      "Taksimetrenin açık olmadığını fark et ve aç diye rica et",
+      "Neden bu yoldan gittiğini kibarca sor",
+      "Köprü geçiş ücretini sor",
+      "Otelin önünde kenara çekmesini iste",
+      "Fiş iste"
+    ],
+    "twistsTr": [
+      "Şoför yanlış yola sapıyor",
+      "Kartın reddediliyor ve nakdin yetmiyor",
+      "Uygulamadan çağırdığın araç başka bir kapıda bekliyor"
+    ]
+  },
+  "notesTr": "Avustralya aksanı (en-AU)."
+}

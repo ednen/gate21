@@ -1,0 +1,113 @@
+{
+  "slug": "transport-bronze",
+  "chapter": "transport-bronze",
+  "title": "Buying a ticket",
+  "titleTr": "Bilet almak",
+  "role": "Station assistant",
+  "setting": "King's Cross St Pancras · Ticket hall",
+  "voice": "en-GB",
+  "persona": "You are a helpful London Underground station assistant at the ticket hall. You speak clearly and kindly to tourists.",
+  "briefTr": "King's Cross metro istasyonundasın. Camden Town'a gitmek istiyorsun ve sadece gidiş bileti lazım.",
+  "opening": "Hello, can I help you?",
+  "facts": [
+    { "id": "platform", "values": ["2", "4", "1"], "question": "Which platform did your train leave from?", "questionTr": "Trenin hangi perondan kalkıyordu?" },
+    { "id": "stops", "values": ["three", "four", "five"], "question": "How many stops was it?", "questionTr": "Kaç durak sürdü?" },
+    { "id": "price", "values": ["£2.80", "£3.40", "£2.70"], "question": "How much was your ticket?", "questionTr": "Biletin ne kadardı?" }
+  ],
+  "goals": [
+    {
+      "id": "destination",
+      "titleTr": "Nereye gideceğini söylemek",
+      "instruction": "The passenger says where they want to go.",
+      "hint": "Yes, I want to go to Camden Town.",
+      "hintTr": "Evet, Camden Town'a gitmek istiyorum.",
+      "keywords": ["go", "camden", "to", "get", "want", "need"],
+      "successReply": "Camden Town, easy.",
+      "retryReply": "Where would you like to go?"
+    },
+    {
+      "id": "ticket",
+      "titleTr": "Bilet tipini seçmek",
+      "ask": "Do you want a single or a return?",
+      "instruction": "The passenger says single (one way) or return.",
+      "hint": "A single, please.",
+      "hintTr": "Tek yön, lütfen.",
+      "keywords": ["single", "return", "one way", "round trip"],
+      "successReply": "Okay, a single.",
+      "retryReply": "Just going there — a single? Or there and back — a return?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemek",
+      "ask": "That's {price}. How would you like to pay?",
+      "instruction": "The passenger says how they will pay.",
+      "hint": "By card, please.",
+      "hintTr": "Kartla, lütfen.",
+      "keywords": ["card", "cash", "phone", "contactless"],
+      "successReply": "Here's your ticket.",
+      "retryReply": "Card or cash?"
+    },
+    {
+      "id": "line",
+      "titleTr": "Hangi hatta bineceğini sormak",
+      "ask": "Do you know how to get there?",
+      "instruction": "The passenger asks which line or train to take.",
+      "hint": "No. Which line do I take?",
+      "hintTr": "Hayır. Hangi hatta binmeliyim?",
+      "keywords": ["which line", "line", "train", "take", "how", "platform"],
+      "successReply": "Take the Northern line, from platform {platform}.",
+      "retryReply": "Would you like to know which line to take?"
+    },
+    {
+      "id": "stops",
+      "titleTr": "Kaç durak olduğunu sormak",
+      "ask": "Anything else?",
+      "instruction": "The passenger asks how many stops it is or how long it takes.",
+      "hint": "How many stops is it?",
+      "hintTr": "Kaç durak?",
+      "keywords": ["how many", "stops", "stop", "how long", "far", "minutes"],
+      "successReply": "Only {stops} stops.",
+      "retryReply": "Do you want to know how far it is?"
+    }
+  ],
+  "twists": [
+    {
+      "id": "line-closed",
+      "titleTr": "Hat kapalı",
+      "intro": "Oh, wait — sorry, the Northern line is closed today.",
+      "instruction": "The line is closed. The passenger asks for another way, asks about a bus, or asks about a taxi.",
+      "retryReply": "Sorry about that. Can I help you find another way?",
+      "options": [
+        { "text": "How else can I get there?", "keywords": ["how else", "else", "another", "other way"], "reply": "Take the bus 214 from outside. It goes straight to Camden." },
+        { "text": "Is there a bus?", "keywords": ["bus"], "reply": "Yes — bus 214, just outside. Your ticket works on it too." },
+        { "text": "Can I take a taxi from here?", "keywords": ["taxi", "cab"], "reply": "Yes, the taxi rank is by the main exit. About ten minutes." }
+      ]
+    },
+    {
+      "id": "delay",
+      "titleTr": "Gecikme var",
+      "intro": "Oh, there are delays on that line right now. About twenty minutes.",
+      "instruction": "The trains are delayed. The passenger says they can wait, asks for a faster way, or asks how long.",
+      "retryReply": "Sorry about the delay. What would you like to do?",
+      "options": [
+        { "text": "That's fine, I can wait.", "keywords": ["wait", "fine", "okay", "ok"], "reply": "Good — there's a café by platform {platform}." },
+        { "text": "Is there a faster way?", "keywords": ["faster", "quicker", "quick"], "reply": "The bus might be faster today. Number 214, outside." },
+        { "text": "How long is the delay?", "keywords": ["how long", "delay", "minutes"], "reply": "About twenty minutes. It should get better soon." }
+      ]
+    },
+    {
+      "id": "busy",
+      "titleTr": "Çok kalabalık",
+      "intro": "Just so you know — it's rush hour. The trains are very busy now.",
+      "instruction": "It is rush hour. The passenger says that's okay, asks about a quieter time, or asks for another way.",
+      "retryReply": "It's okay, just a bit crowded. Is that alright?",
+      "options": [
+        { "text": "That's okay, thank you.", "keywords": ["okay", "ok", "fine", "thank"], "reply": "Have a good trip! Mind the gap." },
+        { "text": "When is it quieter?", "keywords": ["quieter", "quiet", "when", "later"], "reply": "After half past nine it's much quieter." },
+        { "text": "Is there another way?", "keywords": ["another", "other", "way", "bus"], "reply": "The bus is a good idea — number 214, just outside." }
+      ]
+    }
+  ],
+  "twistSlots": [{ "after": "line", "pool": ["line-closed", "delay", "busy"] }],
+  "closing": "Have a good trip, and mind the gap!"
+}

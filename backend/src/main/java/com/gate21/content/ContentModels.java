@@ -8,25 +8,57 @@ public final class ContentModels {
     private ContentModels() {
     }
 
-    public record Manifest(String version, List<WeekInfo> weeks, List<ChapterInfo> chapters) {
+    public record Manifest(String version, int freeDays, List<LevelInfo> levels, Graduation graduation,
+                           List<Stop> stops, List<ChapterInfo> chapters) {
         public Manifest {
-            weeks = List.copyOf(weeks);
+            levels = List.copyOf(levels);
+            stops = List.copyOf(stops);
             chapters = List.copyOf(chapters);
         }
     }
 
-    public record WeekInfo(int week, String level, String levelTr, int startDay) {
+    /** Bronze, Silver and Gold Traveller: one per week of the journey, each a different trip. */
+    public record LevelInfo(int week, String id, String title, String titleTr, String tagline, String message,
+                            String messageTr, String trip, int startDay) {
     }
 
-    public record ChapterInfo(String slug, int week, int order, String title, String titleTr, String icon, boolean available) {
+    public record Graduation(String title, String titleTr, List<String> lines, List<String> linesTr) {
+        public Graduation {
+            lines = List.copyOf(lines);
+            linesTr = List.copyOf(linesTr);
+        }
+    }
+
+    /** One stage of a trip (arrival, transfer, hotel…). Every week revisits all seven. */
+    public record Stop(String slug, int order, String title, String titleTr, String icon) {
+    }
+
+    /**
+     * One unit of progress. {@code kind}: {@code lesson} (a stop at one level, one journey day),
+     * {@code starter} (the zero-English pack) or {@code simulation} (Full Trip).
+     */
+    public record ChapterInfo(String slug, String kind, String stop, int week, int day, int order, String title,
+                              String titleTr, String icon, boolean available) {
+
+        public boolean isLesson() {
+            return "lesson".equals(kind);
+        }
+
+        public boolean isStarter() {
+            return "starter".equals(kind);
+        }
+
+        public boolean isSimulation() {
+            return "simulation".equals(kind);
+        }
     }
 
     /**
      * The fields of a chapter file the server needs; the app receives the whole file.
-     * {@code simulation} chapters have only the Survive step.
+     * {@code requiredBits} are the chapter's own steps; {@code scenario} is null without a Survive step.
      */
-    public record ChapterMeta(String slug, boolean simulation, String mission, String missionTr, String stamp,
-                              String scenario) {
+    public record ChapterMeta(String slug, String kind, int requiredBits, String mission, String missionTr,
+                              String stamp, String scenario) {
     }
 
     /**
@@ -98,6 +130,6 @@ public final class ContentModels {
     public record SpeakingTask(String situationTr, String phrase) {
     }
 
-    public record Band(int min, String level, int startDay, String messageTr) {
+    public record Band(int min, String level, int startDay, boolean starter, String messageTr) {
     }
 }

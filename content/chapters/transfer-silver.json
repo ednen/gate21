@@ -1,0 +1,72 @@
+{
+  "slug": "transfer-silver",
+  "draft": true,
+  "mission": "Meet your driver and chat on the way",
+  "missionTr": "Seni bekleyen transfer şoförünü bul, yolda kısa sohbet et",
+  "stamp": "PICKED UP",
+  "trip": "New York",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "DIALOG",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "driver",
+      "tr": "şoför"
+    },
+    {
+      "en": "name sign",
+      "tr": "isim tabelası"
+    },
+    {
+      "en": "pick up",
+      "tr": "almak (birini)"
+    },
+    {
+      "en": "arrivals hall",
+      "tr": "geliş salonu"
+    },
+    {
+      "en": "meeting point",
+      "tr": "buluşma noktası"
+    },
+    {
+      "en": "booked",
+      "tr": "rezerve edilmiş"
+    },
+    {
+      "en": "trunk",
+      "tr": "bagaj (araba, ABD)"
+    },
+    {
+      "en": "highway",
+      "tr": "otoyol"
+    },
+    {
+      "en": "downtown",
+      "tr": "şehir merkezi"
+    }
+  ],
+  "scene": {
+    "role": "Shuttle driver",
+    "setting": "JFK · Arrivals hall",
+    "goalsTr": [
+      "Adının yazılı olduğu tabelayı tutan şoförü bul ve kendini tanıt",
+      "Rezervasyon adını ve otelini doğrula",
+      "Bavulunu bagaja koymasını rica et",
+      "Yolda şehir hakkında bir soru sor",
+      "Klimayı açmasını ya da kapatmasını rica et",
+      "Varınca teşekkür et ve bahşiş ver"
+    ],
+    "twistsTr": [
+      "Şoför seni bulamıyor, telefonla arıyor: buluşma noktasını tarif et",
+      "Başka bir yolcuyla aynı aracı paylaşacaksın",
+      "Şoför yanlış otelin adını söylüyor"
+    ]
+  },
+  "notesTr": "Notlarda ? olarak bırakılmıştı; transfer görevlisini bulma ve yolda sohbet önerisi."
+}

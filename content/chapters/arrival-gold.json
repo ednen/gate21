@@ -1,0 +1,76 @@
+{
+  "slug": "arrival-gold",
+  "draft": true,
+  "mission": "Sort out lost luggage",
+  "missionTr": "Bagajın gelmedi: kayıp bagaj ofisinde durumu anlat, şikâyet formunu doldur",
+  "stamp": "BAG FOUND",
+  "trip": "Sydney",
+  "steps": [
+    "DISCOVER",
+    "PRONOUNCE",
+    "MATCH",
+    "RECOGNIZE",
+    "FORM",
+    "SURVIVE"
+  ],
+  "words": [
+    {
+      "en": "lost luggage",
+      "tr": "kayıp bagaj"
+    },
+    {
+      "en": "damaged",
+      "tr": "hasarlı"
+    },
+    {
+      "en": "baggage services",
+      "tr": "bagaj hizmetleri ofisi"
+    },
+    {
+      "en": "claim form",
+      "tr": "talep/şikâyet formu"
+    },
+    {
+      "en": "reference number",
+      "tr": "referans numarası"
+    },
+    {
+      "en": "deliver",
+      "tr": "teslim etmek"
+    },
+    {
+      "en": "compensation",
+      "tr": "tazminat"
+    },
+    {
+      "en": "Have you been here before?",
+      "tr": "Daha önce burada bulundunuz mu?"
+    },
+    {
+      "en": "boarding pass",
+      "tr": "biniş kartı"
+    },
+    {
+      "en": "baggage tag",
+      "tr": "bagaj etiketi"
+    }
+  ],
+  "scene": {
+    "role": "Baggage services agent",
+    "setting": "Sydney Airport · Baggage services",
+    "goalsTr": [
+      "Memurla sohbet: \"Have you been here before?\" sorusuna cevap ver",
+      "Biniş kartını ve bagaj etiketini göster",
+      "Bavulunu tarif et (renk, boyut, marka)",
+      "Otel adresini ver ve bavulun oraya getirilmesini iste",
+      "Referans numarasını iste",
+      "Acil ihtiyaçlar için masraf karşılanıyor mu sor"
+    ],
+    "twistsTr": [
+      "Bavulun başka bir şehre gitmiş",
+      "Bavul gelmiş ama tekerleği kırık (damaged luggage)",
+      "Form sadece online doldurulabiliyor"
+    ]
+  },
+  "notesTr": "Notlardaki 3. hafta: \"Have you been here before?\", \"Can I see your boarding pass?\", Lost luggage, Deformed luggage, Filling in a complaint form. FORM adımı: Property Irregularity Report."
+}
