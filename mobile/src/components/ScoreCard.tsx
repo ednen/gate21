@@ -10,12 +10,12 @@ export function ScoreCard({ result }: { result: Assessment }) {
   return (
     <Card style={styles.card}>
       <View style={styles.row}>
-        <Label>TELAFFUZ PUANI</Label>
+        <Label>Telaffuz puanı</Label>
         <Text style={[styles.score, { color }]} accessibilityLabel={`Telaffuz puanı yüzde ${result.overall}`}>
           {result.overall}%
         </Text>
       </View>
-      <ProgressBar value={result.overall / 100} color={color} track={colors.ground} height={8} />
+      <ProgressBar value={result.overall / 100} color={color} track={colors.ground} height={4} />
       <Text style={styles.tip}>{result.tipTr}</Text>
     </Card>
   );
@@ -24,6 +24,6 @@ export function ScoreCard({ result }: { result: Assessment }) {
 const styles = StyleSheet.create({
   card: { gap: 10 },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-  score: { fontFamily: fonts.display, fontSize: 32 },
+  score: { fontFamily: fonts.display, fontSize: 40, letterSpacing: -1 },
   tip: { fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: colors.inkLine },
 });

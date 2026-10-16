@@ -7,13 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon, type IconName } from '@/components/Icon';
 import { SpeakPanel } from '@/components/SpeakPanel';
 import { TabBar } from '@/components/TabBar';
-import { Body, Button, Card, ErrorNote, Label, Title } from '@/components/ui';
+import { Body, Button, Card, ErrorNote, isHovered, Label, Title } from '@/components/ui';
 import { apiGet, apiSend } from '@/lib/api';
 import { messageFor } from '@/lib/errors';
 import { invalidateProgress, useMe } from '@/lib/queries';
 import type { PracticeOverview } from '@/lib/types';
 import { say } from '@/lib/voice';
-import { colors, fonts } from '@/theme';
+import { colors, fonts, gutter, lineColor, radius } from '@/theme';
 
 const DAYS = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
 const PHRASES_PER_SESSION = 5;
@@ -46,7 +46,7 @@ export default function Practice() {
     return (
       <SafeAreaView style={styles.screen}>
         <ScrollView contentContainerStyle={styles.body}>
-          <Label>{`KALIP ${drill + 1} / ${phrases.length}`}</Label>
+          <Label>{`Kalıp ${drill + 1} / ${phrases.length}`}</Label>
           <Pressable accessibilityRole="button" accessibilityHint="Dinle" onPress={() => say(p.en)} style={styles.phraseCard}>
             <Text style={styles.phraseBig}>{p.en}</Text>
             {p.tr ? <Text style={styles.phraseTr}>{p.tr}</Text> : null}
@@ -77,13 +77,13 @@ export default function Practice() {
     <View style={styles.screen}>
       <ScrollView>
         <SafeAreaView edges={['top']} style={styles.body}>
-          <Label>KEEP YOUR ENGLISH TRAVEL READY</Label>
-          <Title size={30}>Haftada iki pratik</Title>
-          <Card style={{ gap: 12 }}>
+          <Title size={34}>Pratik</Title>
+          <Body color={colors.muted}>Keep your English travel ready: haftada iki kısa pratik yeter.</Body>
+          <View style={styles.punchCard}>
             <View style={styles.weekRow}>
               {DAYS.map((d, i) => (
                 <View key={d} style={{ alignItems: 'center', gap: 4 }}>
-                  <View style={[styles.dayDot, practiced.has(i) && { backgroundColor: colors.yellow, borderColor: colors.ink }]}>
+                  <View style={[styles.dayDot, practiced.has(i) && { backgroundColor: colors.yellow, borderColor: colors.yellow }]}>
                     {practiced.has(i) ? <Icon name="check" size={14} strokeWidth={2.6} /> : null}
                   </View>
                   <Text style={styles.dayLabel}>{d}</Text>
@@ -95,35 +95,38 @@ export default function Practice() {
                 ? 'Bu haftanın hedefi tamam. İngilizcen seyahate hazır!'
                 : `Bu hafta ${data?.thisWeek ?? 0} / ${data?.weeklyGoal ?? 2} pratik. Birkaç dakika yeter.`}
             </Body>
-          </Card>
+          </View>
 
           {!member ? (
-            <Card style={{ gap: 10, borderWidth: 2, borderColor: colors.yellow }}>
+            <Card style={{ gap: 10, borderLeftWidth: 4, borderLeftColor: colors.yellow }}>
               <Body>Pratik araçları üyelikle açılır. Yolculuğu bitirenler için daha uygun bir plan var.</Body>
               <Button label="Planları gör" variant="accent" onPress={() => router.push('/membership?plan=KEEP_READY')} />
             </Card>
           ) : (
             <>
-              <Label style={{ marginTop: 8 }}>SENİN KALIPLARIN</Label>
+              <Text style={styles.section}>Senin kalıpların</Text>
               {phrases.length === 0 ? (
                 <Body color={colors.muted}>Sahne raporlarındaki “bir dahakine kullan” kalıpları burada toplanır.</Body>
               ) : (
-                <Card style={{ gap: 10 }}>
-                  {phrases.map((p) => (
-                    <Text key={p.en} style={styles.phraseLine}>{`• ${p.en}`}</Text>
-                  ))}
-                  <Button label={`${phrases.length} kalıbı tekrar et`} onPress={() => setDrill(0)} />
-                </Card>
+                <View style={{ gap: 12 }}>
+                  <View>
+                    {phrases.map((p) => (
+                      <Text key={p.en} style={styles.phraseLine}>{p.en}</Text>
+                    ))}
+                  </View>
+                  <Button label={`${phrases.length} kalıbı tekrar et`} icon="repeat" onPress={() => setDrill(0)} />
+                </View>
               )}
-              <Label style={{ marginTop: 8 }}>SAHNELERİ YENİDEN OYNA</Label>
+              <Text style={styles.section}>Sahneleri yeniden oyna</Text>
               <Body color={colors.muted} size={14}>Her seferinde farklı sürprizler çıkar.</Body>
               {(data?.scenes ?? []).map((s) => (
                 <Pressable
                   key={s.chapter}
                   accessibilityRole="button"
                   onPress={() => router.push(`/scene/${s.scenario}?chapter=${s.chapter}`)}
-                  style={styles.scene}
+                  style={(st) => [styles.scene, (st.pressed || isHovered(st)) && { backgroundColor: 'rgba(35,42,49,0.05)' }]}
                 >
+                  <View style={[styles.sceneSwatch, { backgroundColor: lineColor(s.week) }]} />
                   <Icon name={s.icon as IconName} size={22} />
                   <Text style={styles.sceneTitle}>{s.titleTr}</Text>
                   <Icon name="arrowRight" size={18} />
@@ -141,14 +144,17 @@ export default function Practice() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
-  body: { padding: 20, gap: 14 },
+  body: { padding: gutter, gap: 14 },
+  punchCard: { gap: 12, paddingVertical: 14, borderTopWidth: 2, borderBottomWidth: 1, borderTopColor: colors.ink, borderBottomColor: colors.line },
   weekRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  dayDot: { width: 32, height: 32, borderRadius: 16, borderWidth: 2, borderColor: colors.line, alignItems: 'center', justifyContent: 'center' },
-  dayLabel: { fontFamily: fonts.bodyMedium, fontSize: 11, color: colors.muted },
-  phraseLine: { fontFamily: fonts.bodyMedium, fontSize: 15, color: colors.ink },
-  phraseCard: { backgroundColor: colors.surface, borderRadius: 20, padding: 24, alignItems: 'center', gap: 10 },
-  phraseBig: { fontFamily: fonts.displayBold, fontSize: 26, lineHeight: 31, color: colors.ink, textAlign: 'center' },
-  phraseTr: { fontFamily: fonts.body, fontSize: 15, color: colors.muted, textAlign: 'center' },
-  scene: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.surface, borderRadius: 14, paddingHorizontal: 14 },
+  dayDot: { width: 36, height: 36, borderRadius: radius.sm, borderWidth: 1.5, borderColor: colors.line, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface },
+  dayLabel: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  section: { fontFamily: fonts.display, fontSize: 21, color: colors.ink, marginTop: 14 },
+  phraseLine: { fontFamily: fonts.bodyMedium, fontSize: 16, color: colors.ink, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.line },
+  phraseCard: { backgroundColor: colors.surface, borderRadius: radius.lg, padding: 22, gap: 10 },
+  phraseBig: { fontFamily: fonts.display, fontSize: 30, lineHeight: 33, color: colors.ink },
+  phraseTr: { fontFamily: fonts.body, fontSize: 15, color: colors.muted },
+  scene: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, borderBottomWidth: 1, borderBottomColor: colors.line, paddingHorizontal: 4, borderRadius: radius.sm },
+  sceneSwatch: { width: 4, height: 28, borderRadius: 1 },
   sceneTitle: { flex: 1, fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink },
 });

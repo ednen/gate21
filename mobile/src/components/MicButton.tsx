@@ -47,5 +47,5 @@ export function MicButton({ state, onPress, size = 96, label, disabled }: Props)
 const styles = StyleSheet.create({
   wrap: { alignItems: 'center', gap: 12 },
   button: { alignItems: 'center', justifyContent: 'center' },
-  label: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink, textAlign: 'center' },
+  label: { fontFamily: fonts.displayBold, fontSize: 16, color: colors.ink, textAlign: 'center' },
 });

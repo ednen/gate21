@@ -13,7 +13,7 @@ import { messageFor } from '@/lib/errors';
 import { keys, queryClient, useMe, usePassport } from '@/lib/queries';
 import { scheduleDailyReminder } from '@/lib/reminders';
 import type { Me } from '@/lib/types';
-import { colors, fonts } from '@/theme';
+import { colors, fonts, radius } from '@/theme';
 
 export default function Progress() {
   const me = useMe();
@@ -62,14 +62,14 @@ export default function Progress() {
     <View style={styles.screen}>
       <ScrollView>
         <SafeAreaView edges={['top']} style={styles.body}>
-          <Label>{`${data?.journeyDay ?? 1}. GÜN · İLERLEME`}</Label>
+          <Label>{`İlerleme, ${data?.journeyDay ?? 1}. gün`}</Label>
           <Title size={34}>{after !== null ? 'Artık donup kalmıyorsun.' : 'Yolculuğun nasıl gidiyor?'}</Title>
 
           {DEMO ? <DemoPanel /> : null}
 
           <View style={styles.pair}>
-            <ScoreBox title="ÖNCE · 1. GÜN" value={before} dark={false} />
-            <ScoreBox title="SONRA · 21. GÜN" value={after} dark />
+            <ScoreBox title="Önce, 1. gün" value={before} dark={false} />
+            <ScoreBox title="Sonra, 21. gün" value={after} dark />
           </View>
 
           {before !== null && after !== null ? (
@@ -96,7 +96,7 @@ export default function Progress() {
           </Card>
           {data?.speakingAccuracy != null ? <ProgressBar value={data.speakingAccuracy / 100} color={colors.green} /> : null}
 
-          <Label style={{ marginTop: 12 }}>HESAP</Label>
+          <Text style={styles.section}>Hesap</Text>
           <ErrorNote message={error} />
           {notice ? <Body size={14} color={colors.green}>{notice}</Body> : null}
           <Card style={{ gap: 10 }}>
@@ -145,11 +145,12 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
   body: { padding: 20, gap: 16 },
   pair: { flexDirection: 'row', gap: 10 },
-  box: { flex: 1, backgroundColor: colors.surface, borderRadius: 18, padding: 16, gap: 8 },
-  boxValue: { fontFamily: fonts.display, fontSize: 64, lineHeight: 66 },
-  gain: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.yellow, borderRadius: 14, padding: 14 },
-  gainValue: { fontFamily: fonts.display, fontSize: 28, color: colors.ink },
+  box: { flex: 1, backgroundColor: colors.surface, borderRadius: radius.lg, padding: 16, gap: 8 },
+  boxValue: { fontFamily: fonts.display, fontSize: 72, lineHeight: 72, letterSpacing: -2 },
+  gain: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.yellow, borderRadius: radius.md, padding: 14 },
+  gainValue: { fontFamily: fonts.display, fontSize: 36, color: colors.ink },
+  section: { fontFamily: fonts.display, fontSize: 21, color: colors.ink, marginTop: 12 },
   row: { minHeight: 48, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   rowLabel: { fontFamily: fonts.body, fontSize: 15, color: colors.ink },
-  rowValue: { fontFamily: fonts.mono, fontSize: 14, color: colors.ink },
+  rowValue: { fontFamily: fonts.displayBold, fontSize: 17, color: colors.ink },
 });

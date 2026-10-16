@@ -22,7 +22,7 @@ export default function Graduation() {
           <Medal id="SILVER" size={96} />
           <Medal id="GOLD" size={84} />
         </View>
-        <Label color={colors.yellow}>21 GÜN TAMAMLANDI</Label>
+        <Label color={colors.yellow}>21 gün tamamlandı</Label>
         <Text accessibilityRole="header" style={styles.title}>{g.title}</Text>
         <Body color={colors.mutedOnInk} size={16} style={{ textAlign: 'center' }}>{g.titleTr}</Body>
         <View style={{ gap: 12, alignSelf: 'stretch' }}>
@@ -35,7 +35,7 @@ export default function Graduation() {
         </View>
 
         <Card style={styles.offer}>
-          <Label>KEEP YOUR ENGLISH TRAVEL READY</Label>
+          <Label>Keep your English travel ready</Label>
           <Body size={15}>
             Öğrendiklerini unutma: sahneleri her seferinde yeni sürprizlerle tekrar oyna, raporlarındaki kalıplarla kısa
             tekrarlar yap. Haftada iki pratik yeter.
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   body: { alignItems: 'center', padding: 20, gap: 16 },
   medals: { flexDirection: 'row', alignItems: 'flex-end', gap: 4 },
   title: { fontFamily: fonts.display, fontSize: 34, lineHeight: 38, color: colors.surface, textAlign: 'center' },
-  line: { backgroundColor: colors.inkSoft, borderRadius: 14, padding: 14, gap: 4 },
+  line: { backgroundColor: colors.inkSoft, borderRadius: 8, padding: 14, gap: 4 },
   lineEn: { fontFamily: fonts.bodyBold, fontSize: 16, lineHeight: 22, color: colors.surface },
   lineTr: { fontFamily: fonts.body, fontSize: 14, lineHeight: 20, color: colors.mutedOnInk },
   offer: { alignSelf: 'stretch', gap: 10 },

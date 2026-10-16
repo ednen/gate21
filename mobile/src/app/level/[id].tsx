@@ -30,7 +30,7 @@ export default function LevelScreen() {
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView contentContainerStyle={styles.body}>
-        <Label color={colors.yellow}>{`${info.week}. HAFTA TAMAMLANDI`}</Label>
+        <Label color={colors.yellow}>{`${info.week}. hafta tamamlandı`}</Label>
         <Animated.View style={{ transform: [{ scale }] }}>
           <Medal id={info.id as LevelId} size={190} label={info.title} />
         </Animated.View>
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
   body: { alignItems: 'center', padding: 20, gap: 16 },
   title: { fontFamily: fonts.display, fontSize: 36, color: colors.surface, textAlign: 'center' },
   tagline: { fontFamily: fonts.displayBold, fontSize: 20, textAlign: 'center' },
-  card: { alignSelf: 'stretch', backgroundColor: colors.inkSoft, borderRadius: 18, padding: 18, gap: 8 },
+  card: { alignSelf: 'stretch', backgroundColor: colors.inkSoft, borderRadius: 8, padding: 18, gap: 8 },
   message: { fontFamily: fonts.bodyBold, fontSize: 18, lineHeight: 25, color: colors.surface },
 });

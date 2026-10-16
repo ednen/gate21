@@ -70,11 +70,11 @@ public class MembershipService {
     public Offers offers(UUID userId) {
         return new Offers(status(userId), false, List.of(
             new Offer(Plan.JOURNEY.name(), "Gate 21 Journey", "21 günlük yolculuk", props.journeyPrice(),
-                "Tek seferlik · 60 gün erişim",
+                "Tek seferlik, 60 gün erişim",
                 List.of("21 günün bütün dersleri (Bronz, Gümüş, Altın)", "Her durakta yapay zekâlı sahneler ve raporlar",
                     "Full Trip simülasyonu ve final testi", "Başlangıç paketi ve SOS her zaman ücretsiz")),
             new Offer(Plan.KEEP_READY.name(), "Keep your English travel ready", "İngilizcen seyahate hazır kalsın",
-                props.keepReadyPrice(), "Aylık · yolculuğu bitirenlere",
+                props.keepReadyPrice(), "Aylık, yolculuğu bitirenlere",
                 List.of("Bütün sahneleri yeniden oyna, her seferinde yeni sürprizler", "Raporlarındaki kalıplarla kısa tekrarlar",
                     "Haftada 2 pratik hedefi ve hatırlatmalar", "Yeni şehirler ve bölümler eklendikçe"))));
     }

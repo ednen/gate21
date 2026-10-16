@@ -58,7 +58,7 @@ export default function MembershipScreen() {
         </Pressable>
       </View>
       <ScrollView contentContainerStyle={styles.body}>
-        <Label>ÜYELİK</Label>
+        <Label>Üyelik</Label>
         <Title size={30}>{lockedChapter ? `${lockedChapter.day}. gün seni bekliyor` : 'Yolculuğuna devam et'}</Title>
         <Body color={colors.muted}>
           {`Başlangıç paketi, SOS ve ilk ${manifest().freeDays} gün herkese ücretsiz. Bütün yolculuk ve sahneler için bir plan seç.`}
@@ -66,7 +66,7 @@ export default function MembershipScreen() {
         {current?.active ? (
           <Card style={{ backgroundColor: colors.greenTint }}>
             <Body color={colors.green}>
-              {`Şu anki planın: ${current.plan === 'JOURNEY' ? '21 günlük yolculuk' : 'Keep your English travel ready'}${current.expiresAt ? ` · ${new Date(current.expiresAt).toLocaleDateString('tr-TR')} tarihine kadar` : ''}`}
+              {`Şu anki planın: ${current.plan === 'JOURNEY' ? '21 günlük yolculuk' : 'Keep your English travel ready'}${current.expiresAt ? `, ${new Date(current.expiresAt).toLocaleDateString('tr-TR')} tarihine kadar` : ''}`}
             </Body>
           </Card>
         ) : null}
@@ -114,9 +114,9 @@ export default function MembershipScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
   top: { paddingHorizontal: 16, paddingTop: 8 },
-  close: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.surface, alignItems: 'center', justifyContent: 'center' },
+  close: { width: 44, height: 44, borderRadius: 8, backgroundColor: colors.surface, alignItems: 'center', justifyContent: 'center' },
   body: { padding: 16, gap: 14 },
-  plan: { backgroundColor: colors.surface, borderRadius: 18, padding: 16, gap: 8, borderWidth: 2, borderColor: colors.surface },
+  plan: { backgroundColor: colors.surface, borderRadius: 8, padding: 16, gap: 8, borderWidth: 2, borderColor: colors.surface },
   planOn: { borderColor: colors.ink },
   planTop: { flexDirection: 'row', gap: 10, alignItems: 'flex-start', marginBottom: 4 },
   planTitle: { fontFamily: fonts.displayBold, fontSize: 20, color: colors.ink },

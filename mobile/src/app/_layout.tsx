@@ -1,19 +1,17 @@
-// Per-weight imports so only the 8 weights in use are bundled, not whole families.
-import { BricolageGrotesque_500Medium } from '@expo-google-fonts/bricolage-grotesque/500Medium';
-import { BricolageGrotesque_700Bold } from '@expo-google-fonts/bricolage-grotesque/700Bold';
-import { BricolageGrotesque_800ExtraBold } from '@expo-google-fonts/bricolage-grotesque/800ExtraBold';
-import { DMSans_400Regular } from '@expo-google-fonts/dm-sans/400Regular';
-import { DMSans_500Medium } from '@expo-google-fonts/dm-sans/500Medium';
-import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
-import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono/500Medium';
-import { JetBrainsMono_700Bold } from '@expo-google-fonts/jetbrains-mono/700Bold';
+// Per-weight imports so only the weights in use are bundled, not whole families.
+import { IBMPlexSans_400Regular } from '@expo-google-fonts/ibm-plex-sans/400Regular';
+import { IBMPlexSans_500Medium } from '@expo-google-fonts/ibm-plex-sans/500Medium';
+import { IBMPlexSans_600SemiBold } from '@expo-google-fonts/ibm-plex-sans/600SemiBold';
+import { IBMPlexSansCondensed_500Medium } from '@expo-google-fonts/ibm-plex-sans-condensed/500Medium';
+import { IBMPlexSansCondensed_600SemiBold } from '@expo-google-fonts/ibm-plex-sans-condensed/600SemiBold';
+import { IBMPlexSansCondensed_700Bold } from '@expo-google-fonts/ibm-plex-sans-condensed/700Bold';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
 import { createElement, type CSSProperties } from 'react';
-import { AppState, Platform } from 'react-native';
+import { AppState, Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useAuth } from '@/lib/auth';
@@ -42,13 +40,13 @@ export default function RootLayout() {
 function PhoneFrame() {
   const page: CSSProperties = {
     position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48,
-    background: '#14171C', fontFamily: 'system-ui, sans-serif',
+    background: '#232A31', fontFamily: 'IBMPlexSansCondensed_500Medium, system-ui, sans-serif',
   };
   const phone: CSSProperties = {
-    width: 390, height: 'min(844px, calc(100vh - 48px))', borderRadius: 48, border: '12px solid #2A2F37',
+    width: 390, height: 'min(844px, calc(100vh - 48px))', borderRadius: 44, border: '10px solid #11151A',
     boxShadow: '0 30px 80px rgba(0,0,0,.5)', overflow: 'hidden', background: '#fff',
   };
-  const note: CSSProperties = { color: '#C9CED6', maxWidth: 260, fontSize: 15, lineHeight: 1.5 };
+  const note: CSSProperties = { color: '#AEB7C0', maxWidth: 260, fontSize: 16, lineHeight: 1.5 };
   return createElement(
     'div',
     { style: page },
@@ -61,7 +59,7 @@ function PhoneFrame() {
     createElement(
       'div',
       { style: note },
-      createElement('div', { style: { color: '#FFC629', fontWeight: 700, letterSpacing: 2, fontSize: 12, marginBottom: 8 } }, 'GATE 21 · DEMO'),
+      createElement('div', { style: { color: '#FFC72C', fontWeight: 700, fontSize: 18, marginBottom: 8 } }, 'Gate 21, demo'),
       'Telefonda nasıl görünüyorsa burada da öyle. En iyi deneyim için bu linki telefonunda aç. Ses için Chrome ya da Safari kullan; mikrofon izni ister.',
     ),
   );
@@ -69,14 +67,12 @@ function PhoneFrame() {
 
 function App() {
   const [fontsLoaded] = useFonts({
-    BricolageGrotesque_500Medium,
-    BricolageGrotesque_700Bold,
-    BricolageGrotesque_800ExtraBold,
-    DMSans_400Regular,
-    DMSans_500Medium,
-    DMSans_700Bold,
-    JetBrainsMono_500Medium,
-    JetBrainsMono_700Bold,
+    IBMPlexSans_400Regular,
+    IBMPlexSans_500Medium,
+    IBMPlexSans_600SemiBold,
+    IBMPlexSansCondensed_500Medium,
+    IBMPlexSansCondensed_600SemiBold,
+    IBMPlexSansCondensed_700Bold,
   });
   const status = useAuth((s) => s.status);
   const bootstrap = useAuth((s) => s.bootstrap);
@@ -118,6 +114,9 @@ function App() {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <StatusBar style="auto" />
+        {/* On a wide browser window the app keeps a phone-like column instead of stretching. */}
+        <View style={styles.page}>
+          <View style={styles.column}>
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.ground } }}>
           <Stack.Screen name="home" options={{ animation: 'none' }} />
           <Stack.Screen name="passport" options={{ animation: 'none' }} />
@@ -128,7 +127,21 @@ function App() {
           <Stack.Screen name="progress" options={{ animation: 'none' }} />
           <Stack.Screen name="consent" options={{ presentation: 'modal' }} />
         </Stack>
+          </View>
+        </View>
       </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  page: { flex: 1, backgroundColor: '#D7DBD5' },
+  column: {
+    flex: 1,
+    width: '100%',
+    maxWidth: 560,
+    alignSelf: 'center',
+    backgroundColor: colors.ground,
+    ...(Platform.OS === 'web' ? { borderLeftWidth: 1, borderRightWidth: 1, borderColor: '#C9CEC6' } : null),
+  },
+});

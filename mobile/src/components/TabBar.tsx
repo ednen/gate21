@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fonts } from '@/theme';
 
 import { Icon, type IconName } from './Icon';
+import { isHovered } from './ui';
 
 type Tab = 'home' | 'words' | 'passport' | 'practice' | 'sos' | 'progress';
 
@@ -20,11 +21,11 @@ const TABS: { key: Tab; label: string; icon: IconName; href: '/home' | '/words' 
 export function TabBar({ active }: { active: Tab }) {
   const insets = useSafeAreaInsets();
   return (
-    <View accessibilityRole="tablist" style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 8) }]}>
+    <View accessibilityRole="tablist" style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 6) }]}>
       {TABS.map((tab) => {
         const selected = tab.key === active;
-        const tint = selected ? (tab.key === 'sos' ? colors.red : colors.ink) : colors.muted;
-        const fill = selected ? (tab.key === 'sos' ? colors.redTint : colors.yellow) : 'none';
+        const sos = tab.key === 'sos';
+        const tint = sos ? colors.red : selected ? colors.ink : colors.muted;
         return (
           <Pressable
             key={tab.key}
@@ -32,10 +33,12 @@ export function TabBar({ active }: { active: Tab }) {
             accessibilityState={{ selected }}
             accessibilityLabel={tab.label}
             onPress={() => !selected && router.replace(tab.href)}
-            style={styles.tab}
+            style={(st) => [styles.tab, isHovered(st) && !selected && { backgroundColor: colors.paper }]}
           >
-            <Icon name={tab.icon} size={22} color={tint} fill={fill} strokeWidth={1.8} />
-            <Text style={[styles.text, { color: tint, fontFamily: selected ? fonts.bodyBold : fonts.bodyMedium }]}>{tab.label}</Text>
+            {/* "You are here": a yellow bar on the top edge, like the marker on a sign. */}
+            <View style={[styles.marker, selected && { backgroundColor: sos ? colors.red : colors.yellow }]} />
+            <Icon name={tab.icon} size={22} color={tint} strokeWidth={selected ? 2.2 : 1.8} />
+            <Text style={[styles.text, { color: tint, fontFamily: selected ? fonts.displayBold : fonts.displayMedium }]}>{tab.label}</Text>
           </Pressable>
         );
       })}
@@ -49,8 +52,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: colors.line,
-    paddingTop: 8,
   },
-  tab: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 4, minHeight: 52 },
-  text: { fontSize: 10 },
+  tab: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 3, minHeight: 56, paddingTop: 6 },
+  marker: { position: 'absolute', top: -1, left: 10, right: 10, height: 3, backgroundColor: 'transparent' },
+  text: { fontSize: 12 },
 });

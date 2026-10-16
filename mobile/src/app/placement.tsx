@@ -17,6 +17,8 @@ import { colors, fonts } from '@/theme';
 
 type Phase = 'intro' | 'questions' | 'speaking' | 'result';
 
+const TAG_TR: Record<string, string> = { AIRPORT: 'Havalimanı', HOTEL: 'Otel', RESTAURANT: 'Restoran', TAXI: 'Taksi', SHOP: 'Alışveriş', TRANSPORT: 'Ulaşım' };
+
 /** The 2-minute travel check: 5 questions + 2 speaking tasks. Also the Day 21 final check. */
 export default function Placement() {
   const { kind } = useLocalSearchParams<{ kind?: string }>();
@@ -88,9 +90,9 @@ export default function Placement() {
         <View style={styles.introBody}>
           <Logo />
           <View style={{ flex: 1, justifyContent: 'center', gap: 18 }}>
-            <Label color={colors.yellow}>{isFinal ? '21. GÜN · FİNAL TESTİ' : '2 DAKİKALIK SEYAHAT TESTİ'}</Label>
+            <Label color={colors.yellow}>{isFinal ? '21. gün, final testi' : '2 dakikalık seyahat testi'}</Label>
             <Text accessibilityRole="header" style={styles.introTitle}>You're flying tomorrow.</Text>
-            <Body color="#D4D9DF" size={19}>Bu durumlarla İngilizce başa çıkabilir misin?</Body>
+            <Body color={colors.mutedOnInk} size={19}>Bu durumlarla İngilizce başa çıkabilir misin?</Body>
             <View style={styles.chips}>
               {['5 kısa soru', '2 konuşma görevi', 'yaklaşık 2 dakika'].map((c) => (
                 <Text key={c} style={styles.chip}>{c}</Text>
@@ -107,7 +109,7 @@ export default function Placement() {
     return (
       <SafeAreaView style={styles.screen}>
         <ScrollView contentContainerStyle={styles.body}>
-          <Label>SEYAHAT İNGİLİZCESİ PUANIN</Label>
+          <Label>Seyahat İngilizcesi puanın</Label>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
             <Text style={styles.bigScore}>{result.score}</Text>
             <Text style={styles.outOf}>/100</Text>
@@ -117,13 +119,13 @@ export default function Placement() {
           {isFinal ? (
             me.data?.placementScore != null ? (
               <Card>
-                <Label>ÖNCE → SONRA</Label>
+                <Label>Önce ve sonra</Label>
                 <Text style={styles.beforeAfter}>{me.data.placementScore} → {result.score}</Text>
               </Card>
             ) : null
           ) : (
             <Card style={{ borderWidth: 2, borderColor: colors.yellow, gap: 4 }}>
-              <Label>ÖNERİLEN BAŞLANGIÇ</Label>
+              <Label>Önerilen başlangıç</Label>
               <Title size={20}>
                 {result.starter ? 'Başlangıç paketi: 5 kısa ders' : `${result.level} — ${result.startDayApplied ? result.startDay : 1}. gün`}
               </Title>
@@ -132,7 +134,7 @@ export default function Placement() {
               ) : null}
             </Card>
           )}
-          <Label style={{ marginTop: 6 }}>{`CEVAPLARIN · ${result.correct} / ${result.total} DOĞRU`}</Label>
+          <Label style={{ marginTop: 6 }}>{`Cevapların: ${result.correct} / ${result.total} doğru`}</Label>
           {questions.map((q, i) => {
             const mine = answers[i] ?? null;
             const right = mine === q.answer;
@@ -162,8 +164,8 @@ export default function Placement() {
       <ScrollView contentContainerStyle={styles.body}>
         <View style={{ gap: 10 }}>
           <View style={styles.progressRow}>
-            <Label>{`SORU ${phase === 'questions' ? qi + 1 : questions.length + si + 1} / ${total}`}</Label>
-            <Label>{phase === 'questions' ? questions[qi].tag ?? '' : 'KONUŞMA'}</Label>
+            <Label>{`Soru ${phase === 'questions' ? qi + 1 : questions.length + si + 1} / ${total}`}</Label>
+            <Label>{phase === 'questions' ? TAG_TR[questions[qi].tag ?? ''] ?? '' : 'Konuşma'}</Label>
           </View>
           <ProgressBar value={done / total} />
         </View>
@@ -192,7 +194,7 @@ export default function Placement() {
           <>
             <Body color={colors.muted} size={16}>{placement.speaking[si].situationTr}</Body>
             <Card style={{ gap: 10 }}>
-              <Label>SESLİ SÖYLE</Label>
+              <Label>Sesli söyle</Label>
               <Title size={26}>{`“${placement.speaking[si].phrase}”`}</Title>
             </Card>
             <SpeakPanel
@@ -232,9 +234,9 @@ const styles = StyleSheet.create({
     color: colors.surface,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: 20,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#4A515C',
+    borderColor: '#45505B',
   },
   body: { flexGrow: 1, padding: 20, gap: 18 },
   progressRow: { flexDirection: 'row', justifyContent: 'space-between' },

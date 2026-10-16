@@ -9,6 +9,7 @@
     "MATCH",
     "RECOGNIZE",
     "USE",
+    "DIRECTIONS",
     "SURVIVE"
   ],
   "words": [
@@ -81,6 +82,27 @@
       "picture": "map",
       "example": "Which way is Central Park?",
       "exampleTr": "Central Park hangi tarafta?"
+    },
+    {
+      "en": "block",
+      "tr": "blok (iki sokak arası)",
+      "picture": "block",
+      "example": "It's two blocks from here.",
+      "exampleTr": "Buradan iki blok ötede."
+    },
+    {
+      "en": "avenue",
+      "tr": "cadde (bulvar)",
+      "picture": "street-sign",
+      "example": "Walk up 2nd Avenue.",
+      "exampleTr": "2. Cadde boyunca yürü."
+    },
+    {
+      "en": "onto",
+      "tr": "…-e/-a (sokağa dönerken)",
+      "picture": "turn-right",
+      "example": "Turn right onto 44th Street.",
+      "exampleTr": "44. Sokağa sağa dön."
     }
   ],
   "pronounce": [
@@ -101,6 +123,12 @@
       "ipa": "/ˌʌpˈtaʊn/",
       "stress": "up-TOWN",
       "tipTr": "Vurgu sonda: ap-TAUN."
+    },
+    {
+      "word": "avenue",
+      "ipa": "/ˈæv.ə.nuː/",
+      "stress": "AV-uh-noo",
+      "tipTr": "Vurgu başta: E-vı-nuu. \"Avenü\" değil."
     }
   ],
   "match": [
@@ -161,5 +189,189 @@
   },
   "survive": {
     "scenario": "transport-silver"
+  },
+  "directions": {
+    "titleTr": "Sokak adlarıyla yürü",
+    "town": {
+      "streetsH": [
+        "45th Street",
+        "44th Street",
+        "43rd Street",
+        "42nd Street"
+      ],
+      "streetsV": [
+        "1st Avenue",
+        "2nd Avenue",
+        "3rd Avenue",
+        "4th Avenue"
+      ],
+      "roundabout": null,
+      "places": [
+        {
+          "id": "park",
+          "name": "City Park",
+          "kind": "park",
+          "block": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "museum",
+          "name": "Museum",
+          "kind": "museum",
+          "block": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "theatre",
+          "name": "Theater",
+          "kind": "theatre",
+          "block": [
+            2,
+            0
+          ]
+        },
+        {
+          "id": "deli",
+          "name": "Deli",
+          "kind": "cafe",
+          "block": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "bank",
+          "name": "Bank",
+          "kind": "bank",
+          "block": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "drugstore",
+          "name": "Drugstore",
+          "kind": "pharmacy",
+          "block": [
+            2,
+            1
+          ]
+        },
+        {
+          "id": "post",
+          "name": "Post Office",
+          "kind": "post",
+          "block": [
+            0,
+            2
+          ]
+        },
+        {
+          "id": "hotel",
+          "name": "Hotel",
+          "kind": "hotel",
+          "block": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "subway",
+          "name": "Subway",
+          "kind": "station",
+          "block": [
+            2,
+            2
+          ]
+        }
+      ],
+      "water": "west"
+    },
+    "rounds": [
+      {
+        "goal": "museum",
+        "start": [
+          0,
+          3
+        ],
+        "heading": "N",
+        "steps": [
+          {
+            "say": "Go straight up 1st Avenue for two blocks.",
+            "moves": [
+              "straight",
+              "straight"
+            ]
+          },
+          {
+            "say": "Turn right onto 44th Street.",
+            "moves": [
+              "right"
+            ]
+          }
+        ],
+        "arrive": "The museum is on your left. You can't miss it.",
+        "arriveTr": "Müze solunda. Gözden kaçıramazsın."
+      },
+      {
+        "goal": "hotel",
+        "start": [
+          3,
+          0
+        ],
+        "heading": "S",
+        "steps": [
+          {
+            "say": "Go straight down 4th Avenue.",
+            "moves": [
+              "straight"
+            ]
+          },
+          {
+            "say": "Turn right onto 44th Street.",
+            "moves": [
+              "right"
+            ]
+          },
+          {
+            "say": "Then take the first left.",
+            "moves": [
+              "left"
+            ]
+          }
+        ],
+        "arrive": "The hotel is on your right, on 3rd Avenue.",
+        "arriveTr": "Otel sağında, 3. Cadde üzerinde."
+      },
+      {
+        "goal": "subway",
+        "start": [
+          1,
+          3
+        ],
+        "heading": "E",
+        "steps": [
+          {
+            "say": "Walk along 42nd Street to 4th Avenue.",
+            "moves": [
+              "straight",
+              "straight"
+            ]
+          },
+          {
+            "say": "Turn left onto 4th Avenue.",
+            "moves": [
+              "left"
+            ]
+          }
+        ],
+        "arrive": "The subway entrance is on your left, on the corner.",
+        "arriveTr": "Metro girişi solunda, köşede."
+      }
+    ]
   }
 }

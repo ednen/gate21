@@ -9,7 +9,7 @@ export type IconName =
 type Props = { name: IconName; size?: number; color?: string; fill?: string; strokeWidth?: number };
 
 /** Stroke icons drawn inline (no icon font), matching the design's line weight. */
-export function Icon({ name, size = 22, color = '#14171C', fill = 'none', strokeWidth = 1.9 }: Props) {
+export function Icon({ name, size = 22, color = '#232A31', fill = 'none', strokeWidth = 1.9 }: Props) {
   const common = { stroke: color, strokeWidth, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill };
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" accessibilityElementsHidden importantForAccessibility="no">

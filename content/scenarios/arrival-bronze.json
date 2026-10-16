@@ -290,6 +290,41 @@
           "reply": "That's fine, I can check it here."
         }
       ]
+    },
+    {
+      "id": "visa",
+      "titleTr": "Vizeni soruyor",
+      "intro": "And where's your visa? I can't see it in your passport.",
+      "instruction": "The officer cannot find the visa. The traveller shows the page, shows an e-visa on the phone, or asks the officer to repeat.",
+      "retryReply": "I need to see your visa, please.",
+      "options": [
+        {
+          "text": "It's on page five.",
+          "keywords": [
+            "page",
+            "five"
+          ],
+          "reply": "Ah, there it is. Thank you."
+        },
+        {
+          "text": "Here's my e-visa, on my phone.",
+          "keywords": [
+            "e-visa",
+            "phone",
+            "here"
+          ],
+          "reply": "Let me scan it… yes, that's fine."
+        },
+        {
+          "text": "Sorry, could you repeat that?",
+          "keywords": [
+            "repeat",
+            "again",
+            "sorry"
+          ],
+          "reply": "Your visa — the page with your visa. Ah, here it is. Fine."
+        }
+      ]
     }
   ],
   "twistSlots": [
@@ -299,7 +334,8 @@
         "too-fast",
         "show-booking",
         "no-card",
-        "boarding-pass"
+        "boarding-pass",
+        "visa"
       ]
     }
   ],

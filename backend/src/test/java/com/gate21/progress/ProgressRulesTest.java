@@ -65,6 +65,7 @@ class ProgressRulesTest {
         assertThat(Step.DISCOVER.bit()).isEqualTo(0b1);
         assertThat(Step.SURVIVE.bit()).isEqualTo(0b100000);
         assertThat(Step.FORM.bit()).isEqualTo(0b100000000);
+        assertThat(Step.DIRECTIONS.bit()).isEqualTo(0b1000000000);
         assertThat(ProgressService.stepsIn(Step.MATCH.bit() | Step.DISCOVER.bit())).containsExactly(Step.DISCOVER, Step.MATCH);
     }
 }

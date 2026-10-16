@@ -31,6 +31,7 @@ import fullTrip from '../../../content/chapters/full-trip.json';
 import placementJson from '../../../content/placement.json';
 import sosJson from '../../../content/sos.json';
 import { apiGet } from './api';
+import type { Directions } from './directions';
 import type { ChapterKind, LevelId, Step } from './types';
 import { compareVersions } from './version';
 
@@ -99,6 +100,7 @@ export type Chapter = {
     situationTr: string;
     tiles: string[];
   };
+  directions?: Directions;
   survive?: { scenario: string };
 };
 

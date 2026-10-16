@@ -46,7 +46,7 @@ export default function Badge() {
   return (
     <SafeAreaView style={styles.screen}>
       <View style={{ alignItems: 'center', gap: 6 }}>
-        <Label color={colors.yellow}>{starter ? 'BAŞLANGIÇ DERSİ TAMAM' : 'BÖLÜM TAMAMLANDI'}</Label>
+        <Label color={colors.yellow}>{starter ? 'Başlangıç dersi tamam' : 'Durak tamamlandı'}</Label>
         <Text accessibilityRole="header" style={styles.title}>
           {starter ? `${info?.titleTr ?? ''}: bir adım daha hazırsın.` : `${info?.titleTr ?? ''} artık senin için sorun değil.`}
         </Text>
@@ -99,7 +99,7 @@ export default function Badge() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ink, padding: 20, gap: 20 },
   title: { fontFamily: fonts.display, fontSize: 30, lineHeight: 34, color: colors.surface, textAlign: 'center' },
-  page: { flex: 1, backgroundColor: colors.paper, borderRadius: 22, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  page: { flex: 1, backgroundColor: colors.paper, borderRadius: 8, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   pageLabel: { position: 'absolute', top: 18, fontFamily: fonts.monoMedium, fontSize: 10, letterSpacing: 1.4, color: colors.disabled },
   starsRow: { alignItems: 'center', gap: 8 },
   starsText: { fontFamily: fonts.bodyMedium, fontSize: 14, color: '#C9CFD6', textAlign: 'center' },

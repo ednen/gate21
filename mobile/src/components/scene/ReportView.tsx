@@ -15,11 +15,11 @@ export function ReportView({ report }: { report: SceneReport }) {
       <Card style={{ gap: 10 }}>
         <View style={styles.scoreRow}>
           <View style={{ gap: 2 }}>
-            <Label>SAHNE PUANI</Label>
+            <Label>Sahne puanı</Label>
             <Text style={styles.meta}>
               {report.failedTurns === 0 && report.hintsUsed === 0
                 ? 'Hiç takılmadan, ipucusuz!'
-                : `${report.failedTurns} tekrar · ${report.hintsUsed} ipucu`}
+                : `${report.failedTurns} tekrar, ${report.hintsUsed} ipucu`}
             </Text>
           </View>
           <Text style={[styles.score, { color: tone }]} accessibilityLabel={`Sahne puanı ${report.score}`}>
@@ -29,7 +29,7 @@ export function ReportView({ report }: { report: SceneReport }) {
         <ProgressBar value={report.score / 100} color={tone} track={colors.ground} height={8} />
       </Card>
 
-      <Label>DAHA DOĞAL SÖYLEYİŞ</Label>
+      <Label>Daha doğal söyleyiş</Label>
       <Card style={{ paddingVertical: 4 }}>
         {report.lines.map((line, i) => (
           <View key={i} style={[styles.line, i < report.lines.length - 1 && styles.divider]}>
@@ -51,13 +51,13 @@ export function ReportView({ report }: { report: SceneReport }) {
       </Card>
 
       <Card style={styles.hardest}>
-        <Label color={colors.red}>EN ZORLANDIĞIN AN</Label>
+        <Label color={colors.red}>En zorlandığın an</Label>
         <Text style={styles.hardestText}>{report.hardestTr}</Text>
       </Card>
 
       {report.phrases.length > 0 ? (
         <>
-          <Label>BİR DAHAKİNE KULLAN</Label>
+          <Label>Bir dahakine kullan</Label>
           <View style={{ gap: 8 }}>
             {report.phrases.map((p) => (
               <Pressable
@@ -68,7 +68,7 @@ export function ReportView({ report }: { report: SceneReport }) {
                 style={styles.phrase}
               >
                 <View style={styles.phraseIcon}>
-                  <Icon name="speaker" size={16} color={colors.yellow} />
+                  <Icon name="speaker" size={16} color={colors.ink} />
                 </View>
                 <View style={{ flex: 1, gap: 2 }}>
                   <Text style={styles.phraseEn}>{p.en}</Text>
@@ -86,9 +86,9 @@ export function ReportView({ report }: { report: SceneReport }) {
 const styles = StyleSheet.create({
   scoreRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   meta: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.muted },
-  score: { fontFamily: fonts.display, fontSize: 48, lineHeight: 50 },
+  score: { fontFamily: fonts.display, fontSize: 64, lineHeight: 64, letterSpacing: -2 },
   line: { paddingVertical: 12, gap: 6 },
-  divider: { borderBottomWidth: 1, borderBottomColor: colors.ground },
+  divider: { borderBottomWidth: 1, borderBottomColor: colors.line },
   lineTop: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
   mark: { width: 22, height: 22, borderRadius: 11, alignItems: 'center', justifyContent: 'center', marginTop: 1 },
   said: { flex: 1, fontFamily: fonts.body, fontSize: 15, lineHeight: 21, color: colors.ink },
@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
   betterRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginLeft: 32, minHeight: 32 },
   better: { flex: 1, fontFamily: fonts.bodyBold, fontSize: 16, lineHeight: 22, color: colors.ink },
   note: { marginLeft: 32, fontFamily: fonts.body, fontSize: 13, lineHeight: 18, color: colors.inkLine },
-  hardest: { gap: 6, borderWidth: 2, borderColor: colors.redTint },
+  hardest: { gap: 6, borderLeftWidth: 4, borderLeftColor: colors.red, borderRadius: 2 },
   hardestText: { fontFamily: fonts.bodyMedium, fontSize: 15, lineHeight: 21, color: colors.ink },
-  phrase: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, borderRadius: 14, backgroundColor: colors.surface },
-  phraseIcon: { width: 34, height: 34, borderRadius: 17, backgroundColor: colors.ink, alignItems: 'center', justifyContent: 'center' },
-  phraseEn: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink },
+  phrase: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: colors.line },
+  phraseIcon: { width: 34, height: 34, borderRadius: 8, borderWidth: 2, borderColor: colors.ink, alignItems: 'center', justifyContent: 'center' },
+  phraseEn: { fontFamily: fonts.displayBold, fontSize: 18, color: colors.ink },
   phraseTr: { fontFamily: fonts.body, fontSize: 13, color: colors.muted },
 });

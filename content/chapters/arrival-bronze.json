@@ -27,6 +27,13 @@
       "exampleTr": "Pasaport kontrolü nerede?"
     },
     {
+      "en": "visa",
+      "tr": "vize",
+      "picture": "visa",
+      "example": "Do I need a visa for the UK?",
+      "exampleTr": "Birleşik Krallık için vizeye ihtiyacım var mı?"
+    },
+    {
       "en": "holiday",
       "tr": "tatil",
       "picture": "sun",
@@ -149,6 +156,12 @@
       "ipa": "/ˈpɜː.pəs/",
       "stress": "PUR-puss",
       "tipTr": "Yazıldığı gibi \"pur-poz\" değil: PÖR-pıs. Sondaki e okunmaz."
+    },
+    {
+      "word": "visa",
+      "ipa": "/ˈviː.zə/",
+      "stress": "VEE-zuh",
+      "tipTr": "\"Vize\" değil: Vİİ-zı. Ortadaki s \"z\" okunur."
     }
   ],
   "match": [

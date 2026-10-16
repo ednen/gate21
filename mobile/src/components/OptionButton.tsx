@@ -2,6 +2,8 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, fonts } from '@/theme';
 
+import { isHovered } from './ui';
+
 type Props = {
   index: number;
   text: string;
@@ -27,7 +29,7 @@ export function OptionButton({ index, text, state, onPress, disabled }: Props) {
       accessibilityState={{ disabled: !!disabled, selected: state !== 'idle' }}
       disabled={disabled}
       onPress={onPress}
-      style={[styles.option, { borderColor: look.border, backgroundColor: look.bg }]}
+      style={(st) => [styles.option, { borderColor: look.border, backgroundColor: look.bg }, state === 'idle' && !disabled && (st.pressed || isHovered(st)) && { borderColor: colors.ink }]}
     >
       <View style={[styles.badge, { backgroundColor: look.badgeBg }]}>
         <Text style={[styles.badgeText, { color: look.badgeFg }]}>{look.mark}</Text>
@@ -39,16 +41,16 @@ export function OptionButton({ index, text, state, onPress, disabled }: Props) {
 
 const styles = StyleSheet.create({
   option: {
-    minHeight: 60,
-    borderWidth: 2,
-    borderRadius: 14,
+    minHeight: 58,
+    borderWidth: 1.5,
+    borderRadius: 6,
     paddingHorizontal: 14,
     paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 14,
   },
-  badge: { width: 30, height: 30, borderRadius: 8, alignItems: 'center', justifyContent: 'center' },
-  badgeText: { fontFamily: fonts.mono, fontSize: 13 },
+  badge: { width: 28, height: 28, borderRadius: 3, alignItems: 'center', justifyContent: 'center' },
+  badgeText: { fontFamily: fonts.display, fontSize: 15 },
   text: { flex: 1, fontFamily: fonts.bodyMedium, fontSize: 16, color: colors.ink },
 });

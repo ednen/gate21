@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Icon } from '@/components/Icon';
+import { DirectionsStep } from '@/components/lesson/DirectionsStep';
 import {
   DialogStep,
   DiscoverStep,
@@ -15,13 +16,14 @@ import {
   type StepProps,
   UseStep,
 } from '@/components/lesson/Steps';
-import { Body, Button, Card, Label, Title } from '@/components/ui';
+import { cityTr } from '@/components/Journey';
+import { Body, Button, isHovered, Stations, Title } from '@/components/ui';
 import { canPlay, chapter as getChapter, chapterInfo, level, manifest, stop } from '@/lib/content';
 import { recordStep } from '@/lib/progress';
 import { useMe } from '@/lib/queries';
 import { accentForWeek, setDefaultAccent } from '@/lib/voice';
 import type { Step } from '@/lib/types';
-import { colors, fonts } from '@/theme';
+import { colors, fonts, gutter, lineColor, radius } from '@/theme';
 
 const NAMES: Record<Step, string> = {
   DISCOVER: 'Tanış',
@@ -32,7 +34,8 @@ const NAMES: Record<Step, string> = {
   FORM: 'Form',
   SPEAK: 'Söyle',
   USE: 'Kullan',
-  SURVIVE: 'Survive',
+  DIRECTIONS: 'Yol tarifi',
+  SURVIVE: 'Sahne',
 };
 
 const STEP_VIEWS: Partial<Record<Step, (props: StepProps) => ReactNode>> = {
@@ -44,10 +47,11 @@ const STEP_VIEWS: Partial<Record<Step, (props: StepProps) => ReactNode>> = {
   FORM: FormStep,
   SPEAK: SpeakStep,
   USE: UseStep,
+  DIRECTIONS: DirectionsStep,
 };
 
 export default function Lesson() {
-  const { chapter: slug } = useLocalSearchParams<{ chapter: string }>();
+  const { chapter: slug, step: startAt } = useLocalSearchParams<{ chapter: string; step?: string }>();
   const chapter = getChapter(slug);
   const info = chapterInfo(slug);
   // Words and sentences are heard in the accent of the week's city.
@@ -57,7 +61,8 @@ export default function Lesson() {
   }, [info]);
   const me = useMe();
   const consent = me.data?.voiceConsent ?? false;
-  const [index, setIndex] = useState(0);
+  // ?step=DIRECTIONS opens a lesson at that step (used by the demo and for testing).
+  const [index, setIndex] = useState(() => Math.max(0, chapter?.steps.indexOf((startAt ?? '') as Step) ?? 0));
 
   // Opening a chapter outside the learner's plan leads to the membership page instead.
   const allowed = !info || !me.data || canPlay(info, me.data.membership.active, manifest().freeDays);
@@ -82,10 +87,11 @@ export default function Lesson() {
   const simulation = info.kind === 'simulation';
   const lvl = level(info.week);
   const header = starter
-    ? `BAŞLANGIÇ · ${info.titleTr.toUpperCase()}`
+    ? `Başlangıç paketi, ${info.titleTr}`
     : simulation
-      ? 'FİNAL · BÜTÜN YOLCULUK'
-      : `${info.day}. GÜN · ${(stop(info.stop)?.title ?? info.title).toUpperCase()} · ${lvl?.id ?? ''}`;
+      ? 'Final, bütün yolculuk'
+      : `${info.day}. gün, ${stop(info.stop)?.title ?? info.title}, ${cityTr(lvl?.trip)}`;
+  const line = lineColor(starter ? 0 : info.week);
 
   const done = (score: number | null) => {
     void recordStep(chapter.slug, step, score);
@@ -101,45 +107,48 @@ export default function Lesson() {
     <SafeAreaView edges={['top', 'bottom']} style={styles.screen}>
       <View style={styles.header}>
         <View style={styles.headerRow}>
-          <Pressable accessibilityRole="button" accessibilityLabel="Bölümü kapat" onPress={() => router.back()} style={styles.close}>
-            <Icon name="close" size={20} strokeWidth={2} />
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Bölümü kapat"
+            onPress={() => router.back()}
+            style={(st) => [styles.close, (st.pressed || isHovered(st)) && { backgroundColor: colors.line }]}
+          >
+            <Icon name="close" size={22} strokeWidth={2.2} />
           </Pressable>
-          <View style={{ alignItems: 'center', gap: 2, flex: 1 }}>
-            <Label style={{ textAlign: 'center' }}>{header}</Label>
+          <View style={{ flex: 1, gap: 1 }}>
             <Text style={styles.stepName}>{NAMES[step]}</Text>
+            <Text style={styles.where} numberOfLines={1}>{header}</Text>
           </View>
           <Text style={styles.count} accessibilityLabel={`${steps.length} adımdan ${index + 1}.`}>
-            {`${index + 1}/${steps.length}`}
+            <Text style={{ color: colors.ink }}>{index + 1}</Text>
+            {` / ${steps.length}`}
           </Text>
         </View>
-        {steps.length > 1 ? (
-          <View style={styles.bars}>
-            {steps.map((s, i) => (
-              <View key={s} style={[styles.bar, { backgroundColor: i <= index ? colors.ink : colors.line }]} />
-            ))}
-          </View>
-        ) : null}
+        {steps.length > 1 ? <Stations total={steps.length} done={index} color={line} /> : null}
       </View>
 
       <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
         {step === 'SURVIVE' ? (
-          <View style={{ gap: 16 }}>
-            <Text style={styles.surviveTag}>SURVIVE</Text>
-            <Title>{simulation ? 'Bütün bir yolculuk' : 'Gerçek hayat simülasyonu'}</Title>
+          <View style={{ gap: 18 }}>
+            <View style={styles.sceneSign}>
+              <Icon name="chat" size={20} color={colors.yellow} />
+              <Text style={styles.sceneSignText}>{simulation ? 'Final sahnesi' : 'Sahne'}</Text>
+            </View>
+            <Title size={34}>{simulation ? 'Bütün bir yolculuk' : 'Şimdi gerçeği gibi'}</Title>
             <Body color={colors.inkLine}>
               {simulation
-                ? 'Havalimanı, taksi, otel ve restoran — dört farklı kişi, dört farklı aksan ve yol boyunca birkaç sürpriz. Sonunda neyi hatırladığını da soracağız.'
-                : 'Şimdi öğrendiklerini bir sahnede kullanacaksın. Karşındaki kişi seninle konuşacak ve bir noktada beklenmedik bir şey olacak. Sonunda sana bir rapor vereceğiz.'}
+                ? 'Havalimanı, taksi, otel ve restoran: dört farklı kişi, dört farklı aksan ve yol boyunca birkaç sürpriz. Sonunda neyi hatırladığını da soracağız.'
+                : 'Öğrendiklerini bir konuşmada kullanacaksın. Karşındaki kişi seninle konuşacak ve bir noktada beklenmedik bir şey olacak. Sonunda bir rapor alırsın.'}
             </Body>
-            <Card style={{ gap: 6 }}>
-              <Label>GÖREV</Label>
+            <View style={[styles.missionBox, { borderLeftColor: line }]}>
+              <Text style={styles.missionLabel}>Görevin</Text>
               <Text style={styles.mission}>{chapter.mission}</Text>
               <Body size={14} color={colors.muted}>{chapter.missionTr}</Body>
-            </Card>
+            </View>
             <Button
               label="Sahneye başla"
               variant="accent"
-              icon="arrowRight"
+              icon="mic"
               onPress={() => router.replace(`/scene/${chapter.survive?.scenario}?chapter=${chapter.slug}`)}
             />
           </View>
@@ -153,25 +162,16 @@ export default function Lesson() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
-  header: { backgroundColor: colors.surface, borderBottomWidth: 1, borderBottomColor: colors.line, paddingHorizontal: 16, paddingVertical: 12, gap: 12 },
-  headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
-  close: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.ground, alignItems: 'center', justifyContent: 'center' },
-  stepName: { fontFamily: fonts.displayBold, fontSize: 18, color: colors.ink },
-  count: { width: 44, textAlign: 'right', fontFamily: fonts.mono, fontSize: 12, color: colors.ink },
-  bars: { flexDirection: 'row', gap: 4 },
-  bar: { flex: 1, height: 6, borderRadius: 3 },
-  body: { padding: 16, paddingBottom: 32 },
-  surviveTag: {
-    alignSelf: 'flex-start',
-    fontFamily: fonts.mono,
-    fontSize: 11,
-    letterSpacing: 1.4,
-    color: colors.yellow,
-    backgroundColor: colors.ink,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 6,
-    overflow: 'hidden',
-  },
-  mission: { fontFamily: fonts.displayBold, fontSize: 20, color: colors.ink },
+  header: { paddingHorizontal: gutter, paddingTop: 8, paddingBottom: 14, gap: 14, borderBottomWidth: 1, borderBottomColor: colors.line },
+  headerRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  close: { width: 40, height: 40, marginLeft: -8, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
+  stepName: { fontFamily: fonts.display, fontSize: 24, lineHeight: 26, color: colors.ink, letterSpacing: -0.3 },
+  where: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  count: { fontFamily: fonts.displayBold, fontSize: 16, color: colors.muted },
+  body: { padding: gutter, paddingBottom: 40 },
+  sceneSign: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: colors.ink, paddingHorizontal: 12, height: 36, borderRadius: radius.sm },
+  sceneSignText: { fontFamily: fonts.display, fontSize: 16, color: colors.surface },
+  missionBox: { borderLeftWidth: 4, paddingLeft: 14, gap: 4, paddingVertical: 2 },
+  missionLabel: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  mission: { fontFamily: fonts.display, fontSize: 22, lineHeight: 25, color: colors.ink },
 });

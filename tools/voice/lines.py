@@ -128,6 +128,10 @@ def collect():
                 add(accent, text, voice_for(line['who'], accent))
         if c.get('use'):
             add(accent, c['use']['phrase'], n)
+        for r in (c.get('directions') or {}).get('rounds', []):
+            for st in r['steps']:
+                add(accent, st['say'], n)
+            add(accent, r['arrive'], n)
         if c.get('speak'):
             add(accent, c['speak']['answer'], n)
 

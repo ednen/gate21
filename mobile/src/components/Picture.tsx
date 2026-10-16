@@ -132,6 +132,18 @@ const DRAWINGS: Record<string, ReactNode> = {
       <Ln x1={24} y1={46} x2={40} y2={46} />
     </>
   ),
+  visa: (
+    <>
+      <Rc x={8} y={10} w={48} h={44} r={3} fill={W} />
+      <Ln x1={32} y1={10} x2={32} y2={54} w={1.5} />
+      <Rc x={36} y={16} w={16} h={22} r={2} fill={GR} />
+      <T x={44} y={30} size={6} fill={W}>VISA</T>
+      <Ln x1={13} y1={20} x2={27} y2={20} w={1.5} />
+      <Ln x1={13} y1={27} x2={25} y2={27} w={1.5} />
+      <Ci x={20} y={41} r={7} fill="none" />
+      <Ln x1={38} y1={46} x2={50} y2={46} w={1.5} />
+    </>
+  ),
   officer: (
     <>
       <Person x={32} y={6} fill={B} />
@@ -1118,6 +1130,61 @@ const DRAWINGS: Record<string, ReactNode> = {
     <>
       <P d="M32 58V30a8 8 0 0 0-8-8H10M18 14l-8 8 8 8" w={4} />
       <P d="M32 30a8 8 0 0 1 8-8h14M46 14l8 8-8 8" w={4} />
+    </>
+  ),
+  'turn-left': (
+    <>
+      <P d="M16 58V30M48 58V30" w={2} />
+      <P d="M36 58V32a8 8 0 0 0-8-8H12M20 16l-8 8 8 8" w={4} />
+    </>
+  ),
+  'turn-right': (
+    <>
+      <P d="M16 58V30M48 58V30" w={2} />
+      <P d="M28 58V32a8 8 0 0 1 8-8h16M44 16l8 8-8 8" w={4} />
+    </>
+  ),
+  block: (
+    <>
+      <Rc x={14} y={14} w={36} h={36} r={2} fill={Y} />
+      <P d="M4 10h56M4 54h56M10 4v56M54 4v56" w={2} />
+      <Rc x={20} y={20} w={10} h={10} r={1} fill={W} />
+      <Rc x={34} y={30} w={10} h={14} r={1} fill={W} />
+    </>
+  ),
+  'street-sign': (
+    <>
+      <Ln x1={32} y1={22} x2={32} y2={60} w={3} />
+      <Rc x={6} y={8} w={52} h={16} r={2} fill={GR} />
+      <T x={32} y={19.5} size={8} fill={W}>2ND AVE</T>
+      <Rc x={18} y={30} w={28} h={10} r={2} fill={GR} />
+      <T x={32} y={37.5} size={7} fill={W}>44 ST</T>
+    </>
+  ),
+  roundabout: (
+    <>
+      <P d="M28 4v14M36 4v14M28 46v14M36 46v14M4 28h14M4 36h14M46 28h14M46 36h14" w={2} />
+      <Ci x={32} y={32} r={17} fill={W} />
+      <Ci x={32} y={32} r={8} fill={GR} />
+      <P d="M44 20l2 6-6 1M20 44l-2-6 6-1" w={2.5} />
+    </>
+  ),
+  crossroads: (
+    <>
+      <Rect x={24} y={4} width={16} height={56} fill={W} />
+      <Rect x={4} y={24} width={56} height={16} fill={W} />
+      <P d="M24 4v20H4M40 4v20h20M24 60V40H4M40 60V40h20" w={2.5} />
+      <P d="M32 8v8M32 48v8M8 32h8M48 32h8" w={2} />
+    </>
+  ),
+  'second-exit': (
+    <>
+      <Ci x={32} y={34} r={15} />
+      <Ci x={32} y={34} r={6} fill={GR} />
+      <P d="M32 60V49M17 34H6M47 34h11" w={2} />
+      <P d="M32 19V4M26 10l6-6 6 6" w={3.5} />
+      <Ci x={50} y={14} r={8} fill={Y} />
+      <T x={50} y={18} size={10}>2</T>
     </>
   ),
   straight: (

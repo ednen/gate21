@@ -9,6 +9,7 @@
     "MATCH",
     "RECOGNIZE",
     "USE",
+    "DIRECTIONS",
     "SURVIVE"
   ],
   "words": [
@@ -81,6 +82,27 @@
       "picture": "walk",
       "example": "It's ten minutes on foot.",
       "exampleTr": "Yürüyerek on dakika."
+    },
+    {
+      "en": "roundabout",
+      "tr": "döner kavşak",
+      "picture": "roundabout",
+      "example": "Go left at the roundabout.",
+      "exampleTr": "Döner kavşaktan sola git."
+    },
+    {
+      "en": "crossroads",
+      "tr": "dört yol ağzı",
+      "picture": "crossroads",
+      "example": "Go straight over the crossroads.",
+      "exampleTr": "Dört yol ağzından düz geç."
+    },
+    {
+      "en": "the second exit",
+      "tr": "ikinci çıkış",
+      "picture": "second-exit",
+      "example": "At the roundabout, take the second exit.",
+      "exampleTr": "Döner kavşakta ikinci çıkıştan çık."
     }
   ],
   "pronounce": [
@@ -101,6 +123,12 @@
       "ipa": "/ˈfer.i/",
       "stress": "FER-ee",
       "tipTr": "\"Feri\": vurgu başta, kısa e."
+    },
+    {
+      "word": "roundabout",
+      "ipa": "/ˈraʊnd.ə.baʊt/",
+      "stress": "ROUND-uh-bout",
+      "tipTr": "RAUND-ı-baut: vurgu başta, iki \"au\" sesi."
     }
   ],
   "match": [
@@ -163,5 +191,191 @@
   },
   "survive": {
     "scenario": "transport-gold"
+  },
+  "directions": {
+    "titleTr": "Döner kavşak ve dört yol ağzı",
+    "town": {
+      "streetsH": [
+        "Harbour Street",
+        "King Street",
+        "Market Street",
+        "Park Street"
+      ],
+      "streetsV": [
+        "George Street",
+        "Pitt Street",
+        "Castle Street",
+        "Macquarie Street"
+      ],
+      "roundabout": [
+        1,
+        2
+      ],
+      "places": [
+        {
+          "id": "gallery",
+          "name": "Art Gallery",
+          "kind": "gallery",
+          "block": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "market",
+          "name": "Fish Market",
+          "kind": "market",
+          "block": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "hotel",
+          "name": "Hotel",
+          "kind": "hotel",
+          "block": [
+            2,
+            0
+          ]
+        },
+        {
+          "id": "cafe",
+          "name": "Café",
+          "kind": "cafe",
+          "block": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "park",
+          "name": "Hyde Gardens",
+          "kind": "park",
+          "block": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "bank",
+          "name": "Bank",
+          "kind": "bank",
+          "block": [
+            2,
+            1
+          ]
+        },
+        {
+          "id": "restaurant",
+          "name": "Restaurant",
+          "kind": "restaurant",
+          "block": [
+            0,
+            2
+          ]
+        },
+        {
+          "id": "station",
+          "name": "Train Station",
+          "kind": "station",
+          "block": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "chemist",
+          "name": "Chemist",
+          "kind": "pharmacy",
+          "block": [
+            2,
+            2
+          ]
+        }
+      ],
+      "water": "north"
+    },
+    "rounds": [
+      {
+        "goal": "hotel",
+        "start": [
+          1,
+          3
+        ],
+        "heading": "N",
+        "steps": [
+          {
+            "say": "Head up Pitt Street to the roundabout.",
+            "moves": [
+              "straight"
+            ]
+          },
+          {
+            "say": "Take the second exit.",
+            "moves": [
+              "exit2"
+            ]
+          },
+          {
+            "say": "At the crossroads, turn right into King Street.",
+            "moves": [
+              "right"
+            ]
+          }
+        ],
+        "arrive": "The hotel's on your left, just past the park.",
+        "arriveTr": "Otel solunda, parkı geçince."
+      },
+      {
+        "goal": "station",
+        "start": [
+          0,
+          2
+        ],
+        "heading": "E",
+        "steps": [
+          {
+            "say": "Follow Market Street to the roundabout.",
+            "moves": [
+              "straight"
+            ]
+          },
+          {
+            "say": "Take the third exit, onto Pitt Street.",
+            "moves": [
+              "exit3"
+            ]
+          }
+        ],
+        "arrive": "The train station is on your left, opposite the restaurant.",
+        "arriveTr": "Tren istasyonu solunda, restoranın karşısında."
+      },
+      {
+        "goal": "bank",
+        "start": [
+          3,
+          3
+        ],
+        "heading": "N",
+        "steps": [
+          {
+            "say": "Go straight up Macquarie Street, over the crossroads.",
+            "moves": [
+              "straight",
+              "straight"
+            ]
+          },
+          {
+            "say": "Turn left into King Street.",
+            "moves": [
+              "left"
+            ]
+          }
+        ],
+        "arrive": "The bank's on your left, opposite the hotel.",
+        "arriveTr": "Banka solunda, otelin karşısında."
+      }
+    ]
   }
 }

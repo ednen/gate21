@@ -30,7 +30,7 @@ import { DEMO_EMAIL } from './flag';
 import { scenarios } from './scenarios';
 import * as scene from './scene';
 
-const STEPS: Step[] = ['DISCOVER', 'PRONOUNCE', 'RECOGNIZE', 'SPEAK', 'USE', 'SURVIVE', 'MATCH', 'DIALOG', 'FORM'];
+const STEPS: Step[] = ['DISCOVER', 'PRONOUNCE', 'RECOGNIZE', 'SPEAK', 'USE', 'SURVIVE', 'MATCH', 'DIALOG', 'FORM', 'DIRECTIONS'];
 const DAILY_GOAL_XP = 50;
 const KEY = 'gate21.demo-state';
 
@@ -486,7 +486,7 @@ function offers(s: State): Offers {
         title: 'Gate 21 Journey',
         titleTr: '21 günlük yolculuk',
         price: '₺449',
-        periodTr: 'Tek seferlik · 60 gün erişim',
+        periodTr: 'Tek seferlik, 60 gün erişim',
         featuresTr: [
           '21 günün bütün dersleri (Bronz, Gümüş, Altın)',
           'Her durakta yapay zekâlı sahneler ve raporlar',
@@ -499,7 +499,7 @@ function offers(s: State): Offers {
         title: 'Keep your English travel ready',
         titleTr: 'İngilizcen seyahate hazır kalsın',
         price: '₺99/ay',
-        periodTr: 'Aylık · yolculuğu bitirenlere',
+        periodTr: 'Aylık, yolculuğu bitirenlere',
         featuresTr: [
           'Bütün sahneleri yeniden oyna, her seferinde yeni sürprizler',
           'Raporlarındaki kalıplarla kısa tekrarlar',

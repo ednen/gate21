@@ -1,7 +1,7 @@
 /** Response shapes of the Gate 21 API (see backend controllers). */
 
 /** Step kinds; every chapter lists the steps it uses, in order. */
-export type Step = 'DISCOVER' | 'PRONOUNCE' | 'RECOGNIZE' | 'SPEAK' | 'USE' | 'SURVIVE' | 'MATCH' | 'DIALOG' | 'FORM';
+export type Step = 'DISCOVER' | 'PRONOUNCE' | 'RECOGNIZE' | 'SPEAK' | 'USE' | 'SURVIVE' | 'MATCH' | 'DIALOG' | 'FORM' | 'DIRECTIONS';
 
 export type LevelId = 'BRONZE' | 'SILVER' | 'GOLD';
 export type ChapterKind = 'lesson' | 'starter' | 'simulation';

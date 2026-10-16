@@ -45,7 +45,7 @@ export default function Consent() {
         </Body>
 
         <Card style={{ gap: 12 }}>
-          <Label>NE OLUYOR</Label>
+          <Label>Ne oluyor?</Label>
           <Body>• Kayıt yalnızca mikrofon düğmesine bastığında başlar, en fazla 15 saniye sürer.</Body>
           <Body>• Ses, puanlanmak için Microsoft Azure'a (Batı Avrupa), konuşma metni sahne cevabı için Google Gemini'ye gönderilir. Bu, yurt dışına veri aktarımıdır.</Body>
           <Body>• Ses kaydını saklamıyoruz. Yalnızca puanları saklıyoruz; sahne metinleri 90 gün sonra silinir.</Body>
@@ -63,5 +63,5 @@ export default function Consent() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
   content: { padding: 20, gap: 16 },
-  icon: { width: 56, height: 56, borderRadius: 16, backgroundColor: colors.ink, alignItems: 'center', justifyContent: 'center' },
+  icon: { width: 56, height: 56, borderRadius: 8, backgroundColor: colors.ink, alignItems: 'center', justifyContent: 'center' },
 });

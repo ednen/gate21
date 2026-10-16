@@ -4,7 +4,7 @@ import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Icon } from '@/components/Icon';
-import { Body, Button, ErrorNote, Label, Title } from '@/components/ui';
+import { Body, Button, ErrorNote, isHovered, Label, Title } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { messageFor } from '@/lib/errors';
 import { colors, fonts } from '@/theme';
@@ -44,19 +44,24 @@ export default function Auth() {
     <SafeAreaView style={styles.screen}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
-          <Pressable accessibilityRole="button" accessibilityLabel="Geri" onPress={() => router.back()} style={styles.back}>
-            <Icon name="arrowLeft" size={20} />
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Geri"
+            onPress={() => router.back()}
+            style={(st) => [styles.back, (st.pressed || isHovered(st)) && { backgroundColor: colors.line }]}
+          >
+            <Icon name="arrowLeft" size={22} strokeWidth={2.2} />
           </Pressable>
-          <Title size={32}>{isRegister ? 'Hesabını oluştur' : 'Tekrar hoş geldin'}</Title>
+          <Title size={38}>{isRegister ? 'Hesabını oluştur' : 'Tekrar hoş geldin'}</Title>
           <Body color={colors.muted}>
             {isRegister ? 'İlerlemen, serin ve pasaport damgaların hesabında saklanır.' : 'Kaldığın yerden devam et.'}
           </Body>
 
           {isRegister ? (
-            <Field label="ADIN" value={name} onChangeText={setName} autoComplete="name" textContentType="givenName" />
+            <Field label="Adın" value={name} onChangeText={setName} autoComplete="name" textContentType="givenName" />
           ) : null}
           <Field
-            label="E-POSTA"
+            label="E-posta"
             value={email}
             onChangeText={setEmail}
             autoComplete="email"
@@ -64,7 +69,7 @@ export default function Auth() {
             textContentType="emailAddress"
           />
           <Field
-            label="ŞİFRE"
+            label="Şifre"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -92,6 +97,7 @@ export default function Auth() {
 type FieldProps = React.ComponentProps<typeof TextInput> & { label: string; note?: string };
 
 function Field({ label, note, ...input }: FieldProps) {
+  const [focused, setFocused] = useState(false);
   return (
     <View style={{ gap: 6 }}>
       <Label>{label}</Label>
@@ -99,7 +105,9 @@ function Field({ label, note, ...input }: FieldProps) {
         {...input}
         accessibilityLabel={label}
         autoCapitalize={input.secureTextEntry || input.keyboardType === 'email-address' ? 'none' : 'words'}
-        style={styles.input}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        style={[styles.input, focused && { borderColor: colors.ink }]}
         placeholderTextColor={colors.muted}
       />
       {note ? <Text style={styles.note}>{note}</Text> : null}
@@ -109,12 +117,12 @@ function Field({ label, note, ...input }: FieldProps) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
-  content: { padding: 20, gap: 16 },
-  back: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.surface, alignItems: 'center', justifyContent: 'center' },
+  content: { padding: 20, gap: 18, maxWidth: 480, width: '100%', alignSelf: 'center' },
+  back: { width: 40, height: 40, marginLeft: -8, borderRadius: 6, alignItems: 'center', justifyContent: 'center' },
   input: {
     minHeight: 52,
-    borderRadius: 14,
-    borderWidth: 1,
+    borderRadius: 6,
+    borderWidth: 1.5,
     borderColor: colors.line,
     backgroundColor: colors.surface,
     paddingHorizontal: 14,

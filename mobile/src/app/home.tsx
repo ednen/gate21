@@ -4,15 +4,15 @@ import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/Icon';
+import { cityTr, JourneyLine, StripRow, Ticket } from '@/components/Journey';
 import { Logo } from '@/components/Logo';
-import { LEVEL_COLORS } from '@/components/Medal';
 import { TabBar } from '@/components/TabBar';
-import { Body, Button, Card, Label, ProgressBar } from '@/components/ui';
+import { Body, Button, isHovered } from '@/components/ui';
 import { canPlay, chapterInfo, level, manifest, stop } from '@/lib/content';
 import { flushProgress } from '@/lib/progress';
 import { invalidateProgress, useMe, usePassport } from '@/lib/queries';
-import type { LevelId, Me, PassportChapter } from '@/lib/types';
-import { colors, fonts } from '@/theme';
+import type { Me, PassportChapter } from '@/lib/types';
+import { colors, fonts, gutter, lineColor, radius } from '@/theme';
 
 export default function Home() {
   const me = useMe();
@@ -31,7 +31,6 @@ export default function Home() {
   const member = data?.membership.active ?? false;
   const freeDays = manifest().freeDays;
   const chapters = passport.data?.chapters ?? [];
-  // Show the week the learner is working on: the next lesson's week, else the calendar week.
   const currentWeek = next?.kind === 'lesson' ? next.week : week;
   // Any week can be looked at (and, once it is open, replayed); the current one is shown first.
   const [pickedWeek, setPickedWeek] = useState<number | null>(null);
@@ -41,89 +40,103 @@ export default function Home() {
   const starterLeft = starter.filter((c) => !c.complete);
   const nextAllowed = !next || canPlay(next, member, freeDays);
   const lvl = level(week);
+  const nextWeek = next?.kind === 'lesson' ? next.week : next?.kind === 'simulation' ? 3 : 0;
 
   return (
     <View style={styles.screen}>
       <ScrollView
-        contentContainerStyle={{ paddingBottom: 24 }}
+        contentContainerStyle={{ paddingBottom: 32 }}
         refreshControl={<RefreshControl refreshing={me.isFetching} onRefresh={() => void flushProgress().then(invalidateProgress)} />}
       >
-        <View style={styles.header}>
-          <SafeAreaView edges={['top']} style={{ gap: 18 }}>
+        {/* The departures sign: where you are on the journey. */}
+        <View style={styles.sign}>
+          <SafeAreaView edges={['top']} style={{ gap: 22 }}>
             <View style={styles.topRow}>
               <Logo />
               <Pressable
                 accessibilityRole="button"
                 accessibilityLabel="SOS English, acil durum cümleleri"
                 onPress={() => router.push('/sos')}
-                style={styles.sos}
+                style={({ pressed }) => [styles.sos, pressed && { backgroundColor: colors.redDeep }]}
               >
-                <Icon name="alert" size={16} color={colors.surface} strokeWidth={2} />
+                <Icon name="alert" size={16} color={colors.surface} strokeWidth={2.2} />
                 <Text style={styles.sosText}>SOS</Text>
               </Pressable>
             </View>
-            <View style={{ gap: 4 }}>
-              <Label color={LEVEL_COLORS[(lvl?.id ?? 'BRONZE') as LevelId].metal}>
-                {`${week}. HAFTA · ${(lvl?.title ?? '').toUpperCase()} · ${(lvl?.trip ?? '').toUpperCase()}`}
-              </Label>
-              <View style={styles.dayRow} accessible accessibilityLabel={`21 günün ${day}. günü`}>
-                <Text style={styles.day}>DAY {day}</Text>
-                <Text style={styles.dayOf}>/ 21</Text>
+            <View style={styles.dayRow} accessible accessibilityLabel={`21 günün ${day}. günü, ${cityTr(lvl?.trip)}`}>
+              <View>
+                <Text style={styles.dayWord}>Gün</Text>
+                <Text style={styles.dayNumber}>{day}</Text>
+              </View>
+              <View style={{ flex: 1, paddingBottom: 6, paddingLeft: 14 }}>
+                <Text style={styles.city}>{cityTr(lvl?.trip)}</Text>
+                <Text style={styles.levelName}>{`${lvl?.titleTr ?? ''}, 21 günlük yolculukta`}</Text>
               </View>
             </View>
-            <DayBar day={day} todayDone={data?.todayDone ?? false} />
+            <JourneyLine day={day} todayDone={data?.todayDone ?? false} />
           </SafeAreaView>
         </View>
 
-        <Card style={styles.mission}>
-          <View style={styles.missionTop}>
-            <Label>{next?.kind === 'starter' ? 'BAŞLANGIÇ PAKETİ' : 'BUGÜNÜN GÖREVİ'}</Label>
-            <Text style={styles.badge}>{data?.todayDone ? 'TAMAM ✓' : '8 DK'}</Text>
-          </View>
+        {/* Today's mission is the boarding pass. */}
+        <View style={styles.block}>
           {next ? (
-            <>
+            <Ticket
+              stripColor={next.kind === 'starter' ? lineColor(0) : lineColor(nextWeek)}
+              strip={next.kind === 'starter' ? 'Başlangıç paketi' : `Bugünün görevi, ${next.day}. gün`}
+              stripRight={data?.todayDone ? 'Bugün tamam' : '8 dakika'}
+              stub={
+                <>
+                  <View style={styles.stubRow}>
+                    <StubField label="Durak" value={stop(next.stop)?.title ?? chapterInfo(next.slug)?.title ?? ''} />
+                    <StubField label="Şehir" value={next.kind === 'starter' ? 'Hazırlık' : cityTr(level(nextWeek)?.trip)} />
+                    <StubField label="Hedef" value={`${Math.min(data?.todayXp ?? 0, data?.dailyGoalXp ?? 50)}/${data?.dailyGoalXp ?? 50} XP`} />
+                  </View>
+                  {nextAllowed ? (
+                    <Button
+                      label={data?.todayDone ? 'Bir ders daha yap' : 'Derse başla'}
+                      variant="accent"
+                      onPress={() => router.push(`/lesson/${next.slug}`)}
+                    />
+                  ) : (
+                    <Button label={`${next.day}. gün için plan seç`} icon="lock" onPress={() => router.push(`/membership?from=${next.slug}`)} />
+                  )}
+                </>
+              }
+            >
               <View style={styles.missionRow}>
-                <View style={styles.missionIcon}>
-                  <Icon name={(chapterInfo(next.slug)?.icon ?? 'plane') as IconName} size={28} />
-                </View>
-                <View style={{ flex: 1, gap: 4 }}>
+                <Icon name={(chapterInfo(next.slug)?.icon ?? 'plane') as IconName} size={30} strokeWidth={1.8} />
+                <View style={{ flex: 1, gap: 6 }}>
                   <Text accessibilityRole="header" style={styles.missionTitle}>{next.mission}</Text>
                   <Body size={14} color={colors.muted}>{next.missionTr}</Body>
                 </View>
               </View>
-              {nextAllowed ? (
-                <Button
-                  label={data?.todayDone ? 'Bir ders daha yap' : 'Bugünkü derse başla'}
-                  icon="arrowRight"
-                  onPress={() => router.push(`/lesson/${next.slug}`)}
-                />
-              ) : (
-                <Button label={`${next.day}. gün için planını seç`} icon="lock" variant="accent" onPress={() => router.push(`/membership?from=${next.slug}`)} />
-              )}
-            </>
-          ) : data?.graduatedAt ? (
-            <Body>Yolculuğu bitirdin! Haftada iki pratikle İngilizceni seyahate hazır tut.</Body>
+            </Ticket>
           ) : (
-            <Body>Açık olan bütün dersleri bitirdin. Yeni haftanın dersleri yakında; o zamana kadar sahneleri tekrar oynayabilirsin.</Body>
-          )}
-          {data && !data.todayDone ? (
-            <View style={{ gap: 6 }}>
-              <ProgressBar value={data.todayXp / data.dailyGoalXp} color={colors.yellow} track={colors.ground} />
-              <Text style={styles.goalText}>{`Günlük hedef: ${Math.min(data.todayXp, data.dailyGoalXp)} / ${data.dailyGoalXp} XP`}</Text>
+            <View style={styles.doneNote}>
+              <Text style={styles.doneTitle}>{data?.graduatedAt ? 'Yolculuğu bitirdin.' : 'Açık dersleri bitirdin.'}</Text>
+              <Body size={14} color={colors.muted}>
+                {data?.graduatedAt
+                  ? 'Haftada iki kısa pratikle İngilizceni seyahate hazır tut.'
+                  : 'Yeni haftanın dersleri açılana kadar sahneleri tekrar oynayabilirsin.'}
+              </Body>
             </View>
-          ) : null}
-        </Card>
-
-        {data?.graduatedAt ? <PracticeCard me={data} /> : null}
-
-        <View style={styles.stats}>
-          <Stat icon="flame" iconColor={colors.red} value={String(data?.streak ?? 0)} label="günlük seri" />
-          <Stat icon="star" iconFill={colors.yellow} value={(data?.xp ?? 0).toLocaleString('en-US')} label="XP" />
-          <Stat icon="target" value={data?.speakingAccuracy != null ? `${data.speakingAccuracy}%` : '—'} label="konuşma doğruluğu" />
+          )}
         </View>
 
-        <View style={styles.section}>
-          <View style={styles.weekTabs} accessibilityRole="tablist">
+        {data?.graduatedAt ? <PracticeRow me={data} /> : null}
+
+        {/* Figures in a sentence, not a dashboard. */}
+        <View style={[styles.block, styles.figures]} accessible>
+          <Figure icon="flame" iconColor={colors.red} value={`${data?.streak ?? 0}`} unit="gün seri" />
+          <View style={styles.figureRule} />
+          <Figure icon="star" iconColor={colors.ink} value={(data?.xp ?? 0).toLocaleString('tr-TR')} unit="XP" />
+          <View style={styles.figureRule} />
+          <Figure icon="target" iconColor={colors.ink} value={data?.speakingAccuracy != null ? `%${data.speakingAccuracy}` : '–'} unit="konuşma" />
+        </View>
+
+        {/* The week as a strip map: pick a city, then a stop. */}
+        <View style={styles.block}>
+          <View style={styles.lines} accessibilityRole="tablist">
             {manifest().levels.map((l) => {
               const active = l.week === shownWeek;
               return (
@@ -131,19 +144,27 @@ export default function Home() {
                   key={l.id}
                   accessibilityRole="tab"
                   accessibilityState={{ selected: active }}
+                  accessibilityLabel={`${l.week}. hafta, ${cityTr(l.trip)}`}
                   onPress={() => setPickedWeek(l.week)}
-                  style={[styles.weekTab, active && { backgroundColor: colors.ink, borderColor: colors.ink }]}
+                  style={(st) => [styles.lineTab, isHovered(st) && !active && { backgroundColor: 'rgba(35,42,49,0.05)' }]}
                 >
-                  <View style={[styles.weekDot, { backgroundColor: LEVEL_COLORS[l.id].metal }]} />
-                  <Text style={[styles.weekTabText, active && { color: colors.surface }]}>{`${l.week}. hafta`}</Text>
+                  <View style={[styles.lineSwatch, { backgroundColor: lineColor(l.week) }]} />
+                  <Text style={[styles.lineName, active && { color: colors.ink }]}>{cityTr(l.trip)}</Text>
+                  <View style={[styles.lineUnderline, { backgroundColor: active ? lineColor(l.week) : 'transparent' }]} />
                 </Pressable>
               );
             })}
           </View>
-          <Label>{`${shownWeek}. HAFTA · ${(level(shownWeek)?.trip ?? '').toUpperCase()} · 7 DURAK`}</Label>
-          <View style={styles.stops}>
-            {weekLessons.map((c) => (
-              <StopRow key={c.slug} chapter={c} isNext={c.slug === next?.slug} locked={!canPlay(c, member, freeDays)} />
+          <View style={{ marginTop: 6 }}>
+            {weekLessons.map((c, i) => (
+              <StopRow
+                key={c.slug}
+                chapter={c}
+                isNext={c.slug === next?.slug}
+                locked={!canPlay(c, member, freeDays)}
+                first={i === 0}
+                last={i === weekLessons.length - 1}
+              />
             ))}
           </View>
         </View>
@@ -152,12 +173,12 @@ export default function Home() {
           <Pressable
             accessibilityRole="button"
             onPress={() => router.push(`/lesson/${starterLeft[0].slug}`)}
-            style={[styles.section, styles.starter]}
+            style={({ pressed }) => [styles.block, styles.starter, pressed && { opacity: 0.8 }]}
           >
             <Icon name="abc" size={26} />
             <View style={{ flex: 1, gap: 2 }}>
-              <Text style={styles.starterTitle}>İngilizcen sıfır mı?</Text>
-              <Text style={styles.starterText}>{`Başlangıç paketi: alfabe, sayılar, ilk kelimeler · ${starter.length - starterLeft.length}/${starter.length}`}</Text>
+              <Text style={styles.starterTitle}>İngilizcen sıfırdan mı başlıyor?</Text>
+              <Text style={styles.starterText}>{`Başlangıç paketi: alfabe, sayılar, ilk kelimeler. ${starter.length - starterLeft.length} / ${starter.length} ders.`}</Text>
             </View>
             <Icon name="arrowRight" size={18} />
           </Pressable>
@@ -168,153 +189,118 @@ export default function Home() {
   );
 }
 
-function DayBar({ day, todayDone }: { day: number; todayDone: boolean }) {
-  const levels = manifest().levels;
+function StubField({ label, value }: { label: string; value: string }) {
   return (
-    <View style={{ gap: 8 }}>
-      <View style={{ flexDirection: 'row', gap: 8 }}>
-        {levels.map((l, w) => (
-          <View key={l.id} style={{ flex: 1, flexDirection: 'row', gap: 3 }}>
-            {Array.from({ length: 7 }, (_, i) => {
-              const n = w * 7 + i + 1;
-              const done = n < day || (n === day && todayDone);
-              const color = done ? LEVEL_COLORS[l.id].metal : n === day ? colors.surface : colors.inkLine;
-              return <View key={n} style={{ flex: 1, height: 10, borderRadius: 2, backgroundColor: color }} />;
-            })}
-          </View>
-        ))}
-      </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        {levels.map((l) => (
-          <Text key={l.id} style={[styles.barLabel, { color: LEVEL_COLORS[l.id].metal }]}>{l.id}</Text>
-        ))}
-      </View>
+    <View style={{ flex: 1 }}>
+      <Text style={styles.stubLabel}>{label}</Text>
+      <Text style={styles.stubValue} numberOfLines={1}>{value}</Text>
     </View>
   );
 }
 
-function PracticeCard({ me }: { me: Me }) {
+function Figure({ icon, iconColor, value, unit }: { icon: IconName; iconColor: string; value: string; unit: string }) {
+  return (
+    <View style={styles.figure} accessible accessibilityLabel={`${value} ${unit}`}>
+      <Icon name={icon} size={16} color={iconColor} strokeWidth={2} />
+      <Text style={styles.figureValue}>{value}</Text>
+      <Text style={styles.figureUnit}>{unit}</Text>
+    </View>
+  );
+}
+
+function PracticeRow({ me }: { me: Me }) {
   const { thisWeek, weeklyGoal } = me.practice;
   return (
-    <Pressable accessibilityRole="button" onPress={() => router.push('/practice')} style={[styles.section, styles.practice]}>
-      <Icon name="repeat" size={24} color={colors.yellow} />
+    <Pressable
+      accessibilityRole="button"
+      onPress={() => router.push('/practice')}
+      style={({ pressed }) => [styles.block, styles.practice, pressed && { backgroundColor: colors.inkSoft }]}
+    >
+      <Icon name="repeat" size={22} color={colors.yellow} />
       <View style={{ flex: 1, gap: 2 }}>
         <Text style={styles.practiceTitle}>Keep your English travel ready</Text>
-        <Text style={styles.practiceText}>{`Bu hafta ${thisWeek} / ${weeklyGoal} pratik`}</Text>
+        <Text style={styles.practiceText}>{`Bu hafta ${thisWeek} / ${weeklyGoal} pratik yaptın.`}</Text>
       </View>
       <Icon name="arrowRight" size={18} color={colors.surface} />
     </Pressable>
   );
 }
 
-function Stat({ icon, value, label, iconColor = colors.ink, iconFill = 'none' }: { icon: IconName; value: string; label: string; iconColor?: string; iconFill?: string }) {
-  return (
-    <View style={styles.stat} accessible accessibilityLabel={`${value} ${label}`}>
-      <Icon name={icon} size={20} color={iconColor} fill={iconFill} />
-      <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
-    </View>
-  );
-}
-
-function StopRow({ chapter, isNext, locked }: { chapter: PassportChapter; isNext: boolean; locked: boolean }) {
+function StopRow({ chapter, isNext, locked, first, last }: { chapter: PassportChapter; isNext: boolean; locked: boolean; first: boolean; last: boolean }) {
   const s = stop(chapter.stop);
   const closed = !chapter.unlocked;
-  const status = closed
-    ? chapter.available ? 'Kilitli' : 'Yakında'
-    : chapter.complete
-      ? '★'.repeat(chapter.stars) + '☆'.repeat(3 - chapter.stars)
-      : locked
-        ? 'Üyelikle'
-        : isNext
-          ? 'Bugün'
-          : `${chapter.stepsDone}/${chapter.totalSteps}`;
-  const content = (
-    <>
-      <View style={[styles.stopIcon, chapter.complete && { backgroundColor: colors.yellow }, closed && { backgroundColor: colors.ground }]}>
-        <Icon name={(s?.icon ?? chapter.icon) as IconName} size={20} color={closed ? colors.muted : colors.ink} />
-      </View>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.stopDay}>{`${chapter.day}. GÜN · ${(s?.title ?? '').toUpperCase()}`}</Text>
-        <Text style={[styles.stopTitle, closed && { color: colors.muted }]}>{chapter.titleTr}</Text>
-      </View>
-      {locked && !closed && !chapter.complete ? <Icon name="lock" size={16} color={colors.muted} /> : null}
-      <Text style={[styles.stopStatus, isNext && !locked && { backgroundColor: colors.yellow }]}>{status}</Text>
-    </>
+  const state = closed ? 'closed' : chapter.complete ? 'done' : isNext ? 'here' : 'open';
+  const right = closed ? (
+    <Icon name="lock" size={16} color={colors.disabled} />
+  ) : chapter.complete ? (
+    <Text style={styles.stars} accessibilityLabel={`${chapter.stars} yıldız`}>{'★'.repeat(chapter.stars) + '☆'.repeat(3 - chapter.stars)}</Text>
+  ) : locked ? (
+    <Icon name="lock" size={16} color={colors.muted} />
+  ) : isNext ? (
+    <Text style={styles.today}>Bugün</Text>
+  ) : chapter.stepsDone > 0 ? (
+    <Text style={styles.partial}>{`${chapter.stepsDone}/${chapter.totalSteps}`}</Text>
+  ) : null;
+  const body = (
+    <StripRow color={lineColor(chapter.week)} state={state} first={first} last={last} right={right}>
+      <Text style={[styles.stopTitle, closed && { color: colors.disabled }]}>{chapter.titleTr}</Text>
+      <Text style={styles.stopMeta}>{`${chapter.day}. gün, ${s?.title ?? ''}`}</Text>
+    </StripRow>
   );
   if (closed) {
-    return <View style={styles.stopRow}>{content}</View>;
+    return <View accessible accessibilityLabel={`${chapter.day}. gün, ${chapter.titleTr}, kilitli`}>{body}</View>;
   }
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={`${chapter.day}. gün, ${chapter.titleTr}`}
       onPress={() => router.push(locked ? `/membership?from=${chapter.slug}` : `/lesson/${chapter.slug}`)}
-      style={[styles.stopRow, isNext && { borderColor: colors.yellow, borderWidth: 2 }]}
+      style={(st) => [styles.stopPress, (st.pressed || isHovered(st)) && { backgroundColor: 'rgba(35,42,49,0.05)' }]}
     >
-      {content}
+      {body}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ground },
-  header: { backgroundColor: colors.ink, paddingHorizontal: 20, paddingTop: 8, paddingBottom: 76 },
+  sign: { backgroundColor: colors.ink, paddingHorizontal: gutter, paddingTop: 6, paddingBottom: 22 },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  sos: { flexDirection: 'row', alignItems: 'center', gap: 8, height: 44, paddingHorizontal: 16, borderRadius: 22, backgroundColor: colors.red },
-  sosText: { fontFamily: fonts.mono, fontSize: 13, color: colors.surface, letterSpacing: 1.3 },
-  dayRow: { flexDirection: 'row', alignItems: 'baseline', gap: 10 },
-  day: { fontFamily: fonts.display, fontSize: 66, lineHeight: 70, color: colors.surface },
-  dayOf: { fontFamily: fonts.displayMedium, fontSize: 30, color: '#9AA3AE' },
-  barLabel: { fontFamily: fonts.monoMedium, fontSize: 11, letterSpacing: 0.8 },
-  mission: {
-    marginTop: -56,
-    marginHorizontal: 16,
-    gap: 16,
-    padding: 20,
-    borderRadius: 20,
-    shadowColor: colors.ink,
-    shadowOpacity: 0.14,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 6,
-  },
-  missionTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  badge: { fontFamily: fonts.mono, fontSize: 11, backgroundColor: colors.ground, paddingHorizontal: 8, paddingVertical: 5, borderRadius: 6, overflow: 'hidden', color: colors.ink },
-  missionRow: { flexDirection: 'row', gap: 14, alignItems: 'center' },
-  missionIcon: { width: 56, height: 56, borderRadius: 16, backgroundColor: colors.yellow, alignItems: 'center', justifyContent: 'center' },
-  missionTitle: { fontFamily: fonts.displayBold, fontSize: 24, lineHeight: 27, color: colors.ink },
-  goalText: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.muted },
-  stats: { flexDirection: 'row', gap: 10, marginHorizontal: 16, marginTop: 14 },
-  stat: { flex: 1, backgroundColor: colors.surface, borderRadius: 14, padding: 12, gap: 6 },
-  statValue: { fontFamily: fonts.displayBold, fontSize: 22, color: colors.ink },
-  statLabel: { fontFamily: fonts.body, fontSize: 12, color: colors.muted },
-  section: { marginHorizontal: 16, marginTop: 18, gap: 10 },
-  stops: { gap: 8 },
-  weekTabs: { flexDirection: 'row', gap: 8 },
-  weekTab: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    minHeight: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.line,
-    backgroundColor: colors.surface,
-  },
-  weekDot: { width: 10, height: 10, borderRadius: 5 },
-  weekTabText: { fontFamily: fonts.bodyBold, fontSize: 14, color: colors.ink },
-  stopRow: { minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.surface, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 10, borderWidth: 2, borderColor: colors.surface },
-  stopIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: colors.yellowTint, alignItems: 'center', justifyContent: 'center' },
-  stopDay: { fontFamily: fonts.monoMedium, fontSize: 10, letterSpacing: 0.8, color: colors.muted },
-  stopTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink },
-  stopStatus: { fontFamily: fonts.bodyBold, fontSize: 12, color: colors.ink, backgroundColor: colors.ground, paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6, overflow: 'hidden' },
-  starter: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.surface, borderRadius: 14, padding: 14, borderWidth: 2, borderColor: colors.blue },
+  sos: { flexDirection: 'row', alignItems: 'center', gap: 6, height: 40, paddingHorizontal: 14, borderRadius: radius.md, backgroundColor: colors.red },
+  sosText: { fontFamily: fonts.display, fontSize: 16, color: colors.surface, letterSpacing: 0.5 },
+  dayRow: { flexDirection: 'row', alignItems: 'flex-end' },
+  dayNumber: { fontFamily: fonts.display, fontSize: 96, lineHeight: 92, color: colors.yellow, letterSpacing: -3 },
+  dayWord: { fontFamily: fonts.displayBold, fontSize: 15, color: colors.mutedOnInk, marginBottom: -4 },
+  city: { fontFamily: fonts.display, fontSize: 34, lineHeight: 36, color: colors.surface, letterSpacing: -0.5 },
+  levelName: { fontFamily: fonts.displayMedium, fontSize: 15, color: colors.mutedOnInk },
+  block: { marginHorizontal: gutter, marginTop: 20 },
+  missionRow: { flexDirection: 'row', gap: 14, alignItems: 'flex-start' },
+  missionTitle: { fontFamily: fonts.display, fontSize: 26, lineHeight: 28, color: colors.ink, letterSpacing: -0.3 },
+  stubRow: { flexDirection: 'row', gap: 12 },
+  stubLabel: { fontFamily: fonts.displayMedium, fontSize: 12, color: colors.muted },
+  stubValue: { fontFamily: fonts.displayBold, fontSize: 16, color: colors.ink },
+  doneNote: { gap: 6, borderLeftWidth: 4, borderLeftColor: colors.yellow, paddingLeft: 14, paddingVertical: 4 },
+  doneTitle: { fontFamily: fonts.display, fontSize: 24, color: colors.ink },
+  figures: { flexDirection: 'row', alignItems: 'center', paddingVertical: 4 },
+  figure: { flex: 1, flexDirection: 'row', alignItems: 'baseline', gap: 5, justifyContent: 'center' },
+  figureValue: { fontFamily: fonts.display, fontSize: 20, color: colors.ink },
+  figureUnit: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  figureRule: { width: 1, height: 22, backgroundColor: colors.line },
+  lines: { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: colors.line },
+  lineTab: { flex: 1, minHeight: 46, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, borderTopLeftRadius: radius.md, borderTopRightRadius: radius.md },
+  lineSwatch: { width: 14, height: 4, borderRadius: 1 },
+  lineName: { fontFamily: fonts.displayBold, fontSize: 16, color: colors.muted },
+  lineUnderline: { position: 'absolute', left: 8, right: 8, bottom: -1, height: 3 },
+  stopPress: { marginHorizontal: -8, paddingHorizontal: 8, borderRadius: radius.md },
+  stopTitle: { fontFamily: fonts.bodyBold, fontSize: 16, color: colors.ink },
+  stopMeta: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  stars: { fontSize: 13, color: colors.ink, letterSpacing: 1 },
+  today: { fontFamily: fonts.displayBold, fontSize: 13, color: colors.ink, backgroundColor: colors.yellow, paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.sm, overflow: 'hidden' },
+  partial: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  starter: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 14, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.line },
   starterTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink },
-  starterText: { fontFamily: fonts.body, fontSize: 13, color: colors.muted },
-  practice: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.ink, borderRadius: 14, padding: 14 },
-  practiceTitle: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.surface },
+  starterText: { fontFamily: fonts.body, fontSize: 13, color: colors.muted, lineHeight: 19 },
+  practice: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.ink, borderRadius: radius.lg, padding: 14 },
+  practiceTitle: { fontFamily: fonts.displayBold, fontSize: 17, color: colors.surface },
   practiceText: { fontFamily: fonts.body, fontSize: 13, color: colors.mutedOnInk },
 });

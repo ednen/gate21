@@ -25,7 +25,7 @@ import { useMe } from '@/lib/queries';
 import { surviveScore } from '@/lib/sentence';
 import type { Difficulty, SceneMessage, SceneReport, SceneView } from '@/lib/types';
 import { sayAll, sendTurn, setLearnerName, useVoiceRecorder } from '@/lib/voice';
-import { colors, fonts } from '@/theme';
+import { colors, fonts, gutter, lineColor, radius } from '@/theme';
 
 type Item =
   | { id: number; who: 'ai'; kind: SceneMessage['kind']; role: string; text: string; voice: string | null }
@@ -47,7 +47,8 @@ const ROLE_ICON: Record<string, IconName> = {
 
 /** Speech rate grows with the level. */
 const RATE: Record<Difficulty, number> = { BRONZE: 0.85, SILVER: 0.95, GOLD: 1.05 };
-const LEVEL_LABEL: Record<Difficulty, string> = { BRONZE: 'BRONZE', SILVER: 'SILVER', GOLD: 'GOLD' };
+const LEVEL_LABEL: Record<Difficulty, string> = { BRONZE: 'Bronz', SILVER: 'Gümüş', GOLD: 'Altın' };
+const LEVEL_WEEK: Record<Difficulty, number> = { BRONZE: 1, SILVER: 2, GOLD: 3 };
 
 /** The "Can you actually survive this?" scene, then its coaching report and memory check. */
 export default function Scene() {
@@ -227,7 +228,7 @@ export default function Scene() {
       {phase === 'scene' && view ? (
         <View style={styles.progress} accessibilityLabel={`${view.totalSteps} adımdan ${Math.min(view.stepIndex + 1, view.totalSteps)}.`}>
           {Array.from({ length: view.totalSteps }, (_, i) => (
-            <View key={i} style={[styles.progressBar, { backgroundColor: i < view.stepIndex ? colors.yellow : colors.inkLine }]} />
+            <View key={i} style={[styles.progressBar, { backgroundColor: i < view.stepIndex ? lineColor(LEVEL_WEEK[difficulty]) : colors.inkLine }]} />
           ))}
         </View>
       ) : null}
@@ -253,7 +254,7 @@ export default function Scene() {
             <View style={{ gap: 16 }}>
               <Title size={28}>{report.completed ? 'Bu durumdan çıktın.' : 'Bu sefer olmadı — sorun değil.'}</Title>
               <Card style={{ gap: 8 }}>
-                <Label>SONUÇ</Label>
+                <Label>Sonuç</Label>
                 <Body>{`Sahne puanı: ${report.score}`}</Body>
                 {report.memory.length > 0 ? (
                   <Body>{`Akılda tutma: ${report.memory.length - missed} / ${report.memory.length}`}</Body>
@@ -282,7 +283,7 @@ export default function Scene() {
       >
         {view?.briefTr ? (
           <View style={styles.brief}>
-            <Label>GÖREVİN</Label>
+            <Label>Görevin</Label>
             <Text style={styles.briefText}>{view.briefTr}</Text>
             {hideText ? <Text style={styles.briefNote}>Karşındakini önce dinle; metni sonra açabilirsin.</Text> : null}
           </View>
@@ -294,7 +295,7 @@ export default function Scene() {
             return (
               <View key={m.id} style={styles.transition} accessibilityRole="header">
                 <View style={styles.transitionLine} />
-                <Text style={styles.transitionText}>{`${m.role} · ${m.text}`}</Text>
+                <Text style={styles.transitionText}>{`${m.role}, ${m.text}`}</Text>
                 <View style={styles.transitionLine} />
               </View>
             );
@@ -302,7 +303,7 @@ export default function Scene() {
           if (m.who === 'you') {
             return (
               <View key={m.id} style={{ alignItems: 'flex-end', gap: 4 }}>
-                <Text style={[styles.who, m.ok && { color: colors.green }]}>SEN</Text>
+                <Text style={[styles.who, m.ok && { color: colors.green }]}>Sen</Text>
                 <View style={[styles.bubble, styles.youBubble]}>
                   <Text style={[styles.bubbleText, { color: colors.surface }]}>{m.text}</Text>
                 </View>
@@ -315,7 +316,7 @@ export default function Scene() {
           return (
             <View key={m.id} style={{ alignItems: 'flex-start', gap: 4 }}>
               <Text style={[styles.who, twist && { color: colors.red }]}>
-                {twist ? `${m.role.toUpperCase()} · BEKLENMEDİK` : m.role.toUpperCase()}
+                {twist ? `${m.role}, beklenmedik durum` : m.role}
               </Text>
               <Pressable
                 accessibilityRole="button"
@@ -390,14 +391,14 @@ export default function Scene() {
                   <View style={{ flex: 1, gap: 3 }}>
                     <Label>
                       {mic === 'recording'
-                        ? 'DİNLİYORUM… BİTİNCE DOKUN'
+                        ? 'Dinliyorum… bitince dokun'
                         : consent
-                          ? 'MİKROFONA DOKUN, KENDİ CÜMLENİ KUR'
+                          ? 'Mikrofona dokun, kendi cümleni kur'
                           : intended
-                            ? 'SESLİ SÖYLE, SONRA DOKUN'
+                            ? 'Sesli söyle, sonra dokun'
                             : hintVisible && view.hintOptions.length > 0
-                              ? 'BİR SEÇENEK SEÇ YA DA YAZ'
-                              : 'YAZARAK CEVAP VER'}
+                              ? 'Bir seçenek seç ya da yaz'
+                              : 'Yazarak cevap ver'}
                     </Label>
                     {intended ? <Text style={styles.intended}>{intended}</Text> : null}
                     <Pressable accessibilityRole="button" onPress={() => setTyping(true)} style={{ minHeight: 32, justifyContent: 'center' }}>
@@ -430,14 +431,14 @@ function HintArea({ view, difficulty, hintVisible, option, onOption, onReveal }:
   if (!view.hintsAllowed) {
     return (
       <Text style={styles.noHint}>
-        {twistNow ? 'Beklenmedik bir durum! Kendi çözümünü söyle.' : 'İpucu yok — kendi cümleni kur.'}
+        {twistNow ? 'Beklenmedik bir durum. Kendi çözümünü söyle.' : 'İpucu yok. Kendi cümleni kur.'}
       </Text>
     );
   }
   if (!hintVisible) {
     return (
       <View style={styles.hintRow}>
-        <Text style={styles.noHint}>{view.hintOptions.length > 0 ? 'Beklenmedik bir durum! Nasıl çözersin?' : 'Ne diyeceğini biliyor musun?'}</Text>
+        <Text style={styles.noHint}>{view.hintOptions.length > 0 ? 'Beklenmedik bir durum. Nasıl çözersin?' : 'Ne diyeceğini biliyor musun?'}</Text>
         <Pressable accessibilityRole="button" accessibilityHint="İpucu puanını 10 düşürür" onPress={onReveal} style={styles.hintBtn}>
           <Text style={styles.hintBtnText}>İpucu (−10)</Text>
         </Pressable>
@@ -447,7 +448,7 @@ function HintArea({ view, difficulty, hintVisible, option, onOption, onReveal }:
   if (view.hintOptions.length > 0) {
     return (
       <View style={{ gap: 8 }}>
-        <Label color={colors.red}>BEKLENMEDİK DURUM · BİRİNİ SEÇ YA DA KENDİN SÖYLE</Label>
+        <Label color={colors.red}>Beklenmedik durum: birini seç ya da kendin söyle</Label>
         {view.hintOptions.map((o) => (
           <Pressable
             key={o}
@@ -467,46 +468,46 @@ function HintArea({ view, difficulty, hintVisible, option, onOption, onReveal }:
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ink },
-  header: { backgroundColor: colors.ink, paddingHorizontal: 16, paddingBottom: 12, paddingTop: 6, gap: 10 },
+  header: { backgroundColor: colors.ink, paddingHorizontal: gutter, paddingBottom: 14, paddingTop: 6, gap: 12 },
   headerRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  back: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.inkSoft, alignItems: 'center', justifyContent: 'center' },
-  avatar: { width: 44, height: 44, borderRadius: 14, backgroundColor: colors.yellow, alignItems: 'center', justifyContent: 'center' },
-  role: { fontFamily: fonts.displayBold, fontSize: 19, color: colors.surface },
-  setting: { fontFamily: fonts.body, fontSize: 13, color: colors.mutedOnInk },
-  level: { fontFamily: fonts.mono, fontSize: 10, letterSpacing: 1.2, color: colors.ink, backgroundColor: colors.yellow, paddingHorizontal: 8, paddingVertical: 5, borderRadius: 6, overflow: 'hidden' },
+  back: { width: 40, height: 40, marginLeft: -8, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
+  avatar: { width: 42, height: 42, borderRadius: radius.sm, backgroundColor: colors.yellow, alignItems: 'center', justifyContent: 'center' },
+  role: { fontFamily: fonts.display, fontSize: 21, color: colors.surface },
+  setting: { fontFamily: fonts.displayMedium, fontSize: 14, color: colors.mutedOnInk },
+  level: { fontFamily: fonts.displayBold, fontSize: 14, color: colors.ink, backgroundColor: colors.yellow, paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.sm, overflow: 'hidden' },
   progress: { flexDirection: 'row', gap: 3 },
-  progressBar: { flex: 1, height: 4, borderRadius: 2 },
-  chat: { backgroundColor: colors.ground, flexGrow: 1, padding: 16, gap: 12 },
-  brief: { backgroundColor: colors.surface, borderRadius: 14, padding: 14, gap: 6, borderWidth: 2, borderColor: colors.yellow },
-  briefText: { fontFamily: fonts.bodyMedium, fontSize: 15, lineHeight: 21, color: colors.ink },
+  progressBar: { flex: 1, height: 3, borderRadius: 1 },
+  chat: { backgroundColor: colors.ground, flexGrow: 1, padding: gutter, gap: 14 },
+  brief: { gap: 4, borderLeftWidth: 4, borderLeftColor: colors.yellow, paddingLeft: 14, paddingVertical: 2, marginBottom: 6 },
+  briefText: { fontFamily: fonts.bodyMedium, fontSize: 15, lineHeight: 22, color: colors.ink },
   briefNote: { fontFamily: fonts.body, fontSize: 13, color: colors.muted },
-  transition: { flexDirection: 'row', alignItems: 'center', gap: 8, marginVertical: 6 },
-  transitionLine: { flex: 1, height: 1, backgroundColor: colors.line },
-  transitionText: { fontFamily: fonts.mono, fontSize: 10, letterSpacing: 1, color: colors.muted, maxWidth: '75%', textAlign: 'center' },
-  who: { fontFamily: fonts.mono, fontSize: 10, letterSpacing: 1.2, color: colors.muted },
-  bubble: { maxWidth: '82%', paddingHorizontal: 14, paddingVertical: 12, borderRadius: 16, borderWidth: 2 },
-  aiBubble: { backgroundColor: colors.surface, borderColor: colors.surface },
-  youBubble: { backgroundColor: colors.ink, borderColor: colors.ink },
-  bubbleText: { fontFamily: fonts.body, fontSize: 16, lineHeight: 22, color: colors.ink },
+  transition: { flexDirection: 'row', alignItems: 'center', gap: 10, marginVertical: 8 },
+  transitionLine: { flex: 1, height: 1, backgroundColor: colors.ink, opacity: 0.25 },
+  transitionText: { fontFamily: fonts.displayBold, fontSize: 14, color: colors.ink, maxWidth: '78%', textAlign: 'center' },
+  who: { fontFamily: fonts.displayMedium, fontSize: 13, color: colors.muted },
+  bubble: { maxWidth: '84%', paddingHorizontal: 14, paddingVertical: 11, borderRadius: radius.xl, borderWidth: 1.5 },
+  aiBubble: { backgroundColor: colors.surface, borderColor: colors.surface, borderTopLeftRadius: 2 },
+  youBubble: { backgroundColor: colors.ink, borderColor: colors.ink, borderTopRightRadius: 2 },
+  bubbleText: { fontFamily: fonts.body, fontSize: 16, lineHeight: 23, color: colors.ink },
   hiddenRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  hiddenText: { fontFamily: fonts.bodyBold, fontSize: 15, color: colors.ink },
+  hiddenText: { fontFamily: fonts.displayBold, fontSize: 16, color: colors.ink },
   revealBtn: { minHeight: 32, justifyContent: 'center' },
   reveal: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.inkLine, textDecorationLine: 'underline' },
   note: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.muted },
-  footer: { backgroundColor: colors.surface, borderTopWidth: 1, borderTopColor: colors.line, padding: 16, gap: 12 },
+  footer: { backgroundColor: colors.surface, borderTopWidth: 1, borderTopColor: colors.line, paddingHorizontal: gutter, paddingVertical: 14, gap: 12 },
   hintRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
-  hintBtn: { minHeight: 40, paddingHorizontal: 12, borderRadius: 10, borderWidth: 1, borderColor: colors.line, justifyContent: 'center' },
-  hintBtnText: { fontFamily: fonts.bodyBold, fontSize: 13, color: colors.ink },
+  hintBtn: { minHeight: 40, paddingHorizontal: 12, borderRadius: radius.md, borderWidth: 1.5, borderColor: colors.ink, justifyContent: 'center' },
+  hintBtnText: { fontFamily: fonts.displayBold, fontSize: 15, color: colors.ink },
   noHint: { flex: 1, fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.inkLine },
   hintTr: { fontFamily: fonts.body, fontSize: 13, color: colors.muted },
-  option: { minHeight: 44, borderWidth: 2, borderColor: colors.line, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 10, justifyContent: 'center' },
+  option: { minHeight: 44, borderWidth: 1.5, borderColor: colors.line, borderRadius: radius.md, paddingHorizontal: 14, paddingVertical: 10, justifyContent: 'center' },
   optionText: { fontFamily: fonts.bodyMedium, fontSize: 15, color: colors.ink },
   micRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   intended: { fontFamily: fonts.bodyBold, fontSize: 16, lineHeight: 21, color: colors.ink },
-  typeLink: { fontFamily: fonts.bodyMedium, fontSize: 13, color: colors.inkLine, textDecorationLine: 'underline' },
-  input: { minHeight: 48, borderWidth: 1, borderColor: colors.line, borderRadius: 12, paddingHorizontal: 12, fontFamily: fonts.bodyMedium, fontSize: 16, color: colors.ink },
+  typeLink: { fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.inkLine, textDecorationLine: 'underline' },
+  input: { minHeight: 48, borderWidth: 1.5, borderColor: colors.ink, borderRadius: radius.md, paddingHorizontal: 12, fontFamily: fonts.bodyMedium, fontSize: 16, color: colors.ink },
   doneRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  doneIcon: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.green, alignItems: 'center', justifyContent: 'center' },
-  doneTitle: { fontFamily: fonts.displayBold, fontSize: 19, color: colors.ink },
-  body: { padding: 16, gap: 16, paddingBottom: 32 },
+  doneIcon: { width: 36, height: 36, borderRadius: 8, backgroundColor: colors.green, alignItems: 'center', justifyContent: 'center' },
+  doneTitle: { fontFamily: fonts.display, fontSize: 22, color: colors.ink },
+  body: { padding: gutter, gap: 16, paddingBottom: 32 },
 });

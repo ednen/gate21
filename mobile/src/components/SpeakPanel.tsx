@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     gap: 8,
     minHeight: 44,
     paddingHorizontal: 16,
-    borderRadius: 22,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: colors.line,
     backgroundColor: colors.surface,

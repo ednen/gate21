@@ -22,7 +22,7 @@ export function MemoryQuiz({ questions, onDone }: { questions: Question[]; onDon
 
   return (
     <View style={{ gap: 16 }}>
-      <Label>{`AKILDA TUTMA · ${index + 1} / ${questions.length}`}</Label>
+      <Label>{`Neyi hatırlıyorsun? ${index + 1} / ${questions.length}`}</Label>
       <Title size={24}>{q.question}</Title>
       <Text style={styles.tr}>{q.questionTr}</Text>
       <View style={{ gap: 10 }}>
@@ -44,7 +44,7 @@ export function MemoryQuiz({ questions, onDone }: { questions: Question[]; onDon
       </View>
       {picked !== null ? (
         <Text accessibilityLiveRegion="polite" style={[styles.feedback, { color: picked === q.answer ? colors.green : colors.red }]}>
-          {picked === q.answer ? 'Doğru — kulağın açık!' : 'Bunu kaçırdın. Gerçek hayatta tekrar sormaktan çekinme.'}
+          {picked === q.answer ? 'Doğru. Kulağın açık.' : 'Bunu kaçırdın. Gerçek hayatta tekrar sormaktan çekinme.'}
         </Text>
       ) : null}
       <Button

@@ -1,22 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, fonts } from '@/theme';
+import { colors, fonts, radius } from '@/theme';
 
-import { Icon } from './Icon';
-
+/** The wordmark is a gate sign: "Gate" in the panel's colour, the number on a yellow plate. */
 export function Logo({ color = colors.surface }: { color?: string }) {
   return (
     <View style={styles.row} accessible accessibilityLabel="Gate 21">
-      <View style={styles.mark}>
-        <Icon name="plane" size={18} color={colors.ink} />
+      <Text style={[styles.gate, { color }]}>Gate</Text>
+      <View style={styles.plate}>
+        <Text style={styles.number}>21</Text>
       </View>
-      <Text style={[styles.text, { color }]}>GATE 21</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  mark: { width: 32, height: 32, borderRadius: 8, backgroundColor: colors.yellow, alignItems: 'center', justifyContent: 'center' },
-  text: { fontFamily: fonts.mono, fontSize: 14, letterSpacing: 2 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  gate: { fontFamily: fonts.display, fontSize: 22, letterSpacing: -0.3 },
+  plate: { backgroundColor: colors.yellow, borderRadius: radius.sm, paddingHorizontal: 6, height: 26, justifyContent: 'center' },
+  number: { fontFamily: fonts.display, fontSize: 20, color: colors.ink, letterSpacing: -0.3 },
 });

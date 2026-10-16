@@ -22,7 +22,7 @@ export function DemoPanel() {
 
   return (
     <Card style={styles.card}>
-      <Label color={colors.yellow}>{`DEMO AYARLARI · SÜRÜM ${DEMO_BUILD.slice(0, 7)}`}</Label>
+      <Label color={colors.yellow}>{`Demo ayarları, sürüm ${DEMO_BUILD.slice(0, 7)}`}</Label>
       <Body size={14} color={colors.surface}>
         Bu sürüm sunucusuz çalışır; ilerlemen bu tarayıcıda saklanır. Sahnelerde cevaplar anahtar kelimeyle değerlendirilir.
       </Body>
