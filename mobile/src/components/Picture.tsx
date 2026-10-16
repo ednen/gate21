@@ -1132,6 +1132,27 @@ const DRAWINGS: Record<string, ReactNode> = {
       <P d="M32 30a8 8 0 0 1 8-8h14M46 14l8 8-8 8" w={4} />
     </>
   ),
+  'traffic-light': (
+    <>
+      <Ln x1={32} y1={44} x2={32} y2={60} w={3} />
+      <Rc x={21} y={4} w={22} h={42} r={6} fill={INK} />
+      <Ci x={32} y={14} r={5} fill={R} />
+      <Ci x={32} y={25} r={5} fill={Y} />
+      <Ci x={32} y={36} r={5} fill={GR} />
+    </>
+  ),
+  'town-square': (
+    <>
+      <Rc x={6} y={10} w={52} h={46} r={4} fill="#E6DFCB" />
+      <Ci x={32} y={33} r={14} fill="none" />
+      <Ci x={32} y={33} r={7} fill={B} />
+      <Ln x1={32} y1={20} x2={32} y2={26} w={2} />
+      <Ci x={14} y={18} r={5} fill={GR} />
+      <Ci x={50} y={18} r={5} fill={GR} />
+      <Ci x={14} y={48} r={5} fill={GR} />
+      <Ci x={50} y={48} r={5} fill={GR} />
+    </>
+  ),
   'turn-left': (
     <>
       <P d="M16 58V30M48 58V30" w={2} />

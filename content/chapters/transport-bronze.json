@@ -208,15 +208,10 @@
           "block": [
             0,
             0
-          ]
-        },
-        {
-          "id": "museum",
-          "name": "Museum",
-          "kind": "museum",
-          "block": [
-            1,
-            0
+          ],
+          "span": [
+            2,
+            1
           ]
         },
         {
@@ -238,9 +233,9 @@
           ]
         },
         {
-          "id": "cafe",
-          "name": "Café",
-          "kind": "cafe",
+          "id": "square",
+          "name": "Market Square",
+          "kind": "square",
           "block": [
             1,
             1
@@ -283,7 +278,30 @@
           ]
         }
       ],
-      "water": "south"
+      "water": "south",
+      "cols": [
+        32,
+        120,
+        228,
+        326
+      ],
+      "rows": [
+        40,
+        126,
+        234,
+        322
+      ],
+      "bend": 8,
+      "lights": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ]
     },
     "rounds": [
       {

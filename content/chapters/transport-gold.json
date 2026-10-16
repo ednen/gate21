@@ -213,12 +213,16 @@
       ],
       "places": [
         {
-          "id": "gallery",
-          "name": "Art Gallery",
-          "kind": "gallery",
+          "id": "park",
+          "name": "Hyde Gardens",
+          "kind": "park",
           "block": [
             0,
             0
+          ],
+          "span": [
+            1,
+            2
           ]
         },
         {
@@ -240,18 +244,9 @@
           ]
         },
         {
-          "id": "cafe",
-          "name": "Café",
-          "kind": "cafe",
-          "block": [
-            0,
-            1
-          ]
-        },
-        {
-          "id": "park",
-          "name": "Hyde Gardens",
-          "kind": "park",
+          "id": "square",
+          "name": "Town Square",
+          "kind": "square",
           "block": [
             1,
             1
@@ -294,7 +289,30 @@
           ]
         }
       ],
-      "water": "north"
+      "water": "north",
+      "cols": [
+        40,
+        132,
+        236,
+        322
+      ],
+      "rows": [
+        46,
+        138,
+        228,
+        322
+      ],
+      "bend": 9,
+      "lights": [
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ]
     },
     "rounds": [
       {
@@ -318,14 +336,14 @@
             ]
           },
           {
-            "say": "At the crossroads, turn right into King Street.",
+            "say": "At the traffic lights, turn right into King Street.",
             "moves": [
               "right"
             ]
           }
         ],
-        "arrive": "The hotel's on your left, just past the park.",
-        "arriveTr": "Otel solunda, parkı geçince."
+        "arrive": "The hotel's on your left, on the corner.",
+        "arriveTr": "Otel solunda, köşede."
       },
       {
         "goal": "station",
@@ -360,7 +378,7 @@
         "heading": "N",
         "steps": [
           {
-            "say": "Go straight up Macquarie Street, over the crossroads.",
+            "say": "Go straight up Macquarie Street, over the crossroads at the lights.",
             "moves": [
               "straight",
               "straight"

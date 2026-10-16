@@ -8,7 +8,7 @@ import { say } from '@/lib/voice';
 import { colors, fonts, lineColor, radius } from '@/theme';
 
 import { Icon } from '../Icon';
-import { px, TownMap, type WalkerState } from '../directions/TownMap';
+import { nodeXY, TownMap, type WalkerState } from '../directions/TownMap';
 import { Body, Button, isHovered, Label, Title } from '../ui';
 import type { StepProps } from './Steps';
 
@@ -32,7 +32,8 @@ export function DirectionsStep({ chapter, onDone }: StepProps) {
   const [trail, setTrail] = useState<Point[]>(directions ? [directions.rounds[0].start] : []);
   const [walker, setWalker] = useState<WalkerState>(() => {
     const r = directions?.rounds[0];
-    return { x: px(r?.start[0] ?? 0), y: px(r?.start[1] ?? 0), heading: r?.heading ?? 'N' };
+    const xy = directions && r ? nodeXY(directions.town, r.start) : { x: 0, y: 0 };
+    return { ...xy, heading: r?.heading ?? 'N' };
   });
   const [wrong, setWrong] = useState<Move | null>(null);
   const [mistakes, setMistakes] = useState(0);
@@ -64,14 +65,16 @@ export function DirectionsStep({ chapter, onDone }: StepProps) {
     return null;
   }
 
-  const animate = (from: Point, to: Point, nextHeading: Heading) => {
+  const animate = (fromPoint: Point, toPoint: Point, nextHeading: Heading) => {
+    const from = nodeXY(directions.town, fromPoint);
+    const to = nodeXY(directions.town, toPoint);
     const start = Date.now();
     const duration = 520;
     setMoving(true);
     const tick = () => {
       const t = Math.min(1, (Date.now() - start) / duration);
       const e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-      setWalker({ x: px(from[0] + (to[0] - from[0]) * e), y: px(from[1] + (to[1] - from[1]) * e), heading: nextHeading });
+      setWalker({ x: from.x + (to.x - from.x) * e, y: from.y + (to.y - from.y) * e, heading: nextHeading });
       if (t < 1) {
         frame.current = requestAnimationFrame(tick);
       } else {
@@ -121,7 +124,7 @@ export function DirectionsStep({ chapter, onDone }: StepProps) {
     setAt(n.start);
     setHeading(n.heading);
     setTrail([n.start]);
-    setWalker({ x: px(n.start[0]), y: px(n.start[1]), heading: n.heading });
+    setWalker({ ...nodeXY(directions.town, n.start), heading: n.heading });
     setWrong(null);
   };
 
@@ -188,23 +191,29 @@ export function DirectionsStep({ chapter, onDone }: StepProps) {
       {!arrived ? (
         <>
           <View style={styles.choices}>
-            {choices.map((m) => (
-              <Pressable
-                key={m}
-                accessibilityRole="button"
-                accessibilityLabel={`${MOVE_LABEL[m]}, ${MOVE_TR[m]}`}
-                disabled={moving}
-                onPress={() => choose(m)}
-                style={(st) => [
-                  styles.choice,
-                  (st.pressed || isHovered(st)) && { backgroundColor: colors.yellowTint },
-                  wrong === m && { borderColor: colors.red, backgroundColor: colors.redTint },
-                ]}
-              >
-                <MoveGlyph move={m} color={wrong === m ? colors.red : colors.ink} />
-                <Text style={styles.choiceText}>{MOVE_LABEL[m]}</Text>
-              </Pressable>
-            ))}
+            {choices.map((m) => {
+              // No street that way (the edge of town, or a park): the choice is greyed out.
+              const blocked = !applyMove(directions.town, at, heading, m);
+              return (
+                <Pressable
+                  key={m}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${MOVE_LABEL[m]}, ${MOVE_TR[m]}`}
+                  accessibilityState={{ disabled: blocked || moving }}
+                  disabled={moving || blocked}
+                  onPress={() => choose(m)}
+                  style={(st) => [
+                    styles.choice,
+                    !blocked && (st.pressed || isHovered(st)) && { backgroundColor: colors.yellowTint },
+                    wrong === m && { borderColor: colors.red, backgroundColor: colors.redTint },
+                    blocked && { borderColor: colors.line, backgroundColor: 'transparent' },
+                  ]}
+                >
+                  <MoveGlyph move={m} color={blocked ? colors.line : wrong === m ? colors.red : colors.ink} />
+                  <Text style={[styles.choiceText, blocked && { color: colors.disabled }]}>{MOVE_LABEL[m]}</Text>
+                </Pressable>
+              );
+            })}
           </View>
           {wrong ? (
             <Body size={14} color={colors.red}>

@@ -103,6 +103,20 @@
       "picture": "turn-right",
       "example": "Turn right onto 44th Street.",
       "exampleTr": "44. Sokağa sağa dön."
+    },
+    {
+      "en": "traffic lights",
+      "tr": "trafik ışıkları",
+      "picture": "traffic-light",
+      "example": "Turn right at the traffic lights.",
+      "exampleTr": "Trafik ışıklarından sağa dön."
+    },
+    {
+      "en": "square",
+      "tr": "meydan",
+      "picture": "town-square",
+      "example": "The hotel is next to the square.",
+      "exampleTr": "Otel meydanın yanında."
     }
   ],
   "pronounce": [
@@ -208,30 +222,25 @@
       "roundabout": null,
       "places": [
         {
-          "id": "park",
-          "name": "City Park",
-          "kind": "park",
+          "id": "museum",
+          "name": "Museum",
+          "kind": "museum",
           "block": [
             0,
             0
           ]
         },
         {
-          "id": "museum",
-          "name": "Museum",
-          "kind": "museum",
+          "id": "park",
+          "name": "City Park",
+          "kind": "park",
           "block": [
             1,
             0
-          ]
-        },
-        {
-          "id": "theatre",
-          "name": "Theater",
-          "kind": "theatre",
-          "block": [
+          ],
+          "span": [
             2,
-            0
+            1
           ]
         },
         {
@@ -244,18 +253,18 @@
           ]
         },
         {
-          "id": "bank",
-          "name": "Bank",
-          "kind": "bank",
+          "id": "plaza",
+          "name": "Union Square",
+          "kind": "square",
           "block": [
             1,
             1
           ]
         },
         {
-          "id": "drugstore",
-          "name": "Drugstore",
-          "kind": "pharmacy",
+          "id": "bank",
+          "name": "Bank",
+          "kind": "bank",
           "block": [
             2,
             1
@@ -289,7 +298,34 @@
           ]
         }
       ],
-      "water": "west"
+      "water": "west",
+      "cols": [
+        34,
+        122,
+        236,
+        326
+      ],
+      "rows": [
+        32,
+        128,
+        224,
+        326
+      ],
+      "bend": 4,
+      "lights": [
+        [
+          0,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ]
     },
     "rounds": [
       {
@@ -301,14 +337,14 @@
         "heading": "N",
         "steps": [
           {
-            "say": "Go straight up 1st Avenue for two blocks.",
+            "say": "Go straight up 1st Avenue for two blocks, past the deli.",
             "moves": [
               "straight",
               "straight"
             ]
           },
           {
-            "say": "Turn right onto 44th Street.",
+            "say": "At the traffic lights, turn right onto 44th Street.",
             "moves": [
               "right"
             ]
@@ -326,7 +362,7 @@
         "heading": "S",
         "steps": [
           {
-            "say": "Go straight down 4th Avenue.",
+            "say": "Go down 4th Avenue to the traffic lights.",
             "moves": [
               "straight"
             ]
@@ -356,7 +392,7 @@
         "heading": "E",
         "steps": [
           {
-            "say": "Walk along 42nd Street to 4th Avenue.",
+            "say": "Walk along 42nd Street, past the hotel, to 4th Avenue.",
             "moves": [
               "straight",
               "straight"
