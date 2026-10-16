@@ -38,6 +38,10 @@ export type TownSpec = {
   /** Main roads, drawn wider: indexes into streetsH and streetsV. */
   majorH?: number[];
   majorV?: number[];
+  /** The city's look: roofs, trees, traffic and street furniture. */
+  look?: 'london' | 'newyork' | 'sydney';
+  /** The whole street grid turned by this many degrees, clockwise (Manhattan's grid isn't square to the page). */
+  tilt?: number;
   places: Place[];
 };
 

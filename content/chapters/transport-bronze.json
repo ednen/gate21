@@ -200,6 +200,37 @@
         "Bridge Street"
       ],
       "roundabout": null,
+      "water": "south",
+      "cols": [
+        32,
+        120,
+        228,
+        326
+      ],
+      "rows": [
+        30,
+        112,
+        212,
+        296
+      ],
+      "bend": 8,
+      "lights": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "majorH": [
+        1
+      ],
+      "majorV": [
+        2
+      ],
+      "look": "london",
       "places": [
         {
           "id": "gardens",
@@ -277,36 +308,6 @@
             2
           ]
         }
-      ],
-      "water": "south",
-      "cols": [
-        32,
-        120,
-        228,
-        326
-      ],
-      "rows": [
-        40,
-        126,
-        234,
-        322
-      ],
-      "bend": 8,
-      "lights": [
-        [
-          1,
-          2
-        ],
-        [
-          2,
-          1
-        ]
-      ],
-      "majorH": [
-        1
-      ],
-      "majorV": [
-        2
       ]
     },
     "rounds": [
