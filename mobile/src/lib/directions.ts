@@ -35,6 +35,9 @@ export type TownSpec = {
   rows?: number[];
   /** How much the streets wander off a straight line, in map units (0 = a ruler-straight grid). */
   bend?: number;
+  /** Main roads, drawn wider: indexes into streetsH and streetsV. */
+  majorH?: number[];
+  majorV?: number[];
   places: Place[];
 };
 
