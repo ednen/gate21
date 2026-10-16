@@ -45,8 +45,11 @@ const OPTIONS: RecordingOptions = {
 
 const MAX_SECONDS = 15;
 
-/** {@code transcript}: in the browser demo, what the browser's own recognizer heard instead of audio. */
-export type Recording = { uri: string; name: string; type: string; transcript?: string };
+/**
+ * {@code transcript}: in the browser demo, what the browser's own recognizer heard instead of audio,
+ * with its confidence (0–1) and other readings of the same words.
+ */
+export type Recording = { uri: string; name: string; type: string; transcript?: string; confidence?: number; alternatives?: string[] };
 
 function fileFor(uri: string): Recording {
   if (Platform.OS === 'android') {
@@ -95,7 +98,8 @@ function useDeviceRecorder() {
 
 // ---- browser demo: the browser's speech recognizer stands in for server-side transcription ----
 
-type RecognitionResultList = ArrayLike<ArrayLike<{ transcript: string }>>;
+type Alternative = { transcript: string; confidence?: number };
+type RecognitionResult = ArrayLike<Alternative> & { isFinal?: boolean };
 type Recognition = {
   lang: string;
   continuous: boolean;
@@ -103,9 +107,10 @@ type Recognition = {
   maxAlternatives: number;
   start(): void;
   stop(): void;
-  onresult: ((e: { results: RecognitionResultList }) => void) | null;
+  onresult: ((e: { results: ArrayLike<RecognitionResult> }) => void) | null;
   onerror: ((e: { error: string }) => void) | null;
   onend: (() => void) | null;
+  onaudiostart: (() => void) | null;
 };
 
 function recognitionCtor(): (new () => Recognition) | null {
@@ -126,49 +131,61 @@ async function microphoneAllowed(): Promise<boolean> {
   }
 }
 
+/** One stretch of listening: the browser may end it at a pause and we start another. */
+type Heard = { finals: Alternative[][]; partial: string };
+
 function useBrowserRecognizer() {
   const [recording, setRecording] = useState(false);
   const recognizer = useRef<Recognition | null>(null);
-  // Finished sentences, and the words of the one still being heard.
-  const finals = useRef<string[]>([]);
-  const partial = useRef('');
+  // What earlier stretches heard, and the stretch going on now. Each stretch's results replace
+  // only its own part, so a restart never wipes what was said before it.
+  const earlier = useRef<Heard[]>([]);
+  const current = useRef<Heard>({ finals: [], partial: '' });
   const listening = useRef(false);
   const ended = useRef<Promise<void>>(Promise.resolve());
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const allowed = useRef(false);
 
-  const listen = useCallback(() => {
+  const listen = useCallback((): Promise<boolean> => {
     const Ctor = recognitionCtor();
     if (!Ctor) {
-      return false;
+      return Promise.resolve(false);
     }
     const r = new Ctor();
     r.lang = 'en-US';
     r.continuous = true;
     r.interimResults = true;
-    r.maxAlternatives = 1;
+    r.maxAlternatives = 3;
     r.onresult = (e) => {
-      const said: string[] = [];
-      let open = '';
+      const finals: Alternative[][] = [];
+      let partial = '';
       Array.from(e.results).forEach((res) => {
-        const text = res[0]?.transcript ?? '';
-        if ((res as unknown as { isFinal?: boolean }).isFinal) {
-          said.push(text);
+        if (res.isFinal) {
+          finals.push(Array.from(res));
         } else {
-          open += text;
+          partial += res[0]?.transcript ?? '';
         }
       });
-      finals.current = said;
-      partial.current = open;
+      current.current = { finals, partial };
     };
-    r.onerror = () => undefined;
+    let started: (ok: boolean) => void = () => undefined;
+    const ready = new Promise<boolean>((resolve) => {
+      started = resolve;
+    });
+    // Only report "listening" once the microphone is really open, so the first word isn't lost.
+    r.onaudiostart = () => started(true);
+    r.onerror = (e) => {
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+        listening.current = false;
+        started(false);
+      }
+    };
     ended.current = new Promise((resolve) => {
       r.onend = () => {
-        // Some phones stop listening at the first pause; keep listening until the learner taps.
+        // Phones stop listening at the first pause; keep listening until the learner taps.
         if (listening.current) {
-          const before = [...finals.current, partial.current].join(' ');
-          finals.current = before.trim() ? [before] : [];
-          partial.current = '';
+          earlier.current.push(current.current);
+          current.current = { finals: [], partial: '' };
           try {
             r.start();
             return;
@@ -176,16 +193,18 @@ function useBrowserRecognizer() {
             // Fall through: treat as ended.
           }
         }
+        started(false);
         resolve();
       };
     });
     try {
       r.start();
     } catch {
-      return false;
+      return Promise.resolve(false);
     }
     recognizer.current = r;
-    return true;
+    // Some browsers never fire audiostart; don't keep the learner waiting for it.
+    return Promise.race([ready, new Promise<boolean>((res) => setTimeout(() => res(true), 1500))]);
   }, []);
 
   const start = useCallback(async (): Promise<boolean> => {
@@ -200,11 +219,12 @@ function useBrowserRecognizer() {
       }
     }
     stopPlayback();
-    finals.current = [];
-    partial.current = '';
+    earlier.current = [];
+    current.current = { finals: [], partial: '' };
     listening.current = true;
-    if (!listen()) {
+    if (!(await listen())) {
       listening.current = false;
+      recognizer.current?.stop();
       return false;
     }
     setRecording(true);
@@ -226,8 +246,17 @@ function useBrowserRecognizer() {
     await Promise.race([ended.current, new Promise((r) => setTimeout(r, 2500))]);
     recognizer.current = null;
     setRecording(false);
-    const transcript = [...finals.current, partial.current].join(' ').replace(/\s+/g, ' ').trim();
-    return { uri: 'browser-speech', name: 'speech.txt', type: 'text/plain', transcript };
+    const stretches = [...earlier.current, current.current];
+    const finals = stretches.flatMap((h) => h.finals);
+    const partial = stretches.map((h) => h.partial).join(' ');
+    const clean = (t: string) => t.replace(/\s+/g, ' ').trim();
+    // The best reading, and the same sentence with each result read its second or third way.
+    const reading = (k: number) => clean([...finals.map((alts) => (alts[k] ?? alts[0])?.transcript ?? ''), partial].join(' '));
+    const transcript = reading(0);
+    const alternatives = [1, 2].map(reading).filter((t, i, all) => t && t !== transcript && all.indexOf(t) === i);
+    const confidences = finals.map((alts) => alts[0]?.confidence ?? 0).filter((c) => c > 0);
+    const confidence = confidences.length ? confidences.reduce((a, c) => a + c, 0) / confidences.length : undefined;
+    return { uri: 'browser-speech', name: 'speech.txt', type: 'text/plain', transcript, confidence, alternatives };
   }, []);
 
   return { recording, start, stop };
@@ -241,6 +270,12 @@ function audioForm(recording: Recording): FormData {
   if (DEMO) {
     if (recording.transcript !== undefined) {
       form.append('transcript', recording.transcript);
+    }
+    if (recording.confidence !== undefined) {
+      form.append('confidence', String(recording.confidence));
+    }
+    if (recording.alternatives?.length) {
+      form.append('alternatives', JSON.stringify(recording.alternatives));
     }
     return form;
   }

@@ -29,6 +29,7 @@ import type {
 import { DEMO_EMAIL } from './flag';
 import { scenarios } from './scenarios';
 import * as scene from './scene';
+import { closestReading, scoreSpeech } from './speechScore';
 
 const STEPS: Step[] = ['DISCOVER', 'PRONOUNCE', 'RECOGNIZE', 'SPEAK', 'USE', 'SURVIVE', 'MATCH', 'DIALOG', 'FORM', 'DIRECTIONS'];
 const DAILY_GOAL_XP = 50;
@@ -511,32 +512,21 @@ function offers(s: State): Offers {
   };
 }
 
-/** Pronunciation score from the browser's transcript: how many of the reference words were heard. */
-export function assess(reference: string, transcript: string | null): Assessment {
-  const words = reference.match(/[A-Za-z0-9']+/g) ?? [];
+/** Pronunciation score from the browser's transcript (see speechScore.ts). */
+export function assess(reference: string, transcript: string | null, confidence?: number | null, alternatives: string[] = []): Assessment {
   if (transcript === '') {
     fail(422, 'SPEECH_NOT_RECOGNIZED');
   }
-  const heard = new Set((transcript ?? '').toLowerCase().match(/[a-z0-9']+/g) ?? []);
-  // Without a recognizer (some browsers) the demo cannot hear you and gives a friendly score.
-  const scored = words.map((w) => ({
-    word: w,
-    score: transcript == null ? 88 : heard.has(w.toLowerCase()) ? 94 : 42,
-    errorType: transcript == null || heard.has(w.toLowerCase()) ? 'None' : 'Omission',
-  }));
-  const found = scored.filter((w) => w.errorType === 'None').length;
-  const completeness = words.length ? Math.round((100 * found) / words.length) : 100;
-  const accuracy = scored.length ? Math.round(scored.reduce((a, w) => a + w.score, 0) / scored.length) : 90;
-  const fluency = transcript == null ? 85 : 88;
-  const overall = Math.round(0.6 * accuracy + 0.2 * fluency + 0.2 * completeness);
-  const weakest = scored.find((w) => w.score < 80)?.word ?? null;
-  const tipTr =
-    completeness < 60
-      ? 'Cümlenin tamamını söylemeyi dene.'
-      : weakest
-        ? `“${weakest}” kelimesini biraz daha yavaş ve net söylemeyi dene.`
-        : 'Çok net! Böyle devam.';
-  return { overall, accuracy, fluency, completeness, words: scored, weakestWord: weakest, tipTr };
+  return scoreSpeech(reference, transcript, confidence, alternatives);
+}
+
+function readings(body: Body): string[] {
+  try {
+    const list = JSON.parse(field(body, 'alternatives') ?? '[]');
+    return Array.isArray(list) ? list.filter((x): x is string => typeof x === 'string') : [];
+  } catch {
+    return [];
+  }
 }
 
 // ---- routing --------------------------------------------------------------------------------
@@ -643,7 +633,8 @@ function route(method: string, path: string, body: Body): unknown {
   }
   if (p === '/api/v1/speech/assess') {
     requireUser(s);
-    return assess(field(body, 'referenceText') ?? '', field(body, 'transcript'));
+    const confidence = Number(field(body, 'confidence'));
+    return assess(field(body, 'referenceText') ?? '', field(body, 'transcript'), Number.isFinite(confidence) ? confidence : null, readings(body));
   }
 
   if (method === 'POST' && p === '/api/v1/roleplay/sessions') {
@@ -679,7 +670,9 @@ function route(method: string, path: string, body: Body): unknown {
     if (transcript === '') {
       fail(422, 'SPEECH_NOT_RECOGNIZED');
     }
-    const said = transcript ?? field(body, 'text') ?? '';
+    // Of the browser's readings, take the one closest to the line the learner was going for.
+    const intended = field(body, 'text');
+    const said = transcript != null ? (intended ? closestReading(intended, [transcript, ...readings(body)]) : transcript) : (intended ?? '');
     if (!said.trim()) {
       fail(400, 'TEXT_REQUIRED');
     }

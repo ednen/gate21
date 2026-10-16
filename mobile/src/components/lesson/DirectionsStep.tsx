@@ -339,8 +339,8 @@ export function DirectionsStep({ chapter, onDone }: StepProps) {
                       blocked && { borderColor: colors.line, backgroundColor: 'transparent' },
                     ]}
                   >
+                    {/* Only the arrow: the learner has to know what the words mean. */}
                     <MoveGlyph move={m} color={blocked ? colors.line : isWrong ? colors.red : colors.ink} />
-                    <Text style={[styles.choiceText, blocked && { color: colors.disabled }]}>{MOVE_LABEL[m]}</Text>
                   </Pressable>
                 </Animated.View>
               );
@@ -380,11 +380,11 @@ function GoalGlyph({ kind }: { kind: PlaceKind }) {
 
 /** Arrows drawn like road-sign arrows; roundabout exits as a ring with the exit marked. */
 function MoveGlyph({ move, color }: { move: Move; color: string }) {
-  const stroke = { stroke: color, strokeWidth: 3.2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
+  const stroke = { stroke: color, strokeWidth: 3, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
   if (isExit(move)) {
     const exits: Record<string, string> = { exit1: 'M14 16H5M8 13l-3 3 3 3', exit2: 'M16 14V4M13 7l3-3 3 3', exit3: 'M18 16h9M24 13l3 3-3 3' };
     return (
-      <Svg width={34} height={34} viewBox="0 0 32 32">
+      <Svg width={42} height={42} viewBox="0 0 32 32">
         <Circle cx={16} cy={18} r={6} {...stroke} strokeWidth={2.4} />
         <Path d="M16 24v6" {...stroke} strokeWidth={2.4} />
         <Path d={exits[move]} {...stroke} />
@@ -393,7 +393,7 @@ function MoveGlyph({ move, color }: { move: Move; color: string }) {
   }
   const d = move === 'left' ? 'M20 29V17a5 5 0 0 0-5-5H6M10 7l-5 5 5 5' : move === 'right' ? 'M12 29V17a5 5 0 0 1 5-5h9M22 7l5 5-5 5' : 'M16 29V5M10 11l6-6 6 6';
   return (
-    <Svg width={34} height={34} viewBox="0 0 32 32">
+    <Svg width={42} height={42} viewBox="0 0 32 32">
       <Path d={d} {...stroke} />
     </Svg>
   );
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
   reveal: { fontFamily: fonts.bodyMedium, fontSize: 15, color: colors.surface, textDecorationLine: 'underline' },
   choices: { flexDirection: 'row', gap: 8 },
   choice: {
-    minHeight: 84,
+    minHeight: 72,
     borderRadius: radius.md,
     borderWidth: 1.5,
     borderColor: colors.ink,
@@ -442,5 +442,4 @@ const styles = StyleSheet.create({
     gap: 4,
     paddingVertical: 8,
   },
-  choiceText: { fontFamily: fonts.displayBold, fontSize: 15, color: colors.ink },
 });
