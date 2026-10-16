@@ -81,6 +81,41 @@
       "picture": "wave",
       "example": "Thanks! Have a good one!",
       "exampleTr": "Teşekkürler! İyi günler!"
+    },
+    {
+      "en": "the USA",
+      "tr": "ABD (Amerika)",
+      "picture": "flag-usa",
+      "example": "She grew up in the USA.",
+      "exampleTr": "O ABD'de büyüdü. (Amerikalı: American)"
+    },
+    {
+      "en": "Mexico",
+      "tr": "Meksika",
+      "picture": "flag-mexico",
+      "example": "Tacos come from Mexico.",
+      "exampleTr": "Tako Meksika'dan gelir. (Meksikalı: Mexican)"
+    },
+    {
+      "en": "Russia",
+      "tr": "Rusya",
+      "picture": "flag-russia",
+      "example": "Russia is a very big country.",
+      "exampleTr": "Rusya çok büyük bir ülke. (Rus: Russian)"
+    },
+    {
+      "en": "South Korea",
+      "tr": "Güney Kore",
+      "picture": "flag-south-korea",
+      "example": "My flatmate is from South Korea.",
+      "exampleTr": "Ev arkadaşım Güney Kore'li. (Koreli: Korean)"
+    },
+    {
+      "en": "Japan",
+      "tr": "Japonya",
+      "picture": "flag-japan",
+      "example": "I'd love to visit Japan one day.",
+      "exampleTr": "Bir gün Japonya'ya gitmeyi çok isterim. (Japon: Japanese)"
     }
   ],
   "pronounce": [
@@ -101,14 +136,20 @@
       "ipa": "/ɒˈstreɪ.li.ə/",
       "stress": "oss-TRAY-lee-uh",
       "tipTr": "Vurgu ikinci hecede: os-TREY-li-ı."
+    },
+    {
+      "word": "Mexico",
+      "ipa": "/ˈmek.sɪ.kəʊ/",
+      "stress": "MEK-si-koh",
+      "tipTr": "\"Meksika\" değil: MEK-si-kou. Sonu \"o\" ile biter."
     }
   ],
   "match": [
     "flat white",
-    "mix-up",
     "Is this seat taken?",
     "must-see",
-    "beach",
+    "Japan",
+    "South Korea",
     "arvo"
   ],
   "dialog": {
@@ -141,6 +182,16 @@
       {
         "who": "You",
         "text": "I'm from Turkey. It's my first time here."
+      },
+      {
+        "who": "Local",
+        "text": "Nice! My flatmate's from South Korea, and my boss is from ___.",
+        "gap": "Mexico",
+        "options": [
+          "Mexico",
+          "Mexican",
+          "Messy"
+        ]
       },
       {
         "who": "Local",

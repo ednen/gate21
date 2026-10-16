@@ -94,16 +94,20 @@
     {
       "id": "pay",
       "titleTr": "Ödeme şeklini söylemek",
-      "ask": "Cash or card?",
+      "ask": "That's £49. How would you like to pay?",
       "instruction": "The customer says how they will pay.",
-      "hint": "Card, please.",
-      "hintTr": "Kartla, lütfen.",
+      "hint": "I'd like to pay by card.",
+      "hintTr": "Kartla ödemek istiyorum.",
       "keywords": [
         "card",
-        "cash"
+        "cash",
+        "contactless",
+        "phone",
+        "pay",
+        "pounds"
       ],
       "successReply": "Thank you.",
-      "retryReply": "How would you like to pay — cash or card?"
+      "retryReply": "How would you like to pay — by card or in cash?"
     }
   ],
   "twists": [
@@ -217,6 +221,77 @@
           "reply": "Yes, our dry cleaner can fix it by tomorrow — free of charge."
         }
       ]
+    },
+    {
+      "id": "no-euros",
+      "titleTr": "Euro geçmiyor",
+      "intro": "Oh, just so you know — we only take pounds here, not euros.",
+      "instruction": "The shop only takes pounds. The customer says they will pay by card, asks to pay contactless, or asks where to change money.",
+      "retryReply": "Sorry, it has to be pounds. Do you have a card?",
+      "options": [
+        {
+          "text": "No problem, I'll pay by card.",
+          "keywords": [
+            "card",
+            "no problem"
+          ],
+          "reply": "Perfect. Pop it in here."
+        },
+        {
+          "text": "Can I pay contactless?",
+          "keywords": [
+            "contactless",
+            "tap",
+            "phone"
+          ],
+          "reply": "Yes, just tap your card or phone here."
+        },
+        {
+          "text": "Where can I change money?",
+          "keywords": [
+            "change money",
+            "exchange",
+            "bureau",
+            "where"
+          ],
+          "reply": "There's a bureau de change next to the station. Or you can pay by card here."
+        }
+      ]
+    },
+    {
+      "id": "machine-down",
+      "titleTr": "Kart makinesi bozuk",
+      "intro": "Oh no — sorry, the card machine isn't working right now. Have you got cash?",
+      "instruction": "The card machine is broken. The customer pays in cash, asks for a cash machine, or offers to wait.",
+      "retryReply": "Sorry about this! Cash would be easiest.",
+      "options": [
+        {
+          "text": "Yes, I can pay in cash.",
+          "keywords": [
+            "cash",
+            "yes",
+            "pay in"
+          ],
+          "reply": "Lovely, that's forty-nine pounds. Here's your change."
+        },
+        {
+          "text": "Is there a cash machine near here?",
+          "keywords": [
+            "cash machine",
+            "atm",
+            "near"
+          ],
+          "reply": "There's one just outside, on the left."
+        },
+        {
+          "text": "I can wait a few minutes.",
+          "keywords": [
+            "wait",
+            "minutes"
+          ],
+          "reply": "Thanks! Oh — it's working again. Card's fine."
+        }
+      ]
     }
   ],
   "twistSlots": [
@@ -226,6 +301,18 @@
         "no-size",
         "price-mismatch",
         "last-one"
+      ]
+    },
+    {
+      "after": "bag",
+      "pool": [
+        "no-euros"
+      ]
+    },
+    {
+      "after": "pay",
+      "pool": [
+        "machine-down"
       ]
     }
   ],

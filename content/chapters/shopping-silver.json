@@ -81,6 +81,41 @@
       "picture": "receipt",
       "example": "Can I have the receipt, please?",
       "exampleTr": "Fişi alabilir miyim, lütfen?"
+    },
+    {
+      "en": "dollar ($)",
+      "tr": "dolar",
+      "picture": "dollar",
+      "example": "It's twenty dollars.",
+      "exampleTr": "Yirmi dolar."
+    },
+    {
+      "en": "Credit or debit?",
+      "tr": "Kredi kartı mı, banka kartı mı?",
+      "picture": "card-reader",
+      "example": "Credit or debit? — Credit, please.",
+      "exampleTr": "Kredi mi banka kartı mı? — Kredi, lütfen."
+    },
+    {
+      "en": "ATM",
+      "tr": "bankamatik",
+      "picture": "atm",
+      "example": "Is there an ATM near here?",
+      "exampleTr": "Yakında bankamatik var mı?"
+    },
+    {
+      "en": "currency exchange",
+      "tr": "döviz bürosu",
+      "picture": "currency-exchange",
+      "example": "I'm looking for a currency exchange.",
+      "exampleTr": "Bir döviz bürosu arıyorum."
+    },
+    {
+      "en": "Keep the change.",
+      "tr": "Üstü kalsın.",
+      "picture": "change",
+      "example": "Here's twenty. Keep the change.",
+      "exampleTr": "Buyurun yirmi. Üstü kalsın."
     }
   ],
   "pronounce": [
@@ -101,15 +136,21 @@
       "ipa": "/rɪˈsiːt/",
       "stress": "ri-SEET",
       "tipTr": "Ortadaki p okunmaz: ri-SİİT."
+    },
+    {
+      "word": "debit",
+      "ipa": "/ˈdeb.ɪt/",
+      "stress": "DEB-it",
+      "tipTr": "DE-bit, vurgu başta. Sondaki t net okunur."
     }
   ],
   "match": [
     "souvenir",
     "gift",
-    "mug",
-    "postcard",
-    "on sale",
-    "fragile"
+    "fragile",
+    "ATM",
+    "currency exchange",
+    "Credit or debit?"
   ],
   "form": {
     "title": "SHIPPING FORM",
@@ -252,6 +293,30 @@
       {
         "who": "Assistant",
         "text": "We do! Just fill in this form."
+      },
+      {
+        "who": "Assistant",
+        "text": "That's twenty-one sixty with tax. Credit or ___?",
+        "gap": "debit",
+        "options": [
+          "debit",
+          "debt",
+          "deposit"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Credit. Oh — can I pay in euros?"
+      },
+      {
+        "who": "Assistant",
+        "text": "Sorry, US ___ only. There's an ATM on the corner.",
+        "gap": "dollars",
+        "options": [
+          "dollars",
+          "dolls",
+          "euros"
+        ]
       }
     ]
   },

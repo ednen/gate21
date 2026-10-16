@@ -5,7 +5,7 @@ name: Demo
 on:
   push:
     branches: [main]
-    paths: ["mobile/**", "content/**", ".github/workflows/demo.yml"]
+    paths: ["mobile/**", "content/**", "voice/**", ".github/workflows/demo.yml"]
   workflow_dispatch:
 
 permissions:

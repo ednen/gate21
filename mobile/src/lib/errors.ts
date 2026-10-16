@@ -9,7 +9,7 @@ const MESSAGES: Record<string, string> = {
   VOICE_CONSENT_REQUIRED: 'Sesini değerlendirebilmemiz için önce izin vermelisin.',
   SPEECH_QUOTA_EXCEEDED: 'Bugünkü konuşma hakkın doldu. Dinle ve tekrar et moduyla devam edebilirsin.',
   ROLEPLAY_QUOTA_EXCEEDED: 'Bugünkü sahne hakkın doldu. Yarın yeni sahneler seni bekliyor.',
-  SPEECH_NOT_RECOGNIZED: 'Seni net duyamadık. Mikrofona biraz yaklaşıp tekrar dene.',
+  SPEECH_NOT_RECOGNIZED: 'Seni tam duyamadım. Telefonu biraz yaklaştırıp tek nefeste, net söyle.',
   SPEECH_UNAVAILABLE: 'Konuşma servisi şu an meşgul. Biraz sonra tekrar dene.',
   UNSUPPORTED_AUDIO: 'Ses kaydı okunamadı. Tekrar kaydetmeyi dene.',
   AUDIO_TOO_LARGE: 'Kayıt çok uzun. En fazla 15 saniye konuş.',

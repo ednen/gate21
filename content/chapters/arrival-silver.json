@@ -81,6 +81,41 @@
       "picture": "green-channel",
       "example": "I have nothing to declare.",
       "exampleTr": "Beyan edecek bir şeyim yok."
+    },
+    {
+      "en": "Portugal",
+      "tr": "Portekiz",
+      "picture": "flag-portugal",
+      "example": "I went to Portugal last summer.",
+      "exampleTr": "Geçen yaz Portekiz'e gittim. (Portekizli: Portuguese)"
+    },
+    {
+      "en": "Switzerland",
+      "tr": "İsviçre",
+      "picture": "flag-switzerland",
+      "example": "This watch is from Switzerland.",
+      "exampleTr": "Bu saat İsviçre'den. (İsviçreli: Swiss)"
+    },
+    {
+      "en": "Sweden",
+      "tr": "İsveç",
+      "picture": "flag-sweden",
+      "example": "I've been to Sweden twice.",
+      "exampleTr": "İsveç'e iki kez gittim. (İsveçli: Swedish)"
+    },
+    {
+      "en": "Denmark",
+      "tr": "Danimarka",
+      "picture": "flag-denmark",
+      "example": "Copenhagen is in Denmark.",
+      "exampleTr": "Kopenhag Danimarka'da. (Danimarkalı: Danish)"
+    },
+    {
+      "en": "Hungary",
+      "tr": "Macaristan",
+      "picture": "flag-hungary",
+      "example": "Budapest is the capital of Hungary.",
+      "exampleTr": "Budapeşte Macaristan'ın başkenti. (Macar: Hungarian)"
     }
   ],
   "pronounce": [
@@ -101,14 +136,20 @@
       "ipa": "/dɪˈkleər/",
       "stress": "dih-KLAIR",
       "tipTr": "Vurgu sonda: di-KLEIR. Amerikan İngilizcesinde sondaki r duyulur."
+    },
+    {
+      "word": "Hungary",
+      "ipa": "/ˈhʌŋ.ɡər.i/",
+      "stress": "HUNG-guh-ree",
+      "tipTr": "Hungary (Macaristan) HAN-gı-ri; hungry (aç) HAN-gri. Ortadaki \"ı\" sesini yutma!"
     }
   ],
   "match": [
     "fingerprints",
     "scanner",
     "Look at the camera.",
-    "nervous",
-    "sightseeing",
+    "Sweden",
+    "Hungary",
     "customs"
   ],
   "recognize": [
@@ -143,6 +184,17 @@
       ],
       "answer": 0,
       "explainTr": "Customs form = gümrük beyan formu. ABD'de genellikle ekrandan doldurulur."
+    },
+    {
+      "audio": "I see you've been to Switzerland and Denmark.",
+      "prompt": "Listen. Which countries does the officer mention?",
+      "options": [
+        "Switzerland and Denmark",
+        "Sweden and Hungary",
+        "Portugal and Sweden"
+      ],
+      "answer": 0,
+      "explainTr": "Switzerland = İsviçre, Sweden = İsveç. İkisini karıştırmak çok yaygın!"
     }
   ],
   "dialog": {
@@ -168,6 +220,26 @@
           "sightseeing",
           "customs",
           "scanner"
+        ]
+      },
+      {
+        "who": "Officer",
+        "text": "Lots of stamps here — Portugal, Sweden, ___…",
+        "gap": "Denmark",
+        "options": [
+          "Denmark",
+          "Danish",
+          "Dinner"
+        ]
+      },
+      {
+        "who": "You",
+        "text": "Yes, and ___. Budapest is beautiful!",
+        "gap": "Hungary",
+        "options": [
+          "Hungary",
+          "hungry",
+          "Hungarian"
         ]
       },
       {

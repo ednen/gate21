@@ -81,6 +81,41 @@
       "picture": "handshake",
       "example": "Forty-five? It's a deal!",
       "exampleTr": "Kırk beş mi? Anlaştık!"
+    },
+    {
+      "en": "Australian dollars",
+      "tr": "Avustralya doları",
+      "picture": "aud",
+      "example": "Prices are in Australian dollars.",
+      "exampleTr": "Fiyatlar Avustralya doları cinsinden."
+    },
+    {
+      "en": "surcharge",
+      "tr": "ek ücret (kartla ödemede)",
+      "picture": "surcharge",
+      "example": "There's a two percent surcharge on cards.",
+      "exampleTr": "Kartla ödemede yüzde iki ek ücret var."
+    },
+    {
+      "en": "Your card was declined.",
+      "tr": "Kartınız reddedildi.",
+      "picture": "declined",
+      "example": "Sorry, your card was declined. Have you got another one?",
+      "exampleTr": "Üzgünüm, kartınız reddedildi. Başka kartınız var mı?"
+    },
+    {
+      "en": "exchange rate",
+      "tr": "döviz kuru",
+      "picture": "currency-exchange",
+      "example": "What's the exchange rate today?",
+      "exampleTr": "Bugün döviz kuru ne?"
+    },
+    {
+      "en": "PIN",
+      "tr": "kart şifresi",
+      "picture": "pin-pad",
+      "example": "Please enter your PIN.",
+      "exampleTr": "Lütfen şifrenizi girin."
     }
   ],
   "pronounce": [
@@ -101,14 +136,20 @@
       "ipa": "/ɪksˈtʃeɪndʒ/",
       "stress": "iks-CHAYNJ",
       "tipTr": "Vurgu ikinci hecede: iks-ÇEYNC."
+    },
+    {
+      "word": "surcharge",
+      "ipa": "/ˈsɜː.tʃɑːdʒ/",
+      "stress": "SUR-charj",
+      "tipTr": "SÖR-çaac: vurgu başta, sondaki ge \"c\" okunur."
     }
   ],
   "match": [
     "faulty",
     "refund",
-    "exchange",
     "market stall",
-    "final offer",
+    "surcharge",
+    "Your card was declined.",
     "It's a deal!"
   ],
   "recognize": [
@@ -143,6 +184,27 @@
       ],
       "answer": 0,
       "explainTr": "\"Final offer\" = son teklif; daha fazla inmeyecek."
+    },
+    {
+      "prompt": "The sign says: “Card payments: 2% surcharge.” What does it mean?",
+      "options": [
+        "You pay 2% more by card",
+        "You get 2% off by card",
+        "Cards are not accepted"
+      ],
+      "answer": 0,
+      "explainTr": "Surcharge = ek ücret. Avustralya'da kartla ödemede sık görülür."
+    },
+    {
+      "audio": "Would you like to pay in Australian dollars or in euros?",
+      "prompt": "Listen. What does the card machine ask?",
+      "options": [
+        "Which currency you pay in",
+        "If you want a receipt",
+        "Your PIN"
+      ],
+      "answer": 0,
+      "explainTr": "Yerel para birimini (Australian dollars) seçmek genelde daha ucuzdur; kur farkını banka keser."
     }
   ],
   "dialog": {

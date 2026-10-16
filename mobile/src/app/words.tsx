@@ -7,11 +7,11 @@ import { Icon } from '@/components/Icon';
 import { hasPicture, Picture } from '@/components/Picture';
 import { TabBar } from '@/components/TabBar';
 import { Body, Button, Label, ProgressBar } from '@/components/ui';
-import { chapter as getChapter, manifest, stop } from '@/lib/content';
+import { chapter as getChapter, chapterInfo, manifest, stop } from '@/lib/content';
 import { pendingAttempts } from '@/lib/progress';
 import { usePassport } from '@/lib/queries';
 import type { Step } from '@/lib/types';
-import { say } from '@/lib/voice';
+import { accentForWeek, say } from '@/lib/voice';
 import { buildCollection, type CollectionWord, learnedChapters } from '@/lib/words';
 import { colors, fonts } from '@/theme';
 
@@ -75,7 +75,7 @@ export default function Words() {
                   onPress={() => {
                     // A learned word is spoken the moment its picture is tapped.
                     if (w.learned) {
-                      say(w.en, { slow: true });
+                      say(w.en, { slow: true, voice: accentForWeek(chapterInfo(w.chapter)?.week) });
                     }
                     setOpen(w);
                   }}
@@ -92,16 +92,16 @@ export default function Words() {
             <Pressable style={styles.sheet} onPress={() => undefined}>
               {open.learned ? (
                 <>
-                  <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true })}>
+                  <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true, voice: accentForWeek(chapterInfo(open.chapter)?.week) })}>
                     {hasPicture(open.picture) ? <Picture name={open.picture} size={140} /> : <Text style={styles.bigText}>{open.en}</Text>}
                   </Pressable>
-                  <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true })} style={styles.wordRow}>
+                  <Pressable accessibilityRole="button" accessibilityLabel={`${open.en}. Dinle`} onPress={() => say(open.en, { slow: true, voice: accentForWeek(chapterInfo(open.chapter)?.week) })} style={styles.wordRow}>
                     <Text style={styles.sheetWord}>{open.en}</Text>
                     <Icon name="speaker" size={22} />
                   </Pressable>
                   <Text style={styles.sheetTr}>{open.tr}</Text>
                   {open.example ? (
-                    <Pressable accessibilityRole="button" onPress={() => say(open.example ?? '')} style={styles.example}>
+                    <Pressable accessibilityRole="button" onPress={() => say(open.example ?? '', { voice: accentForWeek(chapterInfo(open.chapter)?.week) })} style={styles.example}>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.exampleEn}>{open.example}</Text>
                         {open.exampleTr ? <Text style={styles.exampleTr}>{open.exampleTr}</Text> : null}

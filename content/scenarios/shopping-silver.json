@@ -29,6 +29,16 @@
       ],
       "question": "How many days did you have to exchange it?",
       "questionTr": "Kaç gün içinde değiştirebilirdin?"
+    },
+    {
+      "id": "total",
+      "values": [
+        "$21.60",
+        "$27.40",
+        "$19.80"
+      ],
+      "question": "What was your total with tax?",
+      "questionTr": "Vergiyle birlikte toplam ne tuttu?"
     }
   ],
   "goals": [
@@ -118,19 +128,20 @@
     {
       "id": "pay",
       "titleTr": "Ödemek ve fiş istemek",
-      "ask": "How would you like to pay?",
+      "ask": "Okay, with tax that's {total}. How would you like to pay?",
       "instruction": "The customer pays and asks for a receipt.",
-      "hint": "By card, please. Can I have the receipt?",
-      "hintTr": "Kartla, lütfen. Fişi alabilir miyim?",
+      "hint": "Credit, please. Can I have the receipt?",
+      "hintTr": "Kredi kartı, lütfen. Fişi alabilir miyim?",
       "keywords": [
+        "credit",
+        "debit",
         "card",
         "cash",
         "receipt",
-        "phone",
         "pay"
       ],
       "successReply": "Here's your receipt.",
-      "retryReply": "How would you like to pay?"
+      "retryReply": "How would you like to pay — card or cash?"
     }
   ],
   "twists": [
@@ -241,6 +252,72 @@
           "reply": "No problem."
         }
       ]
+    },
+    {
+      "id": "euros",
+      "titleTr": "Euro ile ödemek istiyorsun",
+      "intro": "Oh, just so you know — we can't take euros. US dollars or cards only.",
+      "instruction": "The shop only takes dollars. The customer pays by card instead, asks for an ATM, or asks for a currency exchange.",
+      "retryReply": "It has to be dollars or a card, I'm afraid.",
+      "options": [
+        {
+          "text": "No problem, I'll pay by card.",
+          "keywords": [
+            "card",
+            "no problem"
+          ],
+          "reply": "No problem. Just tap or insert it here."
+        },
+        {
+          "text": "Is there an ATM near here?",
+          "keywords": [
+            "atm",
+            "cash machine",
+            "near"
+          ],
+          "reply": "There's one at the drugstore on the corner."
+        },
+        {
+          "text": "Where can I find a currency exchange?",
+          "keywords": [
+            "currency exchange",
+            "exchange",
+            "change money"
+          ],
+          "reply": "There's one on 42nd Street, but the rate is better at a bank."
+        }
+      ]
+    },
+    {
+      "id": "credit-debit",
+      "titleTr": "Kredi mi banka kartı mı",
+      "intro": "When you pay, the machine will ask: credit or debit. Which card have you got?",
+      "instruction": "The card machine asks for the card type. The customer chooses credit or debit, or asks what the difference is.",
+      "retryReply": "The screen needs to know: credit or debit?",
+      "options": [
+        {
+          "text": "It's a credit card.",
+          "keywords": [
+            "credit"
+          ],
+          "reply": "Great, then just tap it when you pay."
+        },
+        {
+          "text": "It's debit.",
+          "keywords": [
+            "debit"
+          ],
+          "reply": "Okay, it'll ask for your PIN."
+        },
+        {
+          "text": "What's the difference?",
+          "keywords": [
+            "difference",
+            "what"
+          ],
+          "reply": "Debit comes straight from your bank account. Credit goes on your card bill."
+        }
+      ]
     }
   ],
   "twistSlots": [
@@ -255,6 +332,13 @@
       "after": "wrap",
       "pool": [
         "wrap-cost"
+      ]
+    },
+    {
+      "after": "fragile",
+      "pool": [
+        "euros",
+        "credit-debit"
       ]
     }
   ],

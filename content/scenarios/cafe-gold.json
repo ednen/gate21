@@ -87,8 +87,32 @@
         "i'm",
         "ankara"
       ],
-      "successReply": "Oh, awesome! I've always wanted to go.",
+      "successReply": "Oh, awesome! Sydney's so mixed — my flatmate's from South Korea and my boss is from Mexico.",
       "retryReply": "So, where are you from?"
+    },
+    {
+      "id": "travelled",
+      "titleTr": "Gezdiğin ülkeleri konuşmak",
+      "ask": "Have you travelled much? I want to do Japan next year — or Russia!",
+      "instruction": "The local talks about travel. The customer says which countries they have been to or want to visit.",
+      "hint": "I've been to the USA. I'd love to go to Japan too!",
+      "hintTr": "ABD'ye gittim. Japonya'ya da gitmeyi çok isterim!",
+      "keywords": [
+        "been",
+        "japan",
+        "russia",
+        "mexico",
+        "korea",
+        "usa",
+        "america",
+        "states",
+        "love to",
+        "want to",
+        "never",
+        "visited"
+      ],
+      "successReply": "Japan is top of my list. The food, mate!",
+      "retryReply": "Been anywhere cool? Where do you want to go next?"
     },
     {
       "id": "how-long",

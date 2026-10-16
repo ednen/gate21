@@ -90,6 +90,31 @@
       "retryReply": "Have you been to the United States before?"
     },
     {
+      "id": "countries",
+      "titleTr": "Gittiğin ülkeleri söylemek",
+      "ask": "But you travel a lot, huh? Lots of stamps here. Where have you been?",
+      "instruction": "The officer looks at the passport stamps and asks which countries the traveller has visited.",
+      "hint": "I've been to Portugal and Hungary.",
+      "hintTr": "Portekiz'e ve Macaristan'a gittim.",
+      "keywords": [
+        "been",
+        "portugal",
+        "switzerland",
+        "sweden",
+        "denmark",
+        "hungary",
+        "germany",
+        "italy",
+        "spain",
+        "france",
+        "europe",
+        "visited",
+        "went"
+      ],
+      "successReply": "Nice. I went to Switzerland once — beautiful, but expensive!",
+      "retryReply": "These stamps — which countries did you visit?"
+    },
+    {
       "id": "fingerprints",
       "titleTr": "Parmak izi talimatını uygulamak",
       "ask": "Right hand, four fingers on the scanner, please.",

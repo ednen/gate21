@@ -2,8 +2,9 @@
 // - .nojekyll, so Pages serves the _expo folder (Jekyll skips folders starting with "_");
 // - 404.html, so a reload on a deep link (/gate21/lesson/...) still opens the app;
 // - phone-like meta tags: no zoom on input focus, full screen when added to the home screen.
-import { copyFileSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { copyFileSync, cpSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const dir = process.argv[2] ?? 'dist';
 const index = join(dir, 'index.html');
@@ -24,3 +25,9 @@ writeFileSync(join(dir, '.nojekyll'), '');
 // Read by the app (with the cache bypassed) to notice that a newer demo has been published.
 writeFileSync(join(dir, 'version.json'), JSON.stringify({ build: process.env.EXPO_PUBLIC_DEMO_BUILD ?? 'local' }));
 console.log(`Demo ready in ${dir}`);
+
+// The recorded voices (tools/voice) are served next to the app.
+const voices = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'voice');
+if (existsSync(voices)) {
+  cpSync(voices, join(dir, 'voice'), { recursive: true });
+}

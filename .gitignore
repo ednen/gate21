@@ -22,3 +22,4 @@ mobile/android/
 .idea/
 .vscode/
 *.iml
+__pycache__/

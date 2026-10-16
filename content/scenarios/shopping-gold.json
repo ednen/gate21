@@ -156,6 +156,26 @@
       ],
       "successReply": "Lovely! {final} it is. Enjoy it!",
       "retryReply": "So, have we got a deal?"
+    },
+    {
+      "id": "pay",
+      "titleTr": "Ödemeyi yapmak",
+      "ask": "I can take card today — there's a two percent surcharge. That okay?",
+      "instruction": "The seller takes cards with a surcharge. The customer agrees and pays by card, or asks to pay cash.",
+      "hint": "Yes, that's fine. Here's my card.",
+      "hintTr": "Evet, sorun değil. İşte kartım.",
+      "keywords": [
+        "fine",
+        "okay",
+        "ok",
+        "yes",
+        "card",
+        "sure",
+        "no problem",
+        "cash"
+      ],
+      "successReply": "Beauty. Tap it on here for me.",
+      "retryReply": "Card with the surcharge — or have you got cash?"
     }
   ],
   "twists": [
@@ -298,41 +318,6 @@
       ]
     },
     {
-      "id": "cash-only",
-      "titleTr": "Sadece nakit",
-      "intro": "Just so you know, I only take cash.",
-      "instruction": "The seller only takes cash. The customer asks for an ATM, offers to pay by phone, or checks their wallet.",
-      "retryReply": "Most stalls here are cash only.",
-      "options": [
-        {
-          "text": "Is there an ATM nearby?",
-          "keywords": [
-            "atm",
-            "cash machine",
-            "nearby"
-          ],
-          "reply": "Right by the entrance."
-        },
-        {
-          "text": "Can I pay with my phone?",
-          "keywords": [
-            "phone",
-            "app",
-            "transfer"
-          ],
-          "reply": "Sorry, cash only."
-        },
-        {
-          "text": "Let me check my wallet.",
-          "keywords": [
-            "wallet",
-            "check"
-          ],
-          "reply": "Take your time, love."
-        }
-      ]
-    },
-    {
       "id": "broken-piece",
       "titleTr": "Ürünün ucu kırık",
       "intro": "Oh — that one's got a small chip on the end.",
@@ -364,6 +349,73 @@
           "reply": "Good on ya."
         }
       ]
+    },
+    {
+      "id": "declined",
+      "titleTr": "Kart reddedildi",
+      "intro": "Hmm, sorry love — it says your card was declined.",
+      "instruction": "The card was declined. The customer asks to try again, offers another card, or pays in cash.",
+      "retryReply": "It's not going through, I'm afraid.",
+      "options": [
+        {
+          "text": "Could you try it again, please?",
+          "keywords": [
+            "try",
+            "again"
+          ],
+          "reply": "Sure… there we go, it worked this time."
+        },
+        {
+          "text": "Here's another card.",
+          "keywords": [
+            "another",
+            "other card"
+          ],
+          "reply": "Thanks — yep, that one's fine."
+        },
+        {
+          "text": "Then I'll pay in cash.",
+          "keywords": [
+            "cash",
+            "then"
+          ],
+          "reply": "No worries, cash is easier anyway. No surcharge!"
+        }
+      ]
+    },
+    {
+      "id": "currency",
+      "titleTr": "Hangi para biriminde ödemek",
+      "intro": "The machine's asking — pay in Australian dollars or in euros?",
+      "instruction": "The card machine offers to charge in the home currency. The customer chooses Australian dollars, asks about the exchange rate, or asks which is cheaper.",
+      "retryReply": "Aussie dollars or euros? The screen needs an answer.",
+      "options": [
+        {
+          "text": "In Australian dollars, please.",
+          "keywords": [
+            "australian",
+            "aussie",
+            "dollars"
+          ],
+          "reply": "Good choice — usually cheaper. Done!"
+        },
+        {
+          "text": "What's the exchange rate?",
+          "keywords": [
+            "exchange rate",
+            "rate"
+          ],
+          "reply": "Ooh, not great — I'd go with Aussie dollars."
+        },
+        {
+          "text": "Which one is cheaper?",
+          "keywords": [
+            "cheaper",
+            "which one"
+          ],
+          "reply": "Usually Australian dollars. Your bank does the rest."
+        }
+      ]
     }
   ],
   "twistSlots": [
@@ -379,8 +431,14 @@
       "after": "bargain",
       "pool": [
         "wont-budge",
-        "cash-only",
         "broken-piece"
+      ]
+    },
+    {
+      "after": "pay",
+      "pool": [
+        "declined",
+        "currency"
       ]
     }
   ],

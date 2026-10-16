@@ -35,6 +35,8 @@ export function SpeakPanel({ reference, consent, onResult, idleLabel = 'Dokun ve
   const [result, setResult] = useState<Assessment | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [repeatMode, setRepeatMode] = useState(!consent);
+  // Times in a row nothing was heard; after two the step goes on as listen-and-repeat.
+  const [unheard, setUnheard] = useState(0);
 
   // Consent granted on the consent screen: switch from listen-and-repeat to scored speaking.
   useEffect(() => {
@@ -55,10 +57,22 @@ export function SpeakPanel({ reference, consent, onResult, idleLabel = 'Dokun ve
         const r = await assessPronunciation(recording, reference);
         setResult(r);
         setState('done');
+        setUnheard(0);
         onResult(r.overall);
       } catch (e) {
-        setError(messageFor(e));
         setState('idle');
+        if (e instanceof ApiError && e.code === 'SPEECH_NOT_RECOGNIZED') {
+          const times = unheard + 1;
+          setUnheard(times);
+          if (times >= 2) {
+            setError('Mikrofon seni bu ortamda zor duyuyor. Sesli söyle ve "Söyledim"e dokun; puan olmadan devam edersin.');
+            setRepeatMode(true);
+          } else {
+            setError('Seni tam duyamadım. Telefonu biraz yaklaştırıp tek nefeste, net söyle.');
+          }
+          return;
+        }
+        setError(messageFor(e));
         if (e instanceof ApiError && FALLBACK_CODES.includes(e.code)) {
           setRepeatMode(true);
         }
@@ -86,6 +100,18 @@ export function SpeakPanel({ reference, consent, onResult, idleLabel = 'Dokun ve
         {!consent ? (
           <Pressable accessibilityRole="link" onPress={() => router.push('/consent')} style={styles.link}>
             <Text style={styles.linkText}>Puan almak için ses iznini aç</Text>
+          </Pressable>
+        ) : unheard >= 2 ? (
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => {
+              setRepeatMode(false);
+              setUnheard(0);
+              setError(null);
+            }}
+            style={styles.link}
+          >
+            <Text style={styles.linkText}>Mikrofonla tekrar dene</Text>
           </Pressable>
         ) : null}
       </View>

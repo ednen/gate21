@@ -52,6 +52,48 @@ const B = colors.blue;
 const GR = colors.green;
 const S = 2.5;
 
+/** A flag: coloured fields inside a rounded frame (x 6–58, y 14–50). */
+const FX = 6;
+const FY = 14;
+const FW = 52;
+const FH = 36;
+const Flag = ({ children, bg = W }: { children?: ReactNode; bg?: string }) => (
+  <>
+    <Rect x={FX} y={FY} width={FW} height={FH} rx={3} fill={bg} />
+    {children}
+    <Rc x={FX} y={FY} w={FW} h={FH} r={3} />
+  </>
+);
+/** Three equal stripes, side by side (vertical) or stacked (horizontal). */
+const Tricolor = ({ a, b, c, vertical }: { a: string; b: string; c: string; vertical?: boolean }) => (
+  <Flag>
+    {[a, b, c].map((fill, i) =>
+      vertical ? (
+        <Rect key={i} x={FX + (FW / 3) * i} y={FY} width={FW / 3 + 0.2} height={FH} fill={fill} />
+      ) : (
+        <Rect key={i} x={FX} y={FY + (FH / 3) * i} width={FW} height={FH / 3 + 0.2} fill={fill} />
+      ),
+    )}
+  </Flag>
+);
+/** A Nordic cross, its upright left of centre. */
+const Nordic = ({ bg, cross }: { bg: string; cross: string }) => (
+  <Flag bg={bg}>
+    <Rect x={FX + 15} y={FY} width={7} height={FH} fill={cross} />
+    <Rect x={FX} y={FY + 14.5} width={FW} height={7} fill={cross} />
+  </Flag>
+);
+/** A banknote with a currency sign. */
+const Note = ({ sign, fill = GR, size = 13 }: { sign: string; fill?: string; size?: number }) => (
+  <>
+    <Rc x={6} y={18} w={52} h={28} r={3} fill={fill} />
+    <Ci x={32} y={32} r={9} fill={W} />
+    <T x={32} y={32 + size * 0.37} size={size}>{sign}</T>
+    <Ci x={14} y={32} r={2} fill={W} />
+    <Ci x={50} y={32} r={2} fill={W} />
+  </>
+);
+
 /** Outline. */
 const P = ({ d, fill = 'none', w = S }: { d: string; fill?: string; w?: number }) => (
   <Path d={d} stroke={INK} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" fill={fill} />
@@ -597,6 +639,149 @@ const DRAWINGS: Record<string, ReactNode> = {
       <Rc x={10} y={24} w={10} h={6} r={1} fill={GR} />
     </>
   ),
+  // ---- countries ---------------------------------------------------------------------------
+  'flag-italy': <Tricolor vertical a="#009246" b={W} c="#CE2B37" />,
+  'flag-france': <Tricolor vertical a="#0055A4" b={W} c="#EF4135" />,
+  'flag-mexico': (
+    <>
+      <Tricolor vertical a="#006847" b={W} c="#CE1126" />
+      <Ci x={32} y={32} r={4} fill="#8C6A2F" />
+    </>
+  ),
+  'flag-germany': <Tricolor a={INK} b="#DD0000" c="#FFCE00" />,
+  'flag-hungary': <Tricolor a="#CE2939" b={W} c="#477050" />,
+  'flag-russia': <Tricolor a={W} b="#0039A6" c="#D52B1E" />,
+  'flag-spain': (
+    <Flag bg="#AA151B">
+      <Rect x={FX} y={FY + 9} width={FW} height={18} fill="#F1BF00" />
+    </Flag>
+  ),
+  'flag-portugal': (
+    <Flag bg="#FF0000">
+      <Rect x={FX} y={FY} width={21} height={FH} fill="#006600" />
+      <Circle cx={FX + 21} cy={32} r={7} fill="#FFE000" stroke={INK} strokeWidth={1.5} />
+    </Flag>
+  ),
+  'flag-switzerland': (
+    <Flag bg="#DA291C">
+      <Rect x={28} y={20} width={8} height={24} fill={W} />
+      <Rect x={20} y={28} width={24} height={8} fill={W} />
+    </Flag>
+  ),
+  'flag-sweden': <Nordic bg="#006AA7" cross="#FECC00" />,
+  'flag-denmark': <Nordic bg="#C8102E" cross={W} />,
+  'flag-uk': (
+    <Flag bg="#012169">
+      <Line x1={FX} y1={FY} x2={FX + FW} y2={FY + FH} stroke={W} strokeWidth={7} />
+      <Line x1={FX + FW} y1={FY} x2={FX} y2={FY + FH} stroke={W} strokeWidth={7} />
+      <Line x1={FX} y1={FY} x2={FX + FW} y2={FY + FH} stroke="#C8102E" strokeWidth={2.5} />
+      <Line x1={FX + FW} y1={FY} x2={FX} y2={FY + FH} stroke="#C8102E" strokeWidth={2.5} />
+      <Rect x={27} y={FY} width={10} height={FH} fill={W} />
+      <Rect x={FX} y={27} width={FW} height={10} fill={W} />
+      <Rect x={29} y={FY} width={6} height={FH} fill="#C8102E" />
+      <Rect x={FX} y={29} width={FW} height={6} fill="#C8102E" />
+    </Flag>
+  ),
+  'flag-usa': (
+    <Flag>
+      {[0, 2, 4, 6, 8, 10, 12].map((i) => (
+        <Rect key={i} x={FX} y={FY + (FH / 13) * i} width={FW} height={FH / 13 + 0.1} fill="#B22234" />
+      ))}
+      <Rect x={FX} y={FY} width={23} height={(FH / 13) * 7} fill="#3C3B6E" />
+      {[0, 1, 2].map((r) =>
+        [0, 1, 2, 3].map((c) => <Circle key={`${r}${c}`} cx={FX + 4 + c * 5} cy={FY + 4 + r * 6} r={1.2} fill={W} />),
+      )}
+    </Flag>
+  ),
+  'flag-japan': (
+    <Flag>
+      <Circle cx={32} cy={32} r={10} fill="#BC002D" />
+    </Flag>
+  ),
+  'flag-south-korea': (
+    <Flag>
+      <Path d="M22 32a10 10 0 0 1 20 0a5 5 0 0 0-10 0a5 5 0 0 1-10 0z" fill="#CD2E3A" />
+      <Path d="M22 32a10 10 0 0 0 20 0a5 5 0 0 0-10 0a5 5 0 0 1-10 0z" fill="#0047A0" />
+      <Ln x1={11} y1={22} x2={16} y2={18} w={2} />
+      <Ln x1={48} y1={18} x2={53} y2={22} w={2} />
+      <Ln x1={11} y1={42} x2={16} y2={46} w={2} />
+      <Ln x1={48} y1={46} x2={53} y2={42} w={2} />
+    </Flag>
+  ),
+
+  // ---- paying ------------------------------------------------------------------------------
+  contactless: (
+    <>
+      <Rc x={4} y={22} w={36} h={24} r={4} fill={B} />
+      <Rc x={9} y={31} w={8} h={6} r={1.5} fill={Y} />
+      <P d="M46 24a12 12 0 0 1 0 20M52 19a19 19 0 0 1 0 30M40 28a6 6 0 0 1 0 12" />
+    </>
+  ),
+  euro: <Note sign="€" fill={B} />,
+  change: (
+    <>
+      <Ci x={26} y={36} r={14} fill={Y} />
+      <Ci x={26} y={36} r={9} />
+      <Ci x={42} y={26} r={12} fill={Y} />
+      <T x={42} y={30.5} size={12}>$</T>
+    </>
+  ),
+  dollar: <Note sign="$" />,
+  aud: <Note sign="A$" fill={Y} size={10} />,
+  'card-reader': (
+    <>
+      <Rc x={16} y={6} w={32} h={52} r={5} fill={W} />
+      <Rc x={21} y={11} w={22} h={13} r={2} fill={GR} />
+      {[0, 1, 2].map((r) => [0, 1, 2].map((c) => <Ci key={`${r}${c}`} x={25 + c * 7} y={32 + r * 7} r={2} fill={INK} />))}
+      <Rc x={4} y={20} w={20} h={13} r={2} fill={B} />
+    </>
+  ),
+  'pin-pad': (
+    <>
+      <Rc x={14} y={4} w={36} h={56} r={5} fill={W} />
+      <Rc x={19} y={9} w={26} h={12} r={2} fill={INK} />
+      <T x={32} y={18.5} size={9} fill={Y}>****</T>
+      {[0, 1, 2].map((r) => [0, 1, 2].map((c) => <Rc key={`${r}${c}`} x={19 + c * 9} y={26 + r * 9} w={7} h={6} r={1.5} fill={c === 2 && r === 2 ? GR : Y} />))}
+      <Rc x={28} y={53} w={7} h={4} r={1} fill={Y} />
+    </>
+  ),
+  atm: (
+    <>
+      <Rc x={8} y={4} w={48} h={56} r={4} fill={GR} />
+      <Rc x={14} y={10} w={36} h={10} r={2} fill={W} />
+      <T x={32} y={18.5} size={9}>ATM</T>
+      <Rc x={16} y={25} w={32} h={14} r={2} fill={INK} />
+      <Rc x={20} y={45} w={24} h={5} r={1.5} fill={INK} />
+      <Rc x={24} y={48} w={16} h={10} r={1} fill={W} />
+    </>
+  ),
+  'currency-exchange': (
+    <>
+      <Ci x={18} y={22} r={12} fill={B} />
+      <T x={18} y={26.5} size={12} fill={W}>€</T>
+      <Ci x={46} y={42} r={12} fill={GR} />
+      <T x={46} y={46.5} size={12} fill={W}>$</T>
+      <P d="M34 14h14v10M30 50H16V40" w={3} />
+      <P d="M44 20l4 4 4-4M12 44l4-4 4 4" w={3} />
+    </>
+  ),
+  surcharge: (
+    <>
+      <Rc x={4} y={20} w={40} h={28} r={4} fill={B} />
+      <Rc x={9} y={30} w={8} h={6} r={1.5} fill={Y} />
+      <Ci x={48} y={18} r={12} fill={Y} />
+      <T x={48} y={22} size={10}>+2%</T>
+    </>
+  ),
+  declined: (
+    <>
+      <Rc x={4} y={18} w={44} h={30} r={4} fill={B} />
+      <Ln x1={4} y1={27} x2={48} y2={27} w={5} />
+      <Ci x={46} y={44} r={12} fill={R} />
+      <Path d="M41 39l10 10M51 39l-10 10" stroke={W} strokeWidth={3} strokeLinecap="round" />
+    </>
+  ),
+
   // ---- week 3 · Sydney ------------------------------------------------------------------
   'lost-luggage': (
     <>

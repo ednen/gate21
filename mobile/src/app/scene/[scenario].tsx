@@ -19,12 +19,12 @@ import { MemoryQuiz } from '@/components/scene/MemoryQuiz';
 import { ReportView } from '@/components/scene/ReportView';
 import { Body, Button, Card, ErrorNote, Label, Title } from '@/components/ui';
 import { apiGet, apiSend } from '@/lib/api';
-import { messageFor } from '@/lib/errors';
+import { ApiError, messageFor } from '@/lib/errors';
 import { recordStep } from '@/lib/progress';
 import { useMe } from '@/lib/queries';
 import { surviveScore } from '@/lib/sentence';
 import type { Difficulty, SceneMessage, SceneReport, SceneView } from '@/lib/types';
-import { sayAll, sendTurn, useVoiceRecorder } from '@/lib/voice';
+import { sayAll, sendTurn, setLearnerName, useVoiceRecorder } from '@/lib/voice';
 import { colors, fonts } from '@/theme';
 
 type Item =
@@ -55,6 +55,7 @@ export default function Scene() {
   const me = useMe();
   const consent = me.data?.voiceConsent ?? false;
   const voice = useVoiceRecorder();
+  useEffect(() => setLearnerName(me.data?.displayName ?? ''), [me.data?.displayName]);
 
   const [view, setView] = useState<SceneView | null>(null);
   const [items, setItems] = useState<Item[]>([]);
@@ -70,6 +71,8 @@ export default function Scene() {
   const [report, setReport] = useState<SceneReport | null>(null);
   const [missed, setMissed] = useState(0);
   const [busy, setBusy] = useState(false);
+  // Times in a row the microphone heard nothing: after two, typing is offered instead.
+  const [unheard, setUnheard] = useState(0);
   const scroll = useRef<ScrollView>(null);
   const nextId = useRef(0);
 
@@ -142,10 +145,23 @@ export default function Scene() {
       setView(next);
       setTyped('');
       setTyping(false);
+      setUnheard(0);
       setMic('idle');
     } catch (e) {
-      setError(messageFor(e));
       setMic('idle');
+      if (e instanceof ApiError && e.code === 'SPEECH_NOT_RECOGNIZED') {
+        const times = unheard + 1;
+        setUnheard(times);
+        if (times >= 2) {
+          // Quiet voice, accent or a noisy room: don't keep the learner stuck on the mic.
+          setError('Mikrofon seni bu ortamda zor duyuyor. Cevabını yazarak gönderebilirsin; mikrofonla denemeye de devam edebilirsin.');
+          setTyping(true);
+          return;
+        }
+        setError('Seni tam duyamadım. Telefonu biraz yaklaştırıp tek nefeste, net söyle.');
+        return;
+      }
+      setError(messageFor(e));
     }
   };
 

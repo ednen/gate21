@@ -21,6 +21,7 @@ import { DEMO, reloadIfOutdated } from '@/lib/demo/flag';
 import { syncContent } from '@/lib/content';
 import { flushProgress } from '@/lib/progress';
 import { invalidateProgress, queryClient } from '@/lib/queries';
+import { preloadVoices } from '@/lib/voice';
 import { colors } from '@/theme';
 
 /**
@@ -83,6 +84,7 @@ function App() {
   useEffect(() => {
     void bootstrap();
     void syncContent();
+    void preloadVoices();
   }, [bootstrap]);
 
   // Signed out while using the app (logout elsewhere, revoked session): back to the welcome screen.

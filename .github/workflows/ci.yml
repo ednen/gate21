@@ -40,5 +40,7 @@ jobs:
           cache: npm
           cache-dependency-path: mobile/package-lock.json
       - run: npm ci
+      - name: Every spoken line has a recorded voice
+        run: python3 ../tools/voice/lines.py --check
       - run: npm run typecheck
       - run: npm test

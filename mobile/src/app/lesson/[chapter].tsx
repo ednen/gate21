@@ -19,6 +19,7 @@ import { Body, Button, Card, Label, Title } from '@/components/ui';
 import { canPlay, chapter as getChapter, chapterInfo, level, manifest, stop } from '@/lib/content';
 import { recordStep } from '@/lib/progress';
 import { useMe } from '@/lib/queries';
+import { accentForWeek, setDefaultAccent } from '@/lib/voice';
 import type { Step } from '@/lib/types';
 import { colors, fonts } from '@/theme';
 
@@ -49,6 +50,11 @@ export default function Lesson() {
   const { chapter: slug } = useLocalSearchParams<{ chapter: string }>();
   const chapter = getChapter(slug);
   const info = chapterInfo(slug);
+  // Words and sentences are heard in the accent of the week's city.
+  useEffect(() => {
+    setDefaultAccent(accentForWeek(info?.kind === 'starter' ? 0 : info?.week));
+    return () => setDefaultAccent('en-GB');
+  }, [info]);
   const me = useMe();
   const consent = me.data?.voiceConsent ?? false;
   const [index, setIndex] = useState(0);

@@ -317,7 +317,7 @@ export function DialogStep({ chapter, onDone }: StepProps) {
 
   const listen = () =>
     sayAll(
-      lines.map((l) => ({ text: l.text.replace('___', l.gap ?? ''), voice: l.who === 'You' ? 'en-US' : 'en-GB' })),
+      lines.map((l) => ({ text: l.text.replace('___', l.gap ?? ''), voice: l.who === 'You' ? 'en-US' : null })),
       0.9,
     );
 

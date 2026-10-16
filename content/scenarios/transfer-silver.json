@@ -55,7 +55,7 @@
     {
       "id": "name",
       "titleTr": "Kendini tanıtmak",
-      "ask": "There you are! Are you {name}?",
+      "ask": "There you are! Is this your name on my sign?",
       "instruction": "The driver checks the name. The guest confirms and greets him.",
       "hint": "Yes, that's me! Nice to meet you.",
       "hintTr": "Evet, benim! Tanıştığıma memnun oldum.",
